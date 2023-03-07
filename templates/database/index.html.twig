@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Database index{% endblock %}
+
+{% block body %}
+    <h1>Database index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>NbTables</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for database in databases %}
+            <tr>
+                <td>{{ database.id }}</td>
+                <td>{{ database.name }}</td>
+                <td>{{ database.tables.count }}</td>
+                <td>
+                    <a href="{{ path('app_database_show', {'id': database.id}) }}">show</a>
+                    <a href="{{ path('app_database_edit', {'id': database.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_database_new') }}">Create new</a>
+{% endblock %}

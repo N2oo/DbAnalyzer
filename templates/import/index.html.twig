@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ImportController!{% endblock %}
+
+{% block body %}
+    <ul>
+        <li><a href="{{ path('app_import_field') }}">Import du CSV des champs</a></li>
+        <li><a href="{{ path('app_import_table') }}">Import du CSV des tables</a></li>
+    </ul>
+    Prévoir le nécessaire pour télécharger les modèles de CSV
+    <ul>
+        <li><a href="{{ path('app_import_field_download') }}">Télécharger le modèle CSV pour les champs</a></li>
+        <li><a href="{{ path('app_import_table_download') }}">Télécharger le modèle CSV pour les tables</a></li>
+    </ul>
+{% endblock %}
