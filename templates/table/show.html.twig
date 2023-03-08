@@ -26,6 +26,16 @@
                 <th>IsView</th>
                 <td>{{ table.isView ? 'Yes':'No' }}</td>
             </tr>
+            {% if table.isView %}
+                <tr>
+                    <th>View Query</th>
+                    <td>
+                        <code>
+                            {{ table.query }}
+                        </code>
+                    </td>
+                </tr>
+            {% endif %}
             <tr>
                 <th>Fields</th>
                 <td>

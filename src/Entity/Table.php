@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\TableRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: TableRepository::class)]
@@ -33,6 +34,9 @@ class Table
 
     #[ORM\Column]
     private ?bool $isView = null;
+
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    private ?string $query = null;
 
     public function __construct()
     {
@@ -106,6 +110,18 @@ class Table
     public function setIsView(bool $isView): self
     {
         $this->isView = $isView;
+
+        return $this;
+    }
+
+    public function getQuery(): ?string
+    {
+        return $this->query;
+    }
+
+    public function setQuery(?string $query): self
+    {
+        $this->query = $query;
 
         return $this;
     }

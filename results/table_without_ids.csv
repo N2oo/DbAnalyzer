@@ -1,0 +1,1150 @@
+db_name;table_name;table_is_view;query
+Credel;vcc_hitrefv;1;create view credel.vcc_hitrefv (societe,depot,codeclie,nomcli,datefact,typefact,refeart,libeart,fournis,nomfour,famille,libefam,quantite,remise,montremise,prixun,prixtar,montht,prixachat,magasinier) as select x1.csoc_hlafac ,x1.depo_hlafac ,x1.ccli_hlafac ,x0.rais_cli ,x1.dfac_hlafac ,x1.tfac_hlafac ,x1.refe_hlafac ,x1.libe_hlafac ,x1.four_hlafac ,x3.rais_four ,x1.cfam_hlafac ,x4.libe_fam ,x1.qtte_hlafac ,x1.remi_hlafac ,x2.mrem_hlfac ,x2.ptar_hlfac ,(x2.ptar_hlfac * x1.qtte_hlafac ) ,x2.pxht_hlfac ,(x2.pach_hlfac * x1.qtte_hlafac ) ,x1.maga_hlafac from credel.fclient x0 ,credel.fhislfac x1 ,credel.pxhlfac x2 ,credel.ffournis x3 ,credel.ffamil x4 where ((((((((((((x1.csoc_hlafac = x2.csoc_hlfac ) AND (x1.depo_hlafac = x2.depo_hlfac ) ) AND (x1.nfac_hlafac = x2.nfac_hlfac ) ) AND (x1.dfac_hlafac = x2.dfac_hlfac ) ) AND (x1.ccli_hlafac = x2.ccli_hlfac ) ) AND (x1.nbon_hlafac = x2.nbon_hlfac ) ) AND (x1.nlig_hlafac = x2.nlig_hlfac ) ) AND (x1.natl_hlafac MATCHES '[DMFKP]' ) ) AND (x0.code_cli = x1.ccli_hlafac ) ) AND (x3.code_four = x1.four_hlafac ) ) AND (x4.four_fam = x1.four_hlafac ) ) AND (x4.code_fam = x1.cfam_hlafac ) ) #
+Credel;vcc_irisar;1;create view credel.vcc_irisar (anneemois,reference,libelle,stock,depanage,commande,consos) as select x2.yrmo_consom ,x1.refe_art ,x1.libe_art ,x0.qtite_stk ,x3.qcde_depan ,x0.qtcde_stk ,sum(x2.qtte_consom ) from credel.fstock x0 ,credel.farticle x1 ,outer(credel.fconso x2 ) ,outer(credel.fdepana x3 ) where (((((((((((((x0.csoci_stk = 'ESC' ) AND (x0.depot_stk = 'MEL' ) ) AND (x0.refer_stk = x1.refe_art ) ) AND (x0.fourn_stk = x1.four_art ) ) AND (x1.four_art = 9485 ) ) AND (x2.csoc_consom = x0.csoci_stk ) ) AND (x2.depo_consom = x0.depot_stk ) ) AND (x2.refe_consom = x0.refer_stk ) ) AND (x2.four_consom = x0.fourn_stk ) ) AND (x3.csoc_depan = x0.csoci_stk ) ) AND (x3.depo_depan = x0.depot_stk ) ) AND (x3.refe_depan = x0.refer_stk ) ) AND (x3.four_depan = x0.fourn_stk ) ) group by x2.yrmo_consom ,x1.refe_art ,x1.libe_art ,x0.qtite_stk ,x3.qcde_depan ,x0.qtcde_stk #
+Credel;vcc_jrnalcpt;1;create view credel.vcc_jrnalcpt (societe,depot,date,journal,service,simulat,prefix,compte,intitule,piece,libelle,prefcppa,contrepart,moderegl,echeance,debit,credit,lettrage,datelettre,pointage,datepoint,datecreat,adruser) as select x0.csoc_mvcpt ,x0.depo_mvcpt ,x0.dpie_mvcpt ,x0.jrnl_mvcpt ,x0.serv_mvcpt ,x0.simu_mvcpt ,x0.pref_mvcpt ,x0.ncpt_mvcpt ,x0.inti_mvcpt ,x0.npie_mvcpt ,x0.libe_mvcpt ,x0.prep_mvcpt ,x0.cppa_mvcpt ,x0.mreg_mvcpt ,x0.dech_mvcpt ,x0.debi_mvcpt ,x0.cred_mvcpt ,x0.lett_mvcpt ,x0.dlet_mvcpt ,x0.poin_mvcpt ,x0.dpoi_mvcpt ,x0.dcre_mvcpt ,x0.zal1_mvcpt from credel.fmouvcpt x0 where (x0.cmvj_mvcpt IN (0 ,5 )) #
+Credel;vhfac;1;create view credel.vhfac (societe,depot,numor,numfact,datefact,client,nomcli,typecli,typefact,accident,tempsfact) as select distinct x0.csoc_hefac ,x0.depo_hefac ,x0.nuor_hefac ,x0.nfac_hefac ,x0.dfac_hefac ,x0.ccli_hefac ,x0.nomc_hefac ,x0.tcli_hefac ,x0.tfac_hefac ,x0.acci_hefac ,x0.hfac_hefac from credel.fhisefac x0 #
+Credel;vcli;1;create view credel.vcli (code_cli,rais_cli,litg_cli,adr1_cli,adr2_cli,adr3_cli,codp_cli,vill_cli,pays_cli,tele_cli,faxe_cli,mrem_scli,arem_scli) as select distinct x0.code_cli ,x0.rais_cli ,x0.litg_cli ,x0.adr1_cli ,x0.adr2_cli ,x0.adr3_cli ,x0.codp_cli ,x0.vill_cli ,x0.pays_cli ,x0.tele_cli ,x0.faxe_cli ,x1.mrem_scli ,x1.arem_scli from credel.fclient x0 ,credel.fmagatl x1 where (x0.code_cli = x1.ccli_scli ) #
+Credel;v_cli;1;create view credel.v_cli (code_cli,rais_cli,adr1_cli,adr2_cli,adr3_cli,codp_cli,vill_cli,pays_cli,mrem_scli,arem_scli,mreg_scli,depo_scli,ncpt_scli,litg_cli,type_cli) as select x0.code_cli ,x0.rais_cli ,x0.adr1_cli ,x0.adr2_cli ,x0.adr3_cli ,x0.codp_cli ,x0.vill_cli ,x0.pays_cli ,x1.mrem_scli ,x1.arem_scli ,x1.mreg_scli ,x1.depo_scli ,x1.ncpt_scli ,x0.litg_cli ,x0.type_cli from credel.fclient x0 ,credel.fmagatl x1 where (x0.code_cli = x1.ccli_scli ) #
+Credel;vcc_mvanacpt;1;create view credel.vcc_mvanacpt (societe,datemvt,piece,compte,libelle,etablissement,service,activite,nature,mdebit,credit) as select x0.csoc_mvana ,x0.dpie_mvana ,x0.npie_mvana ,x0.ncpt_mvana ,x1.nintcg_planc ,x0.depa_mvana ,x0.sera_mvana ,x0.acta_mvana ,x0.cess_mvana ,x0.debi_mvana ,x0.cred_mvana from credel.fmvanacpt x0 ,credel.fcompcpt x1 where (((x1.csocie_planc = x0.csoc_mvana ) AND (x1.nclecg_planc = x0.ncpt_mvana ) ) AND (x0.cmvc_mvana = 0 ) ) #
+Credel;vclient;1;create view credel.vclient (societe,depot,codeclient,raisoncli,adr1_cli,adr2_cli,adr3_cli,codp_cli,vill_cli,pays_cli,type_cli,mreg_cli,litg_cli,mrem_scli,arem_scli,ncpt_scli,tele_cli,faxe_cli,rtva_scli) as select x1.csoc_scli ,x1.depo_scli ,x0.code_cli ,TRIM ( BOTH ' ' FROM x0.rais_cli ) ,x0.adr1_cli ,x0.adr2_cli ,x0.adr3_cli ,x0.codp_cli ,x0.vill_cli ,x0.pays_cli ,x0.type_cli ,x0.mreg_cli ,x0.litg_cli ,x1.mrem_scli ,x1.arem_scli ,x1.ncpt_scli ,x0.tele_cli ,x0.faxe_cli ,x1.rtva_scli from credel.fclient x0 ,credel.fmagatl x1 where (x0.code_cli = x1.ccli_scli ) #
+Credel;vclicrm;1;create view credel.vclicrm (codeclient,nonclient,rue1,rue2,rue3,codepostal,ville,pays,telephone,fax,siret,email,codeape,typeclient,motcle,litige,civilite,responsable,secteur,canton,idtva,prospect,regroupe,categorie,stat,codehrs,ventilhrs,libetypc,liblitige,bloquant) as select x0.code_cli ,x0.rais_cli ,x0.adr1_cli ,x0.adr2_cli ,x0.adr3_cli ,x0.codp_cli ,x0.vill_cli ,x0.pays_cli ,x0.tele_cli ,x0.faxe_cli ,x0.sire_cli ,x0.emai_cli ,x0.niso_cli ,x0.type_cli ,x0.mcle_cli ,x0.litg_cli ,x0.init_cli ,x0.resp_cli ,x0.sect_cli ,x0.cant_cli ,x0.tvac_cli ,x0.pros_cli ,x0.regr_cli ,x0.catg_cli ,x0.stat_cli ,x0.chrs_cli ,x0.vhrs_cli ,x1.libe_typc ,x2.libe_ltg ,x2.type_ltg from credel.fclient x0 ,credel.ftypecli x1 ,credel.flitige x2 where ((x1.code_typc = x0.type_cli ) AND (x2.code_ltg = x0.litg_cli ) ) #
+Credel;vcerecdep;1;create view credel.vcerecdep (societe,depot,codeclient,nomclient,immat,numcontrat,navenant,libeaven,anne,mois,recette,depense) as select x0.csoc_hcen ,x0.depo_hcen ,x0.ccli_hcen ,x1.lcli_cen ,x1.imma_cen ,x0.ncon_hcen ,x0.nave_hcen ,x1.lave_cen ,YEAR (x0.date_hcen ) ,MONTH (x0.date_hcen ) ,sum(x0.mtfa_hcen ) ,sum(x0.mtde_hcen ) from credel.fhiscen x0 ,credel.fconcen x1 where (((((x1.csoc_cen = x0.csoc_hcen ) AND (x1.depo_cen = x0.depo_hcen ) ) AND (x1.ncon_cen = x0.ncon_hcen ) ) AND (x1.nave_cen = x0.nave_hcen ) ) AND (x0.cdev_hcen = 1 ) ) group by x0.csoc_hcen ,x0.depo_hcen ,x0.ccli_hcen ,x1.lcli_cen ,x1.imma_cen ,x0.ncon_hcen ,x0.nave_hcen ,x1.lave_cen ,x0.nfac_hcen ,x0.date_hcen #
+Credel;vcc_wdgold;1;create view credel.vcc_wdgold (codeclient,nonclient,rue1,rue2,rue3,codepostal,ville,pays,telephone,fax,siret,email,codeape,typeclient,motcle,litige,civilite,responsable,secteur,canton,idtva,prospect,regroupe,categorie,stat,codehrs,ventilhrs,libetypc,liblitige,bloquant,civcontact,nomcontact,prencontact,telecontact,gsmcontact,faxcontact,mailcontact) as select x0.code_cli ,x0.rais_cli ,x0.adr1_cli ,x0.adr2_cli ,x0.adr3_cli ,x0.codp_cli ,x0.vill_cli ,x0.pays_cli ,x0.tele_cli ,x0.faxe_cli ,x0.sire_cli ,x0.emai_cli ,x0.niso_cli ,x0.type_cli ,x0.mcle_cli ,x0.litg_cli ,x0.init_cli ,x0.resp_cli ,x0.sect_cli ,x0.cant_cli ,x0.tvac_cli ,x0.pros_cli ,x0.regr_cli ,x0.catg_cli ,x0.stat_cli ,x0.chrs_cli ,x0.vhrs_cli ,x1.libe_typc ,x2.libe_ltg ,x2.type_ltg ,x3.init_cont ,x3.nomc_cont ,x3.pren_cont ,x3.telb_cont ,x3.telp_cont ,x3.faxe_cont ,x3.emai_cont from credel.fclient x0 ,credel.ftypecli x1 ,credel.flitige x2 ,outer(credel.fcontact x3 ) where (((x1.code_typc = x0.type_cli ) AND (x2.code_ltg = x0.litg_cli ) ) AND (x3.ccli_cont = x0.code_cli ) ) #
+Credel;vcc_venmod;1;create view credel.vcc_venmod (vmod_csoc,vmod_depo,vmod_tama,vmod_exma,vmod_taat,vmod_exat) as select x0.csoc_vmod ,x0.depo_vmod ,x0.tama_vmod || 'RD' || x0.sema_vmod || x0.acma_vmod ,x0.exma_vmod || 'RD' || x0.sema_vmod || x0.acma_vmod ,x0.taat_vmod || 'RD' || x0.seat_vmod || x0.acat_vmod ,x0.exat_vmod || 'RD' || x0.seat_vmod || x0.acat_vmod from credel.fvennmod x0 #
+Credel;vcc_venfam;1;create view credel.vcc_venfam (vfam_csoc,vfam_depo,vfam_tama,vfam_exma,vfam_taat,vfam_exat) as select x0.csoc_vfam ,x0.depo_vfam ,x0.tama_vfam || 'RD' || x0.sema_vfam || x0.acma_vfam ,x0.exma_vfam || 'RD' || x0.sema_vfam || x0.acma_vfam ,x0.taat_vfam || 'RD' || x0.seat_vfam || x0.acat_vfam ,x0.exat_vfam || 'RD' || x0.seat_vfam || x0.acat_vfam from credel.fvennfam x0 #
+Credel;vcpt;1;create view credel.vcpt (societe,datemvt,compte,libelle,etablissement,service,activite,nature,mdebit,credit) as select x0.csoc_mvana ,x0.dpie_mvana ,x0.ncpt_mvana ,x1.nintcg_planc ,x0.depa_mvana ,x0.sera_mvana ,x0.acta_mvana ,x0.cess_mvana ,x0.debi_mvana ,x0.cred_mvana from credel.fmvanacpt x0 ,credel.fcompcpt x1 where ((x1.csocie_planc = x0.csoc_mvana ) AND (x1.nclecg_planc = x0.ncpt_mvana ) ) #
+Credel;vcc_himatpce;1;create view credel.vcc_himatpce (hsociete,hdepot,hnumor,hnumfact,hdatefact,hcodeclient,hnomclient,htypefact,hnatligne,hreference,hlibelle,hfourligne,hfamligne,hquantite,hprixunitaire,hprixtar,hremise,hhtnet,hachatunite,himmatricul,hcvin,hdatentree,hdsortie,hkilmor) as select x1.csoc_hlafac ,x1.depo_hlafac ,x1.nume_hlafac ,x1.nfac_hlafac ,x1.dfac_hlafac ,x1.ccli_hlafac ,x0.nomc_hefac ,x1.tfac_hlafac ,x1.natl_hlafac ,x1.refe_hlafac ,x1.libe_hlafac ,x1.four_hlafac ,x1.cfam_hlafac ,x1.qtte_hlafac ,x2.pxun_hlfac ,x2.ptar_hlfac ,x2.mrem_hlfac ,x2.pxht_hlfac ,x2.pach_hlfac ,x0.imat_hefac ,x0.cvin_hefac ,x0.dent_hefac ,x0.dsor_hefac ,x0.kilm_hefac from credel.fhisefac x0 ,credel.fhislfac x1 ,credel.pxhlfac x2 where ((((((((((((((((((((x1.csoc_hlafac = x2.csoc_hlfac ) AND (x1.depo_hlafac = x2.depo_hlfac ) ) AND (x1.nfac_hlafac = x2.nfac_hlfac ) ) AND (x1.dfac_hlafac = x2.dfac_hlfac ) ) AND (x1.ccli_hlafac = x2.ccli_hlfac ) ) AND (x1.tfac_hlafac = x2.tfac_hlfac ) ) AND (x1.acci_hlafac = x2.acci_hlfac ) ) AND (x1.nume_hlafac > 0 ) ) AND (x1.nbon_hlafac > 0 ) ) AND (x1.nbon_hlafac = x2.nbon_hlfac ) ) AND (x1.nlig_hlafac = x2.nlig_hlfac ) ) AND (x0.csoc_hefac = x1.csoc_hlafac ) ) AND (x0.depo_hefac = x1.depo_hlafac ) ) AND (x0.nfac_hefac = x1.nfac_hlafac ) ) AND (x0.dfac_hefac = x1.dfac_hlafac ) ) AND (x0.ccli_hefac = x1.ccli_hlafac ) ) AND (x0.tfac_hefac = x1.tfac_hlafac ) ) AND (x0.acci_hefac = x1.acci_hlafac ) ) AND (x0.nuor_hefac = x1.nume_hlafac ) ) AND (x1.natl_hlafac IN ('P' ,'K' ,'N' ,'D' )) ) #
+Credel;vcc_sumcamecano;1;create view credel.vcc_sumcamecano (societe,depot,salarie,periode,natureligne,montantratio) as select x0.societe ,x0.depot ,x0.salarie ,credel.yrmo(x0.dateor ,' ' ),x0.natureligne ,sum(x0.montantratio ) from credel.vcc_camecano x0 group by x0.societe ,x0.depot ,x0.salarie ,4 ,x0.natureligne #
+Credel;vcc_mouvcpt;1;create view credel.vcc_mouvcpt (societe,prefixe,compte,libecompte,libetier,datemvt,piece,libelle,debit,credit) as select x0.csoc_mvcpt ,x0.pref_mvcpt ,x0.ncpt_mvcpt ,x1.nintcg_planc ,x2.rais_tier ,x0.dpie_mvcpt ,x0.npie_mvcpt ,x0.libe_mvcpt ,x0.debi_mvcpt ,x0.cred_mvcpt from credel.fmouvcpt x0 ,outer(credel.fcompcpt x1 ) ,outer(credel.ftiercpt x2 ) where (((((((x1.csocie_planc = x0.csoc_mvcpt ) AND (x1.nclecg_planc = x0.ncpt_mvcpt ) ) AND (x0.cmvc_mvcpt = 0 ) ) AND (x0.cess_mvcpt = 0 ) ) AND (x2.csoc_tier = x0.csoc_mvcpt ) ) AND (x2.pref_tier = x0.pref_mvcpt ) ) AND (x2.code_tier = x0.ncpt_mvcpt ) ) #
+Credel;vcc_salar;1;create view credel.vcc_salar (societe,depot,magasinier,nomsalarie,anneemois,annee,mois,mag_mod_brut,mag_mod_net,mag_mod_achat,mag_piece_b,mag_piece_n,mag_piece_a,totmagbrut,totmagnet,totmagachat,atel_div_b,atel_div_net,atel_div_achat,atel_mo_net,atel_forf_b,atel_forf_net,tale_forf_achat,atel_piece_b,atel_piece_net,atel_piece_achat,totatelbrut,totatelnet,totatelachat) as select distinct x0.csoc_cacl ,x0.depo_cacl ,x0.maga_cacl ,x1.noms_sal || x1.pren_sal ,x0.yrmo_cacl ,x0.year_cacl ,x0.mois_cacl ,credel.casalarie('M' ,'B' ,'T' ,'S' ,x0.csoc_cacl ,x0.depo_cacl ,x0.maga_cacl ,'0' ,'0' ,'0' ,x0.yrmo_cacl ),credel.casalarie('M' ,'N' ,'T' ,'S' ,x0.csoc_cacl ,x0.depo_cacl ,x0.maga_cacl ,'0' ,'0' ,'0' ,x0.yrmo_cacl ),credel.casalarie('M' ,'A' ,'T' ,'S' ,x0.csoc_cacl ,x0.depo_cacl ,x0.maga_cacl ,'0' ,'0' ,'0' ,x0.yrmo_cacl ),credel.casalarie('M' ,'B' ,'P' ,'S' ,x0.csoc_cacl ,x0.depo_cacl ,x0.maga_cacl ,'0' ,'0' ,'0' ,x0.yrmo_cacl ),credel.casalarie('M' ,'N' ,'P' ,'S' ,x0.csoc_cacl ,x0.depo_cacl ,x0.maga_cacl ,'0' ,'0' ,'0' ,x0.yrmo_cacl ),credel.casalarie('M' ,'A' ,'P' ,'S' ,x0.csoc_cacl ,x0.depo_cacl ,x0.maga_cacl ,'0' ,'0' ,'0' ,x0.yrmo_cacl ),credel.casalarie('M' ,'B' ,'X' ,'S' ,x0.csoc_cacl ,x0.depo_cacl ,x0.maga_cacl ,'0' ,'0' ,'0' ,x0.yrmo_cacl ),credel.casalarie('M' ,'N' ,'X' ,'S' ,x0.csoc_cacl ,x0.depo_cacl ,x0.maga_cacl ,'0' ,'0' ,'0' ,x0.yrmo_cacl ),credel.casalarie('M' ,'A' ,'X' ,'S' ,x0.csoc_cacl ,x0.depo_cacl ,x0.maga_cacl ,'0' ,'0' ,'0' ,x0.yrmo_cacl ),credel.casalarie('A' ,'B' ,'D' ,'S' ,x0.csoc_cacl ,x0.depo_cacl ,x0.maga_cacl ,'0' ,'0' ,'0' ,x0.yrmo_cacl ),credel.casalarie('A' ,'N' ,'D' ,'S' ,x0.csoc_cacl ,x0.depo_cacl ,x0.maga_cacl ,'0' ,'0' ,'0' ,x0.yrmo_cacl ),credel.casalarie('A' ,'A' ,'D' ,'S' ,x0.csoc_cacl ,x0.depo_cacl ,x0.maga_cacl ,'0' ,'0' ,'0' ,x0.yrmo_cacl ),credel.casalarie('A' ,'N' ,'M' ,'S' ,x0.csoc_cacl ,x0.depo_cacl ,x0.maga_cacl ,'0' ,'0' ,'0' ,x0.yrmo_cacl ),credel.casalarie('A' ,'B' ,'F' ,'S' ,x0.csoc_cacl ,x0.depo_cacl ,x0.maga_cacl ,'0' ,'0' ,'0' ,x0.yrmo_cacl ),credel.casalarie('A' ,'N' ,'F' ,'S' ,x0.csoc_cacl ,x0.depo_cacl ,x0.maga_cacl ,'0' ,'0' ,'0' ,x0.yrmo_cacl ),credel.casalarie('A' ,'A' ,'F' ,'S' ,x0.csoc_cacl ,x0.depo_cacl ,x0.maga_cacl ,'0' ,'0' ,'0' ,x0.yrmo_cacl ),credel.casalarie('A' ,'B' ,'P' ,'S' ,x0.csoc_cacl ,x0.depo_cacl ,x0.maga_cacl ,'0' ,'0' ,'0' ,x0.yrmo_cacl ),credel.casalarie('A' ,'N' ,'P' ,'S' ,x0.csoc_cacl ,x0.depo_cacl ,x0.maga_cacl ,'0' ,'0' ,'0' ,x0.yrmo_cacl ),credel.casalarie('A' ,'A' ,'P' ,'S' ,x0.csoc_cacl ,x0.depo_cacl ,x0.maga_cacl ,'0' ,'0' ,'0' ,x0.yrmo_cacl ),credel.casalarie('A' ,'B' ,'X' ,'S' ,x0.csoc_cacl ,x0.depo_cacl ,x0.maga_cacl ,'0' ,'0' ,'0' ,x0.yrmo_cacl ),credel.casalarie('A' ,'N' ,'X' ,'S' ,x0.csoc_cacl ,x0.depo_cacl ,x0.maga_cacl ,'0' ,'0' ,'0' ,x0.yrmo_cacl ),credel.casalarie('A' ,'A' ,'X' ,'S' ,x0.csoc_cacl ,x0.depo_cacl ,x0.maga_cacl ,'0' ,'0' ,'0' ,x0.yrmo_cacl )from credel.fcacli x0 ,credel.fsalar x1 where (((x1.csoc_sal = x0.csoc_cacl ) AND (x1.depo_sal = x0.depo_cacl ) ) AND (x1.code_sal = x0.maga_cacl ) ) #
+Credel;vcc_salarfour;1;create view credel.vcc_salarfour (societe,depot,magasinier,nomsalarie,fournisseur,nomfourniss,anneemois,annee,mois,mag_piece_b,mag_piece_n,mag_piece_a,totmagbrut,totmagnet,totmagachat,atel_piece_b,atel_piece_net,atel_piece_achat,totatelbrut,totatelnet,totatelachat) as select distinct x0.csoc_cacl ,x0.depo_cacl ,x0.maga_cacl ,x1.noms_sal || x1.pren_sal ,x0.four_cacl ,x2.rais_four ,x0.yrmo_cacl ,x0.year_cacl ,x0.mois_cacl ,credel.casalarie('M' ,'B' ,'P' ,'F' ,x0.csoc_cacl ,x0.depo_cacl ,x0.maga_cacl ,'0' ,x0.four_cacl ,'0' ,x0.yrmo_cacl ),credel.casalarie('M' ,'N' ,'P' ,'F' ,x0.csoc_cacl ,x0.depo_cacl ,x0.maga_cacl ,'0' ,x0.four_cacl ,'0' ,x0.yrmo_cacl ),credel.casalarie('M' ,'A' ,'P' ,'F' ,x0.csoc_cacl ,x0.depo_cacl ,x0.maga_cacl ,'0' ,x0.four_cacl ,'0' ,x0.yrmo_cacl ),credel.casalarie('M' ,'B' ,'X' ,'F' ,x0.csoc_cacl ,x0.depo_cacl ,x0.maga_cacl ,'0' ,x0.four_cacl ,'0' ,x0.yrmo_cacl ),credel.casalarie('M' ,'N' ,'X' ,'F' ,x0.csoc_cacl ,x0.depo_cacl ,x0.maga_cacl ,'0' ,x0.four_cacl ,'0' ,x0.yrmo_cacl ),credel.casalarie('M' ,'A' ,'X' ,'F' ,x0.csoc_cacl ,x0.depo_cacl ,x0.maga_cacl ,'0' ,x0.four_cacl ,'0' ,x0.yrmo_cacl ),credel.casalarie('A' ,'B' ,'P' ,'F' ,x0.csoc_cacl ,x0.depo_cacl ,x0.maga_cacl ,'0' ,x0.four_cacl ,'0' ,x0.yrmo_cacl ),credel.casalarie('A' ,'N' ,'P' ,'F' ,x0.csoc_cacl ,x0.depo_cacl ,x0.maga_cacl ,'0' ,x0.four_cacl ,'0' ,x0.yrmo_cacl ),credel.casalarie('A' ,'A' ,'P' ,'F' ,x0.csoc_cacl ,x0.depo_cacl ,x0.maga_cacl ,'0' ,x0.four_cacl ,'0' ,x0.yrmo_cacl ),credel.casalarie('A' ,'B' ,'X' ,'F' ,x0.csoc_cacl ,x0.depo_cacl ,x0.maga_cacl ,'0' ,x0.four_cacl ,'0' ,x0.yrmo_cacl ),credel.casalarie('A' ,'N' ,'X' ,'F' ,x0.csoc_cacl ,x0.depo_cacl ,x0.maga_cacl ,'0' ,x0.four_cacl ,'0' ,x0.yrmo_cacl ),credel.casalarie('A' ,'A' ,'X' ,'F' ,x0.csoc_cacl ,x0.depo_cacl ,x0.maga_cacl ,'0' ,x0.four_cacl ,'0' ,x0.yrmo_cacl )from credel.fcacli x0 ,credel.fsalar x1 ,credel.ffournis x2 where ((((x1.csoc_sal = x0.csoc_cacl ) AND (x1.depo_sal = x0.depo_cacl ) ) AND (x1.code_sal = x0.maga_cacl ) ) AND (x0.four_cacl = x2.code_four ) ) #
+Credel;vcc_stock;1;create view credel.vcc_stock (csoci,depot,refer,fourn,casie,cgest,ctype,categ,statu,clots,prxmp,ddent,ddsor,ddinv,ddefc,cumen,cumso,seuil,maxim,qtcde,qtres,qtite,valer) as select x0.csoci_stk ,x0.depot_stk ,x0.refer_stk ,x0.fourn_stk ,x0.casie_stk ,x0.cgest_stk ,x0.ctype_stk ,x0.categ_stk ,x0.statu_stk ,x0.clots_stk ,x0.prxmp_stk ,x0.ddent_stk ,x0.ddsor_stk ,x0.ddinv_stk ,x0.ddefc_stk ,x0.cumen_stk ,x0.cumso_stk ,x0.seuil_stk ,x0.maxim_stk ,x0.qtcde_stk ,x0.qtres_stk ,x0.qtite_stk ,x0.valer_stk from credel.fstock x0 #
+Credel;vcc_socfac;1;create view credel.vcc_socfac (codsoc,codep,nomsoc,nomdep) as select distinct x0.csoc_tva ,x0.depo_tva ,x1.rais_soc ,x2.rais_dep from credel.ftva x0 ,credel.societe x1 ,credel.depot x2 where (((x1.code_soc = x2.csoc_dep ) AND (x0.csoc_tva = x2.csoc_dep ) ) AND (x0.depo_tva = x2.code_dep ) ) #
+Credel;vcc_seract;1;create view credel.vcc_seract (groupe_service,libe_groupe,service,libeservice,activite,libactivite) as select x0.code_gscpt ,x0.libe_gscpt ,x1.code_secpt ,x1.libe_secpt ,x2.code_accpt ,x2.libe_accpt from credel.fgsecpt x0 ,credel.fsercpt x1 ,credel.factcpt x2 where ((x1.rser_secpt = x0.code_gscpt ) AND (x2.serv_accpt = x1.code_secpt ) ) #
+Credel;vcc_salarffam;1;create view credel.vcc_salarffam (societe,depot,magasinier,nomsalarie,fournisseur,nomfourniss,famille,anneemois,annee,mois,mag_piece_b,mag_piece_n,mag_piece_a,totmagbrut,totmagnet,totmagachat,atel_piece_b,atel_piece_net,atel_piece_achat,totatelbrut,totatelnet,totatelachat) as select distinct x0.csoc_cacl ,x0.depo_cacl ,x0.maga_cacl ,x1.noms_sal || x1.pren_sal ,x0.four_cacl ,x2.rais_four ,x0.cfmo_cacl ,x0.yrmo_cacl ,x0.year_cacl ,x0.mois_cacl ,credel.casalarie('M' ,'B' ,'P' ,'M' ,x0.csoc_cacl ,x0.depo_cacl ,x0.maga_cacl ,'0' ,x0.four_cacl ,x0.cfmo_cacl ,x0.yrmo_cacl ),credel.casalarie('M' ,'N' ,'P' ,'M' ,x0.csoc_cacl ,x0.depo_cacl ,x0.maga_cacl ,'0' ,x0.four_cacl ,x0.cfmo_cacl ,x0.yrmo_cacl ),credel.casalarie('M' ,'A' ,'P' ,'M' ,x0.csoc_cacl ,x0.depo_cacl ,x0.maga_cacl ,'0' ,x0.four_cacl ,x0.cfmo_cacl ,x0.yrmo_cacl ),credel.casalarie('M' ,'B' ,'X' ,'M' ,x0.csoc_cacl ,x0.depo_cacl ,x0.maga_cacl ,'0' ,x0.four_cacl ,x0.cfmo_cacl ,x0.yrmo_cacl ),credel.casalarie('M' ,'N' ,'X' ,'M' ,x0.csoc_cacl ,x0.depo_cacl ,x0.maga_cacl ,'0' ,x0.four_cacl ,x0.cfmo_cacl ,x0.yrmo_cacl ),credel.casalarie('M' ,'A' ,'X' ,'M' ,x0.csoc_cacl ,x0.depo_cacl ,x0.maga_cacl ,'0' ,x0.four_cacl ,x0.cfmo_cacl ,x0.yrmo_cacl ),credel.casalarie('A' ,'B' ,'P' ,'M' ,x0.csoc_cacl ,x0.depo_cacl ,x0.maga_cacl ,'0' ,x0.four_cacl ,x0.cfmo_cacl ,x0.yrmo_cacl ),credel.casalarie('A' ,'N' ,'P' ,'M' ,x0.csoc_cacl ,x0.depo_cacl ,x0.maga_cacl ,'0' ,x0.four_cacl ,x0.cfmo_cacl ,x0.yrmo_cacl ),credel.casalarie('A' ,'A' ,'P' ,'M' ,x0.csoc_cacl ,x0.depo_cacl ,x0.maga_cacl ,'0' ,x0.four_cacl ,x0.cfmo_cacl ,x0.yrmo_cacl ),credel.casalarie('A' ,'B' ,'X' ,'M' ,x0.csoc_cacl ,x0.depo_cacl ,x0.maga_cacl ,'0' ,x0.four_cacl ,x0.cfmo_cacl ,x0.yrmo_cacl ),credel.casalarie('A' ,'N' ,'X' ,'M' ,x0.csoc_cacl ,x0.depo_cacl ,x0.maga_cacl ,'0' ,x0.four_cacl ,x0.cfmo_cacl ,x0.yrmo_cacl ),credel.casalarie('A' ,'A' ,'X' ,'M' ,x0.csoc_cacl ,x0.depo_cacl ,x0.maga_cacl ,'0' ,x0.four_cacl ,x0.cfmo_cacl ,x0.yrmo_cacl )from credel.fcacli x0 ,credel.fsalar x1 ,credel.ffournis x2 where ((((x1.csoc_sal = x0.csoc_cacl ) AND (x1.depo_sal = x0.depo_cacl ) ) AND (x1.code_sal = x0.maga_cacl ) ) AND (x0.four_cacl = x2.code_four ) ) #
+Credel;vcc_salarcli;1;create view credel.vcc_salarcli (societe,depot,magasinier,nomsalarie,codeclient,nomclient,anneemois,annee,mois,mag_mod_brut,mag_mod_net,mag_mod_achat,mag_piece_b,mag_piece_n,mag_piece_a,totmagbrut,totmagnet,totmagachat,atel_div_b,atel_div_net,atel_div_achat,atel_mo_net,atel_forf_b,atel_forf_net,tale_forf_achat,atel_piece_b,atel_piece_net,atel_piece_achat,totatelbrut,totatelnet,totatelachat) as select distinct x0.csoc_cacl ,x0.depo_cacl ,x0.maga_cacl ,x1.noms_sal || x1.pren_sal ,x0.ccli_cacl ,x2.rais_cli ,x0.yrmo_cacl ,x0.year_cacl ,x0.mois_cacl ,credel.casalarie('M' ,'B' ,'T' ,'C' ,x0.csoc_cacl ,x0.depo_cacl ,x0.maga_cacl ,x0.ccli_cacl ,'0' ,'0' ,x0.yrmo_cacl ),credel.casalarie('M' ,'N' ,'T' ,'C' ,x0.csoc_cacl ,x0.depo_cacl ,x0.maga_cacl ,x0.ccli_cacl ,'0' ,'0' ,x0.yrmo_cacl ),credel.casalarie('M' ,'A' ,'T' ,'C' ,x0.csoc_cacl ,x0.depo_cacl ,x0.maga_cacl ,x0.ccli_cacl ,'0' ,'0' ,x0.yrmo_cacl ),credel.casalarie('M' ,'B' ,'P' ,'C' ,x0.csoc_cacl ,x0.depo_cacl ,x0.maga_cacl ,x0.ccli_cacl ,'0' ,'0' ,x0.yrmo_cacl ),credel.casalarie('M' ,'N' ,'P' ,'C' ,x0.csoc_cacl ,x0.depo_cacl ,x0.maga_cacl ,x0.ccli_cacl ,'0' ,'0' ,x0.yrmo_cacl ),credel.casalarie('M' ,'A' ,'P' ,'C' ,x0.csoc_cacl ,x0.depo_cacl ,x0.maga_cacl ,x0.ccli_cacl ,'0' ,'0' ,x0.yrmo_cacl ),credel.casalarie('M' ,'B' ,'X' ,'C' ,x0.csoc_cacl ,x0.depo_cacl ,x0.maga_cacl ,x0.ccli_cacl ,'0' ,'0' ,x0.yrmo_cacl ),credel.casalarie('M' ,'N' ,'X' ,'C' ,x0.csoc_cacl ,x0.depo_cacl ,x0.maga_cacl ,x0.ccli_cacl ,'0' ,'0' ,x0.yrmo_cacl ),credel.casalarie('M' ,'A' ,'X' ,'C' ,x0.csoc_cacl ,x0.depo_cacl ,x0.maga_cacl ,x0.ccli_cacl ,'0' ,'0' ,x0.yrmo_cacl ),credel.casalarie('A' ,'B' ,'D' ,'C' ,x0.csoc_cacl ,x0.depo_cacl ,x0.maga_cacl ,x0.ccli_cacl ,'0' ,'0' ,x0.yrmo_cacl ),credel.casalarie('A' ,'N' ,'D' ,'C' ,x0.csoc_cacl ,x0.depo_cacl ,x0.maga_cacl ,x0.ccli_cacl ,'0' ,'0' ,x0.yrmo_cacl ),credel.casalarie('A' ,'A' ,'D' ,'C' ,x0.csoc_cacl ,x0.depo_cacl ,x0.maga_cacl ,x0.ccli_cacl ,'0' ,'0' ,x0.yrmo_cacl ),credel.casalarie('A' ,'N' ,'M' ,'C' ,x0.csoc_cacl ,x0.depo_cacl ,x0.maga_cacl ,x0.ccli_cacl ,'0' ,'0' ,x0.yrmo_cacl ),credel.casalarie('A' ,'B' ,'F' ,'C' ,x0.csoc_cacl ,x0.depo_cacl ,x0.maga_cacl ,x0.ccli_cacl ,'0' ,'0' ,x0.yrmo_cacl ),credel.casalarie('A' ,'N' ,'F' ,'C' ,x0.csoc_cacl ,x0.depo_cacl ,x0.maga_cacl ,x0.ccli_cacl ,'0' ,'0' ,x0.yrmo_cacl ),credel.casalarie('A' ,'A' ,'F' ,'C' ,x0.csoc_cacl ,x0.depo_cacl ,x0.maga_cacl ,x0.ccli_cacl ,'0' ,'0' ,x0.yrmo_cacl ),credel.casalarie('A' ,'B' ,'P' ,'C' ,x0.csoc_cacl ,x0.depo_cacl ,x0.maga_cacl ,x0.ccli_cacl ,'0' ,'0' ,x0.yrmo_cacl ),credel.casalarie('A' ,'N' ,'P' ,'C' ,x0.csoc_cacl ,x0.depo_cacl ,x0.maga_cacl ,x0.ccli_cacl ,'0' ,'0' ,x0.yrmo_cacl ),credel.casalarie('A' ,'A' ,'P' ,'C' ,x0.csoc_cacl ,x0.depo_cacl ,x0.maga_cacl ,x0.ccli_cacl ,'0' ,'0' ,x0.yrmo_cacl ),credel.casalarie('A' ,'B' ,'X' ,'C' ,x0.csoc_cacl ,x0.depo_cacl ,x0.maga_cacl ,x0.ccli_cacl ,'0' ,'0' ,x0.yrmo_cacl ),credel.casalarie('A' ,'N' ,'X' ,'C' ,x0.csoc_cacl ,x0.depo_cacl ,x0.maga_cacl ,x0.ccli_cacl ,'0' ,'0' ,x0.yrmo_cacl ),credel.casalarie('A' ,'A' ,'X' ,'C' ,x0.csoc_cacl ,x0.depo_cacl ,x0.maga_cacl ,x0.ccli_cacl ,'0' ,'0' ,x0.yrmo_cacl )from credel.fcacli x0 ,credel.fsalar x1 ,credel.fclient x2 where ((((x1.csoc_sal = x0.csoc_cacl ) AND (x1.depo_sal = x0.depo_cacl ) ) AND (x1.code_sal = x0.maga_cacl ) ) AND (x0.ccli_cacl = x2.code_cli ) ) #
+Credel;vcc_rubrique;1;create view credel.vcc_rubrique (societe,anneemois,rubrique,cgcess,montantht) as select x0.csoc_mvana ,x0.anmo_mvana ,x1.rubrique_cc ,x0.cess_mvana ,sum((x0.debi_mvana - x0.cred_mvana ) ) from credel.fmvanacpt x0 ,credel.cc_param x1 where (((((x0.ncpt_mvana = x1.ncpt_cc ) AND (x0.depa_mvana = x1.depot_cc ) ) AND (x0.sera_mvana = x1.service_cc ) ) AND (x0.acta_mvana = x1.activite_cc ) ) AND (x0.cmvj_mvana = 1 ) ) group by x0.csoc_mvana ,x0.anmo_mvana ,x1.rubrique_cc ,x0.cess_mvana #
+Credel;vcc_rentacli;1;create view credel.vcc_rentacli (societe,depot,anneemois,codecli,nomclient,catarif,cavente,achat) as select x0.csoc_cacl ,x0.depo_cacl ,x0.yrmo_cacl ,x0.ccli_cacl ,x1.rais_cli ,sum((x0.mbru_cacl + x0.abru_cacl ) ) ,sum((x0.mnet_cacl + x0.anet_cacl ) ) ,sum((x0.mach_cacl + x0.aach_cacl ) ) from credel.fcacli x0 ,credel.fclient x1 ,credel.fmagatl x2 where (x0.ccli_cacl = x1.code_cli ) group by x0.csoc_cacl ,x0.depo_cacl ,x0.yrmo_cacl ,x0.ccli_cacl ,x1.rais_cli #
+Credel;vcc_refpbl;1;create view credel.vcc_refpbl (societe,depot,client,nomclient,numor,nbon,datebon,reference,fournis,liberefe,famille,prixtarifu,quantite,remisevente,pachatu,pxmpu,prixventeht) as select x1.csoc_lbl ,x1.depo_lbl ,x1.ccli_lbl ,x0.nomc_ebl ,x0.orig_ebl ,x0.nbon_ebl ,x0.date_ebl ,x1.refe_lbl ,x1.frns_lbl ,x1.libe_lbl ,x1.cfam_lbl ,x2.ptar_pbl ,x1.qliv_lbl ,x1.remi_lbl ,x2.pach_pbl ,x2.pxmp_pbl ,x2.pxht_pbl from credel.fentbl x0 ,credel.fligblm x1 ,credel.prixbl x2 where (((((((((((x1.csoc_lbl = x0.csoc_ebl ) AND (x1.depo_lbl = x0.depo_ebl ) ) AND (x1.ccli_lbl = x0.ccli_ebl ) ) AND (x1.nbon_lbl = x0.nbon_ebl ) ) AND (x2.csoc_pbl = x1.csoc_lbl ) ) AND (x2.depo_pbl = x1.depo_lbl ) ) AND (x2.ccli_pbl = x1.ccli_lbl ) ) AND (x2.nbon_pbl = x1.nbon_lbl ) ) AND (x2.cdev_pbl = x0.cdev_ebl ) ) AND (x2.nlig_pbl = x1.nlig_lbl ) ) AND (x1.natl_lbl = 'P' ) ) #
+Credel;vcc_nbfac;1;create view credel.vcc_nbfac (societe,depot,origine,libelle,annee_mois,nombre) as select distinct x0.csoc_piedf ,x0.depo_piedf ,x0.orig_piedf ,credel.lib_origine(x0.orig_piedf ),credel.yrmo(x0.dfac_piedf ,'/' ),count(*) from credel.fpiedfac x0 group by x0.csoc_piedf ,x0.depo_piedf ,x0.orig_piedf ,4 ,5 #
+Credel;vcc_reffam;1;create view credel.vcc_reffam (societe,depot,datefact,typefact,reference,libelle,fournisseur,famille,panier,quantite,pxunbrut,ptarubrut,prixuachat,prixupmp,montnet) as select x0.csoc_hlafac ,x0.depo_hlafac ,x0.dfac_hlafac ,x0.tfac_hlafac ,x0.refe_hlafac ,x0.libe_hlafac ,x0.four_hlafac ,x0.cfam_hlafac ,x2.dep2_fam ,sum(x0.qtte_hlafac ) ,sum((x0.qtte_hlafac * x1.pxun_hlfac ) ) ,sum((x0.qtte_hlafac * x1.ptar_hlfac ) ) ,sum((x0.qtte_hlafac * x1.pach_hlfac ) ) ,sum((x0.qtte_hlafac * x1.pxmp_hlfac ) ) ,sum(x1.pxht_hlfac ) from credel.fhislfac x0 ,credel.pxhlfac x1 ,credel.ffamil x2 where ((((((((((((x1.csoc_hlfac = x0.csoc_hlafac ) AND (x1.depo_hlfac = x0.depo_hlafac ) ) AND (x1.nfac_hlfac = x0.nfac_hlafac ) ) AND (x1.dfac_hlfac = x0.dfac_hlafac ) ) AND (x1.ccli_hlfac = x0.ccli_hlafac ) ) AND (x1.tfac_hlfac = x0.tfac_hlafac ) ) AND (x1.acci_hlfac = x0.acci_hlafac ) ) AND (x1.nbon_hlfac = x0.nbon_hlafac ) ) AND (x1.nlig_hlfac = x0.nlig_hlafac ) ) AND (x0.natl_hlafac = 'P' ) ) AND (x2.four_fam = x0.four_hlafac ) ) AND (x2.code_fam = x0.cfam_hlafac ) ) group by x0.csoc_hlafac ,x0.depo_hlafac ,x0.dfac_hlafac ,x0.tfac_hlafac ,x0.refe_hlafac ,x0.libe_hlafac ,x0.four_hlafac ,x0.cfam_hlafac ,x2.dep2_fam #
+Credel;vcc_pscecam;1;create view credel.vcc_pscecam (societe,immat,num_or,dateentree,debutpointage,hdebut,finpointage,hfin) as select x0.csoc_eor ,x0.imat_eor ,x0.nume_eor ,x0.dent_eor ,min(x1.date_hor ) ,x1.hdeb_hor ,max(x1.date_hor ) ,x1.hfin_hor from credel.fentor x0 ,credel.fhrsor x1 where (((x1.csoc_hor = x0.csoc_eor ) AND (x1.depo_hor = x0.depo_eor ) ) AND (x1.nuor_hor = x0.nume_eor ) ) group by x0.csoc_eor ,x0.imat_eor ,x0.nume_eor ,x0.dent_eor ,x1.hdeb_hor ,x1.hfin_hor #
+Credel;vcc_mvthpas;1;create view credel.vcc_mvthpas (societe,depot,operateur,date,heurtransf,codesalarie,anc_nuor,anc_ccli,anc_nomclient,anc_accid,anc_tfac,anc_activite,anc_heurpass,anc_restheur,nv_nuor,nv_ccli,nv_nomcli,nv_accid,nv_tfact,nv_activite,nv_tempspass) as select x0.csoc_mhor ,x0.depo_mhor ,x0.oper_mhor ,x0.date_mhor ,x0.heur_mhor ,x0.nsal_mhor ,x0.anc_nuor ,x0.anc_ccli ,x0.anc_lcli ,x0.anc_acci ,x0.anc_tfac ,x0.anc_acti ,x0.anc_hpas ,x0.anc_rest ,x0.nvx_nuor ,x0.nvx_ccli ,x0.nvx_lcli ,x0.nvx_acci ,x0.nvx_tfac ,x0.nvx_acti ,x0.nvx_hpas from credel.fmvthpas x0 #
+Credel;vcc_fournis;1;create view credel.vcc_fournis (code,rais,marq,ordr,cref,resp,adr1,adr2,adr3,codp,vill,pays,tele,faxe,telx,emai,mreg,domb,cptb,ribb,etab,guib,mini,cdev,dela,expl,remi,majo,dcre) as select x0.code_four ,x0.rais_four ,x0.marq_four ,x0.ordr_four ,x0.cref_four ,x0.resp_four ,x0.adr1_four ,x0.adr2_four ,x0.adr3_four ,x0.codp_four ,x0.vill_four ,x0.pays_four ,x0.tele_four ,x0.faxe_four ,x0.telx_four ,x0.emai_four ,x0.mreg_four ,x0.domb_four ,x0.cptb_four ,x0.ribb_four ,x0.etab_four ,x0.guib_four ,x0.mini_four ,x0.cdev_four ,x0.dela_four ,x0.expl_four ,x0.remi_four ,x0.majo_four ,x0.dcre_four from credel.ffournis x0 #
+Credel;vcc_ffamil;1;create view credel.vcc_ffamil (fournisseur,lib_fournisseur,famille,libelle,nature,lib_nature,taxe_eco) as select x0.four_fam ,x1.rais_four ,x0.code_fam ,x0.libe_fam ,x0.natu_fam ,x2.libe_nat ,x0.cpem_fam from credel.ffamil x0 ,credel.ffournis x1 ,credel.fnatstk x2 where ((x0.four_fam = x1.code_four ) AND (x0.natu_fam = x2.code_nat ) ) #
+Credel;vcc_famref;1;create view credel.vcc_famref (societe,depot,codecli,raisclient,datefact,typecli,typefact,reference,libelle,fournisseur,famille,panier,quantite,pxunbrut,ptarubrut,prixuachat,prixupmp,montnet) as select x1.csoc_hlafac ,x1.depo_hlafac ,x0.ccli_hefac ,x0.nomc_hefac ,x1.dfac_hlafac ,x0.tcli_hefac ,x1.tfac_hlafac ,x1.refe_hlafac ,x1.libe_hlafac ,x1.four_hlafac ,x1.cfam_hlafac ,x3.dep2_fam ,sum(x1.qtte_hlafac ) ,sum((x1.qtte_hlafac * x2.pxun_hlfac ) ) ,sum((x1.qtte_hlafac * x2.ptar_hlfac ) ) ,sum((x1.qtte_hlafac * x2.pach_hlfac ) ) ,sum((x1.qtte_hlafac * x2.pxmp_hlfac ) ) ,sum(x2.pxht_hlfac ) from credel.fhisefac x0 ,credel.fhislfac x1 ,credel.pxhlfac x2 ,credel.ffamil x3 where (((((((((((((((((((x1.csoc_hlafac = x0.csoc_hefac ) AND (x1.depo_hlafac = x0.depo_hefac ) ) AND (x1.nfac_hlafac = x0.nfac_hefac ) ) AND (x1.dfac_hlafac = x0.dfac_hefac ) ) AND (x1.ccli_hlafac = x0.ccli_hefac ) ) AND (x1.tfac_hlafac = x0.tfac_hefac ) ) AND (x1.acci_hlafac = x0.acci_hefac ) ) AND (x1.natl_hlafac = 'P' ) ) AND (x3.four_fam = x1.four_hlafac ) ) AND (x3.code_fam = x1.cfam_hlafac ) ) AND (x2.csoc_hlfac = x1.csoc_hlafac ) ) AND (x2.depo_hlfac = x1.depo_hlafac ) ) AND (x2.nfac_hlfac = x1.nfac_hlafac ) ) AND (x2.dfac_hlfac = x1.dfac_hlafac ) ) AND (x2.ccli_hlfac = x1.ccli_hlafac ) ) AND (x2.tfac_hlfac = x1.tfac_hlafac ) ) AND (x2.acci_hlfac = x1.acci_hlafac ) ) AND (x2.nbon_hlfac = x1.nbon_hlafac ) ) AND (x2.nlig_hlfac = x1.nlig_hlafac ) ) group by x1.csoc_hlafac ,x1.depo_hlafac ,x0.ccli_hefac ,x0.nomc_hefac ,x1.dfac_hlafac ,x0.tcli_hefac ,x1.tfac_hlafac ,x1.refe_hlafac ,x1.libe_hlafac ,x1.four_hlafac ,x1.cfam_hlafac ,x3.dep2_fam #
+Credel;vcc_mouvces;1;create view credel.vcc_mouvces (societe,cession,intitule,annee,debitcess,credcess,soldecess) as select x0.csoc_mvces ,x0.ncpt_mvces ,x0.inti_mvces ,x0.anne_mvces ,sum(x0.debi_mvces ) ,sum(x0.cred_mvces ) ,sum((x0.debi_mvces - x0.cred_mvces ) ) from credel.fmouvces x0 group by x0.csoc_mvces ,x0.ncpt_mvces ,x0.inti_mvces ,x0.anne_mvces #
+Credel;vcc_crmd360;1;create view credel.vcc_crmd360 (societe,codeclient,siretcli,nomclient,rue1,rue2,codpostal,ville,cpays,datefacture,montpieces,montmod,litige,telclient,depot) as select x2.csoc_piedf ,x2.ccli_piedf ,x0.sire_cli ,x0.rais_cli ,x0.adr1_cli ,x0.adr2_cli ,x0.codp_cli ,x0.vill_cli ,x0.pays_cli ,x2.dfac_piedf ,sum(credel.montantfacture('P' ,x2.csoc_piedf ,x2.depo_piedf ,x2.ccli_piedf ,x2.nfac_piedf ,x2.dfac_piedf )) ,sum(credel.montantfacture('M' ,x2.csoc_piedf ,x2.depo_piedf ,x2.ccli_piedf ,x2.nfac_piedf ,x2.dfac_piedf )) ,x1.type_ltg ,x0.tele_cli ,x2.depo_piedf from credel.fclient x0 ,credel.flitige x1 ,credel.fpiedfac x2 where (((x0.type_cli IN (1 ,3 )) AND (x2.ccli_piedf = x0.code_cli ) ) AND (x0.litg_cli = x1.code_ltg ) ) group by x2.csoc_piedf ,x2.ccli_piedf ,x0.sire_cli ,x0.rais_cli ,x0.adr1_cli ,x0.adr2_cli ,x0.codp_cli ,x0.vill_cli ,x0.pays_cli ,x2.dfac_piedf ,x1.type_ltg ,x0.tele_cli ,x2.depo_piedf #
+Credel;vcc_encouror;1;create view credel.vcc_encouror (societe,depot,atelier,numor,entree,immat,kilom,codecli,nomclient,typefact,accident,datecor,etator,cloture,refeclient,pieces,mod,heures) as select x0.csoc_eor ,x0.depo_eor ,x0.type_eor ,x0.nume_eor ,x0.dent_eor ,x0.imat_eor ,x0.kilm_eor ,x1.ccli_cor ,x1.lcli_cor ,x1.tfac_cor ,x1.acci_cor ,x1.date_cor ,x1.etat_cor ,x1.dclo_cor ,x1.refc_cor ,credel.encourpmh('P' ,x1.csoc_cor ,x1.depo_cor ,x1.ccli_cor ,x1.tfac_cor ,x1.acci_cor ,x1.nume_cor ),credel.encourpmh('M' ,x1.csoc_cor ,x1.depo_cor ,x1.ccli_cor ,x1.tfac_cor ,x1.acci_cor ,x1.nume_cor ),credel.encourpmh('H' ,x1.csoc_cor ,x1.depo_cor ,x1.ccli_cor ,x1.tfac_cor ,x1.acci_cor ,x1.nume_cor )from credel.fentor x0 ,credel.fclior x1 where ((((x1.csoc_cor = x0.csoc_eor ) AND (x1.depo_cor = x0.depo_eor ) ) AND (x1.nume_cor = x0.nume_eor ) ) AND (x1.etat_cor != 'FA' ) ) #
+Credel;vcc_crm360;1;create view credel.vcc_crm360 (societe,codeclient,siretcli,nomclient,rue1,rue2,codpostal,ville,cpays,numfacture,datefacture,montpieces,montmod,litige,telclient,depot) as select x2.csoc_piedf ,x2.ccli_piedf ,x0.sire_cli ,x0.rais_cli ,x0.adr1_cli ,x0.adr2_cli ,x0.codp_cli ,x0.vill_cli ,x0.pays_cli ,x2.nfac_piedf ,x2.dfac_piedf ,credel.montantfacture('P' ,x2.csoc_piedf ,x2.depo_piedf ,x2.ccli_piedf ,x2.nfac_piedf ,x2.dfac_piedf ),credel.montantfacture('M' ,x2.csoc_piedf ,x2.depo_piedf ,x2.ccli_piedf ,x2.nfac_piedf ,x2.dfac_piedf ),x1.type_ltg ,x0.tele_cli ,x2.depo_piedf from credel.fclient x0 ,credel.flitige x1 ,credel.fpiedfac x2 where (((x0.type_cli IN (1 ,3 )) AND (x2.ccli_piedf = x0.code_cli ) ) AND (x0.litg_cli = x1.code_ltg ) ) #
+Credel;vcc_crg;1;create view credel.vcc_crg (societe,groupe,tableau,ligne,colonne,anneemois,debit,credit) as select x1.csoc_mvana ,x0.grou_tacp ,x0.tabl_tacp ,x0.lign_tacp ,x0.colo_tacp ,x1.anmo_mvana ,sum(x1.debi_mvana ) ,sum(x1.cred_mvana ) from credel.fcpttab x0 ,credel.fmvanacpt x1 where ((((x0.coli_tacp = 0 ) AND (x1.ncpa_mvana = x0.ncpa_tacp ) ) AND (x1.cess_mvana = x0.cocp_tacp ) ) AND (x1.cmvc_mvana = 0 ) ) group by x1.csoc_mvana ,x0.grou_tacp ,x0.tabl_tacp ,x0.lign_tacp ,x0.colo_tacp ,x1.anmo_mvana #
+Credel;vcc_cpormvcpt;1;create view credel.vcc_cpormvcpt (societe,origine,compte,libecompte,libetier,datemvt,piece,libelle,debit,credit) as select x0.csoc_mvcpt ,x0.cpor_mvcpt ,x0.ncpt_mvcpt ,x1.nintcg_planc ,x2.rais_tier ,x0.dpie_mvcpt ,x0.npie_mvcpt ,x0.libe_mvcpt ,x0.debi_mvcpt ,x0.cred_mvcpt from credel.fmouvcpt x0 ,outer(credel.fcompcpt x1 ) ,outer(credel.ftiercpt x2 ) where ((((((((x1.csocie_planc = x0.csoc_mvcpt ) AND (x1.nclecg_planc = x0.ncpt_mvcpt ) ) AND (x0.cmvj_mvcpt = 0 ) ) AND (x0.cess_mvcpt = 0 ) ) AND (x2.csoc_tier = x0.csoc_mvcpt ) ) AND (x2.pref_tier = x0.pref_mvcpt ) ) AND (x2.code_tier = x0.ncpt_mvcpt ) ) AND (x0.preo_mvcpt = 'G' ) ) #
+Credel;vcc_conso;1;create view credel.vcc_conso (refe,four,csoc,depo,yrmo,year,mois,qtte,nlig,cdev,mont) as select x0.refe_consom ,x0.four_consom ,x0.csoc_consom ,x0.depo_consom ,x0.yrmo_consom ,x0.year_consom ,x0.mois_consom ,x0.qtte_consom ,x0.nlig_consom ,x0.cdev_consom ,x0.mont_consom from credel.fconso x0 #
+Credel;vcc_clirem;1;create view credel.vcc_clirem (societe,depot,codeclient,nomclient,codepostal,ville,magremise,atelremise,magmajo,atelmajo) as select x1.csoc_scli ,x1.depo_scli ,x1.ccli_scli ,x0.rais_cli ,x0.codp_cli ,x0.vill_cli ,x1.mrem_scli ,x1.arem_scli ,x1.mmaj_scli ,x1.amaj_scli from credel.fclient x0 ,credel.fmagatl x1 where (x1.ccli_scli = x0.code_cli ) #
+Credel;vcc_clifour;1;create view credel.vcc_clifour (societe,depot,client,nomclient,fournisseur,nomfourniss,anneemois,annee,mois,mag_piece_b,mag_piece_n,mag_piece_a,totmagbrut,totmagnet,totmagachat,atel_piece_b,atel_piece_net,atel_piece_achat,totatelbrut,totatelnet,totatelachat) as select distinct x0.csoc_cacl ,x0.depo_cacl ,x0.ccli_cacl ,x1.rais_cli ,x0.four_cacl ,x2.rais_four ,x0.yrmo_cacl ,x0.year_cacl ,x0.mois_cacl ,credel.caclient('M' ,'B' ,'P' ,'F' ,x0.csoc_cacl ,x0.depo_cacl ,x0.ccli_cacl ,x0.four_cacl ,'0' ,x0.yrmo_cacl ),credel.caclient('M' ,'N' ,'P' ,'F' ,x0.csoc_cacl ,x0.depo_cacl ,x0.ccli_cacl ,x0.four_cacl ,'0' ,x0.yrmo_cacl ),credel.caclient('M' ,'A' ,'P' ,'F' ,x0.csoc_cacl ,x0.depo_cacl ,x0.ccli_cacl ,x0.four_cacl ,'0' ,x0.yrmo_cacl ),credel.caclient('M' ,'B' ,'X' ,'F' ,x0.csoc_cacl ,x0.depo_cacl ,x0.ccli_cacl ,x0.four_cacl ,'0' ,x0.yrmo_cacl ),credel.caclient('M' ,'N' ,'X' ,'F' ,x0.csoc_cacl ,x0.depo_cacl ,x0.ccli_cacl ,x0.four_cacl ,'0' ,x0.yrmo_cacl ),credel.caclient('M' ,'A' ,'X' ,'F' ,x0.csoc_cacl ,x0.depo_cacl ,x0.ccli_cacl ,x0.four_cacl ,'0' ,x0.yrmo_cacl ),credel.caclient('A' ,'B' ,'P' ,'F' ,x0.csoc_cacl ,x0.depo_cacl ,x0.ccli_cacl ,x0.four_cacl ,'0' ,x0.yrmo_cacl ),credel.caclient('A' ,'N' ,'P' ,'F' ,x0.csoc_cacl ,x0.depo_cacl ,x0.ccli_cacl ,x0.four_cacl ,'0' ,x0.yrmo_cacl ),credel.caclient('A' ,'A' ,'P' ,'F' ,x0.csoc_cacl ,x0.depo_cacl ,x0.ccli_cacl ,x0.four_cacl ,'0' ,x0.yrmo_cacl ),credel.caclient('A' ,'B' ,'X' ,'F' ,x0.csoc_cacl ,x0.depo_cacl ,x0.ccli_cacl ,x0.four_cacl ,'0' ,x0.yrmo_cacl ),credel.caclient('A' ,'N' ,'X' ,'F' ,x0.csoc_cacl ,x0.depo_cacl ,x0.ccli_cacl ,x0.four_cacl ,'0' ,x0.yrmo_cacl ),credel.caclient('A' ,'A' ,'X' ,'F' ,x0.csoc_cacl ,x0.depo_cacl ,x0.ccli_cacl ,x0.four_cacl ,'0' ,x0.yrmo_cacl )from credel.fcacli x0 ,credel.fclient x1 ,credel.ffournis x2 where ((x1.code_cli = x0.ccli_cacl ) AND (x0.four_cacl = x2.code_four ) ) #
+Credel;vcc_cliffam;1;create view credel.vcc_cliffam (societe,depot,client,nomclient,fournisseur,nomfourniss,famille,anneemois,annee,mois,mag_piece_b,mag_piece_n,mag_piece_a,totmagbrut,totmagnet,totmagachat,atel_piece_b,atel_piece_net,atel_piece_achat,totatelbrut,totatelnet,totatelachat) as select distinct x0.csoc_cacl ,x0.depo_cacl ,x0.ccli_cacl ,x1.rais_cli ,x0.four_cacl ,x2.rais_four ,x0.cfmo_cacl ,x0.yrmo_cacl ,x0.year_cacl ,x0.mois_cacl ,credel.caclient('M' ,'B' ,'P' ,'M' ,x0.csoc_cacl ,x0.depo_cacl ,x0.ccli_cacl ,x0.four_cacl ,x0.cfmo_cacl ,x0.yrmo_cacl ),credel.caclient('M' ,'N' ,'P' ,'M' ,x0.csoc_cacl ,x0.depo_cacl ,x0.ccli_cacl ,x0.four_cacl ,x0.cfmo_cacl ,x0.yrmo_cacl ),credel.caclient('M' ,'A' ,'P' ,'M' ,x0.csoc_cacl ,x0.depo_cacl ,x0.ccli_cacl ,x0.four_cacl ,x0.cfmo_cacl ,x0.yrmo_cacl ),credel.caclient('M' ,'B' ,'X' ,'M' ,x0.csoc_cacl ,x0.depo_cacl ,x0.ccli_cacl ,x0.four_cacl ,x0.cfmo_cacl ,x0.yrmo_cacl ),credel.caclient('M' ,'N' ,'X' ,'M' ,x0.csoc_cacl ,x0.depo_cacl ,x0.ccli_cacl ,x0.four_cacl ,x0.cfmo_cacl ,x0.yrmo_cacl ),credel.caclient('M' ,'A' ,'X' ,'M' ,x0.csoc_cacl ,x0.depo_cacl ,x0.ccli_cacl ,x0.four_cacl ,x0.cfmo_cacl ,x0.yrmo_cacl ),credel.caclient('A' ,'B' ,'P' ,'M' ,x0.csoc_cacl ,x0.depo_cacl ,x0.ccli_cacl ,x0.four_cacl ,x0.cfmo_cacl ,x0.yrmo_cacl ),credel.caclient('A' ,'N' ,'P' ,'M' ,x0.csoc_cacl ,x0.depo_cacl ,x0.ccli_cacl ,x0.four_cacl ,x0.cfmo_cacl ,x0.yrmo_cacl ),credel.caclient('A' ,'A' ,'P' ,'M' ,x0.csoc_cacl ,x0.depo_cacl ,x0.ccli_cacl ,x0.four_cacl ,x0.cfmo_cacl ,x0.yrmo_cacl ),credel.caclient('A' ,'B' ,'X' ,'M' ,x0.csoc_cacl ,x0.depo_cacl ,x0.ccli_cacl ,x0.four_cacl ,x0.cfmo_cacl ,x0.yrmo_cacl ),credel.caclient('A' ,'N' ,'X' ,'M' ,x0.csoc_cacl ,x0.depo_cacl ,x0.ccli_cacl ,x0.four_cacl ,x0.cfmo_cacl ,x0.yrmo_cacl ),credel.caclient('A' ,'A' ,'X' ,'M' ,x0.csoc_cacl ,x0.depo_cacl ,x0.ccli_cacl ,x0.four_cacl ,x0.cfmo_cacl ,x0.yrmo_cacl )from credel.fcacli x0 ,credel.fclient x1 ,credel.ffournis x2 where ((x1.code_cli = x0.ccli_cacl ) AND (x0.four_cacl = x2.code_four ) ) #
+Credel;vcc_client;1;create view credel.vcc_client (societe,depot,client,nomclient,anneemois,annee,mois,mag_mod_brut,mag_mod_net,mag_mod_achat,mag_piece_b,mag_piece_n,mag_piece_a,totmagbrut,totmagnet,totmagachat,atel_div_b,atel_div_net,atel_div_achat,atel_mo_net,atel_forf_b,atel_forf_net,tale_forf_achat,atel_piece_b,atel_piece_net,atel_piece_achat,totatelbrut,totatelnet,totatelachat) as select distinct x0.csoc_cacl ,x0.depo_cacl ,x0.ccli_cacl ,x1.rais_cli ,x0.yrmo_cacl ,x0.year_cacl ,x0.mois_cacl ,credel.caclient('M' ,'B' ,'T' ,'C' ,x0.csoc_cacl ,x0.depo_cacl ,x0.ccli_cacl ,'0' ,'0' ,x0.yrmo_cacl ),credel.caclient('M' ,'N' ,'T' ,'C' ,x0.csoc_cacl ,x0.depo_cacl ,x0.ccli_cacl ,'0' ,'0' ,x0.yrmo_cacl ),credel.caclient('M' ,'A' ,'T' ,'C' ,x0.csoc_cacl ,x0.depo_cacl ,x0.ccli_cacl ,'0' ,'0' ,x0.yrmo_cacl ),credel.caclient('M' ,'B' ,'P' ,'C' ,x0.csoc_cacl ,x0.depo_cacl ,x0.ccli_cacl ,'0' ,'0' ,x0.yrmo_cacl ),credel.caclient('M' ,'N' ,'P' ,'C' ,x0.csoc_cacl ,x0.depo_cacl ,x0.ccli_cacl ,'0' ,'0' ,x0.yrmo_cacl ),credel.caclient('M' ,'A' ,'P' ,'C' ,x0.csoc_cacl ,x0.depo_cacl ,x0.ccli_cacl ,'0' ,'0' ,x0.yrmo_cacl ),credel.caclient('M' ,'B' ,'X' ,'C' ,x0.csoc_cacl ,x0.depo_cacl ,x0.ccli_cacl ,'0' ,'0' ,x0.yrmo_cacl ),credel.caclient('M' ,'N' ,'X' ,'C' ,x0.csoc_cacl ,x0.depo_cacl ,x0.ccli_cacl ,'0' ,'0' ,x0.yrmo_cacl ),credel.caclient('M' ,'A' ,'X' ,'C' ,x0.csoc_cacl ,x0.depo_cacl ,x0.ccli_cacl ,'0' ,'0' ,x0.yrmo_cacl ),credel.caclient('A' ,'B' ,'D' ,'C' ,x0.csoc_cacl ,x0.depo_cacl ,x0.ccli_cacl ,'0' ,'0' ,x0.yrmo_cacl ),credel.caclient('A' ,'N' ,'D' ,'C' ,x0.csoc_cacl ,x0.depo_cacl ,x0.ccli_cacl ,'0' ,'0' ,x0.yrmo_cacl ),credel.caclient('A' ,'A' ,'D' ,'C' ,x0.csoc_cacl ,x0.depo_cacl ,x0.ccli_cacl ,'0' ,'0' ,x0.yrmo_cacl ),credel.caclient('A' ,'N' ,'M' ,'C' ,x0.csoc_cacl ,x0.depo_cacl ,x0.ccli_cacl ,'0' ,'0' ,x0.yrmo_cacl ),credel.caclient('A' ,'B' ,'F' ,'C' ,x0.csoc_cacl ,x0.depo_cacl ,x0.ccli_cacl ,'0' ,'0' ,x0.yrmo_cacl ),credel.caclient('A' ,'N' ,'F' ,'C' ,x0.csoc_cacl ,x0.depo_cacl ,x0.ccli_cacl ,'0' ,'0' ,x0.yrmo_cacl ),credel.caclient('A' ,'A' ,'F' ,'C' ,x0.csoc_cacl ,x0.depo_cacl ,x0.ccli_cacl ,'0' ,'0' ,x0.yrmo_cacl ),credel.caclient('A' ,'B' ,'P' ,'C' ,x0.csoc_cacl ,x0.depo_cacl ,x0.ccli_cacl ,'0' ,'0' ,x0.yrmo_cacl ),credel.caclient('A' ,'N' ,'P' ,'C' ,x0.csoc_cacl ,x0.depo_cacl ,x0.ccli_cacl ,'0' ,'0' ,x0.yrmo_cacl ),credel.caclient('A' ,'A' ,'P' ,'C' ,x0.csoc_cacl ,x0.depo_cacl ,x0.ccli_cacl ,'0' ,'0' ,x0.yrmo_cacl ),credel.caclient('A' ,'B' ,'X' ,'C' ,x0.csoc_cacl ,x0.depo_cacl ,x0.ccli_cacl ,'0' ,'0' ,x0.yrmo_cacl ),credel.caclient('A' ,'N' ,'X' ,'C' ,x0.csoc_cacl ,x0.depo_cacl ,x0.ccli_cacl ,'0' ,'0' ,x0.yrmo_cacl ),credel.caclient('A' ,'A' ,'X' ,'C' ,x0.csoc_cacl ,x0.depo_cacl ,x0.ccli_cacl ,'0' ,'0' ,x0.yrmo_cacl )from credel.fcacli x0 ,credel.fclient x1 where (x1.code_cli = x0.ccli_cacl ) #
+Credel;vcc_cavcpt;1;create view credel.vcc_cavcpt (societe,depot,anneemois,cession,journal,compte,service,activite,caht) as select x0.csoc_mvana ,x0.depo_mvana ,x0.anmo_mvana ,x0.cess_mvana ,x0.jrnl_mvana ,x0.ncpt_mvana ,x0.sera_mvana ,x0.acta_mvana ,sum((x0.cred_mvana - x0.debi_mvana ) ) from credel.fmvanacpt x0 group by x0.csoc_mvana ,x0.depo_mvana ,x0.anmo_mvana ,x0.cess_mvana ,x0.jrnl_mvana ,x0.ncpt_mvana ,x0.sera_mvana ,x0.acta_mvana #
+Credel;vcc_cavcptsa;1;create view credel.vcc_cavcptsa (societe,depot,anneemois,cession,compte,service,activite,caht) as select x0.csoc_mvana ,x0.depo_mvana ,x0.anmo_mvana ,x0.cess_mvana ,x0.ncpt_mvana ,x0.sera_mvana ,x0.acta_mvana ,sum((x0.cred_mvana - x0.debi_mvana ) ) from credel.fmvanacpt x0 group by x0.csoc_mvana ,x0.depo_mvana ,x0.anmo_mvana ,x0.cess_mvana ,x0.ncpt_mvana ,x0.sera_mvana ,x0.acta_mvana #
+Credel;vcc_camecano;1;create view credel.vcc_camecano (societe,depot,salarie,dateor,numor,codeclient,raisonsociale,typeclient,accident,typfact,natureligne,reference,quantite,montantligne,ratio,montantratio) as select x0.csoc_hor ,x0.depo_hor ,x0.nsal_hor ,x0.date_hor ,x0.nuor_hor ,x1.ccli_hlafac ,x3.rais_cli ,x3.type_cli ,x0.acci_hor ,x0.tfac_hor ,x1.natl_hlafac ,x1.refe_hlafac ,x1.qtte_hlafac ,x2.pxht_hlfac ,credel.ratiopointag(x0.nsal_hor ,x0.csoc_hor ,x0.depo_hor ,x0.ccli_hor ,x0.acci_hor ,x0.tfac_hor ,x0.nuor_hor ),(x2.pxht_hlfac * credel.ratiopointag(x0.nsal_hor ,x0.csoc_hor ,x0.depo_hor ,x0.ccli_hor ,x0.acci_hor ,x0.tfac_hor ,x0.nuor_hor )) from credel.fhrsor x0 ,credel.fhislfac x1 ,credel.pxhlfac x2 ,credel.fclient x3 where ((((((((((((((((x1.csoc_hlafac = x0.csoc_hor ) AND (x1.depo_hlafac = x0.depo_hor ) ) AND (x1.nume_hlafac = x0.nuor_hor ) ) AND (x1.ccli_hlafac = x0.ccli_hor ) ) AND (x1.acci_hlafac = x0.acci_hor ) ) AND (x1.tfac_hlafac = x0.tfac_hor ) ) AND (x2.csoc_hlfac = x1.csoc_hlafac ) ) AND (x2.depo_hlfac = x1.depo_hlafac ) ) AND (x2.nfac_hlfac = x1.nfac_hlafac ) ) AND (x2.dfac_hlfac = x1.dfac_hlafac ) ) AND (x2.ccli_hlfac = x1.ccli_hlafac ) ) AND (x2.tfac_hlfac = x1.tfac_hlafac ) ) AND (x2.acci_hlfac = x1.acci_hlafac ) ) AND (x2.nlig_hlfac = x1.nlig_hlafac ) ) AND (x1.natl_hlafac IN ('M' ,'D' ,'P' ,'F' )) ) AND (x1.ccli_hlafac = x3.code_cli ) ) #
+Credel;vcc_caimat;1;create view credel.vcc_caimat (immatricul,numserie,datecircul,marque,gamme,anneefact,moisfact,codeclient,raisonsociale,typefact,typeclient,ca_apv) as select distinct x2.immat_cam ,x2.serie_cam ,x2.dcirc_cam ,x2.marqe_cam ,x2.gamme_cam ,YEAR (x0.dfac_hefac ) ,MONTH (x0.dfac_hefac ) ,x0.ccli_hefac ,x0.nomc_hefac ,x0.tfac_hefac ,x0.tcli_hefac ,sum(x1.btva_piedf ) from credel.fhisefac x0 ,credel.fpiedfac x1 ,credel.fcamion x2 where ((((((x0.csoc_hefac = x1.csoc_piedf ) AND (x0.depo_hefac = x1.depo_piedf ) ) AND (x0.nfac_hefac = x1.nfac_piedf ) ) AND (x0.dfac_hefac = x1.dfac_piedf ) ) AND (x0.ccli_hefac = x1.ccli_piedf ) ) AND (x2.immat_cam = x0.imat_hefac ) ) group by x2.immat_cam ,x2.serie_cam ,x2.dcirc_cam ,x2.marqe_cam ,x2.gamme_cam ,x0.dfac_hefac ,x0.ccli_hefac ,x0.nomc_hefac ,x0.tfac_hefac ,x0.tcli_hefac #
+Credel;vcc_camagatce;1;create view credel.vcc_camagatce (societe,codeclient,siretcli,nomclient,codpostal,ville,cpays,annee,camagasin,caatelier,telclient) as select x1.csoc_piedf ,x1.ccli_piedf ,x0.sire_cli ,x0.rais_cli ,x0.codp_cli ,x0.vill_cli ,x0.pays_cli ,YEAR (x1.dfac_piedf ) ,sum(credel.camagatelce('M' ,x1.csoc_piedf ,x1.depo_piedf ,x1.ccli_piedf ,x1.nfac_piedf ,x1.dfac_piedf )) ,sum(credel.camagatelce('A' ,x1.csoc_piedf ,x1.depo_piedf ,x1.ccli_piedf ,x1.nfac_piedf ,x1.dfac_piedf )) ,x0.tele_cli from credel.fclient x0 ,credel.fpiedfac x1 where ((x0.type_cli IN (1 ,3 )) AND (x1.ccli_piedf = x0.code_cli ) ) group by x1.csoc_piedf ,x1.ccli_piedf ,x0.sire_cli ,x0.rais_cli ,x0.codp_cli ,x0.vill_cli ,x0.pays_cli ,8 ,x0.tele_cli #
+Credel;vcc_cacpt;1;create view credel.vcc_cacpt (vsociete,vcodeclient,vnomclient,vanneemois,vmontant) as select x0.csoc_mvcpt ,x0.ncpt_mvcpt ,x0.inti_mvcpt ,x0.anmo_mvcpt ,sum((x0.debi_mvcpt - x0.cred_mvcpt ) ) from credel.fmouvcpt x0 ,credel.fjourcpt x1 where ((((x0.pref_mvcpt = 'C' ) AND (x1.csoc_jcpt = x0.csoc_mvcpt ) ) AND (x0.jrnl_mvcpt = x1.code_jcpt ) ) AND (x1.type_jcpt = 5 ) ) group by x0.csoc_mvcpt ,x0.ncpt_mvcpt ,x0.inti_mvcpt ,x0.anmo_mvcpt #
+Credel;vcc_cacligrirem;1;create view credel.vcc_cacligrirem (soccli,depocli,yrmocli,anneecli,moiscli,codecli,raiscli,grillemag,grilleatl,caclient) as select x0.csoc_cacl ,x0.depo_cacl ,x0.yrmo_cacl ,x0.year_cacl ,x0.mois_cacl ,x0.ccli_cacl ,x1.rais_cli ,x2.mrem_scli ,x2.arem_scli ,sum((x0.mnet_cacl + x0.anet_cacl ) ) from credel.fcacli x0 ,credel.fclient x1 ,credel.fmagatl x2 where ((((x1.code_cli = x0.ccli_cacl ) AND (x2.csoc_scli = x0.csoc_cacl ) ) AND (x2.depo_scli = x0.depo_cacl ) ) AND (x2.ccli_scli = x0.ccli_cacl ) ) group by x0.csoc_cacl ,x0.depo_cacl ,x0.yrmo_cacl ,x0.year_cacl ,x0.mois_cacl ,x0.ccli_cacl ,x1.rais_cli ,x2.mrem_scli ,x2.arem_scli #
+Credel;vcc_ca_clients;1;create view credel.vcc_ca_clients (soccli,depcli,yrmocli,codecli,raiscli,code_typc,libe_typc,caclient) as select x0.csoc_cacl ,x0.depo_cacl ,x0.yrmo_cacl ,x0.ccli_cacl ,x1.rais_cli ,x2.code_typc ,x2.libe_typc ,sum((x0.mnet_cacl + x0.anet_cacl ) ) from credel.fcacli x0 ,credel.fclient x1 ,credel.ftypecli x2 where ((x1.code_cli = x0.ccli_cacl ) AND (x1.type_cli = x2.code_typc ) ) group by x0.csoc_cacl ,x0.depo_cacl ,x0.yrmo_cacl ,x0.ccli_cacl ,x1.rais_cli ,x2.code_typc ,x2.libe_typc #
+Credel;vcc_cacliadr;1;create view credel.vcc_cacliadr (soccli,depocli,yrmocli,anneecli,moiscli,codecli,raiscli,adr1cli,codpcli,villecli,departemt,caclient) as select x0.csoc_cacl ,x0.depo_cacl ,x0.yrmo_cacl ,x0.year_cacl ,x0.mois_cacl ,x0.ccli_cacl ,x1.rais_cli ,x1.adr1_cli ,x1.codp_cli ,x1.vill_cli ,x1.codp_cli [1,2] ,sum((x0.mnet_cacl + x0.anet_cacl ) ) from credel.fcacli x0 ,credel.fclient x1 where (x1.code_cli = x0.ccli_cacl ) group by x0.csoc_cacl ,x0.depo_cacl ,x0.yrmo_cacl ,x0.year_cacl ,x0.mois_cacl ,x0.ccli_cacl ,x1.rais_cli ,x1.adr1_cli ,x1.codp_cli ,x1.vill_cli #
+Credel;vcc_caapv;1;create view credel.vcc_caapv (societe,depot,codeclient,nomclient,anneemois,annee,mois,mag_mod_brut,mag_mod_net,mag_mod_achat,mag_piece_b,mag_piece_n,mag_piece_a,totmagbrut,totmagnet,totmagachat,atel_div_b,atel_div_net,atel_div_achat,atel_mo_net,atel_forf_b,atel_forf_net,tale_forf_achat,atel_piece_b,atel_piece_net,atel_piece_achat,totatelbrut,totatelnet,totatelachat) as select distinct x0.csoc_cacl ,x0.depo_cacl ,x0.ccli_cacl ,x1.rais_cli ,x0.yrmo_cacl ,x0.year_cacl ,x0.mois_cacl ,credel.caapv('M' ,'B' ,'T' ,x0.csoc_cacl ,x0.depo_cacl ,x0.ccli_cacl ,x0.yrmo_cacl ),credel.caapv('M' ,'N' ,'T' ,x0.csoc_cacl ,x0.depo_cacl ,x0.ccli_cacl ,x0.yrmo_cacl ),credel.caapv('M' ,'A' ,'T' ,x0.csoc_cacl ,x0.depo_cacl ,x0.ccli_cacl ,x0.yrmo_cacl ),credel.caapv('M' ,'B' ,'P' ,x0.csoc_cacl ,x0.depo_cacl ,x0.ccli_cacl ,x0.yrmo_cacl ),credel.caapv('M' ,'N' ,'P' ,x0.csoc_cacl ,x0.depo_cacl ,x0.ccli_cacl ,x0.yrmo_cacl ),credel.caapv('M' ,'A' ,'P' ,x0.csoc_cacl ,x0.depo_cacl ,x0.ccli_cacl ,x0.yrmo_cacl ),credel.caapv('M' ,'B' ,'X' ,x0.csoc_cacl ,x0.depo_cacl ,x0.ccli_cacl ,x0.yrmo_cacl ),credel.caapv('M' ,'N' ,'X' ,x0.csoc_cacl ,x0.depo_cacl ,x0.ccli_cacl ,x0.yrmo_cacl ),credel.caapv('M' ,'A' ,'X' ,x0.csoc_cacl ,x0.depo_cacl ,x0.ccli_cacl ,x0.yrmo_cacl ),credel.caapv('A' ,'B' ,'D' ,x0.csoc_cacl ,x0.depo_cacl ,x0.ccli_cacl ,x0.yrmo_cacl ),credel.caapv('A' ,'N' ,'D' ,x0.csoc_cacl ,x0.depo_cacl ,x0.ccli_cacl ,x0.yrmo_cacl ),credel.caapv('A' ,'A' ,'D' ,x0.csoc_cacl ,x0.depo_cacl ,x0.ccli_cacl ,x0.yrmo_cacl ),credel.caapv('A' ,'N' ,'M' ,x0.csoc_cacl ,x0.depo_cacl ,x0.ccli_cacl ,x0.yrmo_cacl ),credel.caapv('A' ,'B' ,'F' ,x0.csoc_cacl ,x0.depo_cacl ,x0.ccli_cacl ,x0.yrmo_cacl ),credel.caapv('A' ,'N' ,'F' ,x0.csoc_cacl ,x0.depo_cacl ,x0.ccli_cacl ,x0.yrmo_cacl ),credel.caapv('A' ,'A' ,'F' ,x0.csoc_cacl ,x0.depo_cacl ,x0.ccli_cacl ,x0.yrmo_cacl ),credel.caapv('A' ,'B' ,'P' ,x0.csoc_cacl ,x0.depo_cacl ,x0.ccli_cacl ,x0.yrmo_cacl ),credel.caapv('A' ,'N' ,'P' ,x0.csoc_cacl ,x0.depo_cacl ,x0.ccli_cacl ,x0.yrmo_cacl ),credel.caapv('A' ,'A' ,'P' ,x0.csoc_cacl ,x0.depo_cacl ,x0.ccli_cacl ,x0.yrmo_cacl ),credel.caapv('A' ,'B' ,'X' ,x0.csoc_cacl ,x0.depo_cacl ,x0.ccli_cacl ,x0.yrmo_cacl ),credel.caapv('A' ,'N' ,'X' ,x0.csoc_cacl ,x0.depo_cacl ,x0.ccli_cacl ,x0.yrmo_cacl ),credel.caapv('A' ,'A' ,'X' ,x0.csoc_cacl ,x0.depo_cacl ,x0.ccli_cacl ,x0.yrmo_cacl )from credel.fcacli x0 ,credel.fclient x1 where (x0.ccli_cacl = x1.code_cli ) #
+Credel;vcc_banque;1;create view credel.vcc_banque (bq_societe,bq_jrnal,bq_banque,bq_compte,bq_anmois,bq_solde) as select x0.csoc_mvcpt ,x0.jrnl_mvcpt ,x1.libe_jcpt ,x1.cplt_jcpt ,x0.anmo_mvcpt ,sum((x0.debi_mvcpt - x0.cred_mvcpt ) ) from credel.fmouvcpt x0 ,credel.fjourcpt x1 where ((((((x0.csoc_mvcpt = x1.csoc_jcpt ) AND (x0.jrnl_mvcpt = x1.code_jcpt ) ) AND (x1.type_jcpt = 1 ) ) AND (x0.cmvc_mvcpt = 0 ) ) AND (x0.pref_mvcpt = 'G' ) ) AND (x0.ncpt_mvcpt = x1.cplt_jcpt ) ) group by x0.csoc_mvcpt ,x0.jrnl_mvcpt ,x1.libe_jcpt ,x1.cplt_jcpt ,x0.anmo_mvcpt #
+Credel;vcc_article;1;create view credel.vcc_article (refe,libe,four,reff,cfam,cnat,ctva,stnd,remv,majv,cond,cdec,umes,poid,ddta,qmin,conc,dmaj,dcre,nome,equv,remp,comm,dpta,pach,ptar) as select x0.refe_art ,x0.libe_art ,x0.four_art ,x0.reff_art ,x0.cfam_art ,x0.cnat_art ,x0.ctva_art ,x0.stnd_art ,x0.remv_art ,x0.majv_art ,x0.cond_art ,x0.cdec_art ,x0.umes_art ,x0.poid_art ,x0.ddta_art ,x0.qmin_art ,x0.conc_art ,x0.dmaj_art ,x0.dcre_art ,x0.nome_art ,x0.equv_art ,x0.remp_art ,x0.comm_art ,x1.dpta_part ,x1.pach_part ,x1.ptar_part from credel.farticle x0 ,credel.prixart x1 where (((x0.refe_art = x1.refe_part ) AND (x0.four_art = x1.four_part ) ) AND (x1.cdev_part = 1 ) ) #
+Credel;vplanning;1;create view credel.vplanning (psociete,pdepot,pcontrat,pavenant,pimmat,pclient,pnomcli,ptcontrat,pdepart,phdepart,psitdep,pdretprv,phretprv,petat,pdcloture,phretour) as select x0.csoc_vlld ,x0.depo_vlld ,x0.nctr_vlld ,x0.nave_vlld ,x0.imat_vlld ,x1.ccli_loc ,x1.lcli_loc ,x1.type_loc ,x0.ddep_vlld ,x0.hdep_vlld ,x0.sitd_vlld ,x0.dprv_vlld ,x0.hprv_vlld ,x0.etat_vlld ,x0.dret_vlld ,x0.hret_vlld from credel.flldave x0 ,credel.floctra x1 where ((((x1.csoc_loc = x0.csoc_vlld ) AND (x1.depo_loc = x0.depo_vlld ) ) AND (x1.type_loc = x0.type_vlld ) ) AND (x1.nctr_loc = x0.nctr_vlld ) ) #
+Credel;vcc_anaachat;1;create view credel.vcc_anaachat (asociete,araisonsociale,aanneemois,aannee,aservice,aactivite,atypejrnal,amontantht) as select x0.csoc_mvana ,x1.rais_soc ,x0.anmo_mvana ,x0.anne_mvana ,x0.sera_mvana ,x0.acta_mvana ,x3.code_tycp ,sum((x0.debi_mvana - x0.cred_mvana ) ) from credel.fmvanacpt x0 ,credel.societe x1 ,credel.fjourcpt x2 ,credel.ftyjocpt x3 where (((((x2.csoc_jcpt = x0.csoc_mvana ) AND (x1.code_soc = x0.csoc_mvana ) ) AND (x0.jrnl_mvana = x2.code_jcpt ) ) AND (x2.type_jcpt = x3.code_tycp ) ) AND (x3.code_tycp = 2 ) ) group by x0.csoc_mvana ,x1.rais_soc ,x0.anmo_mvana ,x0.anne_mvana ,x0.sera_mvana ,x0.acta_mvana ,x3.code_tycp #
+Credel;vcc_anavente;1;create view credel.vcc_anavente (vsociete,vraisonsociale,vanneemois,vannee,vservice,vactivite,vtypejrnal,vmontantht) as select x0.csoc_mvana ,x1.rais_soc ,x0.anmo_mvana ,x0.anne_mvana ,x0.sera_mvana ,x0.acta_mvana ,x3.code_tycp ,sum((x0.cred_mvana - x0.debi_mvana ) ) from credel.fmvanacpt x0 ,credel.societe x1 ,credel.fjourcpt x2 ,credel.ftyjocpt x3 where (((((x2.csoc_jcpt = x0.csoc_mvana ) AND (x1.code_soc = x0.csoc_mvana ) ) AND (x0.jrnl_mvana = x2.code_jcpt ) ) AND (x2.type_jcpt = x3.code_tycp ) ) AND (x3.code_tycp = 5 ) ) group by x0.csoc_mvana ,x1.rais_soc ,x0.anmo_mvana ,x0.anne_mvana ,x0.sera_mvana ,x0.acta_mvana ,x3.code_tycp #
+Credel;vcamor;1;create view credel.vcamor (codeclient,nomclient,rue1,rue2,rue3,codepostal,ville,numserie,immat,fournis,nomfournis,motcle,vnvo,designat,numparc,numcomde,datelivr,extgarant,codemarque,model,typecomm,typevehic,profil,couleur,pdtc,poidavide,ptac,puissfisc,kmorigine,cumkms,millesime,affectation,dernvisite,dernimmat,codegamme,sousgamme,numfasicule,plaqcam,empattement,fabricat,codecarros,datecircul,fingarant,debutgarant,numgarant,numcentr,debutcentr,fincentr,numlocat,debutloc,finloc,lieuparc,typemine,ordremine,coderadio,neiman,codeclef,siteloc,fleet,cabine,dcartegrise,genre,typecarbur,litrecarb,nbreplaces,dimenspneus) as select distinct x0.ccli_ccam ,x0.lcli_ccam ,x0.adr1_ccam ,x0.adr2_ccam ,x0.adr3_ccam ,x0.codp_ccam ,x0.vill_ccam ,x1.serie_cam ,x1.immat_cam ,x1.ndeal_cam ,x1.ldeal_cam ,x1.mocle_cam ,x1.cvnvo_cam ,x1.desig_cam ,x1.nparc_cam ,x1.nucde_cam ,x1.dlivr_cam ,x1.extga_cam ,x1.marqe_cam ,x1.model_cam ,x1.tcomm_cam ,x1.ttech_cam ,x1.profi_cam ,x1.coulr_cam ,x1.pdstc_cam ,x1.pdsvd_cam ,x1.pdstr_cam ,x1.preel_cam ,x1.kmorg_cam ,x1.cumkm_cam ,x1.melis_cam ,x1.affec_cam ,x1.dvisi_cam ,x1.dimat_cam ,x1.gamme_cam ,x1.sgamm_cam ,x1.codmt_cam ,x1.plaqe_cam ,x1.empat_cam ,x1.fabri_cam ,x1.ccaro_cam ,x1.dcirc_cam ,x1.dfgar_cam ,x1.dbgar_cam ,x1.ngara_cam ,x1.nctre_cam ,x1.dbctr_cam ,x1.dfctr_cam ,x1.nloca_cam ,x1.dbloc_cam ,x1.dfloc_cam ,x1.lparc_cam ,x1.tmine_cam ,x1.ordmi_cam ,x1.radio_cam ,x1.neima_cam ,x1.portc_cam ,x1.silho_cam ,x1.mroue_cam ,x1.cabin_cam ,x1.grise_cam ,x1.genre_cam ,x1.carbu_cam ,x1.litre_cam ,x1.place_cam ,x1.pneus_cam from credel.fclicam x0 ,credel.fcamion x1 where (x0.imat_ccam = x1.immat_cam ) #
+Credel;vcamloc;1;create view credel.vcamloc (codeclient,nomclient,rue1,rue2,rue3,codepostal,ville,numserie,immat,fournis,nomfournis,motcle,vnvo,designat,numparc,numcomde,datelivr,extgarant,codemarque,model,typecomm,typevehic,profil,couleur,pdtc,poidavide,ptac,puissfisc,kmorigine,cumkms,millesime,affectation,dernvisite,dernimmat,codegamme,sousgamme,numfasicule,plaqcam,empattement,fabricat,codecarros,datecircul,fingarant,debutgarant,numgarant,numcentr,debutcentr,fincentr,numlocat,debutloc,finloc,lieuparc,typemine,ordremine,coderadio,neiman,codeclef,siteloc,fleet,cabine,dcartegrise,genre,typecarbur,litrecarb,nbreplaces,dimenspneus) as select distinct x0.ccli_ccam ,x0.lcli_ccam ,x0.adr1_ccam ,x0.adr2_ccam ,x0.adr3_ccam ,x0.codp_ccam ,x0.vill_ccam ,x1.serie_cam ,x1.immat_cam ,x1.ndeal_cam ,x1.ldeal_cam ,x1.mocle_cam ,x1.cvnvo_cam ,x1.desig_cam ,x1.nparc_cam ,x1.nucde_cam ,x1.dlivr_cam ,x1.extga_cam ,x1.marqe_cam ,x1.model_cam ,x1.tcomm_cam ,x1.ttech_cam ,x1.profi_cam ,x1.coulr_cam ,x1.pdstc_cam ,x1.pdsvd_cam ,x1.pdstr_cam ,x1.preel_cam ,x1.kmorg_cam ,x1.cumkm_cam ,x1.melis_cam ,x1.affec_cam ,x1.dvisi_cam ,x1.dimat_cam ,x1.gamme_cam ,x1.sgamm_cam ,x1.codmt_cam ,x1.plaqe_cam ,x1.empat_cam ,x1.fabri_cam ,x1.ccaro_cam ,x1.dcirc_cam ,x1.dfgar_cam ,x1.dbgar_cam ,x1.ngara_cam ,x1.nctre_cam ,x1.dbctr_cam ,x1.dfctr_cam ,x1.nloca_cam ,x1.dbloc_cam ,x1.dfloc_cam ,x1.lparc_cam ,x1.tmine_cam ,x1.ordmi_cam ,x1.radio_cam ,x1.neima_cam ,x1.portc_cam ,x1.silho_cam ,x1.mroue_cam ,x1.cabin_cam ,x1.grise_cam ,x1.genre_cam ,x1.carbu_cam ,x1.litre_cam ,x1.place_cam ,x1.pneus_cam from credel.fclicam x0 ,credel.fcamion x1 where ((x0.imat_ccam = x1.immat_cam ) AND (x1.ngara_cam IN ('LCD' ,'LLD' )) ) #
+Credel;vcc_cafour;1;create view credel.vcc_cafour (socfour,depofour,anneemois,annee,mois,fournis,famille,magas_brut,magas_net,maga_achat,atel_brut,atel_net,atel_achat) as select x0.csoc_cacl ,x0.depo_cacl ,x0.yrmo_cacl ,x0.year_cacl ,x0.mois_cacl ,x0.four_cacl ,x0.cfmo_cacl ,sum(x0.mbru_cacl ) ,sum(x0.mnet_cacl ) ,sum(x0.mach_cacl ) ,sum(x0.abru_cacl ) ,sum(x0.anet_cacl ) ,sum(x0.aach_cacl ) from credel.fcacli x0 where (x0.natl_cacl IN ('P' ,'K' )) group by x0.csoc_cacl ,x0.depo_cacl ,x0.yrmo_cacl ,x0.year_cacl ,x0.mois_cacl ,x0.four_cacl ,x0.cfmo_cacl #
+Credel;vcamion;1;create view credel.vcamion (codeclient,nomclient,rue1,rue2,rue3,codepostal,ville,numserie,immat,fournis,nomfournis,motcle,vnvo,designat,numparc,numcomde,datelivr,extgarant,codemarque,model,typecomm,typevehic,profil,couleur,pdtc,poidavide,ptac,puissfisc,kmorigine,cumkms,millesime,affectation,dernvisite,dernimmat,codegamme,sousgamme,numfasicule,plaqcam,empattement,fabricat,codecarros,datecircul,fingarant,debutgarant,numgarant,numcentr,debutcentr,fincentr,numlocat,debutloc,finloc,lieuparc,typemine,ordremine,coderadio,neiman,codeclef,siteloc,fleet,cabine,dcartegrise,genre,typecarbur,litrecarb,nbreplaces,dimenspneus) as select distinct x0.ccli_ccam ,x0.lcli_ccam ,x0.adr1_ccam ,x0.adr2_ccam ,x0.adr3_ccam ,x0.codp_ccam ,x0.vill_ccam ,x1.serie_cam ,x1.immat_cam ,x1.ndeal_cam ,x1.ldeal_cam ,x1.mocle_cam ,x1.cvnvo_cam ,x1.desig_cam ,x1.nparc_cam ,x1.nucde_cam ,x1.dlivr_cam ,x1.extga_cam ,x1.marqe_cam ,x1.model_cam ,x1.tcomm_cam ,x1.ttech_cam ,x1.profi_cam ,x1.coulr_cam ,x1.pdstc_cam ,x1.pdsvd_cam ,x1.pdstr_cam ,x1.preel_cam ,x1.kmorg_cam ,x1.cumkm_cam ,x1.melis_cam ,x1.affec_cam ,x1.dvisi_cam ,x1.dimat_cam ,x1.gamme_cam ,x1.sgamm_cam ,x1.codmt_cam ,x1.plaqe_cam ,x1.empat_cam ,x1.fabri_cam ,x1.ccaro_cam ,x1.dcirc_cam ,x1.dfgar_cam ,x1.dbgar_cam ,x1.ngara_cam ,x1.nctre_cam ,x1.dbctr_cam ,x1.dfctr_cam ,x1.nloca_cam ,x1.dbloc_cam ,x1.dfloc_cam ,x1.lparc_cam ,x1.tmine_cam ,x1.ordmi_cam ,x1.radio_cam ,x1.neima_cam ,x1.portc_cam ,x1.silho_cam ,x1.mroue_cam ,x1.cabin_cam ,x1.grise_cam ,x1.genre_cam ,x1.carbu_cam ,x1.litre_cam ,x1.place_cam ,x1.pneus_cam from credel.fclicam x0 ,credel.fcamion x1 where (x0.imat_ccam = x1.immat_cam ) #
+Credel;vcamdynor;1;create view credel.vcamdynor (societe,codeclient,nomclient,rue1,rue2,rue3,codepostal,ville,numserie,immat,fournis,nomfournis,motcle,vnvo,designat,numparc,numcomde,datelivr,extgarant,codemarque,model,typecomm,typevehic,profil,couleur,pdtc,poidavide,ptac,puissfisc,kmorigine,cumkms,millesime,affectation,dernvisite,dernimmat,codegamme,sousgamme,numfasicule,plaqcam,empattement,fabricat,codecarros,datecircul,fingarant,debutgarant,numgarant,numcentr,debutcentr,fincentr,numlocat,debutloc,finloc,lieuparc,typemine,ordremine,coderadio,neiman,codeclef,siteloc,fleet,cabine,dcartegrise,genre,typecarbur,litrecarb,nbreplaces,dimenspneus) as select distinct x0.csoc_ccam ,x0.ccli_ccam ,x0.lcli_ccam ,x0.adr1_ccam ,x0.adr2_ccam ,x0.adr3_ccam ,x0.codp_ccam ,x0.vill_ccam ,x1.serie_cam ,x1.immat_cam ,x1.ndeal_cam ,x1.ldeal_cam ,x1.mocle_cam ,x1.cvnvo_cam ,x1.desig_cam ,x1.nparc_cam ,x1.nucde_cam ,x1.dlivr_cam ,x1.extga_cam ,x1.marqe_cam ,x1.model_cam ,x1.tcomm_cam ,x1.ttech_cam ,x1.profi_cam ,x1.coulr_cam ,x1.pdstc_cam ,x1.pdsvd_cam ,x1.pdstr_cam ,x1.preel_cam ,x1.kmorg_cam ,x1.cumkm_cam ,x1.melis_cam ,x1.affec_cam ,x1.dvisi_cam ,x1.dimat_cam ,x1.gamme_cam ,x1.sgamm_cam ,x1.codmt_cam ,x1.plaqe_cam ,x1.empat_cam ,x1.fabri_cam ,x1.ccaro_cam ,x1.dcirc_cam ,x1.dfgar_cam ,x1.dbgar_cam ,x1.ngara_cam ,x1.nctre_cam ,x1.dbctr_cam ,x1.dfctr_cam ,x1.nloca_cam ,x1.dbloc_cam ,x1.dfloc_cam ,x1.lparc_cam ,x1.tmine_cam ,x1.ordmi_cam ,x1.radio_cam ,x1.neima_cam ,x1.portc_cam ,x1.silho_cam ,x1.mroue_cam ,x1.cabin_cam ,x1.grise_cam ,x1.genre_cam ,x1.carbu_cam ,x1.litre_cam ,x1.place_cam ,x1.pneus_cam from credel.fclicam x0 ,credel.fcamion x1 where (x0.imat_ccam = x1.immat_cam ) #
+Credel;vplaningor;1;create view credel.vplaningor (societe,depot,immat,numor,typeor,entree,heurent,delai,heurdel,datesortie,client,libecli,telephone,fax,etator,accident,typefact,refeclient,typeclient,fintravx) as select x0.csoc_eor ,x0.depo_eor ,x0.imat_eor ,x0.nume_eor ,x0.type_eor ,x0.dent_eor ,x0.hent_eor ,x0.dlai_eor ,x0.hdel_eor ,x0.dsor_eor ,x1.ccli_cor ,x1.lcli_cor ,x1.tele_cor ,x1.faxe_cor ,x1.etat_cor ,x1.acci_cor ,x1.tfac_cor ,x1.refc_cor ,x1.tcli_cor ,x1.nloc_cor from credel.fentor x0 ,credel.fclior x1 where (((((x0.csoc_eor = x1.csoc_cor ) AND (x0.depo_eor = x1.depo_cor ) ) AND (x0.nume_eor = x1.nume_cor ) ) AND (x1.tfac_cor IN (1 ,2 )) ) AND (x1.nloc_cor != 'FINTRAVAUX' ) ) #
+Credel;vcaloc;1;create view credel.vcaloc (psociete,pdepot,ptypeloc,pcontrat,pavenant,pcodecli,pnumfact,panneeloc,pmoisloc,pdatefact,ptypefact,ptypecli,pmontht,pmonttva,pmonttc) as select x0.csoc_piedl ,x0.depo_piedl ,x0.type_piedl ,x0.nctr_piedl ,x0.nave_piedl ,x0.ccli_piedl ,x0.nfac_piedl ,YEAR (x0.dfac_piedl ) ,MONTH (x0.dfac_piedl ) ,x0.dfac_piedl ,x0.tfac_piedl ,x0.tcli_piedl ,sum(x0.btva_piedl ) ,sum(x0.mtva_piedl ) ,sum(x0.mttc_piedl ) from credel.fpielfac x0 group by x0.csoc_piedl ,x0.depo_piedl ,x0.type_piedl ,x0.nctr_piedl ,x0.nave_piedl ,x0.ccli_piedl ,x0.nfac_piedl ,8 ,9 ,x0.dfac_piedl ,x0.tfac_piedl ,x0.tcli_piedl #
+Credel;vcagrirem;1;create view credel.vcagrirem (societe,depot,client,nomclient,codegrille,annemois,annee,mois,famille,libefam,four,libfour,brutmag,netmag,achamag,brutatl,netatl,achaatl) as select x0.csoc_cacl ,x0.depo_cacl ,x0.ccli_cacl ,x1.rais_cli ,x2.code_gri ,x0.yrmo_cacl ,x0.year_cacl ,x0.mois_cacl ,x0.cfmo_cacl ,x4.libe_fam ,x0.four_cacl ,x5.rais_four ,x0.mbru_cacl ,x0.mnet_cacl ,x0.mach_cacl ,x0.abru_cacl ,x0.anet_cacl ,x0.aach_cacl from credel.fcacli x0 ,credel.fclient x1 ,credel.fgrirem x2 ,credel.fmagatl x3 ,credel.ffamil x4 ,credel.ffournis x5 where (((((((((((((x0.csoc_cacl = x3.csoc_scli ) AND (x0.depo_cacl = x3.depo_scli ) ) AND (x0.ccli_cacl = x3.ccli_scli ) ) AND (x2.csoc_gri = x3.csoc_scli ) ) AND (x2.depo_gri = x3.depo_scli ) ) AND ((x2.code_gri = x3.mrem_scli ) OR (x2.code_gri = x3.arem_scli ) ) ) AND (x2.four_gri = x0.four_cacl ) ) AND (x2.fami_gri = x0.cfmo_cacl ) ) AND (x0.natl_cacl = 'P' ) ) AND (x4.four_fam = x0.four_cacl ) ) AND (x4.code_fam = x0.cfmo_cacl ) ) AND (x5.code_four = x0.four_cacl ) ) AND (x1.code_cli = x3.ccli_scli ) ) #
+Credel;vcafour;1;create view credel.vcafour (socfour,depofour,yrmo,annee,mois,fournis,famille,magbrut,magnet,magachat,atlbrut,atlnet,atlachat) as select x0.csoc_cacl ,x0.depo_cacl ,x0.yrmo_cacl ,x0.year_cacl ,x0.mois_cacl ,x0.four_cacl ,x0.cfmo_cacl ,sum(x0.mbru_cacl ) ,sum(x0.mnet_cacl ) ,sum(x0.mach_cacl ) ,sum(x0.abru_cacl ) ,sum(x0.anet_cacl ) ,sum(x0.aach_cacl ) from credel.fcacli x0 where (x0.natl_cacl IN ('P' ,'K' )) group by x0.csoc_cacl ,x0.depo_cacl ,x0.yrmo_cacl ,x0.year_cacl ,x0.mois_cacl ,x0.four_cacl ,x0.cfmo_cacl #
+Credel;vcaclix;1;create view credel.vcaclix (soccli,depocli,yrmocli,anneecli,moiscli,codecli,raiscli,adr1cli,codpcli,villecli,caclient) as select x0.csoc_cacl ,x0.depo_cacl ,x0.yrmo_cacl ,x0.year_cacl ,x0.mois_cacl ,x0.ccli_cacl ,x1.rais_cli ,x1.adr1_cli ,x1.codp_cli ,x1.vill_cli ,sum((x0.mnet_cacl + x0.anet_cacl ) ) from credel.fcacli x0 ,credel.fclient x1 where (x1.code_cli = x0.ccli_cacl ) group by x0.csoc_cacl ,x0.depo_cacl ,x0.yrmo_cacl ,x0.year_cacl ,x0.mois_cacl ,x0.ccli_cacl ,x1.rais_cli ,x1.adr1_cli ,x1.codp_cli ,x1.vill_cli #
+Credel;vcacli;1;create view credel.vcacli (client,anneefact,typefact,montht,mtva,montttc) as select x0.ccli_piedf ,YEAR (x0.dfac_piedf ) ,x0.tfac_piedf ,sum(x0.btva_piedf ) ,sum(x0.mtva_piedf ) ,sum(x0.mttc_piedf ) from credel.fpiedfac x0 group by x0.ccli_piedf ,2 ,x0.tfac_piedf #
+Credel;vcace;1;create view credel.vcace (societece,depotce,anneece,moisce,clientce,typfce,monthtce,monttvace,monttcce) as select x0.csoc_piedc ,x0.depo_piedc ,YEAR (x0.dfac_piedc ) ,MONTH (x0.dfac_piedc ) ,x0.ccli_piedc ,x0.tfac_piedc ,sum(x0.btva_piedc ) ,sum(x0.mtva_piedc ) ,sum(x0.mttc_piedc ) from credel.fpiecfac x0 where (x0.cdev_piedc = 1 ) group by x0.csoc_piedc ,x0.depo_piedc ,x0.dfac_piedc ,x0.ccli_piedc ,x0.tfac_piedc #
+Credel;vcacam;1;create view credel.vcacam (societe,immatricul,typefact,typeclient,caht) as select x0.csoc_hisor ,x0.imat_hisor ,x0.tfac_hisor ,x0.tcli_hisor ,sum(x0.pxht_hisor ) from credel.fhisor x0 group by x0.csoc_hisor ,x0.imat_hisor ,x0.tfac_hisor ,x0.tcli_hisor #
+Credel;vavrblmag;1;create view credel.vavrblmag (societe,depot,client,numbon,datebon,reference,libelle,quantite,prixunitaire,remise,prixht) as select x0.csoc_ebl ,x0.depo_ebl ,x0.ccli_ebl ,x0.nbon_ebl ,x0.date_ebl ,x1.refe_lbl ,x1.libe_lbl ,x1.qliv_lbl ,(x2.ptar_pbl * x1.qliv_lbl ) ,x2.mrem_pbl ,x2.pxht_pbl from credel.fentbl x0 ,credel.fligblm x1 ,credel.prixbl x2 where (((((((((((((x0.csoc_ebl = x1.csoc_lbl ) AND (x0.depo_ebl = x1.depo_lbl ) ) AND (x0.nbon_ebl = x1.nbon_lbl ) ) AND (x0.ccli_ebl = x1.ccli_lbl ) ) AND (x0.etab_ebl IN ('BM' ,'BD' )) ) AND (x0.typf_ebl > 2 ) ) AND (x1.natl_lbl IN ('P' ,'D' ,'M' )) ) AND (x0.orig_ebl IS NULL ) ) AND (x2.csoc_pbl = x1.csoc_lbl ) ) AND (x2.depo_pbl = x1.depo_lbl ) ) AND (x2.nbon_pbl = x1.nbon_lbl ) ) AND (x2.ccli_pbl = x1.ccli_lbl ) ) AND (x2.nlig_pbl = x1.nlig_lbl ) ) #
+Credel;vavrblatl;1;create view credel.vavrblatl (societe,depot,client,numbon,datebon,reference,libelle,quantite,prixunitaire,remise,prixht) as select x0.csoc_ebl ,x0.depo_ebl ,x0.ccli_ebl ,x0.nbon_ebl ,x0.date_ebl ,x1.refe_lbl ,x1.libe_lbl ,x1.qliv_lbl ,(x2.ptar_pbl * x1.qliv_lbl ) ,x2.mrem_pbl ,x2.pxht_pbl from credel.fentbl x0 ,credel.fligblm x1 ,credel.prixbl x2 where (((((((((((((x0.csoc_ebl = x1.csoc_lbl ) AND (x0.depo_ebl = x1.depo_lbl ) ) AND (x0.nbon_ebl = x1.nbon_lbl ) ) AND (x0.ccli_ebl = x1.ccli_lbl ) ) AND (x0.etab_ebl IN ('BA' ,'BD' )) ) AND (x0.typf_ebl > 2 ) ) AND (x1.natl_lbl IN ('P' ,'D' ,'M' )) ) AND (x0.orig_ebl > 0 ) ) AND (x2.csoc_pbl = x1.csoc_lbl ) ) AND (x2.depo_pbl = x1.depo_lbl ) ) AND (x2.nbon_pbl = x1.nbon_lbl ) ) AND (x2.ccli_pbl = x1.ccli_lbl ) ) AND (x2.nlig_pbl = x1.nlig_lbl ) ) #
+Credel;vart;1;create view credel.vart (reference,codefour,libeart,reffour,codefam,decimal,codetva,unitemes,poids,conditio,datecreat,dmajprixn,pprixtarif) as select x0.refe_art ,x0.four_art ,x0.libe_art ,x0.reff_art ,x0.cfam_art ,x0.cdec_art ,x0.ctva_art ,x0.umes_art ,x0.poid_art ,x0.cond_art ,x0.dcre_art ,x0.dpta_art ,x1.ptar_part from credel.farticle x0 ,credel.prixart x1 where (((x1.refe_part = x0.refe_art ) AND (x1.four_part = x0.four_art ) ) AND (x1.cdev_part = 1 ) ) #
+Credel;varticle;1;create view credel.varticle (reference,codefour,nomfour,libeart,codefam,libefam,prixtarif,codetva) as select x0.refe_art ,x0.four_art ,x1.rais_four ,x0.libe_art ,x0.cfam_art ,x3.libe_fam ,x2.ptar_part ,x0.ctva_art from credel.farticle x0 ,credel.ffournis x1 ,credel.prixart x2 ,credel.ffamil x3 where ((((((x1.code_four = x0.four_art ) AND (x3.four_fam = x0.four_art ) ) AND (x3.code_fam = x0.cfam_art ) ) AND (x2.refe_part = x0.refe_art ) ) AND (x2.four_part = x0.four_art ) ) AND (x2.cdev_part = 1 ) ) #
+Credel;vclityp;1;create view credel.vclityp (mcle_vcli,code_vcli,rais_vcli,type_vcli,libe_vtyp) as select x0.mcle_cli ,x0.code_cli ,x0.rais_cli ,x0.type_cli ,x1.libe_typc from credel.fclient x0 ,credel.ftypecli x1 where (x0.type_cli = x1.code_typc ) #
+Credel;vctrcam;1;create view credel.vctrcam (nature,libenature,code,libelle) as select x1.natu_pctr ,x0.libe_natctr ,x1.code_pctr ,x1.libe_pctr from credel.fnatctr x0 ,credel.fparctr x1 where (x0.code_natctr = x1.natu_pctr ) #
+Credel;vdebit;1;create view credel.vdebit (societe,client,annee,mois,compte,cdebit) as select x0.csoc_mvcpt ,x0.ccli_mvcpt ,YEAR (x0.dfac_mvcpt ) ,MONTH (x0.dfac_mvcpt ) ,x0.ncpt_mvcpt ,sum((x0.mont_mvcpt * -1. ) ) from credel.fmvtcpt x0 where (((x0.ccli_mvcpt IS NOT NULL ) AND (x0.natl_mvcpt > 1 ) ) AND (x0.sens_mvcpt = 'D' ) ) group by x0.csoc_mvcpt ,x0.ccli_mvcpt ,x0.dfac_mvcpt ,x0.ncpt_mvcpt #
+Credel;vcrg;1;create view credel.vcrg (societe,tableau,ligne,colonne,montant) as select x0.csoc_rlig ,x0.code_rlig ,x0.nlig_rlig ,x0.colo_rlig ,sum(x0.mont_rlig ) from credel.freslig x0 where (((x0.csoc_rlig = 'NEM' ) AND (x0.grou_rlig = 'CRG' ) ) AND ((x0.anmo_rlig >= '200901' ) AND (x0.anmo_rlig <= '200903' ) ) ) group by x0.csoc_rlig ,x0.code_rlig ,x0.nlig_rlig ,x0.colo_rlig #
+Credel;vdepcli;1;create view credel.vdepcli (client,nomclient,numor,numfact,datefact,immat,typefac,typeclient,montht,monttva,monttc) as select distinct x0.ccli_hefac ,x0.nomc_hefac ,x0.nuor_hefac ,x0.nfac_hefac ,x0.dfac_hefac ,x0.imat_hefac ,x0.tfac_hefac ,x0.tcli_hefac ,sum(x1.btva_piedf ) ,sum(x1.mtva_piedf ) ,sum(x1.mttc_piedf ) from credel.fhisefac x0 ,credel.fpiedfac x1 where ((((((((x0.csoc_hefac = x1.csoc_piedf ) AND (x0.depo_hefac = x1.depo_piedf ) ) AND (x0.nfac_hefac = x1.nfac_piedf ) ) AND (x0.dfac_hefac = x1.dfac_piedf ) ) AND (x0.ccli_hefac = x1.ccli_piedf ) ) AND (x0.tcli_hefac = x1.tcli_piedf ) ) AND (x0.tfac_hefac = x1.tfac_piedf ) ) AND (x0.tcli_hefac IN (5 ,8 ,9 )) ) group by x0.ccli_hefac ,x0.nomc_hefac ,x0.nuor_hefac ,x0.nfac_hefac ,x0.dfac_hefac ,x0.imat_hefac ,x0.tfac_hefac ,x0.tcli_hefac #
+Credel;vloccam;1;create view credel.vloccam (origine,numserie,immat,libemarque,model,typecomm,typevehic,datecircul,siteloc,fleet,dateachat,valachat,daffectlcd,daffectlld,daffectfi,dsortielcd,dsortielld,dsortiefi,immonum,immoduree,immobase,immotaux,vr,datevente,prixvente) as select x0.ngara_cam ,x0.serie_cam ,x0.immat_cam ,x1.libe_marq ,x0.model_cam ,x0.tcomm_cam ,x2.libe_lldtmat ,x0.dcirc_cam ,x0.silho_cam ,x0.mroue_cam ,x3.dach_lcam ,x3.mach_lcam ,x3.dlcd_lcam ,x3.dlld_lcam ,x3.dlfi_lcam ,x3.slcd_lcam ,x3.slld_lcam ,x3.slfi_lcam ,x3.nimo_lcam ,x3.dure_lcam ,x3.bimo_lcam ,x3.taux_lcam ,x3.valr_lcam ,x3.dven_lcam ,x3.pven_lcam from credel.fcamion x0 ,outer(credel.fmarqvi x1 ) ,outer(credel.flldtypv x2 ) ,outer(credel.fcamloc x3 ) where ((((x0.marqe_cam = x1.code_marq ) AND (x0.ttech_cam = x2.code_lldtmat ) ) AND (x0.ngara_cam IN ('LCD' ,'LLD' )) ) AND (x3.imat_lcam = x0.immat_cam ) ) #
+Credel;vlockms;1;create view credel.vlockms (societe,depot,typelocat,typefact,immatricul,contrat,avenant,client,raisclient,numfact,datfact,kmdepart,datedebut,datefin,ancreleve,nvreleve,kmeffect,kmfacture,kmsuplem,kmrelais,totalht) as select x0.csoc_efacl ,x0.depo_efacl ,x0.type_efacl ,x0.tfac_efacl ,x1.imat_km ,x1.nctr_km ,x1.nave_km ,x0.ccli_efacl ,x0.lcli_efacl ,x0.nfac_efacl ,x0.dfac_efacl ,x1.acpt_km ,x1.ddpe_km ,x1.dfpe_km ,x1.arel_km ,x1.nrel_km ,x1.keff_km ,x1.kfac_km ,x1.ksup_km ,x1.krel_km ,sum(x2.btva_piedl ) from credel.fentlfac x0 ,credel.fkmloc x1 ,credel.fpielfac x2 where (((((((((((((x0.csoc_efacl = x2.csoc_piedl ) AND (x0.depo_efacl = x2.depo_piedl ) ) AND (x0.type_efacl = x2.type_piedl ) ) AND (x0.nctr_efacl = x2.nctr_piedl ) ) AND (x0.nfac_efacl = x2.nfac_piedl ) ) AND (x0.dfac_efacl = x2.dfac_piedl ) ) AND (x1.csoc_km = x2.csoc_piedl ) ) AND (x1.depo_km = x2.depo_piedl ) ) AND (x1.type_km = x2.type_piedl ) ) AND (x1.nctr_km = x2.nctr_piedl ) ) AND (x1.nave_km = x2.nave_piedl ) ) AND (x1.nfac_km = x2.nfac_piedl ) ) AND (x1.dfac_km = x2.dfac_piedl ) ) group by x0.csoc_efacl ,x0.depo_efacl ,x0.type_efacl ,x0.tfac_efacl ,x1.imat_km ,x1.nctr_km ,x1.nave_km ,x0.ccli_efacl ,x0.lcli_efacl ,x0.nfac_efacl ,x0.dfac_efacl ,x1.acpt_km ,x1.ddpe_km ,x1.dfpe_km ,x1.arel_km ,x1.nrel_km ,x1.keff_km ,x1.kfac_km ,x1.ksup_km ,x1.krel_km #
+Credel;vloctrat;1;create view credel.vloctrat (societe,depot,contrat,avenant,typecontrat,libetypeloc,codeclient,nomclient,adresse1,adresse2,adresse3,codpostal,ville,marque,immat,typevehic,cession,parc,datedepart,heurdepart,kmdepart,nomoperat,prenoperat) as select x0.csoc_loc ,x0.depo_loc ,x1.nctr_vlld ,x1.nave_vlld ,x1.type_vlld ,x7.libe_typloc ,x2.ccli_clil ,x2.rais_clil ,x2.adr1_clil ,x2.adr2_clil ,x2.adr3_clil ,x2.codp_clil ,x2.vill_clil ,x5.libe_marq ,x3.imat_lldcam ,x3.typv_lldcam ,x4.ccli_ccam ,x3.parc_lldcam ,x1.ddep_vlld ,x1.hdep_vlld ,x1.kdep_vlld ,x6.noms_sal ,x6.pren_sal from credel.floctra x0 ,credel.flldave x1 ,credel.floccli x2 ,credel.flldcam x3 ,credel.fclicam x4 ,credel.fmarqvi x5 ,credel.fsalar x6 ,credel.ftyploc x7 where ((((((((((((((((((((x0.csoc_loc = x1.csoc_vlld ) AND (x0.depo_loc = x1.depo_vlld ) ) AND (x0.type_loc = 'LCD' ) ) AND (x0.nctr_loc = x1.nctr_vlld ) ) AND (x3.csoc_lldcam = x1.csoc_vlld ) ) AND (x3.depo_lldcam = x1.depo_vlld ) ) AND (x3.type_lldcam = x1.type_vlld ) ) AND (x3.nctr_lldcam = x1.nctr_vlld ) ) AND (x3.nave_lldcam = x1.nave_vlld ) ) AND (x2.csoc_clil = x1.csoc_vlld ) ) AND (x2.depo_clil = x1.depo_vlld ) ) AND (x2.type_clil = x1.type_vlld ) ) AND (x2.nctr_clil = x1.nctr_vlld ) ) AND (x4.csoc_ccam = x1.csoc_vlld ) ) AND (x4.imat_ccam = x3.imat_lldcam ) ) AND (x5.code_marq = x3.marq_lldcam ) ) AND (x6.csoc_sal = x1.csoc_vlld ) ) AND (x6.depo_sal = x1.depo_vlld ) ) AND (x6.code_sal = x0.oper_loc ) ) AND (x7.code_typloc = x1.type_vlld ) ) #
+Credel;vmenuser;1;create view credel.vmenuser (user_menu,nive_menu,arbo_menu,cpt1_menu,cpt2_menu,cpt3_menu,visu_menu,acti_menu,mpas_menu) as select x0.user_menu ,x0.nive_menu ,x0.arbo_menu ,x0.cpt1_menu ,x0.cpt2_menu ,x0.cpt3_menu ,x0.visu_menu ,x0.acti_menu ,x0.mpas_menu from credel.fmenuaut x0 #
+Credel;vmenu;1;create view credel.vmenu (niveau,arbo,cpt1,cpt2,cpt3,tipe,libelle,action,passwd,aide,keys) as select x0.niveau ,x0.arbo ,x0.cpt1 ,x0.cpt2 ,x0.cpt3 ,x0.tipe ,x0.libelle ,x0.action ,x0.passwd ,x0.aide ,x0.keys from credel.fmenuh x0 #
+Credel;vmodiv;1;create view credel.vmodiv (csoc_mod,depo_mod,code_mod,libe_mod,type_mod,ctva_mod,fhrs_mod,cdec_mod,pxun_mod,cpfi_mod,cpem_mod,posi_mod,nces_mod,rema_mod,pxun_pmod,libe_typm) as select x0.csoc_mod ,x0.depo_mod ,x0.code_mod ,x0.libe_mod ,x0.type_mod ,x0.ctva_mod ,x0.fhrs_mod ,x0.cdec_mod ,x0.pxun_mod ,x0.cpfi_mod ,x0.cpem_mod ,x0.posi_mod ,x0.nces_mod ,x0.rema_mod ,x1.pxun_pmod ,x2.libe_typm from credel.fmodiv x0 ,credel.prixmod x1 ,credel.ftypemod x2 where (((((x1.csoc_pmod = x0.csoc_mod ) AND (x1.depo_pmod = x0.depo_mod ) ) AND (x1.code_pmod = x0.code_mod ) ) AND (x1.cdev_pmod = 1 ) ) AND (x2.code_typm = x0.type_mod ) ) #
+Credel;vmods;1;create view credel.vmods (msociete,mdepot,mdatefact,mcodeclient,mtypefact,mhtpieces,mhtmod) as select x0.csoc_hlafac ,x0.depo_hlafac ,x0.dfac_hlafac ,x0.ccli_hlafac ,x0.tfac_hlafac ,sum(0 ) ,sum(x1.pxht_hlfac ) from credel.fhislfac x0 ,credel.pxhlfac x1 where (((((((((x0.csoc_hlafac = x1.csoc_hlfac ) AND (x0.depo_hlafac = x1.depo_hlfac ) ) AND (x0.nfac_hlafac = x1.nfac_hlfac ) ) AND (x0.dfac_hlafac = x1.dfac_hlfac ) ) AND (x0.ccli_hlafac = x1.ccli_hlfac ) ) AND (x0.tfac_hlafac = x1.tfac_hlfac ) ) AND (x0.acci_hlafac = x1.acci_hlfac ) ) AND (x0.nlig_hlafac = x1.nlig_hlfac ) ) AND (x0.natl_hlafac MATCHES '[MDF]' ) ) group by x0.csoc_hlafac ,x0.depo_hlafac ,x0.dfac_hlafac ,x0.ccli_hlafac ,x0.tfac_hlafac #
+Credel;vmorcor;1;create view credel.vmorcor (ccli_cor,lcli_cor,tele_cor,faxe_cor,tcli_cor,acci_cor,tfac_cor,libe_actor,cope_mor,lcop_mor,tpsp_mor,csoc_cor,depo_cor,nume_cor,natl_mor,ordr_mor,nomc_cor) as select x0.ccli_cor ,x0.lcli_cor ,x0.tele_cor ,x0.faxe_cor ,x0.tcli_cor ,x0.acci_cor ,x0.tfac_cor ,0 ,x1.cope_mor ,x1.lcop_mor ,x1.tpst_mor ,x0.csoc_cor ,x0.depo_cor ,x0.nume_cor ,x1.natl_mor ,x1.ordr_mor ,x0.nomc_cor from credel.fclior x0 ,outer(credel.fopmor x1 ) where ((((((((x0.csoc_cor = x1.csoc_mor ) AND (x0.depo_cor = x1.depo_mor ) ) AND (x0.nume_cor = x1.nume_mor ) ) AND (x0.ccli_cor = x1.ccli_mor ) ) AND (x0.tfac_cor = x1.tfac_mor ) ) AND (x0.acci_cor = x1.acci_mor ) ) AND (x0.dclo_cor IS NULL ) ) AND (x0.tfac_cor < 3 ) ) #
+Credel;haha;1;create view credel.haha (csoc_tva,depo_tva,code_tva,libe_tva,date_tva,taux_tva,cpte_tva) as select x0.csoc_tva ,x0.depo_tva ,x0.code_tva ,x0.libe_tva ,x0.date_tva ,x0.taux_tva ,x0.cpte_tva from credel.ftva x0 #
+Credel;completer_immat;1;create view credel.completer_immat (cplt_immat,soccam) as select x0.immat_cam || '|' || x0.serie_cam || '|' || x0.model_cam || '|' || x1.ccli_ccam || '|' || x1.csoc_ccam ,x1.csoc_ccam from credel.fcamion x0 ,credel.fclicam x1 where (x0.immat_cam = x1.imat_ccam ) #
+Credel;ahiscen;1;create view credel.ahiscen (cclih,nconh,naveh,enreh,yrh,moish,mtfah,mtdeph) as select x0.ccli_hcen ,x0.ncon_hcen ,x0.nave_hcen ,x0.enre_hcen ,YEAR (x0.date_hcen ) ,MONTH (x0.date_hcen ) ,sum(x0.mtfa_hcen ) ,sum(x0.mtde_hcen ) from credel.fhiscen x0 group by x0.ccli_hcen ,x0.ncon_hcen ,x0.nave_hcen ,x0.enre_hcen ,5 ,6 #
+Credel;vctraloc;1;create view credel.vctraloc (csociete,cdepot,ctypeloc,cdate,ccontrat,cavenant,ccodecli,cnomcli,cdebut,cretour,creel,ckmdepart,ckmretour,cetat,cimmat,ctypvehicule,cnature,cactivite,cduree,cprixfixe,cprixkms,cunitekms,ckminclus) as select x0.csoc_vlld ,x0.depo_vlld ,x0.type_vlld ,x0.date_vlld ,x0.nctr_vlld ,x0.nave_vlld ,x1.ccli_clil ,x1.rais_clil ,x0.ddep_vlld ,x0.dprv_vlld ,x0.dret_vlld ,x0.kdep_vlld ,x0.kret_vlld ,x0.etat_vlld ,x0.imat_vlld ,x3.libe_lldtmat ,x4.libe_natave ,x0.cvig_vlld ,x0.dure_vlld ,x0.vale_vlld ,x0.pkms_vlld ,x0.unit_vlld ,x0.kmin_vlld from credel.flldave x0 ,credel.floccli x1 ,credel.flldcam x2 ,outer(credel.flldtypv x3 ) ,outer(credel.fnatave x4 ) where (((((((((((x1.csoc_clil = x0.csoc_vlld ) AND (x1.depo_clil = x0.depo_vlld ) ) AND (x1.type_clil = x0.type_vlld ) ) AND (x1.nctr_clil = x0.nctr_vlld ) ) AND (x2.csoc_lldcam = x0.csoc_vlld ) ) AND (x2.depo_lldcam = x0.depo_vlld ) ) AND (x2.type_lldcam = x0.type_vlld ) ) AND (x2.nctr_lldcam = x0.nctr_vlld ) ) AND (x2.nave_lldcam = x0.nave_vlld ) ) AND (x2.typv_lldcam = x3.code_lldtmat ) ) AND (x0.natu_vlld = x4.code_natave ) ) #
+Credel;vcc_artstk;1;create view credel.vcc_artstk (societe,reference,site,codefour,constructeur,designation,casier,quantite,c_statut,c_gestion) as select x0.csoci_stk ,x1.refe_art ,x0.depot_stk ,x1.four_art ,x2.rais_four ,x1.libe_art ,x0.casie_stk ,x0.qtite_stk ,x0.statu_stk ,x0.cgest_stk from credel.fstock x0 ,credel.farticle x1 ,credel.ffournis x2 where (((x0.refer_stk = x1.refe_art ) AND (x0.fourn_stk = x1.four_art ) ) AND (x2.code_four = x1.four_art ) ) #
+Credel;vnotech;1;create view credel.vnotech (societe,notech,libetech,vintech,imatech,datetech,codeclie,nomcli,adr1cli,adr2cli,adr3cli,codpcli,villecli,faxcli,telcli,emailcli,etatnt) as select x2.csoc_ccam ,x0.code_tec ,x0.libe_tec ,x1.cvin_nvi ,x1.imat_nvi ,x0.date_tec ,x2.ccli_ccam ,x2.lcli_ccam ,x3.adr1_cli ,x3.adr2_cli ,x3.adr3_cli ,x3.codp_cli ,x3.vill_cli ,x3.faxe_cli ,x3.tele_cli ,x3.emai_cli ,x1.etat_nvi from credel.fnotech x0 ,credel.fnotecvi x1 ,credel.fclicam x2 ,credel.fclient x3 where (((x1.code_nvi = x0.code_tec ) AND (x1.imat_nvi = x2.imat_ccam ) ) AND (x3.code_cli = x2.ccli_ccam ) ) #
+Credel;vopfleet;1;create view credel.vopfleet (code,libelle) as select x0.code_vorl ,x0.libelle_vorl from credel.fvorlib x0 where (x0.type_vorl = 'OPFLE' ) #
+Credel;vopmoract;1;create view credel.vopmoract (msociete,mdepot,mnumor,mccli,maccid,mtypfac,activite,tempsall) as select x0.csoc_mor ,x0.depo_mor ,x0.nume_mor ,x0.ccli_mor ,x0.acci_mor ,x0.tfac_mor ,x0.raci_mor ,sum(x0.tpst_mor ) from credel.fopmor x0 group by x0.csoc_mor ,x0.depo_mor ,x0.nume_mor ,x0.ccli_mor ,x0.acci_mor ,x0.tfac_mor ,x0.raci_mor #
+Credel;vcc_grirem;1;create view credel.vcc_grirem (societe,depot,grille,libelle,codefour,fournisseur,famille,libefamille,taux) as select x0.csoc_gri ,x0.depo_gri ,x0.code_gri ,x0.libe_gri ,x0.four_gri ,x1.rais_four ,x0.fami_gri ,x2.libe_fam ,x0.remi_gri from credel.fgrirem x0 ,credel.ffournis x1 ,credel.ffamil x2 where (((x1.code_four = x0.four_gri ) AND (x2.four_fam = x0.four_gri ) ) AND (x2.code_fam = x0.fami_gri ) ) #
+Credel;voratel;1;create view credel.voratel (societe,depot,immat,numor,typeor,entree,heurent,delai,heurdel,datesortie,client,libecli,telephone,fax,etator,accident,typefact,refeclient,typeclient,fintravx) as select x0.csoc_eor ,x0.depo_eor ,x0.imat_eor ,x0.nume_eor ,x0.type_eor ,x0.dent_eor ,x0.hent_eor ,x0.dlai_eor ,x0.hdel_eor ,x0.dsor_eor ,x1.ccli_cor ,x1.lcli_cor ,x1.tele_cor ,x1.faxe_cor ,x1.etat_cor ,x1.acci_cor ,x1.tfac_cor ,x1.refc_cor ,x1.tcli_cor ,x1.nloc_cor from credel.fentor x0 ,credel.fclior x1 where (((((((x0.csoc_eor = x1.csoc_cor ) AND (x0.depo_eor = x1.depo_cor ) ) AND (x0.nume_eor = x1.nume_cor ) ) AND ((x1.etat_cor IS NULL ) OR (x1.etat_cor = 'EN' ) ) ) AND ((x1.nloc_cor IS NULL ) OR (x1.nloc_cor != 'FINTRAVAUX' ) ) ) AND (x1.tfac_cor IN (1 ,2 )) ) AND (x0.dsor_eor IS NULL ) ) #
+Credel;vcc_tiers;1;create view credel.vcc_tiers (m_societe,m_codeclient,m_nomclient,adresse,codepostal,ville,m_telephone,siret,refeinterne) as select x0.csoc_tier ,x0.code_tier ,x0.rais_tier ,TRIM ( BOTH  ' ' FROM credel.nvl(x0.adr1_tier ,' ' )) || ' ' || TRIM ( BOTH  ' ' FROM credel.nvl(x0.adr2_tier ,' ' )) || ' ' || TRIM ( BOTH  ' ' FROM credel.nvl(x0.adr3_tier ,' ' )) ,x0.codp_tier ,x0.vill_tier ,x0.tele_tier ,x0.sire_tier ,x0.telx_tier from credel.ftiercpt x0 where ((x0.pref_tier = 'C' ) AND (x0.type_tier <= 3 ) ) #
+Credel;vpersonne;1;create view credel.vpersonne (idpersonne,nompersonne,idgroupe) as select x0.code_sal ,x0.noms_sal || x0.pren_sal ,x0.acti_sal from credel.fsalar x0 #
+Credel;vpiedloc;1;create view credel.vpiedloc (psociete,pdepot,ptypeloc,pcontrat,pavenant,pcodecli,pnumfact,pdatefact,ptypefact,ptypecli,pmontht,pmonttva,pmonttc) as select x0.csoc_piedl ,x0.depo_piedl ,x0.type_piedl ,x0.nctr_piedl ,x0.nave_piedl ,x0.ccli_piedl ,x0.nfac_piedl ,x0.dfac_piedl ,x0.tfac_piedl ,x0.tcli_piedl ,x0.btva_piedl ,x0.mtva_piedl ,x0.mttc_piedl from credel.fpielfac x0 #
+Credel;v_or;1;create view credel.v_or (csoc_eor,depo_eor,nume_eor,dent_eor,dsor_eor,imat_eor,ccli_cor,lcli_cor,tcli_cor,tfac_cor,acci_cor) as select x0.csoc_eor ,x0.depo_eor ,x0.nume_eor ,x0.dent_eor ,x0.dsor_eor ,x0.imat_eor ,x1.ccli_cor ,x1.lcli_cor ,x1.tcli_cor ,x1.tfac_cor ,x1.acci_cor from credel.fentor x0 ,credel.fclior x1 where (((x0.csoc_eor = x1.csoc_cor ) AND (x0.depo_eor = x1.depo_cor ) ) AND (x0.nume_eor = x1.nume_cor ) ) #
+Credel;vlisfact;1;create view credel.vlisfact (societe,depot,codeclie,anneef,numfact,datefact,typefact,nor,montttc) as select distinct x0.csoc_hefac ,x0.depo_hefac ,x0.ccli_hefac ,YEAR (x0.dfac_hefac ) ,x0.nfac_hefac ,x0.dfac_hefac ,x0.tfac_hefac ,x0.nuor_hefac ,sum(x1.mttc_piedf ) from credel.fhisefac x0 ,credel.fpiedfac x1 where ((((((x0.csoc_hefac = x1.csoc_piedf ) AND (x0.depo_hefac = x1.depo_piedf ) ) AND (x0.nfac_hefac = x1.nfac_piedf ) ) AND (x0.dfac_hefac = x1.dfac_piedf ) ) AND (x0.ccli_hefac = x1.ccli_piedf ) ) AND (x0.tfac_hefac = x1.tfac_piedf ) ) group by x0.csoc_hefac ,x0.depo_hefac ,x0.ccli_hefac ,4 ,x0.nfac_hefac ,x0.dfac_hefac ,x0.tfac_hefac ,x0.nuor_hefac #
+Credel;vligfloc;1;create view credel.vligfloc (lsociete,ldepot,ltypeloc,lcontrat,lavenant,lnumfact,ldatefact,ltypefact,ldesig,lrefcli,lordre,lcode,llibe,lunite,lquantite,lprixunite,lremise,lprixligne,ldebut,lfin,lareleve,lnreleve,lcompta) as select x0.csoc_lfacl ,x0.depo_lfacl ,x0.type_lfacl ,x0.nctr_lfacl ,x0.nave_lfacl ,x0.nfac_lfacl ,x0.dfac_lfacl ,x0.tfac_lfacl ,x0.desi_lfacl ,x0.refe_lfacl ,x0.ordr_lfacl ,x0.code_lfacl ,x0.libe_lfacl ,x0.unit_lfacl ,x0.qtte_lfacl ,x0.pxun_lfacl ,x0.remi_lfacl ,x0.pxht_lfacl ,x0.ddpe_lfacl ,x0.dfpe_lfacl ,x0.arel_lfacl ,x0.nrel_lfacl ,x0.ncpt_lfacl from credel.fliglfac x0 #
+Credel;vjrnalana;1;create view credel.vjrnalana (societe,anneemois,journal,datepiece,cmvj,numpiece,libepiece,compte,libecompte,debit,credit,echeance,libejourn,epiece,prefixe,depot,raisdepot,cptanal,etablis,service,activite,debitana,creditana,cession,debitcess,credcess) as select x2.csoc_mvcpt ,x2.anmo_mvcpt ,x2.jrnl_mvcpt ,x2.dpie_mvcpt ,x2.cmvj_mvcpt ,x2.npie_mvcpt ,x2.libe_mvcpt ,x2.ncpt_mvcpt ,x2.inti_mvcpt ,x2.debi_mvcpt ,x2.cred_mvcpt ,x2.dech_mvcpt ,x1.libe_jcpt ,x2.epie_mvcpt ,x2.pref_mvcpt ,x2.depo_mvcpt ,x0.rais_dep ,x3.ncpt_mvana ,x3.depa_mvana ,x3.sera_mvana ,x3.acta_mvana ,x3.debi_mvana ,x3.cred_mvana ,x4.ncpt_mvces ,x4.debi_mvces ,x4.cred_mvces from credel.depot x0 ,credel.fjourcpt x1 ,credel.fmouvcpt x2 ,outer(credel.fmvanacpt x3 ,outer(credel.fmouvces x4 ) ) where (((((((((((((((((((((x2.csoc_mvcpt = x1.csoc_jcpt ) AND (x2.csoc_mvcpt = x0.csoc_dep ) ) AND (x2.depo_mvcpt = x0.code_dep ) ) AND (x1.code_jcpt = x2.jrnl_mvcpt ) ) AND (x3.csoc_mvana = x2.csoc_mvcpt ) ) AND (x3.depo_mvana = x2.depo_mvcpt ) ) AND (x3.anmo_mvana = x2.anmo_mvcpt ) ) AND (x3.jrnl_mvana = x2.jrnl_mvcpt ) ) AND (x3.nlij_mvana = x2.nlig_mvcpt ) ) AND (x3.dpie_mvana = x2.dpie_mvcpt ) ) AND (x3.npie_mvana = x2.npie_mvcpt ) ) AND (x3.epie_mvana = x2.epie_mvcpt ) ) AND (x3.ncpt_mvana = x2.cpor_mvcpt ) ) AND (x4.csoc_mvces = x2.csoc_mvcpt ) ) AND (x4.anmo_mvces = x2.anmo_mvcpt ) ) AND (x4.jrnl_mvces = x2.jrnl_mvcpt ) ) AND (x4.nlij_mvces = x2.nlig_mvcpt ) ) AND (x4.dpie_mvces = x2.dpie_mvcpt ) ) AND (x4.npie_mvces = x2.npie_mvcpt ) ) AND (x4.epie_mvces = x2.epie_mvcpt ) ) AND (x4.ncpo_mvces = x3.ncpa_mvana ) ) #
+Credel;vintcompt;1;create view credel.vintcompt (societe,depot,date,journal,service,simulat,prefix,compte,intitule,piece,libelle,prefcppa,contrepart,moderegl,echeance,debit,credit,baseht,lettrage,datelettre,pointage,datepoint,datecreat,adruser) as select x0.csoc_mvcpt ,x0.depo_mvcpt ,x0.dpie_mvcpt ,x0.jrnl_mvcpt ,x0.serv_mvcpt ,x0.simu_mvcpt ,x0.pref_mvcpt ,x0.ncpt_mvcpt ,x0.inti_mvcpt ,x0.npie_mvcpt ,x0.libe_mvcpt ,x0.prep_mvcpt ,x0.cppa_mvcpt ,x0.mreg_mvcpt ,x0.dech_mvcpt ,x0.debi_mvcpt ,x0.cred_mvcpt ,x0.btva_mvcpt ,x0.lett_mvcpt ,x0.dlet_mvcpt ,x0.poin_mvcpt ,x0.dpoi_mvcpt ,x0.dcre_mvcpt ,x0.zal1_mvcpt from credel.fmouvcpt x0 where (x0.cmvc_mvcpt = 0 ) #
+Credel;vimmo;1;create view credel.vimmo (societe,depot,service,numimmo,extens,designat1,designat2,nomfour,immat,valacquif,valnetcptf,valresf,baseamortf,dateachat,dateamortf,typeamortf,dureefisc,tauxamortf,totamorantf,totamort) as select x0.csoc_imm ,x0.depo_imm ,x0.serv_imm ,x0.nume_imm ,x0.exte_imm ,x0.des1_imm ,x0.des2_imm ,x0.nofo_imm ,x0.imma_imm ,x0.vach_imm ,x0.vncp_imm ,x0.vres_imm ,x0.bamo_imm ,x0.dach_imm ,x0.damo_imm ,x0.type_imm ,x0.dure_imm ,x0.taux_imm ,sum(x1.aman_iml ) ,sum((x1.aman_iml + x2.aman_iml ) ) from credel.fimmo x0 ,credel.fligim x1 ,credel.fligim x2 where ((((((((((x1.csoc_iml = x0.csoc_imm ) AND (x1.depo_iml = x0.depo_imm ) ) AND (x1.nume_iml = x0.nume_imm ) ) AND (x1.exte_iml = x0.exte_imm ) ) AND (x1.anne_iml < YEAR (TODAY ) ) ) AND (x2.csoc_iml = x0.csoc_imm ) ) AND (x2.depo_iml = x0.depo_imm ) ) AND (x2.nume_iml = x0.nume_imm ) ) AND (x2.exte_iml = x0.exte_imm ) ) AND (x2.anne_iml = YEAR (TODAY ) ) ) group by x0.csoc_imm ,x0.depo_imm ,x0.serv_imm ,x0.nume_imm ,x0.exte_imm ,x0.des1_imm ,x0.des2_imm ,x0.nofo_imm ,x0.imma_imm ,x0.vach_imm ,x0.vncp_imm ,x0.vres_imm ,x0.bamo_imm ,x0.dach_imm ,x0.damo_imm ,x0.type_imm ,x0.dure_imm ,x0.taux_imm #
+Credel;vhrsal;1;create view credel.vhrsal (hsoc,hdep,hnsalarie,hnomsal,hprensal,hfoncsal,hequipsal,hgroupsal,hautosal,hjousal,hsemsal,hmoisal,hansal,hnumor,hccli,hnomcli,hdate,hhdeb,hhfin,hhpasse,htypcli,hchrs,hvhrs) as select x1.csoc_hor ,x1.depo_hor ,x1.nsal_hor ,x0.noms_sal ,x0.pren_sal ,x0.fonc_sal ,x0.eqpe_sal ,x0.acti_sal ,x0.auto_sal ,x0.hjrs_sal ,x0.hsem_sal ,x0.hmoi_sal ,x0.hann_sal ,x1.nuor_hor ,x1.ccli_hor ,x1.lcli_hor ,x1.date_hor ,x1.hdeb_hor ,x1.hfin_hor ,x1.hpas_hor ,x2.type_cli ,x2.chrs_cli ,x2.vhrs_cli from credel.fsalar x0 ,credel.fhrsor x1 ,credel.fclient x2 where ((((x0.csoc_sal = x1.csoc_hor ) AND (x0.depo_sal = x1.depo_hor ) ) AND (x0.code_sal = x1.nsal_hor ) ) AND (x1.ccli_hor = x2.code_cli ) ) #
+Credel;vhrpsal;1;create view credel.vhrpsal (psoc,pdep,pnsalarie,pnomsal,pprensal,pfoncsal,pequipsal,pgroupsal,pautosal,phjousal,phsemsal,phmoisal,phansal,pnumor,pccli,pnomcli,pdate,phdeb,phfin,phpasse,ptypcli,pchrs,pvhrs) as select x1.csoc_point ,x1.depo_point ,x1.nsal_point ,x0.noms_sal ,x0.pren_sal ,x0.fonc_sal ,x0.eqpe_sal ,x0.acti_sal ,x0.auto_sal ,x0.hjrs_sal ,x0.hsem_sal ,x0.hmoi_sal ,x0.hann_sal ,x1.nuor_point ,x1.ccli_point ,x2.rais_cli ,x1.date_point ,x1.hdeb_point ,x1.hfin_point ,x1.hpas_point ,x2.type_cli ,x2.chrs_cli ,x2.vhrs_cli from credel.fsalar x0 ,credel.fpointag x1 ,credel.fclient x2 where ((((x0.csoc_sal = x1.csoc_point ) AND (x0.depo_sal = x1.depo_point ) ) AND (x0.code_sal = x1.nsal_point ) ) AND (x1.ccli_point = x2.code_cli ) ) #
+Credel;vhitrefv;1;create view credel.vhitrefv (societe,depot,codeclie,datefact,typefact,refeart,libeart,fournis,quantite,remise,montremise,prixun,prixtar,montht,prixachat,magasinier) as select x0.csoc_hlafac ,x0.depo_hlafac ,x0.ccli_hlafac ,x0.dfac_hlafac ,x0.tfac_hlafac ,x0.refe_hlafac ,x0.libe_hlafac ,x0.four_hlafac ,x0.qtte_hlafac ,x0.remi_hlafac ,x1.mrem_hlfac ,x1.pxun_hlfac ,x1.ptar_hlfac ,x1.pxht_hlfac ,x1.pach_hlfac ,x0.maga_hlafac from credel.fhislfac x0 ,credel.pxhlfac x1 where ((((((((x0.csoc_hlafac = x1.csoc_hlfac ) AND (x0.depo_hlafac = x1.depo_hlfac ) ) AND (x0.nfac_hlafac = x1.nfac_hlfac ) ) AND (x0.dfac_hlafac = x1.dfac_hlfac ) ) AND (x0.ccli_hlafac = x1.ccli_hlfac ) ) AND (x0.nbon_hlafac = x1.nbon_hlfac ) ) AND (x0.nlig_hlafac = x1.nlig_hlfac ) ) AND (x0.natl_hlafac = 'P' ) ) #
+Credel;vhiscen;1;create view credel.vhiscen (cclih,nconh,naveh,enreh,mtfah,mtdeph) as select x0.ccli_hcen ,x0.ncon_hcen ,x0.nave_hcen ,x0.enre_hcen ,sum(x0.mtfa_hcen ) ,sum(x0.mtde_hcen ) from credel.fhiscen x0 group by x0.ccli_hcen ,x0.ncon_hcen ,x0.nave_hcen ,x0.enre_hcen #
+Credel;vhisatel;1;create view credel.vhisatel (societe,depot,numor,numfact,datefact,codeclient,typefact,reference,libelle,fourligne,famligne,quantite,prixunitaire,remise,htnet,achatunite) as select x0.csoc_hlafac ,x0.depo_hlafac ,x0.nume_hlafac ,x0.nfac_hlafac ,x0.dfac_hlafac ,x0.ccli_hlafac ,x0.tfac_hlafac ,x0.refe_hlafac ,x0.libe_hlafac ,x0.four_hlafac ,x0.cfam_hlafac ,x0.qtte_hlafac ,x1.pxun_hlfac ,x1.mrem_hlfac ,x1.pxht_hlfac ,x1.pach_hlfac from credel.fhislfac x0 ,credel.pxhlfac x1 where (((((((((x0.csoc_hlafac = x1.csoc_hlfac ) AND (x0.depo_hlafac = x1.depo_hlfac ) ) AND (x0.nfac_hlafac = x1.nfac_hlfac ) ) AND (x0.dfac_hlafac = x1.dfac_hlfac ) ) AND (x0.ccli_hlafac = x1.ccli_hlfac ) ) AND (x0.tfac_hlafac = x1.tfac_hlfac ) ) AND (x0.acci_hlafac = x1.acci_hlfac ) ) AND (x0.nume_hlafac > 0 ) ) AND (x0.nlig_hlafac = x1.nlig_hlfac ) ) #
+Credel;vhiscam;1;create view credel.vhiscam (csoc_hisor,depo_hisor,nume_hisor,ccli_hisor,lcli_hisor,acci_hisor,tfac_hisor,cvin_hisor,imat_hisor,nfac_hisor,dfac_hisor,dent_hisor,dsor_hisor,ordr_hisor,natl_hisor,refe_hisor,libe_hisor,qtte_hisor,pxun_hisor,remi_hisor,pxht_hisor,kilm_hisor) as select x0.csoc_hisor ,x0.depo_hisor ,x0.nume_hisor ,x0.ccli_hisor ,x0.lcli_hisor ,x0.acci_hisor ,x0.tfac_hisor ,x0.cvin_hisor ,x0.imat_hisor ,x0.nfac_hisor ,x0.dfac_hisor ,x0.dent_hisor ,x0.dsor_hisor ,x0.ordr_hisor ,x0.natl_hisor ,x0.refe_hisor ,x0.libe_hisor ,x0.qtte_hisor ,x0.pxun_hisor ,x0.remi_hisor ,x0.pxht_hisor ,x0.kilm_hisor from credel.fhisor x0 where (x0.cdev_hisor = 1 ) #
+Credel;vclitige;1;create view credel.vclitige (code,rasionsociale,siret,telephone,ville,libelitige) as select x0.code_cli ,x0.rais_cli ,x0.sire_cli ,x0.tele_cli ,x0.vill_cli ,x1.libe_ltg from credel.fclient x0 ,credel.flitige x1 where (((x0.type_cli IN (1 ,3 ,6 ,7 )) AND (x0.litg_cli = x1.code_ltg ) ) AND (x1.type_ltg = 'O' ) ) #
+Credel;vgrirem;1;create view credel.vgrirem (societe,depot,codegrille,libegri,fournis,nomfour,famille,libefam,remstock,remdepan1,remdepan2) as select x0.csoc_gri ,x0.depo_gri ,x0.code_gri ,x0.libe_gri ,x0.four_gri ,x2.rais_four ,x0.fami_gri ,x1.libe_fam ,x0.remi_gri ,x0.cla1_gri ,x0.cla2_gri from credel.fgrirem x0 ,credel.ffamil x1 ,credel.ffournis x2 where (((x2.code_four = x0.four_gri ) AND (x1.four_fam = x0.four_gri ) ) AND (x1.code_fam = x0.fami_gri ) ) #
+Credel;vgriref;1;create view credel.vgriref (remref,libegref,reference,liberefe,fournis,nomfour,remmag,rematl) as select x0.code_gref ,x0.libe_gref ,x0.refe_gref ,x1.libe_art ,x0.four_gref ,x2.rais_four ,x0.rmag_gref ,x0.ratl_gref from credel.fgrirref x0 ,credel.farticle x1 ,credel.ffournis x2 where (((x2.code_four = x0.four_gref ) AND (x1.four_art = x0.four_gref ) ) AND (x1.refe_art = x0.refe_gref ) ) #
+Credel;vgrimajo;1;create view credel.vgrimajo (societe,depot,codemajo,libemajo,fournis,nomfour,famille,libefam,majofam) as select x0.csoc_gri ,x0.depo_gri ,x0.code_gri ,x0.libe_gri ,x0.four_gri ,x2.rais_four ,x0.fami_gri ,x1.libe_fam ,x0.majo_gri from credel.fgrimajo x0 ,credel.ffamil x1 ,credel.ffournis x2 where (((x2.code_four = x0.four_gri ) AND (x1.four_fam = x0.four_gri ) ) AND (x1.code_fam = x0.fami_gri ) ) #
+Credel;vgoratel;1;create view credel.vgoratel (societe,depot,immat,numor,typeor,entree,heurent,delai,heurdel,datesortie,client,libecli,telephone,fax,etator,accident,typefact,refeclient,typeclient,fintravx) as select x0.csoc_eor ,x0.depo_eor ,x0.imat_eor ,x0.nume_eor ,x0.type_eor ,x0.dent_eor ,x0.hent_eor ,x0.dlai_eor ,x0.hdel_eor ,x0.dsor_eor ,x1.ccli_cor ,x1.lcli_cor ,x1.tele_cor ,x1.faxe_cor ,x1.etat_cor ,x1.acci_cor ,x1.tfac_cor ,x1.refc_cor ,x1.tcli_cor ,x1.nloc_cor from credel.fentor x0 ,credel.fclior x1 where ((((((x0.csoc_eor = x1.csoc_cor ) AND (x0.depo_eor = x1.depo_cor ) ) AND (x0.nume_eor = x1.nume_cor ) ) AND ((x1.etat_cor IS NULL ) OR (x1.etat_cor = 'EN' ) ) ) AND (x1.tfac_cor IN (1 ,2 )) ) AND (x0.dsor_eor IS NULL ) ) #
+Credel;vgaz;1;create view credel.vgaz (societe,depot,numor,dentree,nfacture,dfacture,immat,libelle) as select x0.csoc_hefac ,x0.depo_hefac ,x1.nume_hlafac ,x0.dent_hefac ,x0.nfac_hefac ,x0.dfac_hefac ,x0.imat_hefac ,x1.libe_hlafac from credel.fhisefac x0 ,credel.fhislfac x1 where (((((((x0.csoc_hefac = x1.csoc_hlafac ) AND (x0.depo_hefac = x1.depo_hlafac ) ) AND (x0.nfac_hefac = x1.nfac_hlafac ) ) AND (x0.dfac_hefac = x1.dfac_hlafac ) ) AND (x0.nuor_hefac = x1.nume_hlafac ) ) AND (x1.natl_hlafac = 'O' ) ) AND (x1.refe_hlafac = 'GAZ' ) ) #
+Credel;vfournis;1;create view credel.vfournis (code,nom,marque,principal,rue1,rue2,rue3,cpostal,ville,pays,telephone,fax,mail,refefour,comdmini,majofour) as select x0.code_four ,x0.rais_four ,x0.marq_four ,x0.ordr_four ,x0.adr1_four ,x0.adr2_four ,x0.adr3_four ,x0.codp_four ,x0.vill_four ,x0.pays_four ,x0.tele_four ,x0.faxe_four ,x0.emai_four ,x0.expl_four ,x0.mini_four ,x0.majo_four from credel.ffournis x0 #
+Credel;vfourfam;1;create view credel.vfourfam (code_four,rais_four,code_fam,libe_fam) as select x0.code_four ,x0.rais_four ,x1.code_fam ,x1.libe_fam from credel.ffournis x0 ,credel.ffamil x1 where (x1.four_fam = x0.code_four ) #
+Credel;vfourbqe;1;create view credel.vfourbqe (societe,codefour,nomfour,adresse1,adresse2,adresse3,codpostal,ville,telephone,fax,mail,idtva,siret,siren,modreglt,dombanque,comptebanque,ribb,codeetablis,codeguich,iban,swift) as select x0.csoc_tier ,x0.code_tier ,x0.rais_tier ,x0.adr1_tier ,x0.adr2_tier ,x0.adr3_tier ,x0.codp_tier ,x0.vill_tier ,x0.tele_tier ,x0.faxe_tier ,x0.emai_tier ,x0.tvac_tier ,x0.sire_tier ,x0.sirn_tier ,x0.mreg_tier ,x1.domb_bqe ,x1.cptb_bqe ,x1.ribb_bqe ,x1.etab_bqe ,x1.guib_bqe ,x1.iban_bqe ,x1.swif_bqe from credel.ftiercpt x0 ,credel.fbanqcpt x1 where ((((x0.csoc_tier = x1.csoc_bqe ) AND (x0.pref_tier = 'F' ) ) AND (x1.pref_bqe = 'F' ) ) AND (x0.code_tier = x1.ncpt_bqe ) ) #
+Credel;vfamille;1;create view credel.vfamille (fournis,codefam,libefam,nature,dechet,metier) as select x0.four_fam ,x0.code_fam ,x0.libe_fam ,x0.natu_fam ,x0.cpem_fam ,x0.piec_fam from credel.ffamil x0 #
+Credel;vfacsdpv;1;create view credel.vfacsdpv (refercli,societe,depot,numor,client,nomclient,tcli,accident,typefact,numservie,immat,numfact,datefact,dentree,dsortie,typeor,ordre,natligne,reference,libelle,quantite,pxunitht,mremise,totht,kilom,numserie) as select x1.refc_hefac ,x0.csoc_hisor ,x0.depo_hisor ,x0.nume_hisor ,x0.ccli_hisor ,x0.lcli_hisor ,x0.tcli_hisor ,x0.acci_hisor ,x0.tfac_hisor ,x0.cvin_hisor ,x0.imat_hisor ,x0.nfac_hisor ,x0.dfac_hisor ,x0.dent_hisor ,x0.dsor_hisor ,x0.typo_hisor ,x0.ordr_hisor ,x0.natl_hisor ,x0.refe_hisor ,x0.libe_hisor ,x0.qtte_hisor ,x0.pxun_hisor ,x0.remi_hisor ,x0.pxht_hisor ,x0.kilm_hisor ,x0.cvin_hisor from credel.fhisor x0 ,credel.fhisefac x1 where ((((((x0.csoc_hisor = x1.csoc_hefac ) AND (x0.depo_hisor = x1.depo_hefac ) ) AND (x0.nfac_hisor = x1.nfac_hefac ) ) AND (x0.dfac_hisor = x1.dfac_hefac ) ) AND (x0.ccli_hisor = x1.ccli_hefac ) ) AND (x0.tfac_hisor = x1.tfac_hefac ) ) #
+Credel;vfacmag;1;create view credel.vfacmag (societe,depot,numfact,datefact,codeclient,typefact,reference,libelle,fourligne,famligne,quantite,prixunitaire,remise,htnet,achatunite) as select x0.csoc_hlafac ,x0.depo_hlafac ,x0.nfac_hlafac ,x0.dfac_hlafac ,x0.ccli_hlafac ,x0.tfac_hlafac ,x0.refe_hlafac ,x0.libe_hlafac ,x0.four_hlafac ,x0.cfam_hlafac ,x0.qtte_hlafac ,x1.pxun_hlfac ,x1.mrem_hlfac ,x1.pxht_hlfac ,x1.pach_hlfac from credel.fhislfac x0 ,credel.pxhlfac x1 where ((((((((((x0.csoc_hlafac = x1.csoc_hlfac ) AND (x0.depo_hlafac = x1.depo_hlfac ) ) AND (x0.nfac_hlafac = x1.nfac_hlfac ) ) AND (x0.dfac_hlafac = x1.dfac_hlfac ) ) AND (x0.ccli_hlafac = x1.ccli_hlfac ) ) AND (x0.tfac_hlafac = x1.tfac_hlfac ) ) AND (x0.acci_hlafac = x1.acci_hlfac ) ) AND (x0.nbon_hlafac = x1.nbon_hlfac ) ) AND (x0.nume_hlafac IS NULL ) ) AND (x0.nlig_hlafac = x1.nlig_hlfac ) ) #
+Credel;vfacmagp;1;create view credel.vfacmagp (societe,depot,numfact,datefact,codeclient,typefact,reference,libelle,fourligne,famligne,quantite,prixunitaire,remise,htnet,achatunite) as select x0.csoc_hlafac ,x0.depo_hlafac ,x0.nfac_hlafac ,x0.dfac_hlafac ,x0.ccli_hlafac ,x0.tfac_hlafac ,x0.refe_hlafac ,x0.libe_hlafac ,x0.four_hlafac ,x0.cfam_hlafac ,x0.qtte_hlafac ,x1.pxun_hlfac ,x1.mrem_hlfac ,x1.pxht_hlfac ,x1.pach_hlfac from credel.fhislfac x0 ,credel.pxhlfac x1 where (((((((((((x0.csoc_hlafac = x1.csoc_hlfac ) AND (x0.depo_hlafac = x1.depo_hlfac ) ) AND (x0.nfac_hlafac = x1.nfac_hlfac ) ) AND (x0.dfac_hlafac = x1.dfac_hlfac ) ) AND (x0.ccli_hlafac = x1.ccli_hlfac ) ) AND (x0.tfac_hlafac = x1.tfac_hlfac ) ) AND (x0.acci_hlafac = x1.acci_hlfac ) ) AND (x0.nbon_hlafac = x1.nbon_hlfac ) ) AND (x0.nume_hlafac IS NULL ) ) AND (x0.nlig_hlafac = x1.nlig_hlfac ) ) AND (x0.natl_hlafac MATCHES '[PK]' ) ) #
+Credel;vfacmagm;1;create view credel.vfacmagm (societe,depot,numfact,datefact,codeclient,typefact,reference,libelle,fourligne,famligne,quantite,prixunitaire,remise,htnet,achatunite) as select x0.csoc_hlafac ,x0.depo_hlafac ,x0.nfac_hlafac ,x0.dfac_hlafac ,x0.ccli_hlafac ,x0.tfac_hlafac ,x0.cfam_hlafac ,x0.libe_hlafac ,'M.O.D' ,x0.refe_hlafac ,x0.qtte_hlafac ,x1.pxun_hlfac ,x1.mrem_hlfac ,x1.pxht_hlfac ,x1.pach_hlfac from credel.fhislfac x0 ,credel.pxhlfac x1 where (((((((((((x0.csoc_hlafac = x1.csoc_hlfac ) AND (x0.depo_hlafac = x1.depo_hlfac ) ) AND (x0.nfac_hlafac = x1.nfac_hlfac ) ) AND (x0.dfac_hlafac = x1.dfac_hlfac ) ) AND (x0.ccli_hlafac = x1.ccli_hlfac ) ) AND (x0.tfac_hlafac = x1.tfac_hlfac ) ) AND (x0.acci_hlafac = x1.acci_hlfac ) ) AND (x0.nbon_hlafac = x1.nbon_hlfac ) ) AND (x0.nume_hlafac IS NULL ) ) AND (x0.nlig_hlafac = x1.nlig_hlfac ) ) AND (x0.natl_hlafac MATCHES '[MDF]' ) ) #
+Credel;vfacli;1;create view credel.vfacli (fsociete,fdepot,fcodecli,fannee,fmois,fdatefact,fnumfact,ftypfact,fbtva,fmtva,fpxht) as select x0.csoc_piedf ,x0.depo_piedf ,x0.ccli_piedf ,YEAR (x0.dfac_piedf ) ,MONTH (x0.dfac_piedf ) ,x0.dfac_piedf ,x0.nfac_piedf ,x0.tfac_piedf ,sum(x0.btva_piedf ) ,sum(x0.mtva_piedf ) ,sum(x0.mttc_piedf ) from credel.fpiedfac x0 group by x0.csoc_piedf ,x0.depo_piedf ,x0.ccli_piedf ,x0.dfac_piedf ,x0.nfac_piedf ,x0.tfac_piedf #
+Credel;vfacfleet;1;create view credel.vfacfleet (csoc_hisor,depo_hisor,nume_hisor,ccli_hisor,lcli_hisor,acci_hisor,tfac_hisor,tcli_hisor,colc_hisor,cvin_hisor,imat_hisor,cdev_hisor,typo_hisor,nfac_hisor,dfac_hisor,dent_hisor,dclo_hisor,dsor_hisor,nbon_hisor,dbon_hisor,ordr_hisor,natl_hisor,etal_hisor,olig_hisor,nlig_hisor,refe_hisor,libe_hisor,qtte_hisor,pxun_hisor,remi_hisor,majo_hisor,ppfi_hisor,ppem_hisor,ctva_hisor,ttva_hisor,mtva_hisor,pxht_hisor,ncpt_hisor,kilm_hisor,sire_cli,refc_cor,tvac_cli) as select x0.csoc_hisor ,x0.depo_hisor ,x0.nume_hisor ,x0.ccli_hisor ,x0.lcli_hisor ,x0.acci_hisor ,x0.tfac_hisor ,x0.tcli_hisor ,x0.colc_hisor ,x0.cvin_hisor ,x0.imat_hisor ,x0.cdev_hisor ,x0.typo_hisor ,x0.nfac_hisor ,x0.dfac_hisor ,x0.dent_hisor ,x0.dclo_hisor ,x0.dsor_hisor ,x0.nbon_hisor ,x0.dbon_hisor ,x0.ordr_hisor ,x0.natl_hisor ,x0.etal_hisor ,x0.olig_hisor ,x0.nlig_hisor ,x0.refe_hisor ,x0.libe_hisor ,x0.qtte_hisor ,x0.pxun_hisor ,x0.remi_hisor ,x0.majo_hisor ,x0.ppfi_hisor ,x0.ppem_hisor ,x0.ctva_hisor ,x0.ttva_hisor ,x0.mtva_hisor ,x0.pxht_hisor ,x0.ncpt_hisor ,x0.kilm_hisor ,x1.sire_cli ,x2.refc_cor ,x1.tvac_cli from credel.fhisor x0 ,credel.fclient x1 ,credel.fclior x2 where (((((((x0.csoc_hisor = x2.csoc_cor ) AND (x0.depo_hisor = x2.depo_cor ) ) AND (x0.nume_hisor = x2.nume_cor ) ) AND (x0.ccli_hisor = x2.ccli_cor ) ) AND (x0.tfac_hisor = x2.tfac_cor ) ) AND (x0.acci_hisor = x2.acci_cor ) ) AND (x1.code_cli = x2.ccli_cor ) ) #
+Credel;vfacblmag;1;create view credel.vfacblmag (societe,depot,client,numbon,datebon,reference,libelle,quantite,prixunitaire,remise,prixht) as select x0.csoc_ebl ,x0.depo_ebl ,x0.ccli_ebl ,x0.nbon_ebl ,x0.date_ebl ,x1.refe_lbl ,x1.libe_lbl ,x1.qliv_lbl ,(x2.ptar_pbl * x1.qliv_lbl ) ,x2.mrem_pbl ,x2.pxht_pbl from credel.fentbl x0 ,credel.fligblm x1 ,credel.prixbl x2 where (((((((((((((x0.csoc_ebl = x1.csoc_lbl ) AND (x0.depo_ebl = x1.depo_lbl ) ) AND (x0.nbon_ebl = x1.nbon_lbl ) ) AND (x0.ccli_ebl = x1.ccli_lbl ) ) AND (x0.etab_ebl IN ('BM' ,'BD' )) ) AND (x0.typf_ebl <= 2 ) ) AND (x1.natl_lbl IN ('P' ,'D' ,'M' )) ) AND (x0.orig_ebl IS NULL ) ) AND (x2.csoc_pbl = x1.csoc_lbl ) ) AND (x2.depo_pbl = x1.depo_lbl ) ) AND (x2.nbon_pbl = x1.nbon_lbl ) ) AND (x2.ccli_pbl = x1.ccli_lbl ) ) AND (x2.nlig_pbl = x1.nlig_lbl ) ) #
+Credel;vfacblatl;1;create view credel.vfacblatl (societe,depot,client,numbon,datebon,reference,libelle,quantite,prixunitaire,remise,prixht) as select x0.csoc_ebl ,x0.depo_ebl ,x0.ccli_ebl ,x0.nbon_ebl ,x0.date_ebl ,x1.refe_lbl ,x1.libe_lbl ,x1.qliv_lbl ,(x2.ptar_pbl * x1.qliv_lbl ) ,x2.mrem_pbl ,x2.pxht_pbl from credel.fentbl x0 ,credel.fligblm x1 ,credel.prixbl x2 where (((((((((((((x0.csoc_ebl = x1.csoc_lbl ) AND (x0.depo_ebl = x1.depo_lbl ) ) AND (x0.nbon_ebl = x1.nbon_lbl ) ) AND (x0.ccli_ebl = x1.ccli_lbl ) ) AND (x0.etab_ebl IN ('BA' ,'BD' )) ) AND (x0.typf_ebl <= 2 ) ) AND (x1.natl_lbl IN ('P' ,'D' ,'M' )) ) AND (x0.orig_ebl > 0 ) ) AND (x2.csoc_pbl = x1.csoc_lbl ) ) AND (x2.depo_pbl = x1.depo_lbl ) ) AND (x2.nbon_pbl = x1.nbon_lbl ) ) AND (x2.ccli_pbl = x1.ccli_lbl ) ) AND (x2.nlig_pbl = x1.nlig_lbl ) ) #
+Credel;vfacatl;1;create view credel.vfacatl (societe,depot,numfact,datefact,codeclient,typefact,reference,libelle,fourligne,famligne,quantite,prixunitaire,remise,htnet,achatunite) as select x0.csoc_hlafac ,x0.depo_hlafac ,x0.nfac_hlafac ,x0.dfac_hlafac ,x0.ccli_hlafac ,x0.tfac_hlafac ,x0.refe_hlafac ,x0.libe_hlafac ,x0.four_hlafac ,x0.cfam_hlafac ,x0.qtte_hlafac ,x1.pxun_hlfac ,x1.mrem_hlfac ,x1.pxht_hlfac ,x1.pach_hlfac from credel.fhislfac x0 ,credel.pxhlfac x1 where (((((((((x0.csoc_hlafac = x1.csoc_hlfac ) AND (x0.depo_hlafac = x1.depo_hlfac ) ) AND (x0.nfac_hlafac = x1.nfac_hlfac ) ) AND (x0.dfac_hlafac = x1.dfac_hlfac ) ) AND (x0.ccli_hlafac = x1.ccli_hlfac ) ) AND (x0.tfac_hlafac = x1.tfac_hlfac ) ) AND (x0.acci_hlafac = x1.acci_hlfac ) ) AND (x0.nume_hlafac > 0 ) ) AND (x0.nlig_hlafac = x1.nlig_hlfac ) ) #
+Credel;vfacatlp;1;create view credel.vfacatlp (societe,depot,numfact,datefact,codeclient,typefact,reference,libelle,fourligne,famligne,quantite,prixunitaire,remise,htnet,achatunite) as select x0.csoc_hlafac ,x0.depo_hlafac ,x0.nfac_hlafac ,x0.dfac_hlafac ,x0.ccli_hlafac ,x0.tfac_hlafac ,x0.refe_hlafac ,x0.libe_hlafac ,x0.four_hlafac ,x0.cfam_hlafac ,x0.qtte_hlafac ,x1.pxun_hlfac ,x1.mrem_hlfac ,x1.pxht_hlfac ,x1.pach_hlfac from credel.fhislfac x0 ,credel.pxhlfac x1 where ((((((((((x0.csoc_hlafac = x1.csoc_hlfac ) AND (x0.depo_hlafac = x1.depo_hlfac ) ) AND (x0.nfac_hlafac = x1.nfac_hlfac ) ) AND (x0.dfac_hlafac = x1.dfac_hlfac ) ) AND (x0.ccli_hlafac = x1.ccli_hlfac ) ) AND (x0.tfac_hlafac = x1.tfac_hlfac ) ) AND (x0.acci_hlafac = x1.acci_hlfac ) ) AND (x0.nume_hlafac > 0 ) ) AND (x0.nlig_hlafac = x1.nlig_hlfac ) ) AND (x0.natl_hlafac MATCHES '[PK]' ) ) #
+Credel;vfacatlm;1;create view credel.vfacatlm (societe,depot,numfact,datefact,codeclient,typefact,reference,libelle,fourligne,famligne,quantite,prixunitaire,remise,htnet,achatunite) as select x0.csoc_hlafac ,x0.depo_hlafac ,x0.nfac_hlafac ,x0.dfac_hlafac ,x0.ccli_hlafac ,x0.tfac_hlafac ,x0.cfam_hlafac ,x0.libe_hlafac ,'M.O.D' ,x0.refe_hlafac ,x0.qtte_hlafac ,x1.pxun_hlfac ,x1.mrem_hlfac ,x1.pxht_hlfac ,x1.pach_hlfac from credel.fhislfac x0 ,credel.pxhlfac x1 where ((((((((((x0.csoc_hlafac = x1.csoc_hlfac ) AND (x0.depo_hlafac = x1.depo_hlfac ) ) AND (x0.nfac_hlafac = x1.nfac_hlfac ) ) AND (x0.dfac_hlafac = x1.dfac_hlfac ) ) AND (x0.ccli_hlafac = x1.ccli_hlfac ) ) AND (x0.tfac_hlafac = x1.tfac_hlfac ) ) AND (x0.acci_hlafac = x1.acci_hlfac ) ) AND (x0.nume_hlafac > 0 ) ) AND (x0.nlig_hlafac = x1.nlig_hlfac ) ) AND (x0.natl_hlafac MATCHES '[MDF]' ) ) #
+Credel;vextcde;1;create view credel.vextcde (societe,depot,numcde,operateur,numor,codecli,nomclient,servicec,datecomde,objetcde,accident,typefact,raisfour,adr1four,adr2four,adr3four,codpfour,villefour,numligne,libecde,qttecde,pxuncde,envoyer,cloturer) as select x0.csoc_extc ,x0.depo_extc ,x0.ncde_extc ,x0.oper_extc ,x0.nuor_extc ,x0.ccli_extc ,x0.lcli_extc ,x0.serv_extc ,x0.dcde_extc ,x0.obje_extc ,x0.acci_extc ,x0.tfac_extc ,x0.four_extc ,x0.adr1_extc ,x0.adr2_extc ,x0.adr3_extc ,x0.codp_extc ,x0.vill_extc ,x0.nlig_extc ,x0.libe_extc ,x0.qtte_extc ,x0.pxun_extc ,x0.envo_extc ,x1.clot_extor from credel.fextcde x0 ,outer(credel.ftraveor x1 ) where ((((x0.csoc_extc = x1.csoc_extor ) AND (x0.depo_extc = x1.depo_extor ) ) AND (x0.ncde_extc = x1.ncde_extor ) ) AND (x1.ncde_extor NOT MATCHES '[A-Z]*' ) ) #
+Credel;venclior;1;create view credel.venclior (csoc,cdep,cnuor,cdentree,cimat,cclior,clclior,caccid,ctypefact,ctypcli,typeor) as select x0.csoc_eor ,x0.depo_eor ,x0.nume_eor ,x0.dent_eor ,x0.imat_eor ,x1.ccli_cor ,x1.lcli_cor ,x1.acci_cor ,x1.tfac_cor ,x1.tcli_cor ,x0.type_eor from credel.fentor x0 ,credel.fclior x1 where ((((x1.csoc_cor = x0.csoc_eor ) AND (x1.depo_cor = x0.depo_eor ) ) AND (x1.nume_cor = x0.nume_eor ) ) AND (x1.dclo_cor IS NULL ) ) #
+Credel;ventreor;1;create view credel.ventreor (societe,depot,typeor,numor,dentree,hentree,immat,kilom,codecli,nomclient,typefact,accident,datecor,etator,cloture,refeclient,delai,hdelai,dsortie) as select x0.csoc_eor ,x0.depo_eor ,x0.type_eor ,x0.nume_eor ,x0.dent_eor ,x0.hent_eor ,x0.imat_eor ,x0.kilm_eor ,x1.ccli_cor ,x1.lcli_cor ,x1.tfac_cor ,x1.acci_cor ,x1.date_cor ,x1.etat_cor ,x1.dclo_cor ,x1.refc_cor ,x0.dlai_eor ,x0.hdel_eor ,x1.dsor_cor from credel.fentor x0 ,credel.fclior x1 where (((x1.csoc_cor = x0.csoc_eor ) AND (x1.depo_cor = x0.depo_eor ) ) AND (x1.nume_cor = x0.nume_eor ) ) #
+Credel;vencor;1;create view credel.vencor (societe,depot,atelier,numor,entree,immat,kilom,codecli,nomclient,typefact,accident,datecor,etator,cloture,refeclient) as select x0.csoc_eor ,x0.depo_eor ,x0.type_eor ,x0.nume_eor ,x0.dent_eor ,x0.imat_eor ,x0.kilm_eor ,x1.ccli_cor ,x1.lcli_cor ,x1.tfac_cor ,x1.acci_cor ,x1.date_cor ,x1.etat_cor ,x1.dclo_cor ,x1.refc_cor from credel.fentor x0 ,credel.fclior x1 where (((x1.csoc_cor = x0.csoc_eor ) AND (x1.depo_cor = x0.depo_eor ) ) AND (x1.nume_cor = x0.nume_eor ) ) #
+Credel;vencmag;1;create view credel.vencmag (codesoc,codepot,codecli,nomcli,nbon,datebon,typefact,prixht,typeclient) as select x0.csoc_ebl ,x0.depo_ebl ,x0.ccli_ebl ,x0.nomc_ebl ,x0.nbon_ebl ,x0.date_ebl ,x0.typf_ebl ,x1.pxht_pbl ,x0.typc_ebl from credel.fentbl x0 ,credel.prixbl x1 where (((((((x1.csoc_pbl = x0.csoc_ebl ) AND (x1.depo_pbl = x0.depo_ebl ) ) AND (x1.nbon_pbl = x0.nbon_ebl ) ) AND (x1.ccli_pbl = x0.ccli_ebl ) ) AND (x0.etab_ebl IN ('BD' ,'BM' )) ) AND (x0.orig_ebl IS NULL ) ) AND (x1.cdev_pbl = 1 ) ) #
+Credel;vencdet;1;create view credel.vencdet (codesoc,codepot,codecli,nomcli,nbon,datebon,typefact,natligne,refeligne,libeligne,fourligne,qlivree,famligne,remise,codetva,prixunit,prixtar,prixachat,montrem,prixht,ncompte,numor,accidbl) as select x0.csoc_ebl ,x0.depo_ebl ,x0.ccli_ebl ,x0.nomc_ebl ,x0.nbon_ebl ,x0.date_ebl ,x0.typf_ebl ,x1.natl_lbl ,x1.refe_lbl ,x1.libe_lbl ,x1.frns_lbl ,x1.qliv_lbl ,x1.cfam_lbl ,x1.remi_lbl ,x1.ctva_lbl ,x2.pxun_pbl ,x2.ptar_pbl ,x2.pach_pbl ,x2.mrem_pbl ,x2.pxht_pbl ,x1.ncpt_lbl ,x0.orig_ebl ,x0.acci_ebl from credel.fentbl x0 ,credel.fligblm x1 ,credel.prixbl x2 where ((((((((((x0.csoc_ebl = x1.csoc_lbl ) AND (x0.depo_ebl = x1.depo_lbl ) ) AND (x0.ccli_ebl = x1.ccli_lbl ) ) AND (x0.nbon_ebl = x1.nbon_lbl ) ) AND (x2.csoc_pbl = x1.csoc_lbl ) ) AND (x2.depo_pbl = x1.depo_lbl ) ) AND (x2.ccli_pbl = x1.ccli_lbl ) ) AND (x2.nbon_pbl = x1.nbon_lbl ) ) AND (x2.nlig_pbl = x1.nlig_lbl ) ) AND (x0.etab_ebl IN ('BD' ,'BA' ,'BM' )) ) #
+Credel;v_encblfac;1;create view credel.v_encblfac (bsociete,bdepot,typeclient,typefact,datebon,numeroor,montht) as select distinct x0.csoc_ebl ,x0.depo_ebl ,x0.typc_ebl ,x0.typf_ebl ,x0.date_ebl ,x0.orig_ebl ,sum(x1.pxht_pbl ) from credel.fentbl x0 ,credel.prixbl x1 where (((((x1.csoc_pbl = x0.csoc_ebl ) AND (x1.depo_pbl = x0.depo_ebl ) ) AND (x1.nbon_pbl = x0.nbon_ebl ) ) AND (x1.ccli_pbl = x0.ccli_ebl ) ) AND (x0.etab_ebl IN ('BD' ,'BA' ,'BM' )) ) group by x0.csoc_ebl ,x0.depo_ebl ,x0.typc_ebl ,x0.typf_ebl ,x0.date_ebl ,x0.orig_ebl #
+Credel;vhisce;1;create view credel.vhisce (societe,depot,codeclient,numcontrat,navenant,annee,mois,recette,depense) as select x0.csoc_hcen ,x0.depo_hcen ,x0.ccli_hcen ,x0.ncon_hcen ,x0.nave_hcen ,YEAR (x0.date_hcen ) ,MONTH (x0.date_hcen ) ,sum(x0.mtfa_hcen ) ,sum(x0.mtde_hcen ) from credel.fhiscen x0 where (x0.cdev_hcen = 1 ) group by x0.csoc_hcen ,x0.depo_hcen ,x0.ccli_hcen ,x0.ncon_hcen ,x0.nave_hcen ,x0.date_hcen #
+Credel;vencatel;1;create view credel.vencatel (codesoc,codepot,codecli,nomcli,numor,nbon,datebon,typefact,accident,prixht) as select x0.csoc_ebl ,x0.depo_ebl ,x0.ccli_ebl ,x0.nomc_ebl ,x0.orig_ebl ,x0.nbon_ebl ,x0.date_ebl ,x0.typf_ebl ,x0.acci_ebl ,x1.pxht_pbl from credel.fentbl x0 ,credel.prixbl x1 where (((((((x1.csoc_pbl = x0.csoc_ebl ) AND (x1.depo_pbl = x0.depo_ebl ) ) AND (x1.nbon_pbl = x0.nbon_ebl ) ) AND (x1.ccli_pbl = x0.ccli_ebl ) ) AND (x0.etab_ebl IN ('BD' ,'BA' )) ) AND (x0.orig_ebl > 0 ) ) AND (x1.cdev_pbl = 1 ) ) #
+Credel;vhstock;1;create view credel.vhstock (societe,depot,reference,libelle,fourniss,nomfourniss,casier,quantite,famille,codegest,codestatus,prixachat,codelot,prixpmp,dernierent,derniersort,datecreation,derninvent) as select x0.csoci_stk ,x0.depot_stk ,x0.refer_stk ,x1.libe_art ,x0.fourn_stk ,x2.rais_four ,x0.casie_stk ,x0.qtite_stk ,x1.cfam_art ,x0.cgest_stk ,x0.statu_stk ,x0.valer_stk ,x0.clots_stk ,x0.prxmp_stk ,x0.ddent_stk ,x0.ddsor_stk ,x0.ddefc_stk ,x0.ddinv_stk from credel.fstock x0 ,credel.farticle x1 ,credel.ffournis x2 where (((x1.refe_art = x0.refer_stk ) AND (x1.four_art = x0.fourn_stk ) ) AND (x2.code_four = x1.four_art ) ) #
+Credel;vcc_caclient;1;create view credel.vcc_caclient (ca_societe,ca_depot,ca_client,ca_raiscli,ca_siret,ca_anmois,ca_montttc) as select x0.csoc_mvcpt ,x0.depo_mvcpt ,x0.ncpt_mvcpt ,x0.inti_mvcpt ,x2.sire_tier ,x0.anmo_mvcpt ,sum((x0.debi_mvcpt - x0.cred_mvcpt ) ) from credel.fmouvcpt x0 ,credel.fjourcpt x1 ,credel.ftiercpt x2 where (((((((x0.pref_mvcpt = 'C' ) AND (x1.csoc_jcpt = x0.csoc_mvcpt ) ) AND (x1.code_jcpt = x0.jrnl_mvcpt ) ) AND (x1.type_jcpt = 5 ) ) AND (x2.csoc_tier = x0.csoc_mvcpt ) ) AND (x2.pref_tier = x0.pref_mvcpt ) ) AND (x2.code_tier = x0.ncpt_mvcpt ) ) group by x0.csoc_mvcpt ,x0.depo_mvcpt ,x0.ncpt_mvcpt ,x0.inti_mvcpt ,x2.sire_tier ,x0.anmo_mvcpt #
+Credel;vpnet;1;create view credel.vpnet (four,fami,flib,refe,rlib,pnet,coef) as select x0.four_fam ,x0.code_fam ,x0.libe_fam ,x1.refe_art ,x1.libe_art ,x1.remv_art ,x1.majv_art from credel.ffamil x0 ,credel.farticle x1 where ((x0.four_fam = x1.four_art ) AND (x0.code_fam = x1.cfam_art ) ) #
+Credel;vreccee;1;create view credel.vreccee (societe,depot,codeclient,nomclient,immat,numcontrat,navenant,libeaven,numfact,datefact,recette) as select x0.csoc_hcen ,x0.depo_hcen ,x0.ccli_hcen ,x1.lcli_cen ,x1.imma_cen ,x0.ncon_hcen ,x0.nave_hcen ,x1.lave_cen ,x0.nfac_hcen ,x0.date_hcen ,sum(x0.mtfa_hcen ) from credel.fhiscen x0 ,credel.fconcen x1 where ((((((x1.csoc_cen = x0.csoc_hcen ) AND (x1.depo_cen = x0.depo_hcen ) ) AND (x1.ncon_cen = x0.ncon_hcen ) ) AND (x1.nave_cen = x0.nave_hcen ) ) AND (x0.cdev_hcen = 1 ) ) AND (x0.enre_hcen = 'FAC' ) ) group by x0.csoc_hcen ,x0.depo_hcen ,x0.ccli_hcen ,x1.lcli_cen ,x1.imma_cen ,x0.ncon_hcen ,x0.nave_hcen ,x1.lave_cen ,x0.nfac_hcen ,x0.date_hcen #
+Credel;vreccli;1;create view credel.vreccli (client,nomclient,numor,numfact,datefact,immat,typefac,typeclient,montht,monttva,monttc) as select distinct x0.ccli_hefac ,x0.nomc_hefac ,x0.nuor_hefac ,x0.nfac_hefac ,x0.dfac_hefac ,x0.imat_hefac ,x0.tfac_hefac ,x0.tcli_hefac ,sum(x1.btva_piedf ) ,sum(x1.mtva_piedf ) ,sum(x1.mttc_piedf ) from credel.fhisefac x0 ,credel.fpiedfac x1 where ((((((((x0.csoc_hefac = x1.csoc_piedf ) AND (x0.depo_hefac = x1.depo_piedf ) ) AND (x0.nfac_hefac = x1.nfac_piedf ) ) AND (x0.dfac_hefac = x1.dfac_piedf ) ) AND (x0.ccli_hefac = x1.ccli_piedf ) ) AND (x0.tcli_hefac = x1.tcli_piedf ) ) AND (x0.tfac_hefac = x1.tfac_piedf ) ) AND (x0.tcli_hefac <= 4 ) ) group by x0.ccli_hefac ,x0.nomc_hefac ,x0.nuor_hefac ,x0.nfac_hefac ,x0.dfac_hefac ,x0.imat_hefac ,x0.tfac_hefac ,x0.tcli_hefac #
+Credel;vrefact;1;create view credel.vrefact (societe,depot,annee,mois,reference,fournisseur,famille,quantite,prix_vente) as select x0.csoc_hlafac ,x0.depo_hlafac ,YEAR (x0.dfac_hlafac ) ,MONTH (x0.dfac_hlafac ) ,x0.refe_hlafac ,x0.four_hlafac ,x0.cfam_hlafac ,sum(x0.qtte_hlafac ) ,sum(x1.pxht_hlfac ) from credel.fhislfac x0 ,credel.pxhlfac x1 where (((((((x0.csoc_hlafac = x1.csoc_hlfac ) AND (x0.depo_hlafac = x1.depo_hlfac ) ) AND (x0.nfac_hlafac = x1.nfac_hlfac ) ) AND (x0.dfac_hlafac = x1.dfac_hlfac ) ) AND (x0.nbon_hlafac = x1.nbon_hlfac ) ) AND (x0.nlig_hlafac = x1.nlig_hlfac ) ) AND (x0.natl_hlafac = 'P' ) ) group by x0.csoc_hlafac ,x0.depo_hlafac ,x0.dfac_hlafac ,x0.refe_hlafac ,x0.four_hlafac ,x0.cfam_hlafac #
+Credel;vreffact;1;create view credel.vreffact (societe,depot,numfact,datefact,codeclient,typefact,reference,libelle,fourligne,famligne,quantite,prixunitaire,remise,htnet,achatunite) as select x0.csoc_hlafac ,x0.depo_hlafac ,x0.nfac_hlafac ,x0.dfac_hlafac ,x0.ccli_hlafac ,x0.tfac_hlafac ,x0.refe_hlafac ,x0.libe_hlafac ,x0.four_hlafac ,x0.cfam_hlafac ,x0.qtte_hlafac ,x1.ptar_hlfac ,x1.mrem_hlfac ,x1.pxht_hlfac ,x1.pach_hlfac from credel.fhislfac x0 ,credel.pxhlfac x1 where ((((((((((x0.csoc_hlafac = x1.csoc_hlfac ) AND (x0.depo_hlafac = x1.depo_hlfac ) ) AND (x0.nfac_hlafac = x1.nfac_hlfac ) ) AND (x0.dfac_hlafac = x1.dfac_hlfac ) ) AND (x0.ccli_hlafac = x1.ccli_hlfac ) ) AND (x0.tfac_hlafac = x1.tfac_hlfac ) ) AND (x0.acci_hlafac = x1.acci_hlfac ) ) AND (x0.nbon_hlafac = x1.nbon_hlfac ) ) AND (x0.nlig_hlafac = x1.nlig_hlfac ) ) AND (x0.natl_hlafac MATCHES '[PK]' ) ) #
+Credel;vrelcam;1;create view credel.vrelcam (immat,numserie,coderelance,liberelance,frequence,dernvisite) as select x0.imat_rcam ,x0.cvin_rcam ,x0.code_rcam ,x1.libe_lrel ,x1.freq_lrel ,x0.date_rcam from credel.frelcam x0 ,credel.flrelcam x1 where (x0.code_rcam = x1.code_lrel ) #
+Credel;vremref;1;create view credel.vremref (csoc_rref,depo_rref,ccli_rref,refe_rref,four_rref,rmag_rref,ratl_rref,libe_art,rais_cli) as select x0.csoc_rref ,x0.depo_rref ,x0.ccli_rref ,x0.refe_rref ,x0.four_rref ,x0.rmag_rref ,x0.ratl_rref ,x1.libe_art ,x2.rais_cli from credel.fremref x0 ,credel.farticle x1 ,credel.fclient x2 where (((x1.refe_art = x0.refe_rref ) AND (x1.four_art = x0.four_rref ) ) AND (x2.code_cli = x0.ccli_rref ) ) #
+Credel;vscli;1;create view credel.vscli (societe,depot,codeclient,modereglt,typebon,codefact,exotaxe,mfamremise,afamremise,mgrefe,agrefe,mmodremise,amodremise,mfammajo,afammajo,base100,mecotaxe,aecotaxe,comptecess,pfi,libereglt,libertva) as select x0.csoc_scli ,x0.depo_scli ,x0.ccli_scli ,x0.mreg_scli ,x0.cdbl_scli ,x0.cfac_scli ,x0.rtva_scli ,x0.mrem_scli ,x0.arem_scli ,x0.mdep_scli ,x0.adep_scli ,x0.mmod_scli ,x0.amod_scli ,x0.mmaj_scli ,x0.amaj_scli ,x0.port_scli ,x0.mpem_scli ,x0.apem_scli ,x0.apfi_scli ,x0.ncpt_scli ,x1.libe_regl ,x2.libe_mtva from credel.fmagatl x0 ,credel.freglt x1 ,credel.fmodtva x2 where ((x1.code_regl = x0.mreg_scli ) AND (x2.code_mtva = x0.rtva_scli ) ) #
+Credel;vservact;1;create view credel.vservact (service,libeservice,activite,libeactivite) as select x0.code_secpt ,x0.libe_secpt ,x1.code_accpt ,x1.libe_accpt from credel.fsercpt x0 ,credel.factcpt x1 where (x1.serv_accpt = x0.code_secpt ) #
+Credel;vsocdep;1;create view credel.vsocdep (societe,raissoc,depot,raisdep) as select distinct x0.csoc_tva ,x1.rais_soc ,x0.depo_tva ,x2.rais_dep from credel.ftva x0 ,credel.societe x1 ,credel.depot x2 where (((x1.code_soc = x0.csoc_tva ) AND (x2.csoc_dep = x1.code_soc ) ) AND (x2.code_dep = x0.depo_tva ) ) #
+Credel;vsocfac;1;create view credel.vsocfac (codsoc,codep,nomsoc,nomdep) as select distinct x0.csoc_tva ,x0.depo_tva ,x1.rais_soc ,x2.rais_dep from credel.ftva x0 ,credel.societe x1 ,credel.depot x2 where (((x1.code_soc = x2.csoc_dep ) AND (x0.csoc_tva = x2.csoc_dep ) ) AND (x0.depo_tva = x2.code_dep ) ) #
+Credel;vstock;1;create view credel.vstock (societe,depot,reference,libelle,fourniss,nomfourniss,casier,quantite,codegest,codestatus,prixachat,codelot,prixpmp,dernierent,derniersort,datecreation,derninvent) as select x0.csoci_stk ,x0.depot_stk ,x0.refer_stk ,x1.libe_art ,x0.fourn_stk ,x2.rais_four ,x0.casie_stk ,x0.qtite_stk ,x0.cgest_stk ,x0.statu_stk ,x0.valer_stk ,x0.clots_stk ,x0.prxmp_stk ,x0.ddent_stk ,x0.ddsor_stk ,x0.ddefc_stk ,x0.ddinv_stk from credel.fstock x0 ,credel.farticle x1 ,credel.ffournis x2 where (((x1.refe_art = x0.refer_stk ) AND (x1.four_art = x0.fourn_stk ) ) AND (x2.code_four = x1.four_art ) ) #
+Credel;vtarif;1;create view credel.vtarif (reference,codefour,nomfour,libeart,codefam,libefam,prixtarif,codetva) as select x0.refe_tar ,x0.four_tar ,x1.rais_four ,x0.libe_tar ,x0.fami_tar ,x3.libe_fam ,(x2.prix_ptar * x1.majo_four ) ,'2' from credel.ftarif x0 ,credel.ffournis x1 ,credel.prixtar x2 ,credel.ffamil x3 where ((((((x1.code_four = x0.four_tar ) AND (x3.four_fam = x0.four_tar ) ) AND (x3.code_fam = x0.fami_tar ) ) AND (x2.refe_ptar = x0.refe_tar ) ) AND (x2.four_ptar = x0.four_tar ) ) AND (x2.cdev_ptar = 1 ) ) #
+Credel;vtierplanc;1;create view credel.vtierplanc (csoc_tier,pref_tier,code_tier,type_tier,rais_tier,coll_tier,depa_tier,sera_tier,acta_tier,init_tier,resp_tier,adr1_tier,adr2_tier,adr3_tier,codp_tier,vill_tier,pays_tier,juri_tier,capi_tier,cant_tier,sect_tier,mcle_tier,tele_tier,faxe_tier,telx_tier,emai_tier,tvac_tier,niso_tier,sire_tier,sirn_tier,regr_tier,rlve_tier,rlan_tier,litg_tier,mreg_tier,ctva_tier,stat_tier,catg_tier,cdev_tier,vhrs_tier,chrs_tier,cret_tier,socr_tier,fact_tier,mtcr_tier,cle1_tier,cle2_tier,cle3_tier,plmi_tier,plma_tier,four_tier,dcre_tier,dmvt_tier,csocie_planc,nclecg_planc,nintcg_planc,ademai_planc,cptrem_planc,codcen_planc,ncgest_planc,codana_planc,cptana_planc,codnat_planc,consol_planc,codcol_planc,cconso_planc,cplet1_planc,cplet2_planc,cplet3_planc,pldeco_planc,plesco_planc,datcre_planc,datmvt_planc,cdebee_planc,ccreee_planc,cdebep_planc,ccreep_planc) as select x0.csoc_tier ,x0.pref_tier ,x0.code_tier ,x0.type_tier ,x0.rais_tier ,x0.coll_tier ,x0.depa_tier ,x0.sera_tier ,x0.acta_tier ,x0.init_tier ,x0.resp_tier ,x0.adr1_tier ,x0.adr2_tier ,x0.adr3_tier ,x0.codp_tier ,x0.vill_tier ,x0.pays_tier ,x0.juri_tier ,x0.capi_tier ,x0.cant_tier ,x0.sect_tier ,x0.mcle_tier ,x0.tele_tier ,x0.faxe_tier ,x0.telx_tier ,x0.emai_tier ,x0.tvac_tier ,x0.niso_tier ,x0.sire_tier ,x0.sirn_tier ,x0.regr_tier ,x0.rlve_tier ,x0.rlan_tier ,x0.litg_tier ,x0.mreg_tier ,x0.ctva_tier ,x0.stat_tier ,x0.catg_tier ,x0.cdev_tier ,x0.vhrs_tier ,x0.chrs_tier ,x0.cret_tier ,x0.socr_tier ,x0.fact_tier ,x0.mtcr_tier ,x0.cle1_tier ,x0.cle2_tier ,x0.cle3_tier ,x0.plmi_tier ,x0.plma_tier ,x0.four_tier ,x0.dcre_tier ,x0.dmvt_tier ,x1.csocie_planc ,x1.nclecg_planc ,x1.nintcg_planc ,x1.ademai_planc ,x1.cptrem_planc ,x1.codcen_planc ,x1.ncgest_planc ,x1.codana_planc ,x1.cptana_planc ,x1.codnat_planc ,x1.consol_planc ,x1.codcol_planc ,x1.cconso_planc ,x1.cplet1_planc ,x1.cplet2_planc ,x1.cplet3_planc ,x1.pldeco_planc ,x1.plesco_planc ,x1.datcre_planc ,x1.datmvt_planc ,x1.cdebee_planc ,x1.ccreee_planc ,x1.cdebep_planc ,x1.ccreep_planc from credel.ftiercpt x0 ,outer(credel.fcompcpt x1 ) where ((x0.csoc_tier = x1.csocie_planc ) AND (x0.coll_tier = x1.nclecg_planc ) ) #
+Credel;vtypefac;1;create view credel.vtypefac (codetypf,libetypef) as select distinct x0.code_tfac ,x0.libe_tfac from credel.ftypefac x0 #
+Credel;vvheures;1;create view credel.vvheures (societe,depot,codeheure,typeheure,anneemois,mois,totmois,totfacture,totdebut,totfin,libevhrs,groupevhrs,libechrs) as select x0.tcsoc ,x0.tdepo ,x0.tchrs ,x0.tvhrs ,x0.tyrmo ,x0.tmois ,x0.ttoth ,x0.thfac ,x0.thdeb ,x0.thfin ,x1.libe_venth ,x1.grpe_venth ,x2.libe_cvhrs from credel.tmphor x0 ,credel.fventhrs x1 ,credel.fcodhrs x2 where ((x0.tvhrs = x1.code_venth ) AND (x1.grpe_venth = x2.code_cvhrs ) ) #
+Credel;wsclient;1;create view credel.wsclient (societe,depot,codeclient,raisoncli,adr1_cli,adr2_cli,adr3_cli,codp_cli,vill_cli,pays_cli,type_cli,mreg_cli,litg_cli,mrem_scli,arem_scli,ncpt_scli,tele_cli,faxe_cli,rtva_scli,libe_ltg,libe_regl,libe_mtva,libe_typc) as select x1.csoc_scli ,x1.depo_scli ,x0.code_cli ,TRIM ( BOTH ' ' FROM x0.rais_cli ) ,x0.adr1_cli ,x0.adr2_cli ,x0.adr3_cli ,x0.codp_cli ,x0.vill_cli ,x0.pays_cli ,x0.type_cli ,x0.mreg_cli ,x0.litg_cli ,x1.mrem_scli ,x1.arem_scli ,x1.ncpt_scli ,x0.tele_cli ,x0.faxe_cli ,x1.rtva_scli ,x2.code_ltg || ' - ' || x2.libe_ltg ,x3.code_regl || ' - ' || x3.libe_regl ,x4.code_mtva || ' - ' || x4.libe_mtva ,x5.code_typc || ' - ' || x5.libe_typc from credel.fclient x0 ,credel.fmagatl x1 ,outer(credel.flitige x2 ) ,outer(credel.freglt x3 ) ,credel.fmodtva x4 ,credel.ftypecli x5 where (((((x0.code_cli = x1.ccli_scli ) AND (x0.litg_cli = x2.code_ltg ) ) AND (x0.mreg_cli = x3.code_regl ) ) AND (x1.rtva_scli = x4.code_mtva ) ) AND (x0.type_cli = x5.code_typc ) ) #
+Credel;xx_vues;1;create view credel.xx_vues (categorie,nomvue,libevue,sqlrequete,grouperpar) as select x0.categorie ,x0.nomvue ,x0.libevue ,x0.sqlrequete ,x0.grp1 from credel.tb_vues x0 #
+Credel;vtypclient;1;create view credel.vtypclient (code_cli,rais_cli,type_cli) as select x0.code_cli ,x0.rais_cli ,x0.type_cli from credel.fclient x0 where (x0.type_cli IN (4 ,5 ,8 ,9 )) #
+Credel;vcc_ncptvfam;1;create view credel.vcc_ncptvfam (societe_vfam,depot_vfam,four_vfam,fami_vfam,compte_vfam,service_vfam,activite_vfam) as select distinct x0.csoc_vfam ,x0.depo_vfam ,x0.four_vfam ,x0.code_vfam ,x0.tama_vfam ,x0.sema_vfam ,x0.acma_vfam from credel.fvennfam x0 where (x0.tcli_vfam = 1 ) #
+Credel;vcc_heursal;1;create view credel.vcc_heursal (societehrs,depothrs,codesalarie,numeroor,dateheure,imputation,terms,ventilheure,codeheure,salarie,heures) as select x0.csoc_hor ,x0.depo_hor ,x0.nsal_hor ,x0.nuor_hor ,x0.date_hor ,x0.ccli_hor || '-' || x1.lcli_cor ,0 ,x4.vhrs_cli || '-' || x3.libe_venth ,x4.chrs_cli || '-' || x2.libe_cvhrs ,x0.noms_hor ,sum(x0.hpas_hor ) from credel.fhrsor x0 ,credel.fclior x1 ,credel.fcodhrs x2 ,credel.fventhrs x3 ,credel.fclient x4 where (((((((((x0.csoc_hor = x1.csoc_cor ) AND (x0.depo_hor = x1.depo_cor ) ) AND (x1.nume_cor = x0.nuor_hor ) ) AND (x0.ccli_hor = x1.ccli_cor ) ) AND (x0.acci_hor = x1.acci_cor ) ) AND (x0.tfac_hor = x1.tfac_cor ) ) AND (x3.code_venth = x4.vhrs_cli ) ) AND (x2.code_cvhrs = x4.chrs_cli ) ) AND (x4.code_cli = x1.ccli_cor ) ) group by x0.csoc_hor ,x0.depo_hor ,x0.nsal_hor ,x0.nuor_hor ,x0.date_hor ,6 ,7 ,8 ,9 ,x0.noms_hor #
+Credel;fiscmvcpt;0;
+Credel;fcptlogwin;0;
+Credel;fcrgrep;0;
+Credel;fcrgtab;0;
+Credel;fetatmsg;0;
+Credel;fexpcde;0;
+Credel;fgamvolvo;0;
+Credel;fgrtxop;0;
+Credel;fhiscde;0;
+Credel;firccpt;0;
+Credel;fgrikmp;0;
+Credel;fjrnlogwin;0;
+Credel;fligcpt;0;
+Credel;fmodelcpt;0;
+Credel;fmodnet;0;
+Credel;fmotifor;0;
+Credel;fmotifret;0;
+Credel;fmouvint;0;
+Credel;fmouvirc;0;
+Credel;fphasor;0;
+Credel;fpms;0;
+Credel;fpmsbarmhs;0;
+Credel;fpmsoperat;0;
+Credel;fpmspieces;0;
+Credel;fpmsspec;0;
+Credel;fppq;0;
+Credel;fprixgame;0;
+Credel;frefanet;0;
+Credel;frefplus;0;
+Credel;fsap;0;
+Credel;fsuivior;0;
+Credel;fsuivrtd;0;
+Credel;ftextop;0;
+Credel;ftrfleet;0;
+Credel;fvorlib;0;
+Credel;fvorlog;0;
+Credel;gacgrirem;0;
+Credel;gacrefnet;0;
+Credel;fcptcpt;0;
+Credel;mouvirc;0;
+Credel;fsltaches;0;
+Credel;mtlibe;0;
+Credel;mtope;0;
+Credel;parclistat;0;
+Credel;parclrefs;0;
+Credel;parefstat;0;
+Credel;parfrstat;0;
+Credel;parmodstat;0;
+Credel;parstats;0;
+Credel;parstref;0;
+Credel;syscolval;0;
+Credel;tb_vues;0;
+Credel;venrem;0;
+Credel;fcamgar;0;
+Credel;forigimop;0;
+Credel;frefass;0;
+Credel;ftempsal;0;
+Credel;wvehicle;0;
+Credel;fconstruct;0;
+Credel;frefautd;0;
+Credel;fsitelogw;0;
+Credel;fclascli;0;
+Credel;fmandat;0;
+Credel;fsepa;0;
+Credel;fdefcli;0;
+Credel;fgariveco;0;
+Credel;zpneu;0;
+Credel;fcontact;0;
+Credel;frefpneu;0;
+Credel;fmvthpas;0;
+Credel;fsupror;0;
+Credel;fctrprogf;0;
+Credel;frefpnet;0;
+Credel;flldtypv;0;
+Credel;fgrimcam;0;
+Credel;fpmandat;0;
+Credel;flldave;0;
+Credel;fprodhrs;0;
+Credel;aclients;0;
+Credel;amouvtag;0;
+Credel;aplancpt;0;
+Credel;archcli;0;
+Credel;archebl;0;
+Credel;fachvfam;0;
+Credel;factrt;0;
+Credel;archlbl;0;
+Credel;fkmplus;0;
+Credel;fpanfam;0;
+Credel;orclient;0;
+Credel;firizar;0;
+Credel;fcondfour;0;
+Credel;archmagatl;0;
+Credel;archmvtstk;0;
+Credel;archpbl;0;
+Credel;archtier;0;
+Credel;cc_param;0;
+Credel;compteur;0;
+Credel;detloc;0;
+Credel;eltloc;0;
+Credel;entloc;0;
+Credel;fmouacpt;0;
+Credel;facebl;0;
+Credel;fachcmvt;0;
+Credel;fachext;0;
+Credel;fachint;0;
+Credel;faclbl;0;
+Credel;facpbl;0;
+Credel;fautcli;0;
+Credel;fautoris;0;
+Credel;fcodges;0;
+Credel;fcomstk;0;
+Credel;fdivlig;0;
+Credel;fdivent;0;
+Credel;fefpcpt;0;
+Credel;fserchorus;0;
+Credel;archmvces;0;
+Credel;fchiforf;0;
+Credel;fgmenu;0;
+Credel;fcodlias;0;
+Credel;fliascpt;0;
+Credel;fmodelana;0;
+Credel;fmodelces;0;
+Credel;fdef4rp;0;
+Credel;fcompach;0;
+Credel;fentpms;0;
+Credel;fligpms;0;
+Credel;ftclivens;0;
+Credel;fvencom;0;
+Credel;fcategories;0;
+Credel;fagenda;0;
+Credel;fpassword;0;
+Credel;fmotif;0;
+Credel;prixforf;0;
+Credel;frefekmp;0;
+Credel;foffrkmp;0;
+Credel;fpasscstk;0;
+Credel;frumcpt;0;
+Credel;frtnet;0;
+Credel;fentstk;0;
+Credel;vinpms;0;
+Credel;forfcom;0;
+Credel;fgaruchp;0;
+Credel;ffoncuchp;0;
+Credel;fcptfan;0;
+Credel;fcompirc;0;
+Credel;ftarifrt;0;
+Credel;pcovid;0;
+Credel;fgroupelec;0;
+Credel;fmarqelec;0;
+Credel;fprodthrs;0;
+Credel;fcondcen;0;
+Credel;frsgaz;0;
+Credel;frsmod;0;
+Credel;frsmor;0;
+Credel;frsfuit;0;
+Credel;frsrefe;0;
+Credel;frsobs;0;
+Credel;frsmach;0;
+Credel;ffrscamp;0;
+Credel;fparfrs;0;
+Credel;fpasgelec;0;
+Credel;fgtaches;0;
+Credel;foptaches;0;
+Credel;fstaches;0;
+Credel;fmodfrigo;0;
+Credel;fsecfrs;0;
+Credel;fmarqfrs;0;
+Credel;fgrpfonc;0;
+Credel;fparuchp;0;
+Credel;fgarrep;0;
+Credel;fhgarrep;0;
+Credel;paramanut;0;
+Credel;fintarif;0;
+Credel;flibcfac;0;
+Credel;fclinet;0;
+Credel;fcamchar;0;
+Credel;orinterv;0;
+Credel;fcosges;0;
+Credel;fgmod;0;
+Credel;fparaclim;0;
+Credel;fetator;0;
+Credel;ormanut;0;
+Credel;fcintmanut;0;
+Credel;fncmanut;0;
+Credel;orsignc;0;
+Credel;orpanne;0;
+Credel;orapport;0;
+Credel;orsuivi;0;
+Credel;fprevoir;0;
+Credel;orprevoir;0;
+Credel;fsitecde;0;
+Credel;fmouchard;0;
+Credel;forprompt;0;
+Credel;rdvcredel;0;
+Credel;chrtab;0;
+Credel;fcamclim;0;
+Credel;fclimnet;0;
+Credel;fcontroliv;0;
+Credel;fcptcde;0;
+Credel;fcstkfam;0;
+Credel;fetalgaz;0;
+Credel;fgwpgaz;0;
+Credel;finventaire;0;
+Credel;flibelle;0;
+Credel;flistepo;0;
+Credel;flistprompt;0;
+Credel;fmvdepvte;0;
+Credel;fourparts;0;
+Credel;fpanierpr;0;
+Credel;fparacde;0;
+Credel;fparamor;0;
+Credel;fparport;0;
+Credel;fpfourache;0;
+Credel;fpliaison;0;
+Credel;fpropcde;0;
+Credel;freffachat;0;
+Credel;frelancpt;0;
+Credel;t_operat;0;
+Credel;t_users;0;
+Credel;fpstat;0;
+Credel;fclim;0;
+Credel;fcatart;0;
+Credel;ftypart;0;
+Credel;fstusart;0;
+Credel;flibtva;0;
+Credel;flibfam;0;
+Credel;fmessage;0;
+Credel;fcatcli;0;
+Credel;fadrcli;0;
+Credel;fgroupcli;0;
+Credel;cpostal;0;
+Credel;ftxtserv;0;
+Credel;frefer;0;
+Credel;fstile;0;
+Credel;fzones;0;
+Credel;fprog;0;
+Credel;fprogautor;0;
+Credel;fsprgautor;0;
+Credel;fcontfrs;0;
+Credel;fadrfrs;0;
+Credel;m_operat;0;
+Credel;fmsgmenu;0;
+Credel;fcompt;0;
+Credel;ftypemod;0;
+Credel;fpubmag;0;
+Credel;fresprop;0;
+Credel;fremarq;0;
+Credel;fcdedepa;0;
+Credel;fcbl;0;
+Credel;consult;0;
+Credel;fparebl;0;
+Credel;fgamvi;0;
+Credel;futilvi;0;
+Credel;ftiti;0;
+Credel;fcodope;0;
+Credel;fparop;0;
+Credel;tabl25;0;
+Credel;tabl22;0;
+Credel;operab;0;
+Credel;abrx;0;
+Credel;tab23;0;
+Credel;fopiecvi;0;
+Credel;ffamvi;0;
+Credel;forigvi;0;
+Credel;opebar;0;
+Credel;tabl23;0;
+Credel;typevi;0;
+Credel;opcpiece;0;
+Credel;ftypefac;0;
+Credel;fservsal;0;
+Credel;fstatsal;0;
+Credel;fachavi;0;
+Credel;fventvi;0;
+Credel;fpvatel;0;
+Credel;fvatel;0;
+Credel;ffonc;0;
+Credel;fpgestk;0;
+Credel;fnatstk;0;
+Credel;societe;0;
+Credel;fcomart;0;
+Credel;fcertif;0;
+Credel;frespiec;0;
+Credel;freliqc;0;
+Credel;frefere;0;
+Credel;frefour;0;
+Credel;fprepfac;0;
+Credel;fattente;0;
+Credel;fhrstheo;0;
+Credel;ftypabs;0;
+Credel;fabsence;0;
+Credel;ftextat;0;
+Credel;fhrsfac;0;
+Credel;fdopmor;0;
+Credel;fpointag;0;
+Credel;fpiecor;0;
+Credel;fmaxi;0;
+Credel;fmenu;0;
+Credel;ffacmag;0;
+Credel;fhisref;0;
+Credel;fmtrvi;0;
+Credel;fentete;0;
+Credel;tunenvs;0;
+Credel;tuntables;0;
+Credel;tunfields;0;
+Credel;prixmod;0;
+Credel;fconscli;0;
+Credel;fconsoart;0;
+Credel;fretbon;0;
+Credel;fdevise;0;
+Credel;fpdevise;0;
+Credel;fservice;0;
+Credel;fplafcli;0;
+Credel;frelvcli;0;
+Credel;ffammo;0;
+Credel;pxmodor;0;
+Credel;fmagcli;0;
+Credel;fgrimod;0;
+Credel;fcaravi;0;
+Credel;fvarcara;0;
+Credel;fpxforf;0;
+Credel;fcliforf;0;
+Credel;fregssa;0;
+Credel;fregssb;0;
+Credel;frnatfrs;0;
+Credel;table128;0;
+Credel;tmp128;0;
+Credel;tmp4;0;
+Credel;depot;0;
+Credel;fselect;0;
+Credel;formatl;0;
+Credel;fprogace;0;
+Credel;ftypliai;0;
+Credel;fdetliai;0;
+Credel;fcondfic;0;
+Credel;fatlcli;0;
+Credel;fpfonc;0;
+Credel;frecu;0;
+Credel;fptrstk;0;
+Credel;fgrpsal;0;
+Credel;factsal;0;
+Credel;fcodhrs;0;
+Credel;fventhrs;0;
+Credel;fparafic;0;
+Credel;rvirecu;0;
+Credel;t100;0;
+Credel;fcondrpl;0;
+Credel;fcodrpl;0;
+Credel;frplref;0;
+Credel;frempart;0;
+Credel;fhmenu;0;
+Credel;flogin;0;
+Credel;fgrpaut;0;
+Credel;ftyplot;0;
+Credel;fcdagent;0;
+Credel;fstdcat;0;
+Credel;fcolcli;0;
+Credel;fmodor;0;
+Credel;ftypfi;0;
+Credel;fppfi;0;
+Credel;ffacent;0;
+Credel;ffaclig;0;
+Credel;ftypkit;0;
+Credel;fkit;0;
+Credel;feqvart;0;
+Credel;fkitbl;0;
+Credel;fnatbl;0;
+Credel;fpstcde;0;
+Credel;fagencde;0;
+Credel;fvmanqe;0;
+Credel;cust_calls;0;
+Credel;fcmvtstk;0;
+Credel;ftypecli;0;
+Credel;freglt;0;
+Credel;fclient;0;
+Credel;fplancpt;0;
+Credel;ftgrirem;0;
+Credel;fremref;0;
+Credel;fmodtva;0;
+Credel;fsalar;0;
+Credel;fdetconso;0;
+Credel;fdetccli;0;
+Credel;fcasalar;0;
+Credel;listzone;0;
+Credel;fcpteur;0;
+Credel;fnatcpt;0;
+Credel;fimpuser;0;
+Credel;fuseraut;0;
+Credel;fcodimp;0;
+Credel;fcliber;0;
+Credel;fuserimp;0;
+Credel;fcafam;0;
+Credel;fgrimajo;0;
+Credel;fpromos;0;
+Credel;flocktr;0;
+Credel;fnatcpf;0;
+Credel;fcptfac;0;
+Credel;fnatjou;0;
+Credel;fintfac;0;
+Credel;tredfac;0;
+Credel;fforfait;0;
+Credel;fedchx;0;
+Credel;fmenued;0;
+Credel;fdefimp;0;
+Credel;flrelcam;0;
+Credel;fdefprog;0;
+Credel;fmenuaut;0;
+Credel;fcorespd;0;
+Credel;fclidij;0;
+Credel;ftarsup;0;
+Credel;fparatar;0;
+Credel;fcondtar;0;
+Credel;fbanqcli;0;
+Credel;fexpfac;0;
+Credel;fdepana;0;
+Credel;fentcmr;0;
+Credel;xtarif;0;
+Credel;fliaison;0;
+Credel;fparliai;0;
+Credel;fparfour;0;
+Credel;favuser;0;
+Credel;fdmodor;0;
+Credel;pxdmodor;0;
+Credel;fmodiv;0;
+Credel;fgesatl;0;
+Credel;fmagatl;0;
+Credel;fmetier;0;
+Credel;fprosto;0;
+Credel;flibcart;0;
+Credel;fenvcde;0;
+Credel;famstkc;0;
+Credel;fclibes;0;
+Credel;fartng;0;
+Credel;frefremp;0;
+Credel;frplmult;0;
+Credel;ffamil;0;
+Credel;fclispl;0;
+Credel;fcptable;0;
+Credel;fclihpl;0;
+Credel;frnur;0;
+Credel;fcam;0;
+Credel;fmaxime;0;
+Credel;fstkvirt;0;
+Credel;fventfam;0;
+Credel;stklec;0;
+Credel;ftva;0;
+Credel;tmpatel;0;
+Credel;tpem;0;
+Credel;fremfam;0;
+Credel;okk;0;
+Credel;tarticle;0;
+Credel;trefremp;0;
+Credel;fprofile;0;
+Credel;foppiece;0;
+Credel;fopint;0;
+Credel;flibint;0;
+Credel;fgrirref;0;
+Credel;fcpagar;0;
+Credel;ftxgar;0;
+Credel;ftextgl;0;
+Credel;fstkgac;0;
+Credel;tm_rental;0;
+Credel;fdentor;0;
+Credel;frelvkm;0;
+Credel;fdentbl;0;
+Credel;fdligne;0;
+Credel;prixdev;0;
+Credel;pxtrail;0;
+Credel;ftrailor;0;
+Credel;fgrpatel;0;
+Credel;fhrs;0;
+Credel;zaza;0;
+Credel;tmphor;0;
+Credel;tclior;0;
+Credel;tmpboni;0;
+Credel;fbonmals;0;
+Credel;fbonimal;0;
+Credel;fopngere;0;
+Credel;fquery;0;
+Credel;fliggar;0;
+Credel;fsubdel;0;
+Credel;rfsspr;0;
+Credel;rfsshd;0;
+Credel;fretgar;0;
+Credel;fetiqgar;0;
+Credel;formetiq;0;
+Credel;fmouchar;0;
+Credel;flib2ive;0;
+Credel;flib4ive;0;
+Credel;factgar;0;
+Credel;fconsgar;0;
+Credel;idx_src;0;
+Credel;ftraveor;0;
+Credel;foptionv;0;
+Credel;fcartech;0;
+Credel;fcaratvi;0;
+Credel;fcalsto;0;
+Credel;fcarros;0;
+Credel;fgenre;0;
+Credel;ftypcon;0;
+Credel;fprocen;0;
+Credel;fcrecen;0;
+Credel;frgrcen;0;
+Credel;findtar;0;
+Credel;fttrcen;0;
+Credel;ftrlcen;0;
+Credel;ftarcen;0;
+Credel;archlfac;0;
+Credel;archmcpt;0;
+Credel;archpied;0;
+Credel;archprix;0;
+Credel;ftyptar;0;
+Credel;ftalcen;0;
+Credel;fgractat;0;
+Credel;archefac;0;
+Credel;fdclior;0;
+Credel;finfart;0;
+Credel;fventmod;0;
+Credel;fanalart;0;
+Credel;fsectact;0;
+Credel;ftypvend;0;
+Credel;fsmarche;0;
+Credel;fmarqvi;0;
+Credel;ftypmess;0;
+Credel;fmespros;0;
+Credel;fprofes;0;
+Credel;fleasing;0;
+Credel;fnafpros;0;
+Credel;fcntpros;0;
+Credel;fadrpros;0;
+Credel;fprospet;0;
+Credel;fproparc;0;
+Credel;fvendeur;0;
+Credel;fautvend;0;
+Credel;fsecvend;0;
+Credel;fcomune;0;
+Credel;fventcen;0;
+Credel;frelfkm;0;
+Credel;fconsom;0;
+Credel;ftypmine;0;
+Credel;piecfac;0;
+Credel;fpiecfac;0;
+Credel;pxconcen;0;
+Credel;fconcen;0;
+Credel;xconsom;0;
+Credel;fligcfac;0;
+Credel;pxligcfac;0;
+Credel;fentcfac;0;
+Credel;fencours;0;
+Credel;fhiscen;0;
+Credel;rvicam;0;
+Credel;fhisart;0;
+Credel;fcptserv;0;
+Credel;felemloc;0;
+Credel;rviag;0;
+Credel;fprohstk;0;
+Credel;fparhstk;0;
+Credel;fhrstk;0;
+Credel;rviedag;0;
+Credel;cmpstk;0;
+Credel;fceprof;0;
+Credel;fhrsor;0;
+Credel;fclidub;0;
+Credel;fhisor;0;
+Credel;fhismat;0;
+Credel;fcacli;0;
+Credel;fparstk;0;
+Credel;fparstkf;0;
+Credel;fstkmort;0;
+Credel;fyvi;0;
+Credel;fparstkg;0;
+Credel;fgrirem;0;
+Credel;frelcli;0;
+Credel;flrelcli;0;
+Credel;tempi;0;
+Credel;modelli;0;
+Credel;sinonimi;0;
+Credel;fextcde;0;
+Credel;aa;0;
+Credel;farticle;0;
+Credel;fstock;0;
+Credel;prixart;0;
+Credel;tconso;0;
+Credel;fconso;0;
+Credel;systables;0;
+Credel;famive;0;
+Credel;syscolauth;0;
+Credel;famces;0;
+Credel;tcamion;0;
+Credel;fventree;0;
+Credel;fhjsal;0;
+Credel;fconces;0;
+Credel;hrdlub;0;
+Credel;fpierech;0;
+Credel;xfparfour;0;
+Credel;orpieces;0;
+Credel;ptoto;0;
+Credel;fham;0;
+Credel;customer;0;
+Credel;manufact;0;
+Credel;orders;0;
+Credel;stock;0;
+Credel;items;0;
+Credel;log_record;0;
+Credel;hclient;0;
+Credel;fpubfac;0;
+Credel;gricom;0;
+Credel;clicom;0;
+Credel;fopemt;0;
+Credel;fsaigar;0;
+Credel;prixtarn;0;
+Credel;ftarifn;0;
+Credel;ftarif;0;
+Credel;prixtar;0;
+Credel;fcamion;0;
+Credel;usermsg;0;
+Credel;fmenuh;0;
+Credel;fautoremp;0;
+Credel;fautarif;0;
+Credel;fpostit;0;
+Credel;entor;0;
+Credel;framses;0;
+Credel;fstopart;0;
+Credel;clieinf;0;
+Credel;magatl;0;
+Credel;adrcli;0;
+Credel;colisage;0;
+Credel;fcolisage;0;
+Credel;fanodms;0;
+Credel;frfamfrs;0;
+Credel;fpstlot;0;
+Credel;fvisdepo;0;
+Credel;fclicam;0;
+Credel;finvstt;0;
+Credel;fivecde;0;
+Credel;fanulstk;0;
+Credel;tdefprog;0;
+Credel;ffournis;0;
+Credel;tfonc;0;
+Credel;fsolremp;0;
+Credel;fsolutr;0;
+Credel;ffoncaut;0;
+Credel;tmpligc;0;
+Credel;fparcoq;0;
+Credel;libercpt;0;
+Credel;fparcfam;0;
+Credel;fparamod;0;
+Credel;tfamil;0;
+Credel;fprincli;0;
+Credel;fprinvi;0;
+Credel;fprincvi;0;
+Credel;fpromult;0;
+Credel;fcopystk;0;
+Credel;frelcam;0;
+Credel;flettre;0;
+Credel;fprogest;0;
+Credel;fgrpcli;0;
+Credel;fligdep;0;
+Credel;fligprix;0;
+Credel;fsuptar;0;
+Credel;pxsuptar;0;
+Credel;fparstat;0;
+Credel;ffamstat;0;
+Credel;fmodstat;0;
+Credel;ftclstat;0;
+Credel;fclistat;0;
+Credel;camsult;0;
+Credel;fanaldep;0;
+Credel;fclitopg;0;
+Credel;fcondftar;0;
+Credel;fmvtces;0;
+Credel;fobjcli;0;
+Credel;fparftar;0;
+Credel;ftariff;0;
+Credel;fptopgar;0;
+Credel;fwinuser;0;
+Credel;fprintor;0;
+Credel;fenqsat;0;
+Credel;fmvtpass;0;
+Credel;fsfac;0;
+Credel;mouchard;0;
+Credel;sysviews;0;
+Credel;flibforf;0;
+Credel;fextgar;0;
+Credel;fdatbon;0;
+Credel;fmajfour;0;
+Credel;fopmor;0;
+Credel;freforf;0;
+Credel;fanalbon;0;
+Credel;famforf;0;
+Credel;fgrforf;0;
+Credel;fcoeforf;0;
+Credel;fcoefcli;0;
+Credel;frefstat;0;
+Credel;fgrille;0;
+Credel;fechstd;0;
+Credel;indqalit;0;
+Credel;fpargar;0;
+Credel;fnotech;0;
+Credel;fnotecvi;0;
+Credel;fnotecpi;0;
+Credel;fnotecor;0;
+Credel;fautmag;0;
+Credel;fanalor;0;
+Credel;fstkmag;0;
+Credel;ffamqs;0;
+Credel;analvmqe;0;
+Credel;fdocpvin;0;
+Credel;fdocovin;0;
+Credel;fmvtmod;0;
+Credel;fenvfour;0;
+Credel;fintcen;0;
+Credel;fdegim;0;
+Credel;ftypimm;0;
+Credel;fserim;0;
+Credel;fimpiml;0;
+Credel;fprinmor;0;
+Credel;fencor;0;
+Credel;fnatgar;0;
+Credel;forfrvi;0;
+Credel;fnotecop;0;
+Credel;flib6ive;0;
+Credel;fcomde;0;
+Credel;fslibop;0;
+Credel;flibop;0;
+Credel;fcodctrl;0;
+Credel;fcoefmt;0;
+Credel;fcompge;0;
+Credel;fconcu;0;
+Credel;sysusers;0;
+Credel;fgrfenw;0;
+Credel;flocobs;0;
+Credel;flldopt;0;
+Credel;floccond;0;
+Credel;floccli;0;
+Credel;flocelt;0;
+Credel;flocnome;0;
+Credel;floccam;0;
+Credel;floctra;0;
+Credel;flochauf;0;
+Credel;fmodclie;0;
+Credel;fnatloc;0;
+Credel;fpmostat;0;
+Credel;frapport;0;
+Credel;fsuitor;0;
+Credel;fsuspens;0;
+Credel;ftarloc;0;
+Credel;ftech;0;
+Credel;ftournee;0;
+Credel;ftypelem;0;
+Credel;ftyploc;0;
+Credel;ftypmat;0;
+Credel;fvenditi;0;
+Credel;ventctrl;0;
+Credel;fligim;0;
+Credel;fligime;0;
+Credel;fbudgcli;0;
+Credel;fconsimm;0;
+Credel;ftaxim;0;
+Credel;fempim;0;
+Credel;fnotim;0;
+Credel;fimpim;0;
+Credel;foplibe;0;
+Credel;ftarcli;0;
+Credel;partdate;0;
+Credel;fimmo;0;
+Credel;fplveim;0;
+Credel;flogwin;0;
+Credel;frefnet;0;
+Credel;fdetforf;0;
+Credel;fchiftmp;0;
+Credel;factive;0;
+Credel;factivor;0;
+Credel;fdetactor;0;
+Credel;etatacor;0;
+Credel;vpointag;0;
+Credel;fmagdep;0;
+Credel;fstkdep;0;
+Credel;ffaxor;0;
+Credel;fclie;0;
+Credel;ftarhebd;0;
+Credel;tarhebdo;0;
+Credel;fmvtdeps;0;
+Credel;flistpor;0;
+Credel;accident;0;
+Credel;defrcpt;0;
+Credel;famiveco;0;
+Credel;fartcorgev;0;
+Credel;fartgev;0;
+Credel;fartigev;0;
+Credel;fartoke;0;
+Credel;fassurvi;0;
+Credel;favagar;0;
+Credel;fbudcen;0;
+Credel;fcaclia;0;
+Credel;fchamps;0;
+Credel;fcharge;0;
+Credel;fchekcam;0;
+Credel;fcontab;0;
+Credel;fctrcam;0;
+Credel;fdeftab;0;
+Credel;fdiagvi;0;
+Credel;fdonnevi;0;
+Credel;fenqsati;0;
+Credel;fentlfac;0;
+Credel;ferrgar;0;
+Credel;fetatvi;0;
+Credel;fetatvid;0;
+Credel;ffamvive;0;
+Credel;fichcara;0;
+Credel;fimela;0;
+Credel;fincidor;0;
+Credel;fkmloc;0;
+Credel;fleetcam;0;
+Credel;fletcpt;0;
+Credel;flibopa;0;
+Credel;flibopiv;0;
+Credel;flibrvi;0;
+Credel;fliglfac;0;
+Credel;sysdepend;0;
+Credel;flldctr;0;
+Credel;flldchau;0;
+Credel;felmctra;0;
+Credel;flldcond;0;
+Credel;flocpres;0;
+Credel;flldcam;0;
+Credel;flocact;0;
+Credel;flocave;0;
+Credel;flocdate;0;
+Credel;flocscli;0;
+Credel;flocopt;0;
+Credel;floctar;0;
+Credel;fmatopt;0;
+Credel;fnatave;0;
+Credel;fnatctr;0;
+Credel;fnatrave;0;
+Credel;fopemtiv;0;
+Credel;foprvi;0;
+Credel;forclind;0;
+Credel;fparcli;0;
+Credel;fparctr;0;
+Credel;fparenq;0;
+Credel;fpieecpt;0;
+Credel;fpielfac;0;
+Credel;fprocom;0;
+Credel;fproduit;0;
+Credel;frgrfloc;0;
+Credel;fslibopiv;0;
+Credel;fstation;0;
+Credel;ftabloc;0;
+Credel;ftachloc;0;
+Credel;ftarloca;0;
+Credel;ftravor;0;
+Credel;fttaloc;0;
+Credel;ftypoper;0;
+Credel;ftyptach;0;
+Credel;iverecu;0;
+Credel;ncdeive;0;
+Credel;rttmessg;0;
+Credel;tache;0;
+Credel;tachsal;0;
+Credel;travppc;0;
+Credel;tmpthor;0;
+Credel;fcongrp;0;
+Credel;fcongrcli;0;
+Credel;fcongrref;0;
+Credel;fconstru;0;
+Credel;fcamloc;0;
+Credel;fcoefour;0;
+Credel;femprunt;0;
+Credel;folopaie;0;
+Credel;fpotapv;0;
+Credel;fregltt;0;
+Credel;fsocrema;0;
+Credel;fsocremv;0;
+Credel;hinvstk;0;
+Credel;finvstk;0;
+Credel;fhisefac;0;
+Credel;fhislfac;0;
+Credel;pxhlfac;0;
+Credel;fentbl;0;
+Credel;fpiedfac;0;
+Credel;fmvtcpt;0;
+Credel;fligblm;0;
+Credel;prixbl;0;
+Credel;fentfac;0;
+Credel;fligfac;0;
+Credel;pxlfac;0;
+Credel;fentafac;0;
+Credel;fligafac;0;
+Credel;pxlafac;0;
+Credel;faclatel;0;
+Credel;fmvtstk;0;
+Credel;fentor;0;
+Credel;fclior;0;
+Credel;factcpt;0;
+Credel;fanocpt;0;
+Credel;fbanqcpt;0;
+Credel;fclvscpt;0;
+Credel;fcompcpt;0;
+Credel;fcomptag;0;
+Credel;fcomptage;0;
+Credel;fconscpt;0;
+Credel;fcpanacpt;0;
+Credel;fcpgtab;0;
+Credel;fcptatag;0;
+Credel;fcpttab;0;
+Credel;fdegcpt;0;
+Credel;fdepcpt;0;
+Credel;fefrcpt;0;
+Credel;fchorus;0;
+Credel;fgsecpt;0;
+Credel;fgtacpt;0;
+Credel;fjourcpt;0;
+Credel;fjovecpt;0;
+Credel;flettcpt;0;
+Credel;flibcpt;0;
+Credel;fliblig;0;
+Credel;flibtab;0;
+Credel;fmcestag;0;
+Credel;fmdanacpt;0;
+Credel;fmodcpt;0;
+Credel;fmouaces;0;
+Credel;fabanacpt;0;
+Credel;fmoudcpt;0;
+Credel;fmoufcpt;0;
+Credel;fmoulcpt;0;
+Credel;fmouncpt;0;
+Credel;fmoutces;0;
+Credel;fmoutcpt;0;
+Credel;fmouvces;0;
+Credel;fmouvcpt;0;
+Credel;fmouvtag;0;
+Credel;fmtanacpt;0;
+Credel;fmvanacpt;0;
+Credel;fmvtrcpt;0;
+Credel;fpganacpt;0;
+Credel;fplagcpt;0;
+Credel;fplanacpt;0;
+Credel;fregltag;0;
+Credel;freslig;0;
+Credel;fretcpt;0;
+Credel;fseaccpt;0;
+Credel;fseccpt;0;
+Credel;fsercpt;0;
+Credel;fssecpt;0;
+Credel;fstocpt;0;
+Credel;ftagcpt;0;
+Credel;ftagcpte;0;
+Credel;ftiercpt;0;
+Credel;ftyjocpt;0;
+Credel;fvenncen;0;
+Credel;fvennfam;0;
+Credel;fvennmod;0;
+Credel;fventier;0;
+Credel;fcsi;0;
+Credel;fopfleet;0;
+Credel;ftabdeal;0;
+Credel;syssynonyms;0;
+Credel;syssyntable;0;
+Credel;sysconstraints;0;
+Credel;sysreferences;0;
+Credel;syschecks;0;
+Credel;sysdefaults;0;
+Credel;syscoldepend;0;
+Credel;sysprocedures;0;
+Credel;sysprocbody;0;
+Credel;sysprocplan;0;
+Credel;sysprocauth;0;
+Credel;systriggers;0;
+Credel;systrigbody;0;
+Credel;sysdistrib;0;
+Credel;sysobjstate;0;
+Credel;sysviolations;0;
+Credel;systabauth;0;
+Credel;sysindexes;0;
+Credel;syscolumns;0;
+Credel;messages;0;
+Credel;litige;0;
+Credel;flitige;0;
+Credel;fcfac;0;
+Credel;t_menu2;0;

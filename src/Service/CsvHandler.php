@@ -20,6 +20,7 @@ class CsvHandler{
         'db_name',
         'table_name',
         'table_is_view',
+        'query'
     ];
     public function __construct(
         private EntityManagerInterface $em,
@@ -47,8 +48,9 @@ class CsvHandler{
         $labels = [];
         $previous_entity = null;
         $csv_is_valid = true;
+        $row_count = 0;
         [$repository, $field_to_match,$required_labels,$field_in_csv] = $this->generateMetadatas($class);
-        while($row = fgetcsv($fp, 1000, ';')){
+        while($row = fgetcsv($fp, 10000, ';')){
             if($firstRow){
                 $labels = $row;
                 $firstRow = false;
@@ -71,6 +73,11 @@ class CsvHandler{
             }
             $entity = $this->create_entity($row, $labels, $previous_entity,$class);
             $this->em->persist($entity);
+            if($row_count == 1000){
+                $this->em->flush();
+                $row_count = 0;
+            }
+            $row_count++;
         }
         if ($csv_is_valid){
             $this->em->flush();
@@ -97,8 +104,8 @@ class CsvHandler{
        return (new Table())
            ->setName($row[array_search($this->table_csv_labels[1], $labels)])//table_name
            ->setForDb($previous_database)
-           ->setIsView($row[array_search($this->table_csv_labels[2], $labels)]);//table_is_view
-
+           ->setIsView($row[array_search($this->table_csv_labels[2], $labels)])//table_is_view
+           ->setQuery($row[array_search($this->table_csv_labels[3], $labels)]);//query
     }
 
     private function create_field($row, $labels, $previous_table){
