@@ -1,60 +1,58 @@
 <?php
 namespace App\Service;
+use App\Entity\Database;
 use App\Entity\Field;
 use App\Entity\Table;
 use App\Repository\DatabaseRepository;
-use App\Repository\FieldRepository;
 use App\Repository\TableRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class CsvHandler{
-    private array $field_csv_labels = [
-        'table_name',
-        'field_name',
-        'field_type',
-        'field_length',
-        'field_is_primary',
-    ];
-    private array $table_csv_labels = [
-        'db_name',
-        'table_name',
-        'table_is_view',
-        'query'
+    private array $csv_labels = [
+        'db_name',//0
+        'table_id',//1
+        'table_name',//2
+        'table_is_view',//3
+        'table_sql_query',//4
+        'field_id',//5
+        'field_name',//6
+        'field_type',//7
+        'field_length',//8
+        'field_is_primary',//9
     ];
     public function __construct(
         private EntityManagerInterface $em,
         private TableRepository $tableRepository,
         private DatabaseRepository $databaseRepository,
-    ){
+    ){}
 
+    public function generateCsvFileHeader():string
+    {
+        return implode(';', $this->csv_labels);
     }
 
-    private function create_entity($row, $labels, $previous_table,$class){
-        if($class === 'App\Entity\Field'){
-            $entity = $this->create_field($row, $labels, $previous_table);
-        }else{
-            $entity = $this->create_table($row, $labels, $previous_table);
-        }
-        return $entity;
-    }
-
-    public function handleFile(UploadedFile $file, $class){
+    /**
+     * Pour des performances optimales, le csv doit être trié par db_name, table_name, table_sql_query
+     * @param UploadedFile $file
+     * @return string[]
+     */
+    public function handleFile(UploadedFile $file): array
+    {
         $fp = fopen($file,'r');
-
         //paramètres de boucle
         $missing_label = "";
         $firstRow = true;
         $labels = [];
-        $previous_entity = null;
+        $previous_db = null;
+        $previous_table = null;
         $csv_is_valid = true;
         $row_count = 0;
-        [$repository, $field_to_match,$required_labels,$field_in_csv] = $this->generateMetadatas($class);
-        while($row = fgetcsv($fp, 10000, ';')){
+        while($row = fgetcsv($fp, 20000, ';')){
             if($firstRow){
                 $labels = $row;
                 $firstRow = false;
-                foreach($required_labels as $required_label){
+                foreach($this->csv_labels as $required_label){
                     if(!in_array($required_label, $labels)){
                         $missing_label = $required_label;
                         $csv_is_valid = false;
@@ -63,16 +61,43 @@ class CsvHandler{
                 }
                 continue;
             }
-            //Evite les execution de requetes SQL superflues
-            if ($previous_entity === null || $previous_entity->getName() != $row[array_search($field_in_csv, $labels)]) {
-                $previous_entity = $repository->findOneBy([
-                    $field_to_match => $row[array_search($field_in_csv, $labels)],
+
+            if ($previous_db === null || $previous_db->getName() != $row[array_search($this->csv_labels[0], $labels)]) {//dbname
+                //on cherche la base de données, si elle n'exite pas on la crée
+                $previous_db = $this->databaseRepository->findOneBy([
+                    'name' => $row[array_search('db_name', $labels)],
                 ]);
-                //todo : il faut renvoyer un message d'erreur car la table n'existe pas
-                // faire un break et ajouter une valeur dans une variable particulière dédiée
+                if ($previous_db === null) {
+                    $previous_db = new Database();
+                    $previous_db->setName($row[array_search($this->csv_labels[0], $labels)]);
+                    $this->em->persist($previous_db);
+                    $this->em->flush();
+                }
             }
-            $entity = $this->create_entity($row, $labels, $previous_entity,$class);
-            $this->em->persist($entity);
+            if ($previous_table === null || $previous_table->getName() != $row[array_search($this->csv_labels[2], $labels)]) {//tablename
+                //on cherche la table, si elle n'exite pas on la crée
+                $previous_table = $this->tableRepository->findOneBy([
+                    'name' => $row[array_search('table_name', $labels)],
+                ]);
+                if ($previous_table === null) {
+                    $previous_table = new Table();
+                    $previous_table->setTableOriginalId($row[array_search($this->csv_labels[1], $labels)]);//table_id
+                    $previous_table->setName($row[array_search($this->csv_labels[2], $labels)]);//tablename
+                    $previous_table->setIsView($row[array_search($this->csv_labels[3], $labels)]);//table_is_view
+                    $previous_table->setQuery($row[array_search($this->csv_labels[4], $labels)]);//table_sql_query
+                    $previous_table->setForDb($previous_db);
+                    $this->em->persist($previous_table);
+                    $this->em->flush();
+                }
+            }
+            $field = new Field();
+            $field->setFieldOriginalId($row[array_search($this->csv_labels[5], $labels)])//field_id
+                    ->setName($row[array_search($this->csv_labels[6], $labels)])//field_name
+                    ->setType($row[array_search($this->csv_labels[7], $labels)])//field_type
+                    ->setLength($row[array_search($this->csv_labels[8], $labels)])//field_length
+                    ->setIsPrimary($row[array_search($this->csv_labels[9], $labels)])//field_is_primary
+                    ->setForTable($previous_table);
+            $this->em->persist($field);
             if($row_count == 1000){
                 $this->em->flush();
                 $row_count = 0;
@@ -89,50 +114,6 @@ class CsvHandler{
         }
         return [$message, $status];
 
-    }
-
-    public function generateCsvFileHeader($class){
-        if($class === 'App\Entity\Field'){
-            return implode(';',$this->field_csv_labels);
-        }else{
-            return implode(';',$this->table_csv_labels);
-        }
-
-    }
-
-    private function create_table($row, $labels, $previous_database){
-       return (new Table())
-           ->setName($row[array_search($this->table_csv_labels[1], $labels)])//table_name
-           ->setForDb($previous_database)
-           ->setIsView($row[array_search($this->table_csv_labels[2], $labels)])//table_is_view
-           ->setQuery($row[array_search($this->table_csv_labels[3], $labels)]);//query
-    }
-
-    private function create_field($row, $labels, $previous_table){
-        return (new Field())
-            ->setName($row[array_search($this->field_csv_labels[1], $labels)])//field_name
-            ->setForTable($previous_table)
-            ->setType($row[array_search($this->field_csv_labels[2], $labels)])//field_type
-            ->setLength($row[array_search($this->field_csv_labels[3], $labels)])//field_length
-            ->setIsPrimary($row[array_search($this->field_csv_labels[4], $labels)]);//field_is_primary
-    }
-
-    private function generateMetadatas($class){
-        if($class === 'App\Entity\Field'){
-            return [
-                $this->tableRepository,
-                'name',
-                $this->field_csv_labels,
-                $this->field_csv_labels[0]//table_name
-            ];
-        }else{
-            return [
-                $this->databaseRepository,
-                'name',
-                $this->table_csv_labels,
-                $this->table_csv_labels[0]//db_name
-            ];
-        }
     }
 
 }

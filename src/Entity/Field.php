@@ -43,6 +43,9 @@ class Field
     #[ORM\Column]
     private ?bool $isPrimary = null;
 
+    #[ORM\Column]
+    private ?int $fieldOriginalId = null;
+
     public function __construct()
     {
         $this->usages = new ArrayCollection();
@@ -151,6 +154,18 @@ class Field
     public function setIsPrimary(bool $isPrimary): self
     {
         $this->isPrimary = $isPrimary;
+
+        return $this;
+    }
+
+    public function getFieldOriginalId(): ?int
+    {
+        return $this->fieldOriginalId;
+    }
+
+    public function setFieldOriginalId(int $fieldOriginalId): self
+    {
+        $this->fieldOriginalId = $fieldOriginalId;
 
         return $this;
     }

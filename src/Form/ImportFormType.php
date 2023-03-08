@@ -7,13 +7,13 @@ use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class ImportTableFormType extends AbstractType
+class ImportFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add('csv_file',FileType::class,[
-                'label' => 'Fichier des tables CSV',
+                'label' => 'Fichier CSV issu de CREDEL',
                 'mapped' => false,
                 'required' => true,
                 'attr' => [

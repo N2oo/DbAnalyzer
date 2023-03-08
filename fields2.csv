@@ -1,0 +1,7 @@
+db_name;table_id;table_name;table_is_view;table_sql_query;field_id;field_name;field_type;field_length;field_is_primary
+credel;1;user;0;;1;id;0;255;1
+credel;1;user;0;;2;name;1;255;0
+credel;1;user;0;;6;service_id;0;255;0
+credel;2;service;0;;3;id;0;255;1
+credel;2;service;0;;4;name;1;255;0
+credel;3;service_user;1;CREATE VIEW service_user AS SELECT * FROM user LEFT JOIN service ON user.service_id = service.id;5;id_user;0;255;0

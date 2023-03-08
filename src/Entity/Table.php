@@ -38,6 +38,9 @@ class Table
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $query = null;
 
+    #[ORM\Column]
+    private ?int $tableOriginalId = null;
+
     public function __construct()
     {
         $this->fields = new ArrayCollection();
@@ -122,6 +125,18 @@ class Table
     public function setQuery(?string $query): self
     {
         $this->query = $query;
+
+        return $this;
+    }
+
+    public function getTableOriginalId(): ?int
+    {
+        return $this->tableOriginalId;
+    }
+
+    public function setTableOriginalId(int $tableOriginalId): self
+    {
+        $this->tableOriginalId = $tableOriginalId;
 
         return $this;
     }

@@ -41,10 +41,12 @@ class DatabaseController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_database_show', methods: ['GET'])]
-    public function show(Database $database): Response
+    public function show(Database $database,DatabaseRepository $databaseRepository): Response
     {
+        //optimisation à faire ici
         return $this->render('database/show.html.twig', [
             'database' => $database,
+            'tables'=> $database->getTables(),
         ]);
     }
 
@@ -75,4 +77,5 @@ class DatabaseController extends AbstractController
 
         return $this->redirectToRoute('app_database_index', [], Response::HTTP_SEE_OTHER);
     }
+
 }
