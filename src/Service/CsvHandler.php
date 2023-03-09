@@ -98,8 +98,11 @@ class CsvHandler{
                     ->setIsPrimary($row[array_search($this->csv_labels[9], $labels)])//field_is_primary
                     ->setForTable($previous_table);
             $this->em->persist($field);
-            if($row_count == 1000){
+            if($row_count % 1000){
                 $this->em->flush();
+                $this->em->clear();
+                $previous_db = null;
+                $previous_table = null;
                 $row_count = 0;
             }
             $row_count++;
@@ -112,6 +115,7 @@ class CsvHandler{
             $message = "Le fichier n'a pas pu être importé en raison de l'absence du champ ".$missing_label;
             $status = "error";
         }
+        $this->em->clear();
         return [$message, $status];
 
     }
