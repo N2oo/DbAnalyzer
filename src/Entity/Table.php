@@ -140,4 +140,15 @@ class Table
 
         return $this;
     }
+
+    public function getDumpQuery():string
+    {
+        $query = "SELECT ";
+        foreach ($this->getFields() as $field) {
+            $query .= $this->getName().'.'.$field->getName().", ";
+        }
+        $query = substr($query, 0, -2);
+        $query .= " FROM ".$this->getName().";";
+        return $query;
+    }
 }
