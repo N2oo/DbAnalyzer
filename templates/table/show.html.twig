@@ -36,6 +36,7 @@
                 </td>
             </tr>
         {% endif %}
+
         <tr>
             <th>DumpQuery</th>
             <td>
@@ -43,6 +44,10 @@
                     {{ table.dumpQuery }}
                 </code>
             </td>
+        </tr>
+        <tr>
+            <th>Commentaire</th>
+            <td>{{ table.commentary }}</td>
         </tr>
         <tr>
             <th>Fields</th>
@@ -58,8 +63,9 @@
                                 <th>Type du champ</th>
                                 <th>Taille du champ</th>
                                 <th>Primaire ?</th>
-                                <th>Nombre d'usages</th>
-                                <th>Utilisé dans autre table</th>
+                                <th>Utilise la propriété</th>
+                                <th>Est utilisé ?</th>
+                                <th>Commentaire</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -72,16 +78,19 @@
                                         <td>{{ field.type }}</td>
                                         <td>{{ field.length }}</td>
                                         <td>{{ field.isPrimary ? 'Oui':'Non' }}</td>
-                                        {% if field.usages.count>0 %}
-                                            <td>{{ field.usages.count }}</td>
-                                            {% else %}
-                                            <td>0</td>
-                                        {% endif %}
                                         {% if field.useProperty is not null %}
                                             <td><a href="{{ path('app_field_show',{'id':field.useProperty.id}) }}">{{ field.useProperty }}</a></td>
                                             {% else %}
                                             <td>Non</td>
                                         {% endif %}
+                                        <td>
+                                            {% if field.usages.count > 0 %}
+                                                Oui ({{ field.usages.count }} fois)
+                                                {% else %}
+                                                Non
+                                            {% endif %}
+                                        </td>
+                                        <td>{{ field.commentary }}</td>
                                     </tr>
                             {% endfor %}
                         </tbody>

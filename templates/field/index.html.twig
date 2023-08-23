@@ -13,6 +13,7 @@
                 <th>Name</th>
                 <th>Length</th>
                 <th>IsPrimary</th>
+                <th>Commentary</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -24,6 +25,7 @@
                 <td>{{ field.name }}</td>
                 <td>{{ field.length }}</td>
                 <td>{{ field.isPrimary ? 'primary':'default' }}</td>
+                <td>{{ field.commentary }}</td>
                 <td>
                     <a href="{{ path('app_field_show', {'id': field.id}) }}">show</a>
                     <a href="{{ path('app_field_edit', {'id': field.id}) }}">edit</a>

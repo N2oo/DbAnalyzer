@@ -16,6 +16,7 @@ class TableType extends AbstractType
             ->add('isView')
             ->add('forDb')
             ->add('table_original_id')
+            ->add('commentary')
         ;
     }
 
