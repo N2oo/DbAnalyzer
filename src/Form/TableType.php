@@ -15,6 +15,7 @@ class TableType extends AbstractType
             ->add('name')
             ->add('isView')
             ->add('forDb')
+            ->add('table_original_id')
         ;
     }
 

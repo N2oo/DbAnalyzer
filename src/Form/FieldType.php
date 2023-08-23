@@ -18,6 +18,7 @@ class FieldType extends AbstractType
             ->add('type')
             ->add('useProperty')
             ->add('isPrimary')
+            ->add('field_original_id')
         ;
     }
 
