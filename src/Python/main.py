@@ -17,8 +17,6 @@ def addSpacesOnQuery(query):
     query = query.replace('group by', ' group by ')
     return query
 
-
-
 def analyzeQuery(sqlQuery):
     sqlQuery = addSpacesOnQuery(sqlQuery)
     sqlQueryCreate = re.sub(r'as select.*', '', sqlQuery).strip()
@@ -52,16 +50,30 @@ def analyzeQuery(sqlQuery):
         if match:
             value, key = match.groups()
             fieldAssoc[key] = value
-    
-
-
-
     return tables, fieldAssoc
 
+sql = "select f.id from `field` f left join `table` t on f.for_table_id = t.id where t.name = '{}' and f.name ='{}'"
+sql_update = "update `field` f set use_property_id = {} where id = {}"
 
 mycursor.execute("SELECT query,name,for_db_id FROM `table` t where t.is_view = 1")
-for x in mycursor:
-    print(x[1])
-    print(analyzeQuery(x[0]))
+for line in mycursor.fetchall():
+    table_name = line[1]
+    tables, fieldAssoc = analyzeQuery(line[0])
+    for key, value in tables.items():
+        x_label = value.split('.')[0]
+        try:
+            field_label = value.split('.')[1]
+            mycursor.execute(sql.format(fieldAssoc[x_label],field_label))
+            id_of_folowed_field = None
+            for line2 in mycursor:
+                id_of_folowed_field = line2[0]
+            id_of_field_to_update = None
+            mycursor.execute(sql.format(table_name,key))
+            for line2 in mycursor:
+                id_of_field_to_update = line2[0]
+            mycursor.execute(sql_update.format(id_of_folowed_field,id_of_field_to_update))
+            mydb.commit()
+        except:
+            pass
 
 mycursor.close()
