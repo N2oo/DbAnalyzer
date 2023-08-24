@@ -14,7 +14,7 @@ SELECT count(DISTINCT t.id) FROM `field` f left join `table` t on t.id = f.for_t
 
 -- classement des propriétés les plus utilisées pour les vues
 SELECT count(f.id),f.use_property_id FROM `field` f left join `table` t on t.id = f.for_table_id where t.is_view = 1 group by f.use_property_id  
-ORDER BY `count(f.id)` DESC;*
+ORDER BY `count(f.id)` DESC;
 
 -- met en avant des champs qui sont issus d'une vue, et qui sont utilisés par une autre vue
 SELECT count(f.id),f.use_property_id 
