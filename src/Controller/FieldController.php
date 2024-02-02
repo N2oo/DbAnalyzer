@@ -31,7 +31,7 @@ class FieldController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $fieldRepository->save($field, true);
 
-            return $this->redirectToRoute('app_field_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_table_show', ["id"=>$field->getForTable()->getId()], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('field/new.html.twig', [
@@ -57,7 +57,7 @@ class FieldController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $fieldRepository->save($field, true);
 
-            return $this->redirectToRoute('app_field_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_table_show', ["id"=>$field->getForTable()->getId()], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('field/edit.html.twig', [

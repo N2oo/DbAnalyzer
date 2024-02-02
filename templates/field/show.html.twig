@@ -56,6 +56,10 @@
                 <th>Length</th>
                 <td>{{ field.length }}</td>
             </tr>
+            <tr>
+                <th>Commentary</th>
+                <td>{{ field.commentary }}</td>
+            </tr>
         </tbody>
     </table>
     <a href="{{ path('app_table_show',{'id':field.forTable.id}) }}">back to table</a>

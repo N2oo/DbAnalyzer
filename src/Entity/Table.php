@@ -41,6 +41,9 @@ class Table
     #[ORM\Column]
     private ?int $tableOriginalId = null;
 
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    private ?string $commentary = null;
+
     public function __construct()
     {
         $this->fields = new ArrayCollection();
@@ -150,5 +153,17 @@ class Table
         $query = substr($query, 0, -2);
         $query .= " FROM ".$this->getName().";";
         return $query;
+    }
+
+    public function getCommentary(): ?string
+    {
+        return $this->commentary;
+    }
+
+    public function setCommentary(?string $commentary): self
+    {
+        $this->commentary = $commentary;
+
+        return $this;
     }
 }

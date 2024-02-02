@@ -18,13 +18,26 @@
             <tr>
                 <th>Tables</th>
                 <td>
-                    <ul>
-                        {% for table in database.tables %}
-                            <li>
-                                <a href="{{ path('app_table_show',{'id':table.id}) }}">{{ table }} ({{ table.fields.count }} colonnes)</a>
-                            </li>
-                        {% endfor %}
-                    </ul>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Nom</th>
+                                <th>Nb Col</th>
+                                <th>Is View ?</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for table in database.tables %}
+                                <tr>
+                                    <td>{{ table.id }}</td>
+                                    <td><a href="{{ path('app_table_show',{'id':table.id}) }}">{{ table }}</a></td>
+                                    <td>{{ table.fields.count }}</td>
+                                    <td>{{ table.isView ? 'Yes' : 'No' }}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
                 </td>
             </tr>
         </tbody>

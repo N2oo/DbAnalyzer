@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\FieldRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use phpDocumentor\Reflection\Types\Integer;
 
@@ -45,6 +46,9 @@ class Field
 
     #[ORM\Column]
     private ?int $fieldOriginalId = null;
+
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    private ?string $commentary = null;
 
     public function __construct()
     {
@@ -166,6 +170,18 @@ class Field
     public function setFieldOriginalId(int $fieldOriginalId): self
     {
         $this->fieldOriginalId = $fieldOriginalId;
+
+        return $this;
+    }
+
+    public function getCommentary(): ?string
+    {
+        return $this->commentary;
+    }
+
+    public function setCommentary(?string $commentary): self
+    {
+        $this->commentary = $commentary;
 
         return $this;
     }
