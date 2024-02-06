@@ -10,7 +10,7 @@ use App\Repository\TableRepository;
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\GetCollection;
 use ApiPlatform\OpenApi\Model\Operation;
-use App\Processor\TableMultipleProcessor;
+use App\Service\Processor\TableMultipleProcessor;
 use App\Entity\DTO\Table\TableMultipleDTO;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;

@@ -1,12 +1,10 @@
 <?php
 
-namespace App\Processor;
+namespace App\Service\Processor;
 use ApiPlatform\Metadata\Operation;
 use Doctrine\ORM\EntityManagerInterface;
 use ApiPlatform\State\ProcessorInterface;
-use App\Entity\DTO\Table\TableMultipleDTO;
 use App\Entity\DTO\Table\TableMultipleResponseDTO;
-use Symfony\Component\DependencyInjection\Attribute\Autowire;
 
 class TableMultipleProcessor implements ProcessorInterface
 {

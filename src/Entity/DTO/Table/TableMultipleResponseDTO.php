@@ -4,10 +4,9 @@ namespace App\Entity\DTO\Table;
 
 use App\Entity\Table as TableEntity;
 
-class TableMultipleResponseDTO
+final class TableMultipleResponseDTO
 
 {
-
     public function __construct(
         protected array $tables = []
     )
