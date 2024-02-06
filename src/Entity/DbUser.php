@@ -2,15 +2,18 @@
 
 namespace App\Entity;
 
-use App\Repository\DbUserRepository;
-use Doctrine\ORM\Mapping as ORM;
-use ApiPlatform\Metadata\ApiResource;
-use ApiPlatform\Metadata\GetCollection;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\Post;
+use Doctrine\ORM\Mapping as ORM;
+use App\Repository\DbUserRepository;
+use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\GetCollection;
+use Symfony\Component\Serializer\Annotation\SerializedName;
 
 #[ORM\Entity(repositoryClass: DbUserRepository::class),
     ApiResource(
+    shortName: "Utilisateur",
+    description:"Utilisateurs de la base de données",
     uriTemplate: "dbuser",
     operations: [
         new Get(uriTemplate: "dbuser/{id}"),
@@ -30,18 +33,26 @@ class DbUser
 
 
     #[ORM\Column(length: 255)]
+    
+    #[SerializedName('identifier1')]
     private ?string $uniqueId = null;
 
     #[ORM\Column(length: 255)]
+    
+    #[SerializedName('identifier2')]
     private ?string $groupId = null;
 
     #[ORM\Column(length: 255)]
+    
+    #[SerializedName('userfolder')]
     private ?string $homeFolder = null;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $description = null;
 
     #[ORM\Column(length: 255)]
+    
+    #[SerializedName('lauch')]
     private ?string $defaultShell = null;
 
     public function getId(): ?int

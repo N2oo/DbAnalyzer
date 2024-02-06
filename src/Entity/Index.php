@@ -2,15 +2,18 @@
 
 namespace App\Entity;
 
-use App\Repository\IndexRepository;
-use Doctrine\ORM\Mapping as ORM;
-use ApiPlatform\Metadata\ApiResource;
-use ApiPlatform\Metadata\GetCollection;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\Post;
+use Doctrine\ORM\Mapping as ORM;
+use App\Repository\IndexRepository;
+use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\GetCollection;
+use Symfony\Component\Serializer\Attribute\SerializedName;
 
 #[ORM\Entity(repositoryClass: IndexRepository::class),
     ApiResource(
+        shortName: "Index",
+        description: "Détails sur l'index de la colonne",
         uriTemplate: "index",
         operations:[
             new Get(uriTemplate:"index/{id}"),
@@ -26,15 +29,21 @@ class Index
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    
+    #[SerializedName('idxname')]
     private ?string $indexName = null;
 
     #[ORM\Column(length: 255)]
     private ?string $owner = null;
 
     #[ORM\Column]
+    
+    #[SerializedName('tabid')]
     private ?int $tableId = null;
 
     #[ORM\Column(length: 255)]
+    
+    #[SerializedName('idxtype')]
     private ?string $indexType = null;
 
     #[ORM\Column(length: 255, nullable: true)]

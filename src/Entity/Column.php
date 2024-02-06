@@ -2,15 +2,17 @@
 
 namespace App\Entity;
 
-use App\Repository\ColumnRepository;
-use Doctrine\ORM\Mapping as ORM;
-use ApiPlatform\Metadata\ApiResource;
-use ApiPlatform\Metadata\GetCollection;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\Post;
+use Doctrine\ORM\Mapping as ORM;
+use App\Repository\ColumnRepository;
+use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\GetCollection;
+use Symfony\Component\Serializer\Attribute\SerializedName;
 
 #[ORM\Entity(repositoryClass: ColumnRepository::class),
     ApiResource(
+    shortName: "Colonne",
     uriTemplate: "column",
     operations: [
         new Get(uriTemplate: "column/{id}"),
@@ -27,18 +29,28 @@ class Column
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    
+    #[SerializedName('colname')]
     private ?string $columnName = null;
 
     #[ORM\Column]
+    
+    #[SerializedName('tabid')]
     private ?int $tableId = null;
 
     #[ORM\Column]
+    
+    #[SerializedName('colno')]
     private ?int $columnNumber = null;
 
     #[ORM\Column]
+    
+    #[SerializedName('coltype')]
     private ?int $columnType = null;
 
     #[ORM\Column]
+    
+    #[SerializedName('collength')]
     private ?int $columnLength = null;
 
     #[ORM\ManyToOne(inversedBy: 'columns')]

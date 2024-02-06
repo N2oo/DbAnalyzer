@@ -2,18 +2,21 @@
 
 namespace App\Entity;
 
-use App\Repository\TableRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
-use Doctrine\ORM\Mapping as ORM;
-use ApiPlatform\Metadata\ApiResource;
-use ApiPlatform\Metadata\GetCollection;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\Post;
+use Doctrine\ORM\Mapping as ORM;
+use App\Repository\TableRepository;
+use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\GetCollection;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Serializer\Annotation\SerializedName;
 
 #[ORM\Entity(repositoryClass: TableRepository::class)]
 #[ORM\Table(name: '`table`')]
 #[ApiResource(
+    shortName: "Table",
     uriTemplate: "table",
     operations:[
         new Get(uriTemplate:"table/{id}"),
@@ -29,33 +32,48 @@ class Table
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[SerializedName('tabname')]
     private ?string $tableName = null;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $owner = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    
+    #[SerializedName('dirpath')]
     private ?string $dbFileName = null;
 
     #[ORM\Column]
+    
+    #[SerializedName('tabid')]
     private ?int $tabId = null;
 
     #[ORM\Column]
+    
+    #[SerializedName('rowsize')]
     private ?int $rowSize = null;
 
     #[ORM\Column]
+    
+    #[SerializedName('ncols')]
     private ?int $numberRows = null;
 
     #[ORM\Column]
+    
+    #[SerializedName('created')]
     private ?\DateTimeImmutable $createdAt = null;
 
     #[ORM\Column]
     private ?int $version = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    
+    #[SerializedName('tabtype')]
     private ?string $tableType = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    
+    #[SerializedName('audpath')]
     private ?string $audPath = null;
 
     #[ORM\OneToMany(mappedBy: 'tableElement', targetEntity: Column::class)]
@@ -207,10 +225,16 @@ class Table
         return $this;
     }
 
+    #[Groups("default")]
     public function getViewSql():string
     {
-        return "";
-        //TODO : implémenter la méthode pour générer la requête SQL
+        $sql_query = "";
+        //TODO : s'assurer que les views sont triés par seqno
+        foreach($this->getViews() as $viewElement)
+        {
+            $sql_query += $viewElement->getViewText();
+        }
+        return $sql_query;
     }
 
     /**

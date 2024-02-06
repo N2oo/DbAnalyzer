@@ -2,16 +2,18 @@
 
 namespace App\Entity;
 
-use App\Repository\DependOnRepository;
-use Doctrine\ORM\Mapping as ORM;
-use ApiPlatform\Metadata\ApiResource;
-use ApiPlatform\Metadata\GetCollection;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\Post;
+use Doctrine\ORM\Mapping as ORM;
+use ApiPlatform\Metadata\ApiResource;
+use App\Repository\DependOnRepository;
+use ApiPlatform\Metadata\GetCollection;
+use Symfony\Component\Serializer\Annotation\SerializedName;
 
 #[
     ORM\Entity(repositoryClass: DependOnRepository::class),
     ApiResource(
+    shortName: "Dépendance",
     uriTemplate: "depend_on",
     operations: [
         new Get(uriTemplate: "depend_on/{id}"),
@@ -28,15 +30,23 @@ class DependOn
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    
+    #[SerializedName('btype')]
     private ?string $bType = null;
 
     #[ORM\Column(length: 255)]
+    
+    #[SerializedName('dtype')]
     private ?string $dType = null;
 
     #[ORM\Column]
+    
+    #[SerializedName('btabid')]
     private ?int $bTableIdOriginal = null;
 
     #[ORM\Column]
+    
+    #[SerializedName('dtabid')]
     private ?int $dTableIdOriginal = null;
 
     #[ORM\ManyToOne(inversedBy: 'dependencies')]

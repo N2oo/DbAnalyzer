@@ -2,19 +2,22 @@
 
 namespace App\Entity;
 
-use App\Repository\DetailRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
-use Doctrine\DBAL\Types\Types;
-use Doctrine\ORM\Mapping as ORM;
-use ApiPlatform\Metadata\ApiResource;
-use ApiPlatform\Metadata\GetCollection;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\Post;
+use Doctrine\DBAL\Types\Types;
+use Doctrine\ORM\Mapping as ORM;
+use App\Repository\DetailRepository;
+use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\GetCollection;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Serializer\Annotation\SerializedName;
 
 #[
     ORM\Entity(repositoryClass: DetailRepository::class),
     ApiResource(
+        shortName: "Détail",
+        description: "Détails sur la table",
         uriTemplate: "detail",
         operations: [
             new Get(uriTemplate: "detail/{id}"),
@@ -31,21 +34,31 @@ class Detail
     private ?int $id = null;
 
     #[ORM\Column]
+    
+    #[SerializedName('inode')]
     private ?int $iNode = null;
 
     #[ORM\Column(length: 255)]
     private ?string $permissions = null;
 
     #[ORM\Column]
+    
+    #[SerializedName('cntlink')]
     private ?int $countLink = null;
 
     #[ORM\Column(length: 255)]
+    
+    #[SerializedName('file_owner')]
     private ?string $fileOwner = null;
 
     #[ORM\Column(length: 255)]
+    
+    #[SerializedName('filegroup')]
     private ?string $fileGroup = null;
 
     #[ORM\Column(type: Types::BIGINT)]
+    
+    #[SerializedName('filesize')]
     private ?string $fileSize = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
@@ -55,15 +68,21 @@ class Detail
     private ?\DateTimeInterface $time = null;
 
     #[ORM\Column(length: 255)]
+    
+    #[SerializedName('file_location')]
     private ?string $fileLocation = null;
 
     #[ORM\Column(length: 255)]
     private ?string $folder = null;
 
     #[ORM\Column(length: 255)]
+    
+    #[SerializedName('filename')]
     private ?string $fileName = null;
 
     #[ORM\Column(length: 255)]
+    
+    #[SerializedName('file_extension')]
     private ?string $fileExtension = null;
 
     #[ORM\ManyToMany(targetEntity: DbUser::class)]

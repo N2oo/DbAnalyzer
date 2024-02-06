@@ -2,16 +2,19 @@
 
 namespace App\Entity;
 
-use App\Repository\ViewRepository;
-use Doctrine\ORM\Mapping as ORM;
-use ApiPlatform\Metadata\ApiResource;
-use ApiPlatform\Metadata\GetCollection;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\Post;
+use Doctrine\ORM\Mapping as ORM;
+use App\Repository\ViewRepository;
+use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\GetCollection;
+use Symfony\Component\Serializer\Annotation\SerializedName;
 
 #[
     ORM\Entity(repositoryClass: ViewRepository::class),
     ApiResource(
+        shortName: "Vue",
+        description: "Informations sur la constitution de la vue",
         uriTemplate: "view",
         operations:[
             new Get(uriTemplate:"view/{id}"),
@@ -27,12 +30,18 @@ class View
     private ?int $id = null;
 
     #[ORM\Column]
+    
+    #[SerializedName('tabid')]
     private ?int $tableId = null;
 
     #[ORM\Column]
+    
+    #[SerializedName('seqno')]
     private ?int $sequenceNumber = null;
 
     #[ORM\Column(length: 255)]
+    
+    #[SerializedName('viewtext')]
     private ?string $viewText = null;
 
     #[ORM\ManyToOne(inversedBy: 'views')]
