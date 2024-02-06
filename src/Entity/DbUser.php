@@ -35,12 +35,12 @@ class DbUser
     #[ORM\Column(length: 255)]
     
     #[SerializedName('identifier1')]
-    private ?string $uniqueId = null;
+    private ?int $uniqueId = null;
 
     #[ORM\Column(length: 255)]
     
     #[SerializedName('identifier2')]
-    private ?string $groupId = null;
+    private ?int $groupId = null;
 
     #[ORM\Column(length: 255)]
     
@@ -72,24 +72,24 @@ class DbUser
         return $this;
     }
 
-    public function getUniqueId(): ?string
+    public function getUniqueId(): ?int
     {
         return $this->uniqueId;
     }
 
-    public function setUniqueId(string $uniqueId): static
+    public function setUniqueId(int $uniqueId): static
     {
         $this->uniqueId = $uniqueId;
 
         return $this;
     }
 
-    public function getGroupId(): ?string
+    public function getGroupId(): ?int
     {
         return $this->groupId;
     }
 
-    public function setGroupId(string $groupId): static
+    public function setGroupId(int $groupId): static
     {
         $this->groupId = $groupId;
 
