@@ -1,0 +1,32 @@
+{
+    "tables": [
+        {
+            "tabname": "fstock",
+            "owner": "credel",
+            "dirpath": "fstoc00467",
+            "tabid": 467,
+            "rowsize": 105,
+            "ncols": 23,
+            "nindexes": 3,
+            "nrows": 763036,
+            "created": "2011-09-03",
+            "version": 30608633,
+            "tabtype": "T",
+            "audpath": null
+        },
+        {
+            "tabname": "vhfac",
+            "owner": "credel",
+            "dirpath": null,
+            "tabid": 2059,
+            "rowsize": 63,
+            "ncols": 11,
+            "nindexes": 0,
+            "nrows": 0,
+            "created": "2018-07-18",
+            "version": 5,
+            "tabtype": "V",
+            "audpath": null
+        }
+    ]
+}

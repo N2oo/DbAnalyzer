@@ -2,26 +2,46 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Doctrine\Common\State\PersistProcessor;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\Post;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\TableRepository;
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\GetCollection;
+use ApiPlatform\OpenApi\Model\Operation;
+use App\Processor\TableMultipleProcessor;
+use App\Entity\DTO\Table\TableMultipleDTO;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
+use App\Entity\DTO\Table\TableMultipleResponseDTO;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Serializer\Annotation\SerializedName;
 
 #[ORM\Entity(repositoryClass: TableRepository::class)]
 #[ORM\Table(name: '`table`')]
+/**
+ * Méthode pour la procession de multiples tables
+ * https://github.com/api-platform/api-platform/issues/294
+ */
+
 #[ApiResource(
     shortName: "Table",
     uriTemplate: "table",
     operations:[
         new Get(uriTemplate:"table/{id}"),
         new GetCollection(),
-        new Post()
+        new Post(),
+        new Post(
+            uriTemplate:'table/multiple',
+            openapi: new Operation(
+                summary:"Envoi de multiple instances de Table",
+                description: "Utiliez ce endpoint pour envoyer plusieurs tables à la fois"
+            ),
+            input: TableMultipleDTO::class,
+            output: TableMultipleResponseDTO::class,
+            processor: TableMultipleProcessor::class
+        )
     ])
 ]
 class Table
