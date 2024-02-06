@@ -8,6 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 use App\Repository\ColumnRepository;
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\GetCollection;
+use ApiPlatform\Metadata\Link;
 use Symfony\Component\Serializer\Attribute\SerializedName;
 
 #[ORM\Entity(repositoryClass: ColumnRepository::class),
@@ -18,8 +19,17 @@ use Symfony\Component\Serializer\Attribute\SerializedName;
         new Get(uriTemplate: "column/{id}"),
         new GetCollection(),
         new Post()
-    ]
-)]
+    ]),
+    ApiResource(
+        shortName: "Colonne",
+        description: "Résolution des colones personnalisée",
+        uriTemplate:"table/{id}/columns",
+        uriVariables:["id"=>new Link(fromClass:Table::class,fromProperty:"id")],
+        operations: [
+            new GetCollection()
+        ]
+    )
+]
 #[ORM\Table(name: '`column`')]
 class Column
 {
