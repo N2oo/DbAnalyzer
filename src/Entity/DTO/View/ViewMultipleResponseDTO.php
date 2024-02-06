@@ -8,13 +8,13 @@ final class ViewMultipleResponseDTO
 
 {
     public function __construct(
-        protected array $Views = []
+        protected array $views = []
     )
     {}
 
-    public function addView(ViewEntity $View):void
+    public function addView(ViewEntity $view):void
     {
-        $this->Views[] = $View;
+        $this->views[] = $view;
     }
 
     /**
@@ -22,7 +22,7 @@ final class ViewMultipleResponseDTO
      */
     public function getViews():?array
     {
-        return $this->Views;
+        return $this->views;
     }
     
 

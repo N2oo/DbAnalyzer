@@ -8,6 +8,10 @@ use Doctrine\ORM\Mapping as ORM;
 use App\Repository\IndexRepository;
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\GetCollection;
+use ApiPlatform\OpenApi\Model\Operation;
+use App\Entity\DTO\Index\IndexMultipleDTO;
+use App\Service\Processor\IndexMultipleProcessor;
+use App\Entity\DTO\Index\IndexMultipleResponseDTO;
 use Symfony\Component\Serializer\Attribute\SerializedName;
 
 #[ORM\Entity(repositoryClass: IndexRepository::class),
@@ -18,7 +22,17 @@ use Symfony\Component\Serializer\Attribute\SerializedName;
         operations:[
             new Get(uriTemplate:"index/{id}"),
             new GetCollection(),
-            new Post()
+            new Post(),
+            new Post(
+                uriTemplate:'index/multiple',
+                openapi: new Operation(
+                    summary:"Envoi de multiple instances de index",
+                    description: "Utiliez ce endpoint pour envoyer plusieurs indexs à la fois"
+                ),
+                input: IndexMultipleDTO::class,
+                output: IndexMultipleResponseDTO::class,
+                processor: IndexMultipleProcessor::class
+            )
         ])
 ]
 class Index

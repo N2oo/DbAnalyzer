@@ -7,7 +7,7 @@ use App\Entity\DependOn as DependOnEntity;
 final class DependOnMultipleDTO
 {
     public function __construct(
-        protected ?array $DependOns = null
+        protected ?array $dependOns = null
     )
     {}
 
@@ -16,6 +16,6 @@ final class DependOnMultipleDTO
      */
     public function getDependOns(): ?array
     {
-        return $this->DependOns;
+        return $this->dependOns;
     }
 }

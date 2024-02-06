@@ -3,12 +3,16 @@
 namespace App\Entity;
 
 use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\Link;
 use ApiPlatform\Metadata\Post;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\ColumnRepository;
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\GetCollection;
-use ApiPlatform\Metadata\Link;
+use ApiPlatform\OpenApi\Model\Operation;
+use App\Entity\DTO\Column\ColumnMultipleDTO;
+use App\Service\Processor\ColumnMultipleProcessor;
+use App\Entity\DTO\Column\ColumnMultipleResponseDTO;
 use Symfony\Component\Serializer\Attribute\SerializedName;
 
 #[ORM\Entity(repositoryClass: ColumnRepository::class),
@@ -18,7 +22,17 @@ use Symfony\Component\Serializer\Attribute\SerializedName;
     operations: [
         new Get(uriTemplate: "column/{id}"),
         new GetCollection(),
-        new Post()
+        new Post(),
+        new Post(
+            uriTemplate:'column/multiple',
+            openapi: new Operation(
+                summary:"Envoi de multiple instances de column",
+                description: "Utiliez ce endpoint pour envoyer plusieurs columns à la fois"
+            ),
+            input: ColumnMultipleDTO::class,
+            output: ColumnMultipleResponseDTO::class,
+            processor: ColumnMultipleProcessor::class
+        )
     ]),
     ApiResource(
         shortName: "Colonne",

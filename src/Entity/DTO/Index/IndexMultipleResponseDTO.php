@@ -8,13 +8,13 @@ final class IndexMultipleResponseDTO
 
 {
     public function __construct(
-        protected array $Indexs = []
+        protected array $indexs = []
     )
     {}
 
-    public function addIndex(IndexEntity $Index):void
+    public function addIndex(IndexEntity $index):void
     {
-        $this->Indexs[] = $Index;
+        $this->indexs[] = $index;
     }
 
     /**
@@ -22,7 +22,7 @@ final class IndexMultipleResponseDTO
      */
     public function getIndexs():?array
     {
-        return $this->Indexs;
+        return $this->indexs;
     }
     
 

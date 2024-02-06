@@ -8,13 +8,13 @@ final class ColumnMultipleResponseDTO
 
 {
     public function __construct(
-        protected array $Columns = []
+        protected array $columns = []
     )
     {}
 
-    public function addColumn(ColumnEntity $Column):void
+    public function addColumn(ColumnEntity $column):void
     {
-        $this->Columns[] = $Column;
+        $this->columns[] = $column;
     }
 
     /**
@@ -22,7 +22,7 @@ final class ColumnMultipleResponseDTO
      */
     public function getColumns():?array
     {
-        return $this->Columns;
+        return $this->columns;
     }
     
 

@@ -7,7 +7,7 @@ use App\Entity\Index as IndexEntity;
 final class IndexMultipleDTO
 {
     public function __construct(
-        protected ?array $Indexs = null
+        protected ?array $indexs = null
     )
     {}
 
@@ -16,6 +16,6 @@ final class IndexMultipleDTO
      */
     public function getIndexs(): ?array
     {
-        return $this->Indexs;
+        return $this->indexs;
     }
 }

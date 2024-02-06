@@ -8,13 +8,13 @@ final class DetailMultipleResponseDTO
 
 {
     public function __construct(
-        protected array $Details = []
+        protected array $details = []
     )
     {}
 
-    public function addDetail(DetailEntity $Detail):void
+    public function addDetail(DetailEntity $detail):void
     {
-        $this->Details[] = $Detail;
+        $this->details[] = $detail;
     }
 
     /**
@@ -22,7 +22,7 @@ final class DetailMultipleResponseDTO
      */
     public function getDetails():?array
     {
-        return $this->Details;
+        return $this->details;
     }
     
 

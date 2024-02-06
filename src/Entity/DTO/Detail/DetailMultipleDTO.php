@@ -7,7 +7,7 @@ use App\Entity\Detail as DetailEntity;
 final class DetailMultipleDTO
 {
     public function __construct(
-        protected ?array $Details = null
+        protected ?array $details = null
     )
     {}
 
@@ -16,6 +16,6 @@ final class DetailMultipleDTO
      */
     public function getDetails(): ?array
     {
-        return $this->Details;
+        return $this->details;
     }
 }

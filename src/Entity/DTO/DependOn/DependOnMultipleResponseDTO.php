@@ -8,13 +8,13 @@ final class DependOnMultipleResponseDTO
 
 {
     public function __construct(
-        protected array $DependOns = []
+        protected array $dependOns = []
     )
     {}
 
-    public function addDependOn(DependOnEntity $DependOn):void
+    public function addDependOn(DependOnEntity $dependOn):void
     {
-        $this->DependOns[] = $DependOn;
+        $this->dependOns[] = $dependOn;
     }
 
     /**
@@ -22,7 +22,7 @@ final class DependOnMultipleResponseDTO
      */
     public function getDependOns():?array
     {
-        return $this->DependOns;
+        return $this->dependOns;
     }
     
 

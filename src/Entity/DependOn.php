@@ -8,6 +8,10 @@ use Doctrine\ORM\Mapping as ORM;
 use ApiPlatform\Metadata\ApiResource;
 use App\Repository\DependOnRepository;
 use ApiPlatform\Metadata\GetCollection;
+use ApiPlatform\OpenApi\Model\Operation;
+use App\Entity\DTO\DependOn\DependOnMultipleDTO;
+use App\Service\Processor\DependOnMultipleProcessor;
+use App\Entity\DTO\DependOn\DependOnMultipleResponseDTO;
 use Symfony\Component\Serializer\Annotation\SerializedName;
 
 #[
@@ -18,7 +22,17 @@ use Symfony\Component\Serializer\Annotation\SerializedName;
     operations: [
         new Get(uriTemplate: "depend_on/{id}"),
         new GetCollection(),
-        new Post()
+        new Post(),
+        new Post(
+            uriTemplate:'depend_on/multiple',
+            openapi: new Operation(
+                summary:"Envoi de multiple instances de depend_on",
+                description: "Utiliez ce endpoint pour envoyer plusieurs depend_ons à la fois"
+            ),
+            input: DependOnMultipleDTO::class,
+            output: DependOnMultipleResponseDTO::class,
+            processor: DependOnMultipleProcessor::class
+        )
     ]
 )
 ]

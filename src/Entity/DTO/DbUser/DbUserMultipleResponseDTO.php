@@ -8,13 +8,13 @@ final class DbUserMultipleResponseDTO
 
 {
     public function __construct(
-        protected array $DbUsers = []
+        protected array $dbUsers = []
     )
     {}
 
-    public function addDbUser(DbUserEntity $DbUser):void
+    public function addDbUser(DbUserEntity $dbUser):void
     {
-        $this->DbUsers[] = $DbUser;
+        $this->dbUsers[] = $dbUser;
     }
 
     /**
@@ -22,7 +22,7 @@ final class DbUserMultipleResponseDTO
      */
     public function getDbUsers():?array
     {
-        return $this->DbUsers;
+        return $this->dbUsers;
     }
     
 

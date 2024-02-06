@@ -8,6 +8,10 @@ use Doctrine\ORM\Mapping as ORM;
 use App\Repository\DbUserRepository;
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\GetCollection;
+use ApiPlatform\OpenApi\Model\Operation;
+use App\Entity\DTO\DbUser\DbUserMultipleDTO;
+use App\Service\Processor\DbUserMultipleProcessor;
+use App\Entity\DTO\DbUser\DbUserMultipleResponseDTO;
 use Symfony\Component\Serializer\Annotation\SerializedName;
 
 #[ORM\Entity(repositoryClass: DbUserRepository::class),
@@ -18,7 +22,17 @@ use Symfony\Component\Serializer\Annotation\SerializedName;
     operations: [
         new Get(uriTemplate: "dbuser/{id}"),
         new GetCollection(),
-        new Post()
+        new Post(),
+        new Post(
+            uriTemplate:'dbuser/multiple',
+            openapi: new Operation(
+                summary:"Envoi de multiple instances de DbDser",
+                description: "Utiliez ce endpoint pour envoyer plusieurs DbUsers à la fois"
+            ),
+            input: DbUserMultipleDTO::class,
+            output: DbUserMultipleResponseDTO::class,
+            processor: DbUserMultipleProcessor::class
+        )
     ]
 )]
 class DbUser

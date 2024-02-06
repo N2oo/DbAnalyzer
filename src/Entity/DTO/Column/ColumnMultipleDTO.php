@@ -7,7 +7,7 @@ use App\Entity\Column as ColumnEntity;
 final class ColumnMultipleDTO
 {
     public function __construct(
-        protected ?array $Columns = null
+        protected ?array $columns = null
     )
     {}
 
@@ -16,6 +16,6 @@ final class ColumnMultipleDTO
      */
     public function getColumns(): ?array
     {
-        return $this->Columns;
+        return $this->columns;
     }
 }

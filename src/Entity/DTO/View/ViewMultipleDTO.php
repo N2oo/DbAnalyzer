@@ -7,7 +7,7 @@ use App\Entity\View as ViewEntity;
 final class ViewMultipleDTO
 {
     public function __construct(
-        protected ?array $Views = null
+        protected ?array $views = null
     )
     {}
 
@@ -16,6 +16,6 @@ final class ViewMultipleDTO
      */
     public function getViews(): ?array
     {
-        return $this->Views;
+        return $this->views;
     }
 }

@@ -1,21 +1,21 @@
 <?php
 
-namespace App\Entity\DTO\Column;
+namespace App\Entity\DTO\DbUser;
 
-use App\Entity\Column as ColumnEntity;
+use App\Entity\DbUser as DbUserEntity;
 
-final class ColumnMultipleDTO
+final class DbUserMultipleDTO
 {
     public function __construct(
-        protected ?array $Columns = null
+        protected ?array $dbUsers = null
     )
     {}
 
     /**
-     * @return ?ColumnEntity[]
+     * @return ?DbUserEntity[]
      */
-    public function getColumns(): ?array
+    public function getDbUsers(): ?array
     {
-        return $this->Columns;
+        return $this->dbUsers;
     }
 }

@@ -9,8 +9,12 @@ use Doctrine\ORM\Mapping as ORM;
 use App\Repository\DetailRepository;
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\GetCollection;
+use ApiPlatform\OpenApi\Model\Operation;
 use Doctrine\Common\Collections\Collection;
+use App\Entity\DTO\Detail\DetailMultipleDTO;
 use Doctrine\Common\Collections\ArrayCollection;
+use App\Service\Processor\DetailMultipleProcessor;
+use App\Entity\DTO\Detail\DetailMultipleResponseDTO;
 use Symfony\Component\Serializer\Annotation\SerializedName;
 
 #[
@@ -22,7 +26,17 @@ use Symfony\Component\Serializer\Annotation\SerializedName;
         operations: [
             new Get(uriTemplate: "detail/{id}"),
             new GetCollection(),
-            new Post()
+            new Post(),
+            new Post(
+                uriTemplate:'detail/multiple',
+                openapi: new Operation(
+                    summary:"Envoi de multiple instances de detail",
+                    description: "Utiliez ce endpoint pour envoyer plusieurs details à la fois"
+                ),
+                input: DetailMultipleDTO::class,
+                output: DetailMultipleResponseDTO::class,
+                processor: DetailMultipleProcessor::class
+            )
         ]
     )
 ]

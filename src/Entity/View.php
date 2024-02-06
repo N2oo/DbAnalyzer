@@ -8,6 +8,10 @@ use Doctrine\ORM\Mapping as ORM;
 use App\Repository\ViewRepository;
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\GetCollection;
+use ApiPlatform\OpenApi\Model\Operation;
+use App\Entity\DTO\View\ViewMultipleDTO;
+use App\Entity\DTO\View\ViewMultipleResponseDTO;
+use App\Service\Processor\ViewMultipleProcessor;
 use Symfony\Component\Serializer\Annotation\SerializedName;
 
 #[
@@ -19,7 +23,17 @@ use Symfony\Component\Serializer\Annotation\SerializedName;
         operations:[
             new Get(uriTemplate:"view/{id}"),
             new GetCollection(),
-            new Post()
+            new Post(),
+            new Post(
+                uriTemplate:'view/multiple',
+                openapi: new Operation(
+                    summary:"Envoi de multiple instances de view",
+                    description: "Utiliez ce endpoint pour envoyer plusieurs views à la fois"
+                ),
+                input: ViewMultipleDTO::class,
+                output: ViewMultipleResponseDTO::class,
+                processor: ViewMultipleProcessor::class
+            )
         ])
 ]
 class View
