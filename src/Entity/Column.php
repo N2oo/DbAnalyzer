@@ -4,8 +4,20 @@ namespace App\Entity;
 
 use App\Repository\ColumnRepository;
 use Doctrine\ORM\Mapping as ORM;
+use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\GetCollection;
+use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\Post;
 
-#[ORM\Entity(repositoryClass: ColumnRepository::class)]
+#[ORM\Entity(repositoryClass: ColumnRepository::class),
+    ApiResource(
+    uriTemplate: "column",
+    operations: [
+        new Get(uriTemplate: "column/{id}"),
+        new GetCollection(),
+        new Post()
+    ]
+)]
 #[ORM\Table(name: '`column`')]
 class Column
 {

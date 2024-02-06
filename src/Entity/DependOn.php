@@ -4,8 +4,22 @@ namespace App\Entity;
 
 use App\Repository\DependOnRepository;
 use Doctrine\ORM\Mapping as ORM;
+use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\GetCollection;
+use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\Post;
 
-#[ORM\Entity(repositoryClass: DependOnRepository::class)]
+#[
+    ORM\Entity(repositoryClass: DependOnRepository::class),
+    ApiResource(
+    uriTemplate: "depend_on",
+    operations: [
+        new Get(uriTemplate: "depend_on/{id}"),
+        new GetCollection(),
+        new Post()
+    ]
+)
+]
 class DependOn
 {
     #[ORM\Id]
@@ -20,10 +34,10 @@ class DependOn
     private ?string $dType = null;
 
     #[ORM\Column]
-    private ?int $bTableId = null;
+    private ?int $bTableIdOriginal = null;
 
     #[ORM\Column]
-    private ?int $dTableId = null;
+    private ?int $dTableIdOriginal = null;
 
     #[ORM\ManyToOne(inversedBy: 'dependencies')]
     private ?Table $bTable = null;
@@ -60,26 +74,26 @@ class DependOn
         return $this;
     }
 
-    public function getBTableId(): ?int
+    public function getBTableIdOriginal(): ?int
     {
-        return $this->bTableId;
+        return $this->bTableIdOriginal;
     }
 
-    public function setBTableId(int $bTableId): static
+    public function setBTableIdOriginal(int $bTableIdOriginal): static
     {
-        $this->bTableId = $bTableId;
+        $this->bTableIdOriginal = $bTableIdOriginal;
 
         return $this;
     }
 
-    public function getDTableId(): ?int
+    public function getDTableIdOriginal(): ?int
     {
-        return $this->dTableId;
+        return $this->dTableIdOriginal;
     }
 
-    public function setDTableId(int $dTableId): static
+    public function setDTableIdOriginal(int $dTableIdOriginal): static
     {
-        $this->dTableId = $dTableId;
+        $this->dTableIdOriginal = $dTableIdOriginal;
 
         return $this;
     }

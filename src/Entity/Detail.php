@@ -7,8 +7,22 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\GetCollection;
+use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\Post;
 
-#[ORM\Entity(repositoryClass: DetailRepository::class)]
+#[
+    ORM\Entity(repositoryClass: DetailRepository::class),
+    ApiResource(
+        uriTemplate: "detail",
+        operations: [
+            new Get(uriTemplate: "detail/{id}"),
+            new GetCollection(),
+            new Post()
+        ]
+    )
+]
 class Detail
 {
     #[ORM\Id]

@@ -4,8 +4,20 @@ namespace App\Entity;
 
 use App\Repository\DbUserRepository;
 use Doctrine\ORM\Mapping as ORM;
+use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\GetCollection;
+use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\Post;
 
-#[ORM\Entity(repositoryClass: DbUserRepository::class)]
+#[ORM\Entity(repositoryClass: DbUserRepository::class),
+    ApiResource(
+    uriTemplate: "dbuser",
+    operations: [
+        new Get(uriTemplate: "dbuser/{id}"),
+        new GetCollection(),
+        new Post()
+    ]
+)]
 class DbUser
 {
     #[ORM\Id]

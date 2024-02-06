@@ -4,8 +4,20 @@ namespace App\Entity;
 
 use App\Repository\IndexRepository;
 use Doctrine\ORM\Mapping as ORM;
+use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\GetCollection;
+use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\Post;
 
-#[ORM\Entity(repositoryClass: IndexRepository::class)]
+#[ORM\Entity(repositoryClass: IndexRepository::class),
+    ApiResource(
+        uriTemplate: "index",
+        operations:[
+            new Get(uriTemplate:"index/{id}"),
+            new GetCollection(),
+            new Post()
+        ])
+]
 class Index
 {
     #[ORM\Id]

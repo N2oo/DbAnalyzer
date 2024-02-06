@@ -4,8 +4,21 @@ namespace App\Entity;
 
 use App\Repository\ViewRepository;
 use Doctrine\ORM\Mapping as ORM;
+use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\GetCollection;
+use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\Post;
 
-#[ORM\Entity(repositoryClass: ViewRepository::class)]
+#[
+    ORM\Entity(repositoryClass: ViewRepository::class),
+    ApiResource(
+        uriTemplate: "view",
+        operations:[
+            new Get(uriTemplate:"view/{id}"),
+            new GetCollection(),
+            new Post()
+        ])
+]
 class View
 {
     #[ORM\Id]
