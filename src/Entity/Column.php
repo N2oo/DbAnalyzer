@@ -22,7 +22,10 @@ use Symfony\Component\Serializer\Attribute\SerializedName;
     ]),
     ApiResource(
         shortName: "Colonne",
-        description: "Résolution des colones personnalisée",
+        openapiContext:[
+            "summary"=> "Résolution des colonnes d'une table",
+            "secription"=> "Résolution des colonnes affairantes à une table"
+        ],
         uriTemplate:"table/{id}/columns",
         uriVariables:["id"=>new Link(fromClass:Table::class,fromProperty:"id")],
         operations: [
