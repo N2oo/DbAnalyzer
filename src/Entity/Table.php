@@ -114,6 +114,9 @@ class Table
     #[ORM\OneToMany(mappedBy: 'dTable', targetEntity: DependOn::class,cascade:["persist"])]
     private Collection $dependOns;
 
+    #[ORM\OneToMany(mappedBy: 'tableElement', targetEntity: Detail::class, cascade:["persist"])]
+    private Collection $details;
+
     public function __construct()
     {
         $this->columns = new ArrayCollection();
@@ -121,6 +124,7 @@ class Table
         $this->views = new ArrayCollection();
         $this->dependencies = new ArrayCollection();
         $this->dependOns = new ArrayCollection();
+        $this->details = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -404,6 +408,36 @@ class Table
             // set the owning side to null (unless already changed)
             if ($dependOn->getDTable() === $this) {
                 $dependOn->setDTable(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Detail>
+     */
+    public function getDetails(): Collection
+    {
+        return $this->details;
+    }
+
+    public function addDetail(Detail $detail): static
+    {
+        if (!$this->details->contains($detail)) {
+            $this->details->add($detail);
+            $detail->setTableElement($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDetail(Detail $detail): static
+    {
+        if ($this->details->removeElement($detail)) {
+            // set the owning side to null (unless already changed)
+            if ($detail->getTableElement() === $this) {
+                $detail->setTableElement(null);
             }
         }
 

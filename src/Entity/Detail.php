@@ -17,6 +17,8 @@ use App\Service\Processor\DetailMultipleProcessor;
 use App\Entity\DTO\Detail\DetailMultipleResponseDTO;
 use Symfony\Component\Serializer\Annotation\SerializedName;
 
+//Attention pour la propriété filesize nous travaillons avec un bigInt en conséquence l'élément à passer doit etre au format string
+
 #[
     ORM\Entity(repositoryClass: DetailRepository::class),
     ApiResource(
@@ -71,8 +73,8 @@ class Detail
     private ?string $fileGroup = null;
 
     #[ORM\Column(type: Types::BIGINT)]
-    
     #[SerializedName('filesize')]
+    //String car BIG Int voir les effet dans le commentaire en haut
     private ?string $fileSize = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
@@ -101,6 +103,9 @@ class Detail
 
     #[ORM\ManyToMany(targetEntity: DbUser::class)]
     private Collection $users;
+
+    #[ORM\ManyToOne(inversedBy: 'details')]
+    private ?Table $tableElement = null;
 
     public function __construct()
     {
@@ -276,6 +281,18 @@ class Detail
     public function removeUser(DbUser $user): static
     {
         $this->users->removeElement($user);
+
+        return $this;
+    }
+
+    public function getTableElement(): ?Table
+    {
+        return $this->tableElement;
+    }
+
+    public function setTableElement(?Table $tableElement): static
+    {
+        $this->tableElement = $tableElement;
 
         return $this;
     }
