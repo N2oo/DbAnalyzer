@@ -2,11 +2,12 @@
 
 namespace App\Service\Processor;
 use ApiPlatform\Metadata\Operation;
+use ApiPlatform\State\ProcessorInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\DTO\Detail\DetailMultipleDTO;
 use App\Entity\DTO\Detail\DetailMultipleResponseDTO;
 
-class DetailMultipleProcessor implements MultipleEntityProcessorInterface
+class DetailMultipleProcessor implements ProcessorInterface
 {
     public function __construct(
         private EntityManagerInterface $em
