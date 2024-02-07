@@ -2609,5 +2609,240 @@
         ],
         "viewsql": "create view \"credel\".vhfac (societe,depot,numor,numfact,datefact,client,nomcli,typecli,typefact,accident,tempsfact) as select distinct x0.csoc_hefac ,x0.depo_hefac ,x0.nuor_hefac ,x0.nfac_hefac ,x0.dfac_hefac ,x0.ccli_hefac ,x0.nomc_hefac ,x0.tcli_hefac ,x0.tfac_hefac ,x0.acci_hefac ,x0.hfac_hefac from \"credel\".fhisefac x0 ;",
         "details": []
+    },
+    {
+        "tabname": "vcc_stock",
+        "owner": "credel",
+        "dirpath": null,
+        "tabid": 2013,
+        "rowsize": 105,
+        "ncols": 23,
+        "nindexes": 0,
+        "nrows": 0,
+        "created": "2018-07-18",
+        "version": 5,
+        "tabtype": "V",
+        "audpath": null,
+        "columns": [
+            {
+                "colname": "valer",
+                "tabid": 2013,
+                "colno": 23,
+                "coltype": 5,
+                "collength": 3074
+            },
+            {
+                "colname": "qtite",
+                "tabid": 2013,
+                "colno": 22,
+                "coltype": 5,
+                "collength": 2562
+            },
+            {
+                "colname": "qtres",
+                "tabid": 2013,
+                "colno": 21,
+                "coltype": 5,
+                "collength": 2562
+            },
+            {
+                "colname": "qtcde",
+                "tabid": 2013,
+                "colno": 20,
+                "coltype": 2,
+                "collength": 4
+            },
+            {
+                "colname": "maxim",
+                "tabid": 2013,
+                "colno": 19,
+                "coltype": 2,
+                "collength": 4
+            },
+            {
+                "colname": "seuil",
+                "tabid": 2013,
+                "colno": 18,
+                "coltype": 2,
+                "collength": 4
+            },
+            {
+                "colname": "cumso",
+                "tabid": 2013,
+                "colno": 17,
+                "coltype": 2,
+                "collength": 4
+            },
+            {
+                "colname": "cumen",
+                "tabid": 2013,
+                "colno": 16,
+                "coltype": 2,
+                "collength": 4
+            },
+            {
+                "colname": "ddefc",
+                "tabid": 2013,
+                "colno": 15,
+                "coltype": 7,
+                "collength": 4
+            },
+            {
+                "colname": "ddinv",
+                "tabid": 2013,
+                "colno": 14,
+                "coltype": 7,
+                "collength": 4
+            },
+            {
+                "colname": "ddsor",
+                "tabid": 2013,
+                "colno": 13,
+                "coltype": 7,
+                "collength": 4
+            },
+            {
+                "colname": "ddent",
+                "tabid": 2013,
+                "colno": 12,
+                "coltype": 7,
+                "collength": 4
+            },
+            {
+                "colname": "prxmp",
+                "tabid": 2013,
+                "colno": 11,
+                "coltype": 5,
+                "collength": 2306
+            },
+            {
+                "colname": "clots",
+                "tabid": 2013,
+                "colno": 10,
+                "coltype": 0,
+                "collength": 1
+            },
+            {
+                "colname": "statu",
+                "tabid": 2013,
+                "colno": 9,
+                "coltype": 1,
+                "collength": 2
+            },
+            {
+                "colname": "categ",
+                "tabid": 2013,
+                "colno": 8,
+                "coltype": 1,
+                "collength": 2
+            },
+            {
+                "colname": "ctype",
+                "tabid": 2013,
+                "colno": 7,
+                "coltype": 1,
+                "collength": 2
+            },
+            {
+                "colname": "cgest",
+                "tabid": 2013,
+                "colno": 6,
+                "coltype": 1,
+                "collength": 2
+            },
+            {
+                "colname": "casie",
+                "tabid": 2013,
+                "colno": 5,
+                "coltype": 0,
+                "collength": 10
+            },
+            {
+                "colname": "fourn",
+                "tabid": 2013,
+                "colno": 4,
+                "coltype": 2,
+                "collength": 4
+            },
+            {
+                "colname": "refer",
+                "tabid": 2013,
+                "colno": 3,
+                "coltype": 0,
+                "collength": 15
+            },
+            {
+                "colname": "depot",
+                "tabid": 2013,
+                "colno": 2,
+                "coltype": 0,
+                "collength": 3
+            },
+            {
+                "colname": "csoci",
+                "tabid": 2013,
+                "colno": 1,
+                "coltype": 0,
+                "collength": 3
+            }
+        ],
+        "depends_on": [
+            {
+                "btabid": 467,
+                "btype": "T",
+                "dtabid": 2013,
+                "dtype": "V"
+            }
+        ],
+        "indexes": [],
+        "view": [
+            {
+                "tabid": 2013,
+                "seqno": 8,
+                "viewtext": "el\".fstock x0 ;"
+            },
+            {
+                "tabid": 2013,
+                "seqno": 7,
+                "viewtext": "0.qtcde_stk ,x0.qtres_stk ,x0.qtite_stk ,x0.valer_stk from \"cred"
+            },
+            {
+                "tabid": 2013,
+                "seqno": 6,
+                "viewtext": "c_stk ,x0.cumen_stk ,x0.cumso_stk ,x0.seuil_stk ,x0.maxim_stk ,x"
+            },
+            {
+                "tabid": 2013,
+                "seqno": 5,
+                "viewtext": ",x0.prxmp_stk ,x0.ddent_stk ,x0.ddsor_stk ,x0.ddinv_stk ,x0.ddef"
+            },
+            {
+                "tabid": 2013,
+                "seqno": 4,
+                "viewtext": "est_stk ,x0.ctype_stk ,x0.categ_stk ,x0.statu_stk ,x0.clots_stk"
+            },
+            {
+                "tabid": 2013,
+                "seqno": 3,
+                "viewtext": "k ,x0.depot_stk ,x0.refer_stk ,x0.fourn_stk ,x0.casie_stk ,x0.cg"
+            },
+            {
+                "tabid": 2013,
+                "seqno": 2,
+                "viewtext": "cumso,seuil,maxim,qtcde,qtres,qtite,valer) as select x0.csoci_st"
+            },
+            {
+                "tabid": 2013,
+                "seqno": 1,
+                "viewtext": "est,ctype,categ,statu,clots,prxmp,ddent,ddsor,ddinv,ddefc,cumen,"
+            },
+            {
+                "tabid": 2013,
+                "seqno": 0,
+                "viewtext": "create view \"credel\".vcc_stock (csoci,depot,refer,fourn,casie,cg"
+            }
+        ],
+        "viewsql": "create view \"credel\".vcc_stock (csoci,depot,refer,fourn,casie,cgest,ctype,categ,statu,clots,prxmp,ddent,ddsor,ddinv,ddefc,cumen,cumso,seuil,maxim,qtcde,qtres,qtite,valer) as select x0.csoci_stk ,x0.depot_stk ,x0.refer_stk ,x0.fourn_stk ,x0.casie_stk ,x0.cgest_stk ,x0.ctype_stk ,x0.categ_stk ,x0.statu_stk ,x0.clots_stk,x0.prxmp_stk ,x0.ddent_stk ,x0.ddsor_stk ,x0.ddinv_stk ,x0.ddefc_stk ,x0.cumen_stk ,x0.cumso_stk ,x0.seuil_stk ,x0.maxim_stk ,x0.qtcde_stk ,x0.qtres_stk ,x0.qtite_stk ,x0.valer_stk from \"credel\".fstock x0 ;",
+        "details": []
     }
 ]
