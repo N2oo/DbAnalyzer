@@ -27,9 +27,9 @@ class DbUserMultipleProcessor implements ProcessorInterface
         }
         foreach($dbUsers as $dbUser){
             $this->em->persist($dbUser);
-            $this->em->flush();
             $results->addDbUser($dbUser);
         }
+        $this->em->flush();
         return $results;
     }
 }

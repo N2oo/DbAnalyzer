@@ -27,9 +27,9 @@ class TableMultipleProcessor implements ProcessorInterface
         }
         foreach($tables as $table){
             $this->em->persist($table);
-            $this->em->flush();
             $results->addTable($table);
         }
+        $this->em->flush();
         return $results;
     }
 }

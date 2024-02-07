@@ -29,9 +29,9 @@ class ColumnMultipleProcessor implements ProcessorInterface
         }
         foreach ($columns as $column) {
             $this->em->persist($column);
-            $this->em->flush();
             $results->addColumn($column);
         }
+        $this->em->flush();
         return $results;
     }
 }

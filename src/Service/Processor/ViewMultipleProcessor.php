@@ -27,9 +27,9 @@ class ViewMultipleProcessor implements ProcessorInterface
         }
         foreach($views as $view){
             $this->em->persist($view);
-            $this->em->flush();
             $results->addView($view);
         }
+        $this->em->flush();
         return $results;
     }
 }

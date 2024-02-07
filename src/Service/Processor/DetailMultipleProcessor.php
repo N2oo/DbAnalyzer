@@ -27,9 +27,9 @@ class DetailMultipleProcessor implements ProcessorInterface
         }
         foreach($details as $detail){
             $this->em->persist($detail);
-            $this->em->flush();
             $results->addDetail($detail);
         }
+        $this->em->flush();
         return $results;
     }
 }

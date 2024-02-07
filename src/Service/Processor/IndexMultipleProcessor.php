@@ -27,9 +27,9 @@ class IndexMultipleProcessor implements ProcessorInterface
         }
         foreach($indexs as $index){
             $this->em->persist($index);
-            $this->em->flush();
             $results->addIndex($index);
         }
+        $this->em->flush();
         return $results;
     }
 }

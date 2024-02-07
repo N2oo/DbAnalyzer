@@ -27,9 +27,9 @@ class DependOnMultipleProcessor implements ProcessorInterface
         }
         foreach($dependOns as $dependOn){
             $this->em->persist($dependOn);
-            $this->em->flush();
             $results->addDependOn($dependOn);
         }
+        $this->em->flush();
         return $results;
     }
 }
