@@ -18,6 +18,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
 use App\Service\Processor\TableMultipleProcessor;
 use App\Entity\DTO\Table\TableMultipleResponseDTO;
+use Doctrine\ORM\Mapping\OrderBy;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Serializer\Annotation\SerializedName;
 
@@ -106,6 +107,7 @@ class Table
     private Collection $indexes;
 
     #[ORM\OneToMany(mappedBy: 'tableElement', targetEntity: View::class,cascade:["persist"])]
+    #[OrderBy(["sequenceNumber"=>"ASC"])]
     private Collection $views;
 
     #[ORM\OneToMany(mappedBy: 'bTable', targetEntity: DependOn::class,cascade:["persist"])]
@@ -259,7 +261,7 @@ class Table
         //TODO : s'assurer que les views sont triés par seqno
         foreach($this->getViews() as $viewElement)
         {
-            $sql_query += $viewElement->getViewText();
+            $sql_query .= $viewElement->getViewText();
         }
         return $sql_query;
     }
