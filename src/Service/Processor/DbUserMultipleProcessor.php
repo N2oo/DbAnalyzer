@@ -4,6 +4,7 @@ namespace App\Service\Processor;
 use ApiPlatform\Metadata\Operation;
 use Doctrine\ORM\EntityManagerInterface;
 use ApiPlatform\State\ProcessorInterface;
+use App\Entity\DTO\DbUser\DbUserMultipleDTO;
 use App\Entity\DTO\DbUser\DbUserMultipleResponseDTO;
 
 class DbUserMultipleProcessor implements ProcessorInterface
@@ -14,6 +15,9 @@ class DbUserMultipleProcessor implements ProcessorInterface
     {
 
     }
+    /**
+     * @param DbUserMultipleDTO $data
+     */
     public function process(mixed $data, Operation $operation, array $uriVariables = [], array $context = [])
     {
         $results = new DbUserMultipleResponseDTO();

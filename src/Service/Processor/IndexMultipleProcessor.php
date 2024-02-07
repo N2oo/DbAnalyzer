@@ -4,6 +4,7 @@ namespace App\Service\Processor;
 use ApiPlatform\Metadata\Operation;
 use Doctrine\ORM\EntityManagerInterface;
 use ApiPlatform\State\ProcessorInterface;
+use App\Entity\DTO\Index\IndexMultipleDTO;
 use App\Entity\DTO\Index\IndexMultipleResponseDTO;
 
 class IndexMultipleProcessor implements ProcessorInterface
@@ -14,6 +15,9 @@ class IndexMultipleProcessor implements ProcessorInterface
     {
 
     }
+    /**
+     * @param IndexMultipleDTO $data
+     */
     public function process(mixed $data, Operation $operation, array $uriVariables = [], array $context = [])
     {
         $results = new IndexMultipleResponseDTO();

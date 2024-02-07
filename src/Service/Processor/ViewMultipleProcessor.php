@@ -2,6 +2,7 @@
 
 namespace App\Service\Processor;
 use ApiPlatform\Metadata\Operation;
+use App\Entity\DTO\View\ViewMultipleDTO;
 use Doctrine\ORM\EntityManagerInterface;
 use ApiPlatform\State\ProcessorInterface;
 use App\Entity\DTO\View\ViewMultipleResponseDTO;
@@ -14,6 +15,9 @@ class ViewMultipleProcessor implements ProcessorInterface
     {
 
     }
+    /**
+     * @param ViewMultipleDTO $data
+     */
     public function process(mixed $data, Operation $operation, array $uriVariables = [], array $context = [])
     {
         $results = new ViewMultipleResponseDTO();

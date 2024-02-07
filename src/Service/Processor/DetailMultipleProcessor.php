@@ -4,6 +4,7 @@ namespace App\Service\Processor;
 use ApiPlatform\Metadata\Operation;
 use Doctrine\ORM\EntityManagerInterface;
 use ApiPlatform\State\ProcessorInterface;
+use App\Entity\DTO\Detail\DetailMultipleDTO;
 use App\Entity\DTO\Detail\DetailMultipleResponseDTO;
 
 class DetailMultipleProcessor implements ProcessorInterface
@@ -14,6 +15,9 @@ class DetailMultipleProcessor implements ProcessorInterface
     {
 
     }
+    /**
+     * @param DetailMultipleDTO $data
+     */
     public function process(mixed $data, Operation $operation, array $uriVariables = [], array $context = [])
     {
         $results = new DetailMultipleResponseDTO();

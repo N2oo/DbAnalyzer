@@ -4,6 +4,7 @@ namespace App\Service\Processor;
 use ApiPlatform\Metadata\Operation;
 use Doctrine\ORM\EntityManagerInterface;
 use ApiPlatform\State\ProcessorInterface;
+use App\Entity\DTO\DependOn\DependOnMultipleDTO;
 use App\Entity\DTO\DependOn\DependOnMultipleResponseDTO;
 
 class DependOnMultipleProcessor implements ProcessorInterface
@@ -14,6 +15,9 @@ class DependOnMultipleProcessor implements ProcessorInterface
     {
 
     }
+    /**
+     * @param DependOnMultipleDTO $data
+     */
     public function process(mixed $data, Operation $operation, array $uriVariables = [], array $context = [])
     {
         $results = new DependOnMultipleResponseDTO();
