@@ -65,8 +65,7 @@ class DbUser
     private ?string $description = null;
 
     #[ORM\Column(length: 255)]
-    
-    #[SerializedName('lauch')]
+    #[SerializedName('launch')]
     private ?string $defaultShell = null;
 
     public function getId(): ?int
