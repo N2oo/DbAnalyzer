@@ -17,8 +17,6 @@ use Symfony\Component\Serializer\Attribute\SerializedName;
 #[ORM\Entity(repositoryClass: IndexRepository::class),
     ApiResource(
         shortName: "Index",
-        description: "Détails sur l'index de la colonne",
-        uriTemplate: "index",
         operations:[
             new Get(uriTemplate:"index/{id}"),
             new GetCollection(),
@@ -26,14 +24,13 @@ use Symfony\Component\Serializer\Attribute\SerializedName;
             new Post(
                 uriTemplate:'index/multiple',
                 openapi: new Operation(
-                    summary:"Envoi de multiple instances de index",
-                    description: "Utiliez ce endpoint pour envoyer plusieurs indexs à la fois"
+                    summary:"Envoi de multiple instances de index"
                 ),
                 input: IndexMultipleDTO::class,
                 output: IndexMultipleResponseDTO::class,
                 processor: IndexMultipleProcessor::class
-            )
-        ])
+            ),
+            ])
 ]
 class Index
 {
