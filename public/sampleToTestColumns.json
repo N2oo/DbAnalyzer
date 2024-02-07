@@ -1,0 +1,165 @@
+{
+    "columns": [
+      {
+                  "colname": "csoci_stk",
+                  "tabid": 467,
+                  "colno": 1,
+                  "coltype": 0,
+                  "collength": 3
+              },
+              {
+                  "colname": "depot_stk",
+                  "tabid": 467,
+                  "colno": 2,
+                  "coltype": 0,
+                  "collength": 3
+              },
+              {
+                  "colname": "refer_stk",
+                  "tabid": 467,
+                  "colno": 3,
+                  "coltype": 0,
+                  "collength": 15
+              },
+              {
+                  "colname": "fourn_stk",
+                  "tabid": 467,
+                  "colno": 4,
+                  "coltype": 2,
+                  "collength": 4
+              },
+              {
+                  "colname": "casie_stk",
+                  "tabid": 467,
+                  "colno": 5,
+                  "coltype": 0,
+                  "collength": 10
+              },
+              {
+                  "colname": "cgest_stk",
+                  "tabid": 467,
+                  "colno": 6,
+                  "coltype": 1,
+                  "collength": 2
+              },
+              {
+                  "colname": "ctype_stk",
+                  "tabid": 467,
+                  "colno": 7,
+                  "coltype": 1,
+                  "collength": 2
+              },
+              {
+                  "colname": "categ_stk",
+                  "tabid": 467,
+                  "colno": 8,
+                  "coltype": 1,
+                  "collength": 2
+              },
+              {
+                  "colname": "statu_stk",
+                  "tabid": 467,
+                  "colno": 9,
+                  "coltype": 1,
+                  "collength": 2
+              },
+              {
+                  "colname": "clots_stk",
+                  "tabid": 467,
+                  "colno": 10,
+                  "coltype": 0,
+                  "collength": 1
+              },
+              {
+                  "colname": "prxmp_stk",
+                  "tabid": 467,
+                  "colno": 11,
+                  "coltype": 5,
+                  "collength": 2306
+              },
+              {
+                  "colname": "ddent_stk",
+                  "tabid": 467,
+                  "colno": 12,
+                  "coltype": 7,
+                  "collength": 4
+              },
+              {
+                  "colname": "ddsor_stk",
+                  "tabid": 467,
+                  "colno": 13,
+                  "coltype": 7,
+                  "collength": 4
+              },
+              {
+                  "colname": "ddinv_stk",
+                  "tabid": 467,
+                  "colno": 14,
+                  "coltype": 7,
+                  "collength": 4
+              },
+              {
+                  "colname": "ddefc_stk",
+                  "tabid": 467,
+                  "colno": 15,
+                  "coltype": 7,
+                  "collength": 4
+              },
+              {
+                  "colname": "cumen_stk",
+                  "tabid": 467,
+                  "colno": 16,
+                  "coltype": 2,
+                  "collength": 4
+              },
+              {
+                  "colname": "cumso_stk",
+                  "tabid": 467,
+                  "colno": 17,
+                  "coltype": 2,
+                  "collength": 4
+              },
+              {
+                  "colname": "seuil_stk",
+                  "tabid": 467,
+                  "colno": 18,
+                  "coltype": 2,
+                  "collength": 4
+              },
+              {
+                  "colname": "maxim_stk",
+                  "tabid": 467,
+                  "colno": 19,
+                  "coltype": 2,
+                  "collength": 4
+              },
+              {
+                  "colname": "qtcde_stk",
+                  "tabid": 467,
+                  "colno": 20,
+                  "coltype": 2,
+                  "collength": 4
+              },
+              {
+                  "colname": "qtres_stk",
+                  "tabid": 467,
+                  "colno": 21,
+                  "coltype": 5,
+                  "collength": 2562
+              },
+              {
+                  "colname": "qtite_stk",
+                  "tabid": 467,
+                  "colno": 22,
+                  "coltype": 5,
+                  "collength": 2562
+              },
+              {
+                  "colname": "valer_stk",
+                  "tabid": 467,
+                  "colno": 23,
+                  "coltype": 5,
+                  "collength": 3074
+              }
+    ]
+  }

@@ -4,15 +4,21 @@ namespace App\Decorator;
 
 use Psr\Log\LoggerInterface;
 use ApiPlatform\Metadata\Operation;
-use ApiPlatform\State\ProcessorInterface;
 use App\Service\Processor\MultipleEntityProcessorInterface;
-use Symfony\Component\DependencyInjection\Attribute\AsDecorator;
+use Symfony\Component\DependencyInjection\Attribute\AutowireDecorated;
 
-#[AsDecorator(ProcessorInterface::class)]
+/**
+ * Décorateur utilisé pour toutes les classes implémentant l'interface MultipleEntityProcessorInterface
+ * https://stackoverflow.com/questions/57443470/decorate-all-services-that-implement-the-same-interface-by-default
+ * 
+ * Raison de la mise en place de l'attribut AutowireDecorated
+ * https://symfony.com/doc/7.1/service_container/service_decoration.html#control-the-behavior-when-the-decorated-service-does-not-exist
+ */
 class JoinResolver implements MultipleEntityProcessorInterface
 {
     public function __construct(
-        private ProcessorInterface $inner,
+        #[AutowireDecorated]
+        private ?MultipleEntityProcessorInterface $inner,
         private LoggerInterface $logger
     ){
 
@@ -20,7 +26,6 @@ class JoinResolver implements MultipleEntityProcessorInterface
 
     public function process(mixed $data, Operation $operation, array $uriVariables = [], array $context = [])
     {
-        $this->logger->critical("hello");
-        $this->inner->process($data,$operation,$uriVariables,$context);
+        return $this->inner->process($data,$operation,$uriVariables,$context);
     }
 }
