@@ -27,6 +27,20 @@
             "version": 5,
             "tabtype": "V",
             "audpath": null
+        },
+        {
+            "tabname": "vcc_stock",
+            "owner": "credel",
+            "dirpath": null,
+            "tabid": 2013,
+            "rowsize": 105,
+            "ncols": 23,
+            "nindexes": 0,
+            "nrows": 0,
+            "created": "2018-07-18",
+            "version": 5,
+            "tabtype": "V",
+            "audpath": null
         }
     ]
 }
