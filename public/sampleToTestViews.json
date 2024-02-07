@@ -1,0 +1,49 @@
+{
+    "views":[
+        {
+            "tabid": 2013,
+            "seqno": 8,
+            "viewtext": "el\".fstock x0 ;"
+        },
+        {
+            "tabid": 2013,
+            "seqno": 7,
+            "viewtext": "0.qtcde_stk ,x0.qtres_stk ,x0.qtite_stk ,x0.valer_stk from \"cred"
+        },
+        {
+            "tabid": 2013,
+            "seqno": 6,
+            "viewtext": "c_stk ,x0.cumen_stk ,x0.cumso_stk ,x0.seuil_stk ,x0.maxim_stk ,x"
+        },
+        {
+            "tabid": 2013,
+            "seqno": 5,
+            "viewtext": ",x0.prxmp_stk ,x0.ddent_stk ,x0.ddsor_stk ,x0.ddinv_stk ,x0.ddef"
+        },
+        {
+            "tabid": 2013,
+            "seqno": 4,
+            "viewtext": "est_stk ,x0.ctype_stk ,x0.categ_stk ,x0.statu_stk ,x0.clots_stk"
+        },
+        {
+            "tabid": 2013,
+            "seqno": 3,
+            "viewtext": "k ,x0.depot_stk ,x0.refer_stk ,x0.fourn_stk ,x0.casie_stk ,x0.cg"
+        },
+        {
+            "tabid": 2013,
+            "seqno": 2,
+            "viewtext": "cumso,seuil,maxim,qtcde,qtres,qtite,valer) as select x0.csoci_st"
+        },
+        {
+            "tabid": 2013,
+            "seqno": 1,
+            "viewtext": "est,ctype,categ,statu,clots,prxmp,ddent,ddsor,ddinv,ddefc,cumen,"
+        },
+        {
+            "tabid": 2013,
+            "seqno": 0,
+            "viewtext": "create view \"credel\".vcc_stock (csoci,depot,refer,fourn,casie,cg"
+        }
+    ]
+}
