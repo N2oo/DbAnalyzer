@@ -20,6 +20,18 @@ class DbUserRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, DbUser::class);
     }
+    public function findByHomeFolders($homeFolders)
+    {
+        $builder = $this->createQueryBuilder('dbu')
+        ->select('dbu');
+        foreach($homeFolders as $key=>$homeFolder){
+            $builder->orWhere("dbu.homeFolder LIKE :folder{$key}")
+                ->setParameter("folder{$key}","{$homeFolder}%");
+        }
+        return $builder
+            ->getQuery()
+            ->getResult();
+    }
 
 //    /**
 //     * @return DbUser[] Returns an array of DbUser objects

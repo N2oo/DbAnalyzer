@@ -7,7 +7,7 @@ use App\Entity\DbUser as DbUserEntity;
 final class DbUserMultipleDTO
 {
     public function __construct(
-        protected ?array $dbUsers = null
+        private ?array $dbUsers = null
     )
     {}
 

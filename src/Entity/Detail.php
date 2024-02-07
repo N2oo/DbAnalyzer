@@ -101,7 +101,7 @@ class Detail
     #[SerializedName('file_extension')]
     private ?string $fileExtension = null;
 
-    #[ORM\ManyToMany(targetEntity: DbUser::class)]
+    #[ORM\ManyToMany(targetEntity: DbUser::class,cascade:["persist"])]
     private Collection $users;
 
     #[ORM\ManyToOne(inversedBy: 'details')]
@@ -223,6 +223,11 @@ class Detail
         $this->fileLocation = $fileLocation;
 
         return $this;
+    }
+
+    public function getClearFolder():string
+    {
+        return str_replace("/credel.dbs/","",$this->getFolder());
     }
 
     public function getFolder(): ?string

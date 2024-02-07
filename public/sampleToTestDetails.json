@@ -1,0 +1,36 @@
+{
+    "details":[
+        {
+            "inode": 14681222,
+            "other": 0,
+            "permissions": "-rwxrwxrwx",
+            "cntlink": 1,
+            "file_owner": "credel",
+            "filegroup": "informix",
+            "filesize": 0,
+            "date": "2011-06-29",
+            "time": "11:03:57",
+            "other2": 200,
+            "file_location": "/user/austrasie/credel.dbs/fstoc00467.dat",
+            "folder": "/user/austrasie/credel.dbs/",
+            "filename": "fstoc00467",
+            "file_extension": ".dat"
+        },
+        {
+            "inode": 14681223,
+            "other": 8,
+            "permissions": "-rwxrwxrwx",
+            "cntlink": 1,
+            "file_owner": "credel",
+            "filegroup": "informix",
+            "filesize": 5120,
+            "date": "2011-06-29",
+            "time": "11:03:57",
+            "other2": 200,
+            "file_location": "/user/austrasie/credel.dbs/fstoc00467.idx",
+            "folder": "/user/austrasie/credel.dbs/",
+            "filename": "fstoc00467",
+            "file_extension": ".idx"
+        }
+    ]
+}

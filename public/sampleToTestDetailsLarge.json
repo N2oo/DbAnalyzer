@@ -1,0 +1,2250 @@
+{
+    "details":[
+        {
+            "inode": 14681222,
+            "other": 0,
+            "permissions": "-rwxrwxrwx",
+            "cntlink": 1,
+            "file_owner": "credel",
+            "filegroup": "informix",
+            "filesize": 0,
+            "date": "2011-06-29",
+            "time": "11:03:57",
+            "other2": 200,
+            "file_location": "/user/austrasie/credel.dbs/fstoc00467.dat",
+            "folder": "/user/austrasie/credel.dbs/",
+            "filename": "fstoc00467",
+            "file_extension": ".dat",
+            "users": [
+                {
+                    "username": "aust",
+                    "letter": "x",
+                    "identifier1": 1045,
+                    "identifier2": 990,
+                    "description": null,
+                    "userfolder": "/user/austrasie",
+                    "launch": "/bin/bash"
+                }
+            ]
+        },
+        {
+            "inode": 14681223,
+            "other": 8,
+            "permissions": "-rwxrwxrwx",
+            "cntlink": 1,
+            "file_owner": "credel",
+            "filegroup": "informix",
+            "filesize": 5120,
+            "date": "2011-06-29",
+            "time": "11:03:57",
+            "other2": 200,
+            "file_location": "/user/austrasie/credel.dbs/fstoc00467.idx",
+            "folder": "/user/austrasie/credel.dbs/",
+            "filename": "fstoc00467",
+            "file_extension": ".idx",
+            "users": [
+                {
+                    "username": "aust",
+                    "letter": "x",
+                    "identifier1": 1045,
+                    "identifier2": 990,
+                    "description": null,
+                    "userfolder": "/user/austrasie",
+                    "launch": "/bin/bash"
+                }
+            ]
+        },
+        {
+            "inode": 8782400,
+            "other": 71720,
+            "permissions": "-rwxrwxrwx",
+            "cntlink": 1,
+            "file_owner": "credel",
+            "filegroup": "informix",
+            "filesize": 73441280,
+            "date": "2018-01-18",
+            "time": "12:36:59",
+            "other2": 100,
+            "file_location": "/user/andgen/credel.dbs/fstoc00467.dat",
+            "folder": "/user/andgen/credel.dbs/",
+            "filename": "fstoc00467",
+            "file_extension": ".dat",
+            "users": [
+                {
+                    "username": "and",
+                    "letter": "x",
+                    "identifier1": 1016,
+                    "identifier2": 990,
+                    "description": null,
+                    "userfolder": "/user/and",
+                    "launch": "/bin/bash"
+                },
+                {
+                    "username": "weband",
+                    "letter": "x",
+                    "identifier1": 1053,
+                    "identifier2": 990,
+                    "description": null,
+                    "userfolder": "/user/and",
+                    "launch": "/bin/bash"
+                },
+                {
+                    "username": "andodbc",
+                    "letter": "x",
+                    "identifier1": 1086,
+                    "identifier2": 990,
+                    "description": null,
+                    "userfolder": "/user/and",
+                    "launch": "/bin/bash"
+                },
+                {
+                    "username": "genand",
+                    "letter": "x",
+                    "identifier1": 1120,
+                    "identifier2": 990,
+                    "description": null,
+                    "userfolder": "/user/and",
+                    "launch": "/bin/bash"
+                },
+                {
+                    "username": "genweband",
+                    "letter": "x",
+                    "identifier1": 1152,
+                    "identifier2": 990,
+                    "description": null,
+                    "userfolder": "/user/and",
+                    "launch": "/bin/bash"
+                }
+            ]
+        },
+        {
+            "inode": 8782501,
+            "other": 46924,
+            "permissions": "-rwxrwxrwx",
+            "cntlink": 1,
+            "file_owner": "credel",
+            "filegroup": "informix",
+            "filesize": 48048128,
+            "date": "2018-01-18",
+            "time": "12:37:01",
+            "other2": 100,
+            "file_location": "/user/andgen/credel.dbs/fstoc00467.idx",
+            "folder": "/user/andgen/credel.dbs/",
+            "filename": "fstoc00467",
+            "file_extension": ".idx",
+            "users": [
+                {
+                    "username": "and",
+                    "letter": "x",
+                    "identifier1": 1016,
+                    "identifier2": 990,
+                    "description": null,
+                    "userfolder": "/user/and",
+                    "launch": "/bin/bash"
+                },
+                {
+                    "username": "weband",
+                    "letter": "x",
+                    "identifier1": 1053,
+                    "identifier2": 990,
+                    "description": null,
+                    "userfolder": "/user/and",
+                    "launch": "/bin/bash"
+                },
+                {
+                    "username": "andodbc",
+                    "letter": "x",
+                    "identifier1": 1086,
+                    "identifier2": 990,
+                    "description": null,
+                    "userfolder": "/user/and",
+                    "launch": "/bin/bash"
+                },
+                {
+                    "username": "genand",
+                    "letter": "x",
+                    "identifier1": 1120,
+                    "identifier2": 990,
+                    "description": null,
+                    "userfolder": "/user/and",
+                    "launch": "/bin/bash"
+                },
+                {
+                    "username": "genweband",
+                    "letter": "x",
+                    "identifier1": 1152,
+                    "identifier2": 990,
+                    "description": null,
+                    "userfolder": "/user/and",
+                    "launch": "/bin/bash"
+                }
+            ]
+        },
+        {
+            "inode": 9700630,
+            "other": 78964,
+            "permissions": "-rwxrwxrwx",
+            "cntlink": 21,
+            "file_owner": "credel",
+            "filegroup": "informix",
+            "filesize": 80855040,
+            "date": "2024-02-01",
+            "time": "13:44:39",
+            "other2": 100,
+            "file_location": "/user/sigle/credel.dbs/fstoc00467.dat",
+            "folder": "/user/sigle/credel.dbs/",
+            "filename": "fstoc00467",
+            "file_extension": ".dat",
+            "users": [
+                {
+                    "username": "sigle",
+                    "letter": "x",
+                    "identifier1": 1038,
+                    "identifier2": 990,
+                    "description": null,
+                    "userfolder": "/user/sigle",
+                    "launch": "/bin/bash"
+                },
+                {
+                    "username": "gensigle",
+                    "letter": "x",
+                    "identifier1": 1139,
+                    "identifier2": 990,
+                    "description": null,
+                    "userfolder": "/user/sigle",
+                    "launch": "/bin/bash"
+                }
+            ]
+        },
+        {
+            "inode": 9700630,
+            "other": 78964,
+            "permissions": "-rwxrwxrwx",
+            "cntlink": 21,
+            "file_owner": "credel",
+            "filegroup": "informix",
+            "filesize": 80855040,
+            "date": "2024-02-01",
+            "time": "13:44:39",
+            "other2": 100,
+            "file_location": "/user/vpl/credel.dbs/fstoc00467.dat",
+            "folder": "/user/vpl/credel.dbs/",
+            "filename": "fstoc00467",
+            "file_extension": ".dat",
+            "users": [
+                {
+                    "username": "vpl",
+                    "letter": "x",
+                    "identifier1": 1040,
+                    "identifier2": 990,
+                    "description": null,
+                    "userfolder": "/user/vpl",
+                    "launch": "/bin/bash"
+                },
+                {
+                    "username": "vplodbc",
+                    "letter": "x",
+                    "identifier1": 1063,
+                    "identifier2": 990,
+                    "description": null,
+                    "userfolder": "/user/vpl",
+                    "launch": "/bin/bash"
+                },
+                {
+                    "username": "genvpl",
+                    "letter": "x",
+                    "identifier1": 1141,
+                    "identifier2": 990,
+                    "description": null,
+                    "userfolder": "/user/vpl",
+                    "launch": "/bin/bash"
+                }
+            ]
+        },
+        {
+            "inode": 9700630,
+            "other": 78964,
+            "permissions": "-rwxrwxrwx",
+            "cntlink": 21,
+            "file_owner": "credel",
+            "filegroup": "informix",
+            "filesize": 80855040,
+            "date": "2024-02-01",
+            "time": "13:44:44",
+            "other2": 100,
+            "file_location": "/user/and/credel.dbs/fstoc00467.dat",
+            "folder": "/user/and/credel.dbs/",
+            "filename": "fstoc00467",
+            "file_extension": ".dat",
+            "users": [
+                {
+                    "username": "and",
+                    "letter": "x",
+                    "identifier1": 1016,
+                    "identifier2": 990,
+                    "description": null,
+                    "userfolder": "/user/and",
+                    "launch": "/bin/bash"
+                },
+                {
+                    "username": "weband",
+                    "letter": "x",
+                    "identifier1": 1053,
+                    "identifier2": 990,
+                    "description": null,
+                    "userfolder": "/user/and",
+                    "launch": "/bin/bash"
+                },
+                {
+                    "username": "andodbc",
+                    "letter": "x",
+                    "identifier1": 1086,
+                    "identifier2": 990,
+                    "description": null,
+                    "userfolder": "/user/and",
+                    "launch": "/bin/bash"
+                },
+                {
+                    "username": "genand",
+                    "letter": "x",
+                    "identifier1": 1120,
+                    "identifier2": 990,
+                    "description": null,
+                    "userfolder": "/user/and",
+                    "launch": "/bin/bash"
+                },
+                {
+                    "username": "genweband",
+                    "letter": "x",
+                    "identifier1": 1152,
+                    "identifier2": 990,
+                    "description": null,
+                    "userfolder": "/user/and",
+                    "launch": "/bin/bash"
+                }
+            ]
+        },
+        {
+            "inode": 9700630,
+            "other": 78964,
+            "permissions": "-rwxrwxrwx",
+            "cntlink": 21,
+            "file_owner": "credel",
+            "filegroup": "informix",
+            "filesize": 80855040,
+            "date": "2024-02-01",
+            "time": "13:44:44",
+            "other2": 100,
+            "file_location": "/user/aso/credel.dbs/fstoc00467.dat",
+            "folder": "/user/aso/credel.dbs/",
+            "filename": "fstoc00467",
+            "file_extension": ".dat",
+            "users": [
+                {
+                    "username": "aso",
+                    "letter": "x",
+                    "identifier1": 1017,
+                    "identifier2": 990,
+                    "description": null,
+                    "userfolder": "/user/aso",
+                    "launch": "/bin/bash"
+                },
+                {
+                    "username": "webaso",
+                    "letter": "x",
+                    "identifier1": 1054,
+                    "identifier2": 990,
+                    "description": null,
+                    "userfolder": "/user/aso",
+                    "launch": "/bin/bash"
+                },
+                {
+                    "username": "genaso",
+                    "letter": "x",
+                    "identifier1": 1121,
+                    "identifier2": 990,
+                    "description": null,
+                    "userfolder": "/user/aso",
+                    "launch": "/bin/bash"
+                },
+                {
+                    "username": "genwebaso",
+                    "letter": "x",
+                    "identifier1": 1153,
+                    "identifier2": 990,
+                    "description": null,
+                    "userfolder": "/user/aso",
+                    "launch": "/bin/bash"
+                }
+            ]
+        },
+        {
+            "inode": 9700630,
+            "other": 78964,
+            "permissions": "-rwxrwxrwx",
+            "cntlink": 21,
+            "file_owner": "credel",
+            "filegroup": "informix",
+            "filesize": 80855040,
+            "date": "2024-02-01",
+            "time": "13:44:44",
+            "other2": 100,
+            "file_location": "/user/banne/credel.dbs/fstoc00467.dat",
+            "folder": "/user/banne/credel.dbs/",
+            "filename": "fstoc00467",
+            "file_extension": ".dat",
+            "users": [
+                {
+                    "username": "banne",
+                    "letter": "x",
+                    "identifier1": 1025,
+                    "identifier2": 990,
+                    "description": null,
+                    "userfolder": "/user/banne",
+                    "launch": "/bin/bash"
+                },
+                {
+                    "username": "banodbc",
+                    "letter": "x",
+                    "identifier1": 1056,
+                    "identifier2": 990,
+                    "description": null,
+                    "userfolder": "/user/banne",
+                    "launch": "/bin/bash"
+                },
+                {
+                    "username": "genbanne",
+                    "letter": "x",
+                    "identifier1": 1127,
+                    "identifier2": 990,
+                    "description": null,
+                    "userfolder": "/user/banne",
+                    "launch": "/bin/bash"
+                }
+            ]
+        },
+        {
+            "inode": 9700630,
+            "other": 78964,
+            "permissions": "-rwxrwxrwx",
+            "cntlink": 21,
+            "file_owner": "credel",
+            "filegroup": "informix",
+            "filesize": 80855040,
+            "date": "2024-02-01",
+            "time": "13:44:44",
+            "other2": 100,
+            "file_location": "/user/bvs/credel.dbs/fstoc00467.dat",
+            "folder": "/user/bvs/credel.dbs/",
+            "filename": "fstoc00467",
+            "file_extension": ".dat",
+            "users": [
+                {
+                    "username": "bvs",
+                    "letter": "x",
+                    "identifier1": 1011,
+                    "identifier2": 990,
+                    "description": null,
+                    "userfolder": "/user/bvs",
+                    "launch": "/bin/bash"
+                },
+                {
+                    "username": "bvsodbc",
+                    "letter": "x",
+                    "identifier1": 1058,
+                    "identifier2": 990,
+                    "description": null,
+                    "userfolder": "/user/bvs",
+                    "launch": "/bin/bash"
+                },
+                {
+                    "username": "genbvs",
+                    "letter": "x",
+                    "identifier1": 1116,
+                    "identifier2": 990,
+                    "description": null,
+                    "userfolder": "/user/bvs",
+                    "launch": "/bin/bash"
+                }
+            ]
+        },
+        {
+            "inode": 9700630,
+            "other": 78964,
+            "permissions": "-rwxrwxrwx",
+            "cntlink": 21,
+            "file_owner": "credel",
+            "filegroup": "informix",
+            "filesize": 80855040,
+            "date": "2024-02-01",
+            "time": "13:44:44",
+            "other2": 100,
+            "file_location": "/user/creil/credel.dbs/fstoc00467.dat",
+            "folder": "/user/creil/credel.dbs/",
+            "filename": "fstoc00467",
+            "file_extension": ".dat",
+            "users": [
+                {
+                    "username": "creil",
+                    "letter": "x",
+                    "identifier1": 1004,
+                    "identifier2": 990,
+                    "description": null,
+                    "userfolder": "/user/creil",
+                    "launch": "/bin/bash"
+                },
+                {
+                    "username": "creodbc",
+                    "letter": "x",
+                    "identifier1": 1094,
+                    "identifier2": 990,
+                    "description": null,
+                    "userfolder": "/user/creil",
+                    "launch": "/bin/bash"
+                },
+                {
+                    "username": "socodbc",
+                    "letter": "x",
+                    "identifier1": 1060,
+                    "identifier2": 990,
+                    "description": null,
+                    "userfolder": "/user/creil",
+                    "launch": "/bin/bash"
+                },
+                {
+                    "username": "gencreil",
+                    "letter": "x",
+                    "identifier1": 1110,
+                    "identifier2": 990,
+                    "description": null,
+                    "userfolder": "/user/creil",
+                    "launch": "/bin/bash"
+                }
+            ]
+        },
+        {
+            "inode": 9700630,
+            "other": 78964,
+            "permissions": "-rwxrwxrwx",
+            "cntlink": 21,
+            "file_owner": "credel",
+            "filegroup": "informix",
+            "filesize": 80855040,
+            "date": "2024-02-01",
+            "time": "13:44:44",
+            "other2": 100,
+            "file_location": "/user/gl/credel.dbs/fstoc00467.dat",
+            "folder": "/user/gl/credel.dbs/",
+            "filename": "fstoc00467",
+            "file_extension": ".dat",
+            "users": [
+                {
+                    "username": "grl",
+                    "letter": "x",
+                    "identifier1": 1009,
+                    "identifier2": 990,
+                    "description": null,
+                    "userfolder": "/user/gl",
+                    "launch": "/bin/bash"
+                },
+                {
+                    "username": "gengrl",
+                    "letter": "x",
+                    "identifier1": 1114,
+                    "identifier2": 990,
+                    "description": null,
+                    "userfolder": "/user/gl",
+                    "launch": "/bin/bash"
+                }
+            ]
+        },
+        {
+            "inode": 9700630,
+            "other": 78964,
+            "permissions": "-rwxrwxrwx",
+            "cntlink": 21,
+            "file_owner": "credel",
+            "filegroup": "informix",
+            "filesize": 80855040,
+            "date": "2024-02-01",
+            "time": "13:44:44",
+            "other2": 100,
+            "file_location": "/user/hnsed/credel.dbs/fstoc00467.dat",
+            "folder": "/user/hnsed/credel.dbs/",
+            "filename": "fstoc00467",
+            "file_extension": ".dat",
+            "users": []
+        },
+        {
+            "inode": 9700630,
+            "other": 78964,
+            "permissions": "-rwxrwxrwx",
+            "cntlink": 21,
+            "file_owner": "credel",
+            "filegroup": "informix",
+            "filesize": 80855040,
+            "date": "2024-02-01",
+            "time": "13:44:44",
+            "other2": 100,
+            "file_location": "/user/lf/credel.dbs/fstoc00467.dat",
+            "folder": "/user/lf/credel.dbs/",
+            "filename": "fstoc00467",
+            "file_extension": ".dat",
+            "users": [
+                {
+                    "username": "lef",
+                    "letter": "x",
+                    "identifier1": 1008,
+                    "identifier2": 990,
+                    "description": null,
+                    "userfolder": "/user/lf",
+                    "launch": "/bin/bash"
+                },
+                {
+                    "username": "genlef",
+                    "letter": "x",
+                    "identifier1": 1113,
+                    "identifier2": 990,
+                    "description": null,
+                    "userfolder": "/user/lf",
+                    "launch": "/bin/bash"
+                }
+            ]
+        },
+        {
+            "inode": 9700630,
+            "other": 78964,
+            "permissions": "-rwxrwxrwx",
+            "cntlink": 21,
+            "file_owner": "credel",
+            "filegroup": "informix",
+            "filesize": 80855040,
+            "date": "2024-02-01",
+            "time": "13:44:44",
+            "other2": 100,
+            "file_location": "/user/lizy/credel.dbs/fstoc00467.dat",
+            "folder": "/user/lizy/credel.dbs/",
+            "filename": "fstoc00467",
+            "file_extension": ".dat",
+            "users": [
+                {
+                    "username": "lizy",
+                    "letter": "x",
+                    "identifier1": 1006,
+                    "identifier2": 990,
+                    "description": null,
+                    "userfolder": "/user/lizy",
+                    "launch": "/bin/bash"
+                },
+                {
+                    "username": "genlizy",
+                    "letter": "x",
+                    "identifier1": 1112,
+                    "identifier2": 990,
+                    "description": null,
+                    "userfolder": "/user/lizy",
+                    "launch": "/bin/bash"
+                }
+            ]
+        },
+        {
+            "inode": 9700630,
+            "other": 78964,
+            "permissions": "-rwxrwxrwx",
+            "cntlink": 21,
+            "file_owner": "credel",
+            "filegroup": "informix",
+            "filesize": 80855040,
+            "date": "2024-02-01",
+            "time": "13:44:44",
+            "other2": 100,
+            "file_location": "/user/meaux/credel.dbs/fstoc00467.dat",
+            "folder": "/user/meaux/credel.dbs/",
+            "filename": "fstoc00467",
+            "file_extension": ".dat",
+            "users": [
+                {
+                    "username": "meaux",
+                    "letter": "x",
+                    "identifier1": 1002,
+                    "identifier2": 990,
+                    "description": null,
+                    "userfolder": "/user/meaux",
+                    "launch": "/bin/bash"
+                },
+                {
+                    "username": "gceodbc",
+                    "letter": "x",
+                    "identifier1": 1062,
+                    "identifier2": 990,
+                    "description": null,
+                    "userfolder": "/user/meaux",
+                    "launch": "/bin/bash"
+                },
+                {
+                    "username": "genmeaux",
+                    "letter": "x",
+                    "identifier1": 1108,
+                    "identifier2": 990,
+                    "description": null,
+                    "userfolder": "/user/meaux",
+                    "launch": "/bin/bash"
+                }
+            ]
+        },
+        {
+            "inode": 9700630,
+            "other": 78964,
+            "permissions": "-rwxrwxrwx",
+            "cntlink": 21,
+            "file_owner": "credel",
+            "filegroup": "informix",
+            "filesize": 80855040,
+            "date": "2024-02-01",
+            "time": "13:44:44",
+            "other2": 100,
+            "file_location": "/user/melun/credel.dbs/fstoc00467.dat",
+            "folder": "/user/melun/credel.dbs/",
+            "filename": "fstoc00467",
+            "file_extension": ".dat",
+            "users": [
+                {
+                    "username": "melun",
+                    "letter": "x",
+                    "identifier1": 1014,
+                    "identifier2": 990,
+                    "description": null,
+                    "userfolder": "/user/melun",
+                    "launch": "/bin/bash"
+                },
+                {
+                    "username": "escodbc",
+                    "letter": "x",
+                    "identifier1": 1061,
+                    "identifier2": 990,
+                    "description": null,
+                    "userfolder": "/user/melun",
+                    "launch": "/bin/bash"
+                }
+            ]
+        },
+        {
+            "inode": 9700630,
+            "other": 78964,
+            "permissions": "-rwxrwxrwx",
+            "cntlink": 21,
+            "file_owner": "credel",
+            "filegroup": "informix",
+            "filesize": 80855040,
+            "date": "2024-02-01",
+            "time": "13:44:44",
+            "other2": 100,
+            "file_location": "/user/nemours/credel.dbs/fstoc00467.dat",
+            "folder": "/user/nemours/credel.dbs/",
+            "filename": "fstoc00467",
+            "file_extension": ".dat",
+            "users": [
+                {
+                    "username": "nemours",
+                    "letter": "x",
+                    "identifier1": 1005,
+                    "identifier2": 990,
+                    "description": null,
+                    "userfolder": "/user/nemours",
+                    "launch": "/bin/bash"
+                },
+                {
+                    "username": "nemodbc",
+                    "letter": "x",
+                    "identifier1": 1052,
+                    "identifier2": 990,
+                    "description": null,
+                    "userfolder": "/user/nemours",
+                    "launch": "/bin/bash"
+                },
+                {
+                    "username": "gennemours",
+                    "letter": "x",
+                    "identifier1": 1111,
+                    "identifier2": 990,
+                    "description": null,
+                    "userfolder": "/user/nemours",
+                    "launch": "/bin/bash"
+                }
+            ]
+        },
+        {
+            "inode": 9700630,
+            "other": 78964,
+            "permissions": "-rwxrwxrwx",
+            "cntlink": 21,
+            "file_owner": "credel",
+            "filegroup": "informix",
+            "filesize": 80855040,
+            "date": "2024-02-01",
+            "time": "13:44:44",
+            "other2": 100,
+            "file_location": "/user/sed/credel.dbs/fstoc00467.dat",
+            "folder": "/user/sed/credel.dbs/",
+            "filename": "fstoc00467",
+            "file_extension": ".dat",
+            "users": [
+                {
+                    "username": "sed",
+                    "letter": "x",
+                    "identifier1": 1003,
+                    "identifier2": 990,
+                    "description": null,
+                    "userfolder": "/user/sed",
+                    "launch": "/bin/bash"
+                },
+                {
+                    "username": "websed",
+                    "letter": "x",
+                    "identifier1": 1055,
+                    "identifier2": 990,
+                    "description": null,
+                    "userfolder": "/user/sed",
+                    "launch": "/bin/bash"
+                },
+                {
+                    "username": "gensed",
+                    "letter": "x",
+                    "identifier1": 1109,
+                    "identifier2": 990,
+                    "description": null,
+                    "userfolder": "/user/sed",
+                    "launch": "/bin/bash"
+                },
+                {
+                    "username": "genwebsed",
+                    "letter": "x",
+                    "identifier1": 1154,
+                    "identifier2": 990,
+                    "description": null,
+                    "userfolder": "/user/sed",
+                    "launch": "/bin/bash"
+                }
+            ]
+        },
+        {
+            "inode": 9700630,
+            "other": 78964,
+            "permissions": "-rwxrwxrwx",
+            "cntlink": 21,
+            "file_owner": "credel",
+            "filegroup": "informix",
+            "filesize": 80855040,
+            "date": "2024-02-01",
+            "time": "13:44:44",
+            "other2": 100,
+            "file_location": "/user/smelvi/credel.dbs/fstoc00467.dat",
+            "folder": "/user/smelvi/credel.dbs/",
+            "filename": "fstoc00467",
+            "file_extension": ".dat",
+            "users": [
+                {
+                    "username": "smelvi",
+                    "letter": "x",
+                    "identifier1": 1010,
+                    "identifier2": 990,
+                    "description": null,
+                    "userfolder": "/user/smelvi",
+                    "launch": "/bin/bash"
+                },
+                {
+                    "username": "smeodbc",
+                    "letter": "x",
+                    "identifier1": 1064,
+                    "identifier2": 990,
+                    "description": null,
+                    "userfolder": "/user/sme",
+                    "launch": "/bin/bash"
+                },
+                {
+                    "username": "gensmelvi",
+                    "letter": "x",
+                    "identifier1": 1115,
+                    "identifier2": 990,
+                    "description": null,
+                    "userfolder": "/user/smelvi",
+                    "launch": "/bin/bash"
+                }
+            ]
+        },
+        {
+            "inode": 9700630,
+            "other": 78964,
+            "permissions": "-rwxrwxrwx",
+            "cntlink": 21,
+            "file_owner": "credel",
+            "filegroup": "informix",
+            "filesize": 80855040,
+            "date": "2024-02-01",
+            "time": "13:45:51",
+            "other2": 100,
+            "file_location": "/user/gppl/credel.dbs/fstoc00467.dat",
+            "folder": "/user/gppl/credel.dbs/",
+            "filename": "fstoc00467",
+            "file_extension": ".dat",
+            "users": [
+                {
+                    "username": "gppl",
+                    "letter": "x",
+                    "identifier1": 1018,
+                    "identifier2": 990,
+                    "description": null,
+                    "userfolder": "/user/gppl",
+                    "launch": "/bin/bash"
+                },
+                {
+                    "username": "ambodbc",
+                    "letter": "x",
+                    "identifier1": 1057,
+                    "identifier2": 990,
+                    "description": null,
+                    "userfolder": "/user/gppl",
+                    "launch": "/bin/bash"
+                },
+                {
+                    "username": "gengppl",
+                    "letter": "x",
+                    "identifier1": 1122,
+                    "identifier2": 990,
+                    "description": null,
+                    "userfolder": "/user/gppl",
+                    "launch": "/bin/bash"
+                }
+            ]
+        },
+        {
+            "inode": 9700630,
+            "other": 78964,
+            "permissions": "-rwxrwxrwx",
+            "cntlink": 21,
+            "file_owner": "credel",
+            "filegroup": "informix",
+            "filesize": 80855040,
+            "date": "2024-02-01",
+            "time": "13:46:05",
+            "other2": 100,
+            "file_location": "/user/diep/credel.dbs/fstoc00467.dat",
+            "folder": "/user/diep/credel.dbs/",
+            "filename": "fstoc00467",
+            "file_extension": ".dat",
+            "users": [
+                {
+                    "username": "diep",
+                    "letter": "x",
+                    "identifier1": 1001,
+                    "identifier2": 990,
+                    "description": null,
+                    "userfolder": "/user/diep",
+                    "launch": "/bin/bash"
+                },
+                {
+                    "username": "dieodbc",
+                    "letter": "x",
+                    "identifier1": 1059,
+                    "identifier2": 990,
+                    "description": null,
+                    "userfolder": "/user/diep",
+                    "launch": "/bin/bash"
+                },
+                {
+                    "username": "gendiep",
+                    "letter": "x",
+                    "identifier1": 1107,
+                    "identifier2": 990,
+                    "description": null,
+                    "userfolder": "/user/diep",
+                    "launch": "/bin/bash"
+                }
+            ]
+        },
+        {
+            "inode": 9700630,
+            "other": 78964,
+            "permissions": "-rwxrwxrwx",
+            "cntlink": 21,
+            "file_owner": "credel",
+            "filegroup": "informix",
+            "filesize": 80855040,
+            "date": "2024-02-01",
+            "time": "13:46:05",
+            "other2": 100,
+            "file_location": "/user/immob/credel.dbs/fstoc00467.dat",
+            "folder": "/user/immob/credel.dbs/",
+            "filename": "fstoc00467",
+            "file_extension": ".dat",
+            "users": [
+                {
+                    "username": "immob",
+                    "letter": "x",
+                    "identifier1": 1026,
+                    "identifier2": 990,
+                    "description": null,
+                    "userfolder": "/user/immob",
+                    "launch": "/bin/bash"
+                },
+                {
+                    "username": "immo",
+                    "letter": "x",
+                    "identifier1": 1029,
+                    "identifier2": 990,
+                    "description": null,
+                    "userfolder": "/user/immo",
+                    "launch": "/bin/bash"
+                },
+                {
+                    "username": "genimmob",
+                    "letter": "x",
+                    "identifier1": 1128,
+                    "identifier2": 990,
+                    "description": null,
+                    "userfolder": "/user/immob",
+                    "launch": "/bin/bash"
+                },
+                {
+                    "username": "genimmo",
+                    "letter": "x",
+                    "identifier1": 1131,
+                    "identifier2": 990,
+                    "description": null,
+                    "userfolder": "/user/immo",
+                    "launch": "/bin/bash"
+                }
+            ]
+        },
+        {
+            "inode": 9700630,
+            "other": 78964,
+            "permissions": "-rwxrwxrwx",
+            "cntlink": 21,
+            "file_owner": "credel",
+            "filegroup": "informix",
+            "filesize": 80855040,
+            "date": "2024-02-01",
+            "time": "13:46:15",
+            "other2": 100,
+            "file_location": "/user/ablis/credel.dbs/fstoc00467.dat",
+            "folder": "/user/ablis/credel.dbs/",
+            "filename": "fstoc00467",
+            "file_extension": ".dat",
+            "users": [
+                {
+                    "username": "ablis",
+                    "letter": "x",
+                    "identifier1": 1015,
+                    "identifier2": 990,
+                    "description": null,
+                    "userfolder": "/user/ablis",
+                    "launch": "/bin/bash"
+                },
+                {
+                    "username": "abliodbc",
+                    "letter": "x",
+                    "identifier1": 1065,
+                    "identifier2": 990,
+                    "description": null,
+                    "userfolder": "/user/ablis",
+                    "launch": "/bin/bash"
+                },
+                {
+                    "username": "genablis",
+                    "letter": "x",
+                    "identifier1": 1119,
+                    "identifier2": 990,
+                    "description": null,
+                    "userfolder": "/user/ablis",
+                    "launch": "/bin/bash"
+                }
+            ]
+        },
+        {
+            "inode": 9701834,
+            "other": 57336,
+            "permissions": "-rwxrwxrwx",
+            "cntlink": 21,
+            "file_owner": "credel",
+            "filegroup": "informix",
+            "filesize": 58706944,
+            "date": "2024-02-01",
+            "time": "13:44:39",
+            "other2": 100,
+            "file_location": "/user/sigle/credel.dbs/fstoc00467.idx",
+            "folder": "/user/sigle/credel.dbs/",
+            "filename": "fstoc00467",
+            "file_extension": ".idx",
+            "users": [
+                {
+                    "username": "sigle",
+                    "letter": "x",
+                    "identifier1": 1038,
+                    "identifier2": 990,
+                    "description": null,
+                    "userfolder": "/user/sigle",
+                    "launch": "/bin/bash"
+                },
+                {
+                    "username": "gensigle",
+                    "letter": "x",
+                    "identifier1": 1139,
+                    "identifier2": 990,
+                    "description": null,
+                    "userfolder": "/user/sigle",
+                    "launch": "/bin/bash"
+                }
+            ]
+        },
+        {
+            "inode": 9701834,
+            "other": 57336,
+            "permissions": "-rwxrwxrwx",
+            "cntlink": 21,
+            "file_owner": "credel",
+            "filegroup": "informix",
+            "filesize": 58706944,
+            "date": "2024-02-01",
+            "time": "13:44:39",
+            "other2": 100,
+            "file_location": "/user/vpl/credel.dbs/fstoc00467.idx",
+            "folder": "/user/vpl/credel.dbs/",
+            "filename": "fstoc00467",
+            "file_extension": ".idx",
+            "users": [
+                {
+                    "username": "vpl",
+                    "letter": "x",
+                    "identifier1": 1040,
+                    "identifier2": 990,
+                    "description": null,
+                    "userfolder": "/user/vpl",
+                    "launch": "/bin/bash"
+                },
+                {
+                    "username": "vplodbc",
+                    "letter": "x",
+                    "identifier1": 1063,
+                    "identifier2": 990,
+                    "description": null,
+                    "userfolder": "/user/vpl",
+                    "launch": "/bin/bash"
+                },
+                {
+                    "username": "genvpl",
+                    "letter": "x",
+                    "identifier1": 1141,
+                    "identifier2": 990,
+                    "description": null,
+                    "userfolder": "/user/vpl",
+                    "launch": "/bin/bash"
+                }
+            ]
+        },
+        {
+            "inode": 9701834,
+            "other": 57336,
+            "permissions": "-rwxrwxrwx",
+            "cntlink": 21,
+            "file_owner": "credel",
+            "filegroup": "informix",
+            "filesize": 58706944,
+            "date": "2024-02-01",
+            "time": "13:44:44",
+            "other2": 100,
+            "file_location": "/user/and/credel.dbs/fstoc00467.idx",
+            "folder": "/user/and/credel.dbs/",
+            "filename": "fstoc00467",
+            "file_extension": ".idx",
+            "users": [
+                {
+                    "username": "and",
+                    "letter": "x",
+                    "identifier1": 1016,
+                    "identifier2": 990,
+                    "description": null,
+                    "userfolder": "/user/and",
+                    "launch": "/bin/bash"
+                },
+                {
+                    "username": "weband",
+                    "letter": "x",
+                    "identifier1": 1053,
+                    "identifier2": 990,
+                    "description": null,
+                    "userfolder": "/user/and",
+                    "launch": "/bin/bash"
+                },
+                {
+                    "username": "andodbc",
+                    "letter": "x",
+                    "identifier1": 1086,
+                    "identifier2": 990,
+                    "description": null,
+                    "userfolder": "/user/and",
+                    "launch": "/bin/bash"
+                },
+                {
+                    "username": "genand",
+                    "letter": "x",
+                    "identifier1": 1120,
+                    "identifier2": 990,
+                    "description": null,
+                    "userfolder": "/user/and",
+                    "launch": "/bin/bash"
+                },
+                {
+                    "username": "genweband",
+                    "letter": "x",
+                    "identifier1": 1152,
+                    "identifier2": 990,
+                    "description": null,
+                    "userfolder": "/user/and",
+                    "launch": "/bin/bash"
+                }
+            ]
+        },
+        {
+            "inode": 9701834,
+            "other": 57336,
+            "permissions": "-rwxrwxrwx",
+            "cntlink": 21,
+            "file_owner": "credel",
+            "filegroup": "informix",
+            "filesize": 58706944,
+            "date": "2024-02-01",
+            "time": "13:44:44",
+            "other2": 100,
+            "file_location": "/user/aso/credel.dbs/fstoc00467.idx",
+            "folder": "/user/aso/credel.dbs/",
+            "filename": "fstoc00467",
+            "file_extension": ".idx",
+            "users": [
+                {
+                    "username": "aso",
+                    "letter": "x",
+                    "identifier1": 1017,
+                    "identifier2": 990,
+                    "description": null,
+                    "userfolder": "/user/aso",
+                    "launch": "/bin/bash"
+                },
+                {
+                    "username": "webaso",
+                    "letter": "x",
+                    "identifier1": 1054,
+                    "identifier2": 990,
+                    "description": null,
+                    "userfolder": "/user/aso",
+                    "launch": "/bin/bash"
+                },
+                {
+                    "username": "genaso",
+                    "letter": "x",
+                    "identifier1": 1121,
+                    "identifier2": 990,
+                    "description": null,
+                    "userfolder": "/user/aso",
+                    "launch": "/bin/bash"
+                },
+                {
+                    "username": "genwebaso",
+                    "letter": "x",
+                    "identifier1": 1153,
+                    "identifier2": 990,
+                    "description": null,
+                    "userfolder": "/user/aso",
+                    "launch": "/bin/bash"
+                }
+            ]
+        },
+        {
+            "inode": 9701834,
+            "other": 57336,
+            "permissions": "-rwxrwxrwx",
+            "cntlink": 21,
+            "file_owner": "credel",
+            "filegroup": "informix",
+            "filesize": 58706944,
+            "date": "2024-02-01",
+            "time": "13:44:44",
+            "other2": 100,
+            "file_location": "/user/banne/credel.dbs/fstoc00467.idx",
+            "folder": "/user/banne/credel.dbs/",
+            "filename": "fstoc00467",
+            "file_extension": ".idx",
+            "users": [
+                {
+                    "username": "banne",
+                    "letter": "x",
+                    "identifier1": 1025,
+                    "identifier2": 990,
+                    "description": null,
+                    "userfolder": "/user/banne",
+                    "launch": "/bin/bash"
+                },
+                {
+                    "username": "banodbc",
+                    "letter": "x",
+                    "identifier1": 1056,
+                    "identifier2": 990,
+                    "description": null,
+                    "userfolder": "/user/banne",
+                    "launch": "/bin/bash"
+                },
+                {
+                    "username": "genbanne",
+                    "letter": "x",
+                    "identifier1": 1127,
+                    "identifier2": 990,
+                    "description": null,
+                    "userfolder": "/user/banne",
+                    "launch": "/bin/bash"
+                }
+            ]
+        },
+        {
+            "inode": 9701834,
+            "other": 57336,
+            "permissions": "-rwxrwxrwx",
+            "cntlink": 21,
+            "file_owner": "credel",
+            "filegroup": "informix",
+            "filesize": 58706944,
+            "date": "2024-02-01",
+            "time": "13:44:44",
+            "other2": 100,
+            "file_location": "/user/bvs/credel.dbs/fstoc00467.idx",
+            "folder": "/user/bvs/credel.dbs/",
+            "filename": "fstoc00467",
+            "file_extension": ".idx",
+            "users": [
+                {
+                    "username": "bvs",
+                    "letter": "x",
+                    "identifier1": 1011,
+                    "identifier2": 990,
+                    "description": null,
+                    "userfolder": "/user/bvs",
+                    "launch": "/bin/bash"
+                },
+                {
+                    "username": "bvsodbc",
+                    "letter": "x",
+                    "identifier1": 1058,
+                    "identifier2": 990,
+                    "description": null,
+                    "userfolder": "/user/bvs",
+                    "launch": "/bin/bash"
+                },
+                {
+                    "username": "genbvs",
+                    "letter": "x",
+                    "identifier1": 1116,
+                    "identifier2": 990,
+                    "description": null,
+                    "userfolder": "/user/bvs",
+                    "launch": "/bin/bash"
+                }
+            ]
+        },
+        {
+            "inode": 9701834,
+            "other": 57336,
+            "permissions": "-rwxrwxrwx",
+            "cntlink": 21,
+            "file_owner": "credel",
+            "filegroup": "informix",
+            "filesize": 58706944,
+            "date": "2024-02-01",
+            "time": "13:44:44",
+            "other2": 100,
+            "file_location": "/user/creil/credel.dbs/fstoc00467.idx",
+            "folder": "/user/creil/credel.dbs/",
+            "filename": "fstoc00467",
+            "file_extension": ".idx",
+            "users": [
+                {
+                    "username": "creil",
+                    "letter": "x",
+                    "identifier1": 1004,
+                    "identifier2": 990,
+                    "description": null,
+                    "userfolder": "/user/creil",
+                    "launch": "/bin/bash"
+                },
+                {
+                    "username": "creodbc",
+                    "letter": "x",
+                    "identifier1": 1094,
+                    "identifier2": 990,
+                    "description": null,
+                    "userfolder": "/user/creil",
+                    "launch": "/bin/bash"
+                },
+                {
+                    "username": "socodbc",
+                    "letter": "x",
+                    "identifier1": 1060,
+                    "identifier2": 990,
+                    "description": null,
+                    "userfolder": "/user/creil",
+                    "launch": "/bin/bash"
+                },
+                {
+                    "username": "gencreil",
+                    "letter": "x",
+                    "identifier1": 1110,
+                    "identifier2": 990,
+                    "description": null,
+                    "userfolder": "/user/creil",
+                    "launch": "/bin/bash"
+                }
+            ]
+        },
+        {
+            "inode": 9701834,
+            "other": 57336,
+            "permissions": "-rwxrwxrwx",
+            "cntlink": 21,
+            "file_owner": "credel",
+            "filegroup": "informix",
+            "filesize": 58706944,
+            "date": "2024-02-01",
+            "time": "13:44:44",
+            "other2": 100,
+            "file_location": "/user/gl/credel.dbs/fstoc00467.idx",
+            "folder": "/user/gl/credel.dbs/",
+            "filename": "fstoc00467",
+            "file_extension": ".idx",
+            "users": [
+                {
+                    "username": "grl",
+                    "letter": "x",
+                    "identifier1": 1009,
+                    "identifier2": 990,
+                    "description": null,
+                    "userfolder": "/user/gl",
+                    "launch": "/bin/bash"
+                },
+                {
+                    "username": "gengrl",
+                    "letter": "x",
+                    "identifier1": 1114,
+                    "identifier2": 990,
+                    "description": null,
+                    "userfolder": "/user/gl",
+                    "launch": "/bin/bash"
+                }
+            ]
+        },
+        {
+            "inode": 9701834,
+            "other": 57336,
+            "permissions": "-rwxrwxrwx",
+            "cntlink": 21,
+            "file_owner": "credel",
+            "filegroup": "informix",
+            "filesize": 58706944,
+            "date": "2024-02-01",
+            "time": "13:44:44",
+            "other2": 100,
+            "file_location": "/user/hnsed/credel.dbs/fstoc00467.idx",
+            "folder": "/user/hnsed/credel.dbs/",
+            "filename": "fstoc00467",
+            "file_extension": ".idx",
+            "users": []
+        },
+        {
+            "inode": 9701834,
+            "other": 57336,
+            "permissions": "-rwxrwxrwx",
+            "cntlink": 21,
+            "file_owner": "credel",
+            "filegroup": "informix",
+            "filesize": 58706944,
+            "date": "2024-02-01",
+            "time": "13:44:44",
+            "other2": 100,
+            "file_location": "/user/lf/credel.dbs/fstoc00467.idx",
+            "folder": "/user/lf/credel.dbs/",
+            "filename": "fstoc00467",
+            "file_extension": ".idx",
+            "users": [
+                {
+                    "username": "lef",
+                    "letter": "x",
+                    "identifier1": 1008,
+                    "identifier2": 990,
+                    "description": null,
+                    "userfolder": "/user/lf",
+                    "launch": "/bin/bash"
+                },
+                {
+                    "username": "genlef",
+                    "letter": "x",
+                    "identifier1": 1113,
+                    "identifier2": 990,
+                    "description": null,
+                    "userfolder": "/user/lf",
+                    "launch": "/bin/bash"
+                }
+            ]
+        },
+        {
+            "inode": 9701834,
+            "other": 57336,
+            "permissions": "-rwxrwxrwx",
+            "cntlink": 21,
+            "file_owner": "credel",
+            "filegroup": "informix",
+            "filesize": 58706944,
+            "date": "2024-02-01",
+            "time": "13:44:44",
+            "other2": 100,
+            "file_location": "/user/lizy/credel.dbs/fstoc00467.idx",
+            "folder": "/user/lizy/credel.dbs/",
+            "filename": "fstoc00467",
+            "file_extension": ".idx",
+            "users": [
+                {
+                    "username": "lizy",
+                    "letter": "x",
+                    "identifier1": 1006,
+                    "identifier2": 990,
+                    "description": null,
+                    "userfolder": "/user/lizy",
+                    "launch": "/bin/bash"
+                },
+                {
+                    "username": "genlizy",
+                    "letter": "x",
+                    "identifier1": 1112,
+                    "identifier2": 990,
+                    "description": null,
+                    "userfolder": "/user/lizy",
+                    "launch": "/bin/bash"
+                }
+            ]
+        },
+        {
+            "inode": 9701834,
+            "other": 57336,
+            "permissions": "-rwxrwxrwx",
+            "cntlink": 21,
+            "file_owner": "credel",
+            "filegroup": "informix",
+            "filesize": 58706944,
+            "date": "2024-02-01",
+            "time": "13:44:44",
+            "other2": 100,
+            "file_location": "/user/meaux/credel.dbs/fstoc00467.idx",
+            "folder": "/user/meaux/credel.dbs/",
+            "filename": "fstoc00467",
+            "file_extension": ".idx",
+            "users": [
+                {
+                    "username": "meaux",
+                    "letter": "x",
+                    "identifier1": 1002,
+                    "identifier2": 990,
+                    "description": null,
+                    "userfolder": "/user/meaux",
+                    "launch": "/bin/bash"
+                },
+                {
+                    "username": "gceodbc",
+                    "letter": "x",
+                    "identifier1": 1062,
+                    "identifier2": 990,
+                    "description": null,
+                    "userfolder": "/user/meaux",
+                    "launch": "/bin/bash"
+                },
+                {
+                    "username": "genmeaux",
+                    "letter": "x",
+                    "identifier1": 1108,
+                    "identifier2": 990,
+                    "description": null,
+                    "userfolder": "/user/meaux",
+                    "launch": "/bin/bash"
+                }
+            ]
+        },
+        {
+            "inode": 9701834,
+            "other": 57336,
+            "permissions": "-rwxrwxrwx",
+            "cntlink": 21,
+            "file_owner": "credel",
+            "filegroup": "informix",
+            "filesize": 58706944,
+            "date": "2024-02-01",
+            "time": "13:44:44",
+            "other2": 100,
+            "file_location": "/user/melun/credel.dbs/fstoc00467.idx",
+            "folder": "/user/melun/credel.dbs/",
+            "filename": "fstoc00467",
+            "file_extension": ".idx",
+            "users": [
+                {
+                    "username": "melun",
+                    "letter": "x",
+                    "identifier1": 1014,
+                    "identifier2": 990,
+                    "description": null,
+                    "userfolder": "/user/melun",
+                    "launch": "/bin/bash"
+                },
+                {
+                    "username": "escodbc",
+                    "letter": "x",
+                    "identifier1": 1061,
+                    "identifier2": 990,
+                    "description": null,
+                    "userfolder": "/user/melun",
+                    "launch": "/bin/bash"
+                }
+            ]
+        },
+        {
+            "inode": 9701834,
+            "other": 57336,
+            "permissions": "-rwxrwxrwx",
+            "cntlink": 21,
+            "file_owner": "credel",
+            "filegroup": "informix",
+            "filesize": 58706944,
+            "date": "2024-02-01",
+            "time": "13:44:44",
+            "other2": 100,
+            "file_location": "/user/nemours/credel.dbs/fstoc00467.idx",
+            "folder": "/user/nemours/credel.dbs/",
+            "filename": "fstoc00467",
+            "file_extension": ".idx",
+            "users": [
+                {
+                    "username": "nemours",
+                    "letter": "x",
+                    "identifier1": 1005,
+                    "identifier2": 990,
+                    "description": null,
+                    "userfolder": "/user/nemours",
+                    "launch": "/bin/bash"
+                },
+                {
+                    "username": "nemodbc",
+                    "letter": "x",
+                    "identifier1": 1052,
+                    "identifier2": 990,
+                    "description": null,
+                    "userfolder": "/user/nemours",
+                    "launch": "/bin/bash"
+                },
+                {
+                    "username": "gennemours",
+                    "letter": "x",
+                    "identifier1": 1111,
+                    "identifier2": 990,
+                    "description": null,
+                    "userfolder": "/user/nemours",
+                    "launch": "/bin/bash"
+                }
+            ]
+        },
+        {
+            "inode": 9701834,
+            "other": 57336,
+            "permissions": "-rwxrwxrwx",
+            "cntlink": 21,
+            "file_owner": "credel",
+            "filegroup": "informix",
+            "filesize": 58706944,
+            "date": "2024-02-01",
+            "time": "13:44:44",
+            "other2": 100,
+            "file_location": "/user/sed/credel.dbs/fstoc00467.idx",
+            "folder": "/user/sed/credel.dbs/",
+            "filename": "fstoc00467",
+            "file_extension": ".idx",
+            "users": [
+                {
+                    "username": "sed",
+                    "letter": "x",
+                    "identifier1": 1003,
+                    "identifier2": 990,
+                    "description": null,
+                    "userfolder": "/user/sed",
+                    "launch": "/bin/bash"
+                },
+                {
+                    "username": "websed",
+                    "letter": "x",
+                    "identifier1": 1055,
+                    "identifier2": 990,
+                    "description": null,
+                    "userfolder": "/user/sed",
+                    "launch": "/bin/bash"
+                },
+                {
+                    "username": "gensed",
+                    "letter": "x",
+                    "identifier1": 1109,
+                    "identifier2": 990,
+                    "description": null,
+                    "userfolder": "/user/sed",
+                    "launch": "/bin/bash"
+                },
+                {
+                    "username": "genwebsed",
+                    "letter": "x",
+                    "identifier1": 1154,
+                    "identifier2": 990,
+                    "description": null,
+                    "userfolder": "/user/sed",
+                    "launch": "/bin/bash"
+                }
+            ]
+        },
+        {
+            "inode": 9701834,
+            "other": 57336,
+            "permissions": "-rwxrwxrwx",
+            "cntlink": 21,
+            "file_owner": "credel",
+            "filegroup": "informix",
+            "filesize": 58706944,
+            "date": "2024-02-01",
+            "time": "13:44:44",
+            "other2": 100,
+            "file_location": "/user/smelvi/credel.dbs/fstoc00467.idx",
+            "folder": "/user/smelvi/credel.dbs/",
+            "filename": "fstoc00467",
+            "file_extension": ".idx",
+            "users": [
+                {
+                    "username": "smelvi",
+                    "letter": "x",
+                    "identifier1": 1010,
+                    "identifier2": 990,
+                    "description": null,
+                    "userfolder": "/user/smelvi",
+                    "launch": "/bin/bash"
+                },
+                {
+                    "username": "smeodbc",
+                    "letter": "x",
+                    "identifier1": 1064,
+                    "identifier2": 990,
+                    "description": null,
+                    "userfolder": "/user/sme",
+                    "launch": "/bin/bash"
+                },
+                {
+                    "username": "gensmelvi",
+                    "letter": "x",
+                    "identifier1": 1115,
+                    "identifier2": 990,
+                    "description": null,
+                    "userfolder": "/user/smelvi",
+                    "launch": "/bin/bash"
+                }
+            ]
+        },
+        {
+            "inode": 9701834,
+            "other": 57336,
+            "permissions": "-rwxrwxrwx",
+            "cntlink": 21,
+            "file_owner": "credel",
+            "filegroup": "informix",
+            "filesize": 58706944,
+            "date": "2024-02-01",
+            "time": "13:45:51",
+            "other2": 100,
+            "file_location": "/user/gppl/credel.dbs/fstoc00467.idx",
+            "folder": "/user/gppl/credel.dbs/",
+            "filename": "fstoc00467",
+            "file_extension": ".idx",
+            "users": [
+                {
+                    "username": "gppl",
+                    "letter": "x",
+                    "identifier1": 1018,
+                    "identifier2": 990,
+                    "description": null,
+                    "userfolder": "/user/gppl",
+                    "launch": "/bin/bash"
+                },
+                {
+                    "username": "ambodbc",
+                    "letter": "x",
+                    "identifier1": 1057,
+                    "identifier2": 990,
+                    "description": null,
+                    "userfolder": "/user/gppl",
+                    "launch": "/bin/bash"
+                },
+                {
+                    "username": "gengppl",
+                    "letter": "x",
+                    "identifier1": 1122,
+                    "identifier2": 990,
+                    "description": null,
+                    "userfolder": "/user/gppl",
+                    "launch": "/bin/bash"
+                }
+            ]
+        },
+        {
+            "inode": 9701834,
+            "other": 57336,
+            "permissions": "-rwxrwxrwx",
+            "cntlink": 21,
+            "file_owner": "credel",
+            "filegroup": "informix",
+            "filesize": 58706944,
+            "date": "2024-02-01",
+            "time": "13:46:05",
+            "other2": 100,
+            "file_location": "/user/diep/credel.dbs/fstoc00467.idx",
+            "folder": "/user/diep/credel.dbs/",
+            "filename": "fstoc00467",
+            "file_extension": ".idx",
+            "users": [
+                {
+                    "username": "diep",
+                    "letter": "x",
+                    "identifier1": 1001,
+                    "identifier2": 990,
+                    "description": null,
+                    "userfolder": "/user/diep",
+                    "launch": "/bin/bash"
+                },
+                {
+                    "username": "dieodbc",
+                    "letter": "x",
+                    "identifier1": 1059,
+                    "identifier2": 990,
+                    "description": null,
+                    "userfolder": "/user/diep",
+                    "launch": "/bin/bash"
+                },
+                {
+                    "username": "gendiep",
+                    "letter": "x",
+                    "identifier1": 1107,
+                    "identifier2": 990,
+                    "description": null,
+                    "userfolder": "/user/diep",
+                    "launch": "/bin/bash"
+                }
+            ]
+        },
+        {
+            "inode": 9701834,
+            "other": 57336,
+            "permissions": "-rwxrwxrwx",
+            "cntlink": 21,
+            "file_owner": "credel",
+            "filegroup": "informix",
+            "filesize": 58706944,
+            "date": "2024-02-01",
+            "time": "13:46:05",
+            "other2": 100,
+            "file_location": "/user/immob/credel.dbs/fstoc00467.idx",
+            "folder": "/user/immob/credel.dbs/",
+            "filename": "fstoc00467",
+            "file_extension": ".idx",
+            "users": [
+                {
+                    "username": "immob",
+                    "letter": "x",
+                    "identifier1": 1026,
+                    "identifier2": 990,
+                    "description": null,
+                    "userfolder": "/user/immob",
+                    "launch": "/bin/bash"
+                },
+                {
+                    "username": "immo",
+                    "letter": "x",
+                    "identifier1": 1029,
+                    "identifier2": 990,
+                    "description": null,
+                    "userfolder": "/user/immo",
+                    "launch": "/bin/bash"
+                },
+                {
+                    "username": "genimmob",
+                    "letter": "x",
+                    "identifier1": 1128,
+                    "identifier2": 990,
+                    "description": null,
+                    "userfolder": "/user/immob",
+                    "launch": "/bin/bash"
+                },
+                {
+                    "username": "genimmo",
+                    "letter": "x",
+                    "identifier1": 1131,
+                    "identifier2": 990,
+                    "description": null,
+                    "userfolder": "/user/immo",
+                    "launch": "/bin/bash"
+                }
+            ]
+        },
+        {
+            "inode": 9701834,
+            "other": 57336,
+            "permissions": "-rwxrwxrwx",
+            "cntlink": 21,
+            "file_owner": "credel",
+            "filegroup": "informix",
+            "filesize": 58706944,
+            "date": "2024-02-01",
+            "time": "13:46:15",
+            "other2": 100,
+            "file_location": "/user/ablis/credel.dbs/fstoc00467.idx",
+            "folder": "/user/ablis/credel.dbs/",
+            "filename": "fstoc00467",
+            "file_extension": ".idx",
+            "users": [
+                {
+                    "username": "ablis",
+                    "letter": "x",
+                    "identifier1": 1015,
+                    "identifier2": 990,
+                    "description": null,
+                    "userfolder": "/user/ablis",
+                    "launch": "/bin/bash"
+                },
+                {
+                    "username": "abliodbc",
+                    "letter": "x",
+                    "identifier1": 1065,
+                    "identifier2": 990,
+                    "description": null,
+                    "userfolder": "/user/ablis",
+                    "launch": "/bin/bash"
+                },
+                {
+                    "username": "genablis",
+                    "letter": "x",
+                    "identifier1": 1119,
+                    "identifier2": 990,
+                    "description": null,
+                    "userfolder": "/user/ablis",
+                    "launch": "/bin/bash"
+                }
+            ]
+        },
+        {
+            "inode": 14026135,
+            "other": 73276,
+            "permissions": "-rwxrwxrwx",
+            "cntlink": 1,
+            "file_owner": "credel",
+            "filegroup": "informix",
+            "filesize": 75033600,
+            "date": "2022-11-02",
+            "time": "10:53:25",
+            "other2": 100,
+            "file_location": "/user/asvi/credel.dbs/fstoc00467.dat",
+            "folder": "/user/asvi/credel.dbs/",
+            "filename": "fstoc00467",
+            "file_extension": ".dat",
+            "users": []
+        },
+        {
+            "inode": 14026136,
+            "other": 53960,
+            "permissions": "-rwxrwxrwx",
+            "cntlink": 1,
+            "file_owner": "credel",
+            "filegroup": "informix",
+            "filesize": 55255040,
+            "date": "2022-11-02",
+            "time": "10:53:25",
+            "other2": 100,
+            "file_location": "/user/asvi/credel.dbs/fstoc00467.idx",
+            "folder": "/user/asvi/credel.dbs/",
+            "filename": "fstoc00467",
+            "file_extension": ".idx",
+            "users": []
+        },
+        {
+            "inode": 16123391,
+            "other": 71720,
+            "permissions": "-rwxrwxrwx",
+            "cntlink": 1,
+            "file_owner": "credel",
+            "filegroup": "informix",
+            "filesize": 73441280,
+            "date": "2021-04-06",
+            "time": "16:50:58",
+            "other2": 200,
+            "file_location": "/user/test_banne/credel.dbs/fstoc00467.dat",
+            "folder": "/user/test_banne/credel.dbs/",
+            "filename": "fstoc00467",
+            "file_extension": ".dat",
+            "users": [
+                {
+                    "username": "test_banne",
+                    "letter": "x",
+                    "identifier1": 1091,
+                    "identifier2": 990,
+                    "description": null,
+                    "userfolder": "/user/test_banne",
+                    "launch": "/bin/bash"
+                }
+            ]
+        },
+        {
+            "inode": 16123392,
+            "other": 49956,
+            "permissions": "-rwxrwxrwx",
+            "cntlink": 1,
+            "file_owner": "credel",
+            "filegroup": "informix",
+            "filesize": 51153920,
+            "date": "2021-04-06",
+            "time": "16:51:18",
+            "other2": 200,
+            "file_location": "/user/test_banne/credel.dbs/fstoc00467.idx",
+            "folder": "/user/test_banne/credel.dbs/",
+            "filename": "fstoc00467",
+            "file_extension": ".idx",
+            "users": [
+                {
+                    "username": "test_banne",
+                    "letter": "x",
+                    "identifier1": 1091,
+                    "identifier2": 990,
+                    "description": null,
+                    "userfolder": "/user/test_banne",
+                    "launch": "/bin/bash"
+                }
+            ]
+        },
+        {
+            "inode": 16254384,
+            "other": 73392,
+            "permissions": "-rwxrwxrwx",
+            "cntlink": 1,
+            "file_owner": "credel",
+            "filegroup": "informix",
+            "filesize": 75153408,
+            "date": "2022-11-09",
+            "time": "17:00:52",
+            "other2": 100,
+            "file_location": "/user/test_bvs/credel.dbs/fstoc00467.dat",
+            "folder": "/user/test_bvs/credel.dbs/",
+            "filename": "fstoc00467",
+            "file_extension": ".dat",
+            "users": [
+                {
+                    "username": "test_bvs",
+                    "letter": "x",
+                    "identifier1": 1101,
+                    "identifier2": 990,
+                    "description": null,
+                    "userfolder": "/user/test_bvs",
+                    "launch": "/bin/bash"
+                }
+            ]
+        },
+        {
+            "inode": 16254385,
+            "other": 54036,
+            "permissions": "-rwxrwxrwx",
+            "cntlink": 1,
+            "file_owner": "credel",
+            "filegroup": "informix",
+            "filesize": 55330816,
+            "date": "2022-11-09",
+            "time": "17:00:52",
+            "other2": 100,
+            "file_location": "/user/test_bvs/credel.dbs/fstoc00467.idx",
+            "folder": "/user/test_bvs/credel.dbs/",
+            "filename": "fstoc00467",
+            "file_extension": ".idx",
+            "users": [
+                {
+                    "username": "test_bvs",
+                    "letter": "x",
+                    "identifier1": 1101,
+                    "identifier2": 990,
+                    "description": null,
+                    "userfolder": "/user/test_bvs",
+                    "launch": "/bin/bash"
+                }
+            ]
+        },
+        {
+            "inode": 25035394,
+            "other": 71720,
+            "permissions": "-rwxrwxrwx",
+            "cntlink": 1,
+            "file_owner": "credel",
+            "filegroup": "informix",
+            "filesize": 73441280,
+            "date": "2022-11-17",
+            "time": "08:31:11",
+            "other2": 100,
+            "file_location": "/user/demobvs/credel.dbs/fstoc00467.dat",
+            "folder": "/user/demobvs/credel.dbs/",
+            "filename": "fstoc00467",
+            "file_extension": ".dat",
+            "users": [
+                {
+                    "username": "demobvs",
+                    "letter": "x",
+                    "identifier1": 1097,
+                    "identifier2": 990,
+                    "description": null,
+                    "userfolder": "/user/demobvs",
+                    "launch": "/bin/bash"
+                }
+            ]
+        },
+        {
+            "inode": 25035501,
+            "other": 53004,
+            "permissions": "-rwxrwxrwx",
+            "cntlink": 1,
+            "file_owner": "credel",
+            "filegroup": "informix",
+            "filesize": 54275072,
+            "date": "2022-11-17",
+            "time": "08:31:11",
+            "other2": 100,
+            "file_location": "/user/demobvs/credel.dbs/fstoc00467.idx",
+            "folder": "/user/demobvs/credel.dbs/",
+            "filename": "fstoc00467",
+            "file_extension": ".idx",
+            "users": [
+                {
+                    "username": "demobvs",
+                    "letter": "x",
+                    "identifier1": 1097,
+                    "identifier2": 990,
+                    "description": null,
+                    "userfolder": "/user/demobvs",
+                    "launch": "/bin/bash"
+                }
+            ]
+        },
+        {
+            "inode": 27133315,
+            "other": 71720,
+            "permissions": "-rwxrwxrwx",
+            "cntlink": 1,
+            "file_owner": "credel",
+            "filegroup": "informix",
+            "filesize": 73441280,
+            "date": "2022-02-02",
+            "time": "11:30:29",
+            "other2": 100,
+            "file_location": "/user/genmelun/credel.dbs/fstoc00467.dat",
+            "folder": "/user/genmelun/credel.dbs/",
+            "filename": "fstoc00467",
+            "file_extension": ".dat",
+            "users": [
+                {
+                    "username": "genmelun",
+                    "letter": "x",
+                    "identifier1": 1093,
+                    "identifier2": 990,
+                    "description": null,
+                    "userfolder": "/user/genmelun",
+                    "launch": "/bin/bash"
+                }
+            ]
+        },
+        {
+            "inode": 27133316,
+            "other": 52096,
+            "permissions": "-rwxrwxrwx",
+            "cntlink": 1,
+            "file_owner": "credel",
+            "filegroup": "informix",
+            "filesize": 53345280,
+            "date": "2022-02-02",
+            "time": "11:30:29",
+            "other2": 100,
+            "file_location": "/user/genmelun/credel.dbs/fstoc00467.idx",
+            "folder": "/user/genmelun/credel.dbs/",
+            "filename": "fstoc00467",
+            "file_extension": ".idx",
+            "users": [
+                {
+                    "username": "genmelun",
+                    "letter": "x",
+                    "identifier1": 1093,
+                    "identifier2": 990,
+                    "description": null,
+                    "userfolder": "/user/genmelun",
+                    "launch": "/bin/bash"
+                }
+            ]
+        },
+        {
+            "inode": 34616455,
+            "other": 65476,
+            "permissions": "-rwxrwxrwx",
+            "cntlink": 1,
+            "file_owner": "credel",
+            "filegroup": "informix",
+            "filesize": 67044352,
+            "date": "2015-03-24",
+            "time": "19:17:53",
+            "other2": 100,
+            "file_location": "/user/credel/credel.dbs/fstoc00467.dat",
+            "folder": "/user/credel/credel.dbs/",
+            "filename": "fstoc00467",
+            "file_extension": ".dat",
+            "users": [
+                {
+                    "username": "credel",
+                    "letter": "x",
+                    "identifier1": 1000,
+                    "identifier2": 990,
+                    "description": "credel",
+                    "userfolder": "/user/credel",
+                    "launch": "/bin/bash"
+                }
+            ]
+        },
+        {
+            "inode": 34616456,
+            "other": 42824,
+            "permissions": "-rwxrwxrwx",
+            "cntlink": 1,
+            "file_owner": "credel",
+            "filegroup": "informix",
+            "filesize": 43850752,
+            "date": "2015-03-24",
+            "time": "19:17:53",
+            "other2": 100,
+            "file_location": "/user/credel/credel.dbs/fstoc00467.idx",
+            "folder": "/user/credel/credel.dbs/",
+            "filename": "fstoc00467",
+            "file_extension": ".idx",
+            "users": [
+                {
+                    "username": "credel",
+                    "letter": "x",
+                    "identifier1": 1000,
+                    "identifier2": 990,
+                    "description": "credel",
+                    "userfolder": "/user/credel",
+                    "launch": "/bin/bash"
+                }
+            ]
+        }
+    ]
+}
