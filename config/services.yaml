@@ -13,9 +13,11 @@ services:
 
     # makes classes in src/ available to be used as services
     # this creates a service per class whose id is the fully-qualified class name
-    _instanceof:
-        App\Service\Processor\MultipleEntityProcessorInterface:
-            tags: [app.join_resolver_tagged]
+
+    # Create tag for all instance of certain class
+    # _instanceof:
+    #     App\Service\Processor\MultipleEntityProcessorInterface:
+    #         tags: [app.join_resolver_tagged]
     
     
 

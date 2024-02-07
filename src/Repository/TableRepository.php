@@ -21,6 +21,19 @@ class TableRepository extends ServiceEntityRepository
         parent::__construct($registry, Table::class);
     }
 
+    /**
+     * @return Table[]
+     */
+    public function findByTabIds(array $ids):array
+    {
+        return $this->createQueryBuilder('t')
+            ->select('t')
+            ->where('t.tabId IN (:idlist)')
+            ->setParameter("idlist",$ids)
+            ->getQuery()
+            ->getResult();
+    }
+
 //    /**
 //     * @return Table[] Returns an array of Table objects
 //     */

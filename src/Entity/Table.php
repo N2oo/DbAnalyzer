@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Entity\View;
 use App\Entity\Index;
 use App\Entity\Column;
 use App\Entity\DependOn;
@@ -98,19 +99,19 @@ class Table
     #[SerializedName('audpath')]
     private ?string $audPath = null;
 
-    #[ORM\OneToMany(mappedBy: 'tableElement', targetEntity: Column::class)]
+    #[ORM\OneToMany(mappedBy: 'tableElement', targetEntity: Column::class,cascade:["persist"])]
     private Collection $columns;
 
-    #[ORM\OneToMany(mappedBy: 'tableElement', targetEntity: Index::class)]
+    #[ORM\OneToMany(mappedBy: 'tableElement', targetEntity: Index::class,cascade:["persist"])]
     private Collection $indexes;
 
-    #[ORM\OneToMany(mappedBy: 'tableElement', targetEntity: View::class)]
+    #[ORM\OneToMany(mappedBy: 'tableElement', targetEntity: View::class,cascade:["persist"])]
     private Collection $views;
 
-    #[ORM\OneToMany(mappedBy: 'bTable', targetEntity: DependOn::class)]
+    #[ORM\OneToMany(mappedBy: 'bTable', targetEntity: DependOn::class,cascade:["persist"])]
     private Collection $dependencies;
 
-    #[ORM\OneToMany(mappedBy: 'dTable', targetEntity: DependOn::class)]
+    #[ORM\OneToMany(mappedBy: 'dTable', targetEntity: DependOn::class,cascade:["persist"])]
     private Collection $dependOns;
 
     public function __construct()
