@@ -2,7 +2,7 @@
 
 namespace App\DependencyInjection\Compiler;
 
-use App\Decorator\JoinResolver;
+use App\Decorator\JoinResolverDecorator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 /**
@@ -12,10 +12,11 @@ use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 class MultipleEntityProcessorInterfaceDecoratorPass implements CompilerPassInterface
 {
     private const TAG_NAME = "app.join_resolver_tagged";
+    private const DECORATOR_CLASS = JoinResolverDecorator::class;
 
     public function process(ContainerBuilder $container){
         
-        if (!$container->has(JoinResolver::class)) {
+        if (!$container->has(self::DECORATOR_CLASS)) {
             // If the decorator isn't registered in the container you could register it here
             return;
         }            
@@ -24,7 +25,7 @@ class MultipleEntityProcessorInterfaceDecoratorPass implements CompilerPassInter
         foreach ($taggedServices as $id => $tags) {
 
             // skip the decorator, we do it's not self-decorated
-            if ($id === JoinResolver::class) {
+            if ($id === self::DECORATOR_CLASS) {
                 continue;
             }
 
@@ -32,7 +33,7 @@ class MultipleEntityProcessorInterfaceDecoratorPass implements CompilerPassInter
             
 
             // Add the new decorated service.
-            $container->register($decoratedServiceId, JoinResolver::class)
+            $container->register($decoratedServiceId, self::DECORATOR_CLASS)
                 ->setDecoratedService($id)
                 ->setPublic(true)
                 ->setAutowired(true);

@@ -14,7 +14,7 @@ use Symfony\Component\DependencyInjection\Attribute\AutowireDecorated;
  * Raison de la mise en place de l'attribut AutowireDecorated
  * https://symfony.com/doc/7.1/service_container/service_decoration.html#control-the-behavior-when-the-decorated-service-does-not-exist
  */
-class JoinResolver implements MultipleEntityProcessorInterface
+class JoinResolverDecorator implements MultipleEntityProcessorInterface
 {
     public function __construct(
         #[AutowireDecorated]
