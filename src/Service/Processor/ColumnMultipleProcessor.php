@@ -4,14 +4,15 @@ namespace App\Service\Processor;
 
 use ApiPlatform\Metadata\Operation;
 use Doctrine\ORM\EntityManagerInterface;
-use ApiPlatform\State\ProcessorInterface;
 use App\Entity\DTO\Column\ColumnMultipleDTO;
 use App\Entity\DTO\Column\ColumnMultipleResponseDTO;
+use Psr\Log\LoggerInterface;
 
-class ColumnMultipleProcessor implements ProcessorInterface
+class ColumnMultipleProcessor implements MultipleEntityProcessorInterface
 {
     public function __construct(
-        private EntityManagerInterface $em
+        private EntityManagerInterface $em,
+        private LoggerInterface $logger
     ) {
 
     }

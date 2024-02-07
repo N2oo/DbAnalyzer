@@ -3,11 +3,10 @@
 namespace App\Service\Processor;
 use ApiPlatform\Metadata\Operation;
 use Doctrine\ORM\EntityManagerInterface;
-use ApiPlatform\State\ProcessorInterface;
 use App\Entity\DTO\Index\IndexMultipleDTO;
 use App\Entity\DTO\Index\IndexMultipleResponseDTO;
 
-class IndexMultipleProcessor implements ProcessorInterface
+class IndexMultipleProcessor implements MultipleEntityProcessorInterface
 {
     public function __construct(
         private EntityManagerInterface $em

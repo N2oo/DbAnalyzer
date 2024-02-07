@@ -3,11 +3,10 @@
 namespace App\Service\Processor;
 use ApiPlatform\Metadata\Operation;
 use Doctrine\ORM\EntityManagerInterface;
-use ApiPlatform\State\ProcessorInterface;
 use App\Entity\DTO\DependOn\DependOnMultipleDTO;
 use App\Entity\DTO\DependOn\DependOnMultipleResponseDTO;
 
-class DependOnMultipleProcessor implements ProcessorInterface
+class DependOnMultipleProcessor implements MultipleEntityProcessorInterface
 {
     public function __construct(
         private EntityManagerInterface $em
