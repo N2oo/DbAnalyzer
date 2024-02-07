@@ -2,7 +2,9 @@
 
 namespace App\Entity;
 
-use ApiPlatform\Doctrine\Common\State\PersistProcessor;
+use App\Entity\Index;
+use App\Entity\Column;
+use App\Entity\DependOn;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\Post;
 use Doctrine\ORM\Mapping as ORM;
@@ -10,10 +12,10 @@ use App\Repository\TableRepository;
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\GetCollection;
 use ApiPlatform\OpenApi\Model\Operation;
-use App\Service\Processor\TableMultipleProcessor;
 use App\Entity\DTO\Table\TableMultipleDTO;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
+use App\Service\Processor\TableMultipleProcessor;
 use App\Entity\DTO\Table\TableMultipleResponseDTO;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Serializer\Annotation\SerializedName;
