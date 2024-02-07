@@ -1,0 +1,49 @@
+{
+	"indexs": [
+		{
+			"idxname": "ix_stk",
+			"owner": "credel",
+			"tabid": 467,
+			"idxtype": "U",
+			"clustered": "C",
+			"part1": 1,
+			"part2": 2,
+			"part3": 3,
+			"part4": 4,
+			"part5": 0,
+			"part6": 0,
+			"part7": 0,
+			"part8": 0
+		},
+		{
+			"idxname": "ix_stk1",
+			"owner": "credel",
+			"tabid": 467,
+			"idxtype": "D",
+			"clustered": null,
+			"part1": 3,
+			"part2": 4,
+			"part3": 1,
+			"part4": 2,
+			"part5": 0,
+			"part6": 0,
+			"part7": 0,
+			"part8": 0
+		},
+		{
+			"idxname": "ix_stk10",
+			"owner": "credel",
+			"tabid": 467,
+			"idxtype": "D",
+			"clustered": null,
+			"part1": 1,
+			"part2": 2,
+			"part3": 4,
+			"part4": 0,
+			"part5": 0,
+			"part6": 0,
+			"part7": 0,
+			"part8": 0
+		}
+	]
+}

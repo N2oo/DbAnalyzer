@@ -51,7 +51,6 @@ class Index
     private ?string $owner = null;
 
     #[ORM\Column]
-    
     #[SerializedName('tabid')]
     private ?int $tableId = null;
 
