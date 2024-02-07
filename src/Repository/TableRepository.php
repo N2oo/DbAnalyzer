@@ -29,9 +29,21 @@ class TableRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('t')
             ->select('t')
             ->where('t.tabId IN (:idlist)')
-            ->setParameter("idlist",$ids)
+            ->setParameter('idlist',$ids)
             ->getQuery()
             ->getResult();
+    }
+
+    /**
+     * @return Table[]
+     */
+    public function findByFilenames(array $fileNames){
+        return $this->createQueryBuilder('t')
+        ->select('t')
+        ->where('t.dbFileName IN (:fileNameList)')
+        ->setParameter('fileNameList',$fileNames)
+        ->getQuery()
+        ->getResult();
     }
 
 //    /**
