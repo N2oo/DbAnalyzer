@@ -13,9 +13,15 @@ use Symfony\Component\Routing\Annotation\Route;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class DashboardController extends AbstractDashboardController
 {
+    public function __construct(
+        private UrlGeneratorInterface $urlGenerator
+    )
+    {}
+
     #[Route('/admin', name: 'admin')]
     public function index(): Response
     {
@@ -30,6 +36,7 @@ class DashboardController extends AbstractDashboardController
 
     public function configureMenuItems(): iterable
     {
+        yield MenuItem::linkToUrl('Retour à l\'app', 'fa fa-home',$this->urlGenerator->generate("app_main"));
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
         yield MenuItem::linkToCrud('Tables', 'fas fa-list', Table::class);
         yield MenuItem::linkToCrud('Colonnes', 'fas fa-list', Column::class);
