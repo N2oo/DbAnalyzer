@@ -33,19 +33,7 @@ use Symfony\Component\Serializer\Attribute\SerializedName;
             output: ColumnMultipleResponseDTO::class,
             processor: ColumnMultipleProcessor::class
         )
-    ]),
-    ApiResource(
-        shortName: "Colonne",
-        openapiContext:[
-            "summary"=> "Résolution des colonnes d'une table",
-            "secription"=> "Résolution des colonnes affairantes à une table"
-        ],
-        uriTemplate:"table/{id}/columns",
-        uriVariables:["id"=>new Link(fromClass:Table::class,fromProperty:"id")],
-        operations: [
-            new GetCollection()
-        ]
-    )
+        ])
 ]
 #[ORM\Table(name: '`column`')]
 class Column
