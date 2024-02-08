@@ -1,0 +1,15 @@
+<div{{ attributes }} class="m-0 p-0 d-flex">
+    <a 
+        data-bs-toggle="tooltip" 
+        data-bs-title="{{title}}"
+        data-bs-placement="{{placement}}"
+        data-bs-html="{{html ? "true":"false"}}"
+        data-bs-trigger="{{trigger}}"
+        class="text-decoration-none link-body-emphasis {{class}}"
+        {% if href is not null %}
+        href="{{href}}"
+        {% endif %}
+    >
+        {% block content %}{% endblock %}
+    </a>
+</div>
