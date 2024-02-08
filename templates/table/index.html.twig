@@ -5,10 +5,22 @@
 
 {% block body %}
 	{{form_start(searchTableForm)}}
+		<div class="row row-cols mt-3">
+			<div class="col-4">
+			    <div class="input-group h-100">
+					<div class="input-group-text">Référentiel</div>
+					{{form_widget(searchTableForm.owners)}}
+				</div>
+			</div>
+			<div class="col-4">
+				<div class="input-group mb-3 h-100">
+					{# {{form_label(searchTableForm.user_query) }} #}
+					{{form_widget(searchTableForm.user_query)}}
+					{{form_widget(searchTableForm.submit)}}
+				</div>
+			</div>
+		</div>
 	{{form_end(searchTableForm)}}
-    {# <pre>
-        {{ dump(tables) }}
-    </pre> #}
 	<table class="table">
 		<thead>
 			<tr>

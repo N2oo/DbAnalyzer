@@ -42,26 +42,15 @@ class SearchTableType extends AbstractType
                 'label'=>'Référentiel',
                 'choices'=>$this->defineOwnerChoices(),
                 'multiple'=>true,
-                'required'=>false
-                // 'choice_loader'=> new CallbackChoiceLoader(function (): array{
-                //     $response = $this->tableRepository
-                //         ->createQueryBuilder('t')
-                //         ->select('t.owner')
-                //         ->groupBy('t.owner')
-                //         ->getQuery()
-                //         ->getResult();
-                //     $callback = function($element){
-                //         return $element["owner"];
-                //     };
-                //     $response = array_map($callback,$response);
-                //     dump($response);
-                //     return $response;
-                // })
+                'required'=>false,
+                'autocomplete'=>true
             ])
             ->add('user_query',null,[
                 'label'=>'Recherche'
             ])
-            ->add('submit',SubmitType::class)
+            ->add('submit',SubmitType::class,[
+                'label'=>'Rechercher'
+            ])
         ;
     }
 
