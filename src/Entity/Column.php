@@ -124,6 +124,45 @@ class Column
         return $this;
     }
 
+    public function getResolvedColumnType():string
+    {
+        return match($this->getColumnType()){
+            0 => "CHAR",
+            1 => "SMALLINT",
+            2 => "INTEGER",
+            3 => "FLOAT",
+            4 => "SMALLFLOAT",
+            5 => "DECIMAL",
+            6 => "SERIAL",
+            7 => "DATE",
+            8 => "MONEY",
+            9 => "NULL",
+            10 => "DATETIME",
+            11 => "BYTE",
+            12 => "TEXT",
+            13 => "VARCHAR",
+            14 => "INTERVAL",
+            15 => "NCHAR",
+            16 => "NVARCHAR",
+            17 => "INT8",
+            18 => "SERIAL8",
+            19 => "SET",
+            20 => "MULTISET",
+            21 => "LIST",
+            22 => "ROW (unnamed)",
+            23 => "COLLECTION",
+            40 => "LVARCHAR fixed-length opaque types 2",
+            41 => "BLOB, BOOLEAN, CLOB variable-length opaque types 2",
+            43 => "LVARCHAR (client-side only)",
+            45 => "BOOLEAN",
+            52 => "BIGINT",
+            53 => "BIGSERIAL 1",
+            2061 => "IDSSECURITYLABEL 2, 3",
+            4118 => "ROW (named)",
+            default => "INCONNU"
+        };
+    }
+
     public function getColumnType(): ?int
     {
         return $this->columnType;
