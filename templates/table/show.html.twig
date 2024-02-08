@@ -7,9 +7,12 @@
 	{% set hasDependencies = table.dependencies|length > 0 %}
 	{% set hasGlobalDependencies = (hasDependencies or isView) %}
     {% set hasIndexes = table.indexes| length > 0 %}
-    {# <pre>
+    <pre>
         {{ dump(table) }}
-    </pre> #}
+    </pre>
+    <a class="text-decoration-none text-success" tabindex="0" data-bs-trigger="hover focus" data-bs-toggle="popover" data-bs-html="true" data-bs-title="<h3>Le titre</h3>" data-bs-content="<ul><li>Le coco</li></ul>" data-bs-placement="right">
+		L'élément à survoler
+	</a>
 	<div class="mt-3 card shadow shadow-5">
 		<div class="card-header">
 			<h1 class="fs-2">Détail de la {{isView ? "vue":"table"}}
@@ -20,6 +23,9 @@
 			<ul class="mt-1 nav nav-tabs" id="ficheTable" role="tablist">
 				<li class="nav-item" role="presentation">
 					<button class="nav-link active" id="general_decription-tab" data-bs-toggle="tab" data-bs-target="#general_decription-tab-pane" type="button" role="tab" aria-controls="general_decription-tab-pane" aria-selected="true">Informations générales</button>
+				</li>
+                <li class="nav-item" role="presentation">
+					<button class="nav-link" id="system-tab" data-bs-toggle="tab" data-bs-target="#system-tab-pane" type="button" role="tab" aria-controls="system-tab-pane" aria-selected="false">Système</button>
 				</li>
 				<li class="nav-item" role="presentation">
 					<button class="nav-link" id="columns-tab" data-bs-toggle="tab" data-bs-target="#columns-tab-pane" type="button" role="tab" aria-controls="columns-tab-pane" aria-selected="false">Colonne ({{table.columns|length}})</button>
@@ -103,6 +109,14 @@
                                         <td>Nombre de dépendances</td>
                                         <td>{{table.dependOns|length}}</td>
                                     </tr>
+                                    <tr>
+                                        <td>Liste des identifiants odbc</td>
+                                        <td>Montrer (à faire !)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Liste de tous les identifiants</td>
+                                        <td>Montrer (à faire !)</td>
+                                    </tr>
                                     {% if isView %}
                                         <tr>
                                             <td>Déclaration de la vue</td>
@@ -123,6 +137,48 @@
                         </div>
                     </div>
 				</div>
+                <div class="tab-pane fade" id="system-tab-pane" role="tabpanel" aria-labelledby="system-tab" tabindex="0">
+                    
+                    <div class="row mt-2">
+                        <div class="col-6">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h3>Liste des fichiers ".dat"</h3>
+                                </div>
+                                <div class="card-body">
+                                    <ul>
+                                        {% for detail in table.details|filter( d=> d.fileExtension == ".dat") %}
+                                            <li>
+                                                <twig:TooltipCustomComponent title="users to inject" placement="right">
+                                                    {{detail.fileLocation}}
+                                                </twig:TooltipCustomComponent>
+                                            </li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h3>Liste des fichiers ".idx"</h3>
+                                </div>
+                                <div class="card-body">
+                                    <ul>
+                                        {% for detail in table.details|filter( d=> d.fileExtension == ".idx") %}
+                                            <li>
+                                                <twig:TooltipCustomComponent title="users to inject" placement="right">
+                                                    {{detail.fileLocation}}
+                                                </twig:TooltipCustomComponent>
+                                            </li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+				</div>
 				<div class="tab-pane fade" id="columns-tab-pane" role="tabpanel" aria-labelledby="columns-tab" tabindex="0">
 					<table class="table table-hover table-sm">
 						<thead>
@@ -130,6 +186,7 @@
 								<th scope="col-1">#</th>
 								<th scope="col-2">Nom</th>
 								<th scope="col-1">N°</th>
+								<th scope="col-1">TypeID</th>
 								<th scope="col-1">Type</th>
 								<th scope="col">Commentaire</th>
 							</tr>
@@ -141,6 +198,7 @@
 									<td>{{column.columnName}}</td>
 									<td>{{column.columnNumber}}</td>
 									<td>{{column.columnType}}</td>
+									<td>{{column.resolvedColumnType|lower}}</td>
 									<td></td>
 								</tr>
 							{% endfor %}
