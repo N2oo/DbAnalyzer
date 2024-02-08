@@ -3,26 +3,13 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>
-			{% block title %}Welcome!
-			{% endblock %}
+			{% block title %}Welcome!{% endblock %}
 		</title>
 		<link
 		rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
 		{# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
 		{% block stylesheets %}
 			{{ encore_entry_link_tags('app') }}
-			<style>
-				table,
-				td {
-					border: 1px solid #333;
-				}
-
-				thead,
-				tfoot {
-					background-color: #333;
-					color: #fff;
-				}
-			</style>
 		{% endblock %}
 
 		{% block javascripts %}
@@ -44,7 +31,7 @@
 							<a class="nav-link {{ current_route == route ? "active":"" }}" {{ current_route == route ? "aria-current='page'":"" }} href="{{path(route)}}">Accueil</a>
 						</li>
 						<li class="nav-item">
-                            {% set route = "app_table" %}
+                            {% set route = "app_table_index" %}
 							<a class="nav-link {{ current_route == route ? "active":"" }}" {{ current_route == route ? "aria-current='page'":"" }} href="{{path(route)}}">Tables</a>
 						</li>
                         <li class="nav-item">
@@ -59,13 +46,15 @@
 				</div>
 			</div>
 		</nav>
-		{% for type in app.flashes %}
-			{% for message in type %}
-				<div>
-					{{ message }}
-				</div>
+		<div class="container">
+			{% for type in app.flashes %}
+				{% for message in type %}
+					<div>
+						{{ message }}
+					</div>
+				{% endfor %}
 			{% endfor %}
-		{% endfor %}
-		{% block body %}{% endblock %}
+			{% block body %}{% endblock %}
+		</div>
 	</body>
 </html>
