@@ -3,6 +3,8 @@
 {% block title %}Liste des tables{% endblock %}
 
 {% block body %}
+    {{form_start(searchTableForm)}}
+    {{form_end(searchTableForm)}}
     <pre>
         {{ dump(tables) }}
     </pre>

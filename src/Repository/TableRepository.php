@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Table;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -44,6 +45,48 @@ class TableRepository extends ServiceEntityRepository
         ->setParameter('fileNameList',$fileNames)
         ->getQuery()
         ->getResult();
+    }
+
+    public function findByOwners(array $owners)
+    {
+        $queryBuilder = $this->createQueryBuilder('t')
+            ->select('t');
+        return $this->getQBOwnerInList($queryBuilder,$owners)
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function findByLikelyTableName(string $likelyName){
+        $queryBuilder = $this->createQueryBuilder('t')
+            ->select('t');
+        return $this
+            ->getQBLikelyTableName($queryBuilder,$likelyName)
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function findByLikelyTableNameAndInOwnerList(array $owners,string $likelyName)
+    {
+        $queryBuilder = $this->createQueryBuilder('t')
+            ->select('t');
+        $queryBuilder = $this->getQBLikelyTableName($queryBuilder,$likelyName);
+        return $this
+            ->getQBOwnerInList($queryBuilder,$owners)
+            ->getQuery()
+            ->getResult();
+    }
+
+    private function getQBLikelyTableName(QueryBuilder $queryBuilder,string $likelyName):QueryBuilder
+    {
+        return $queryBuilder->andWhere('t.tableName LIKE :input')
+        ->setParameter('input',"%{$likelyName}%");
+    }
+
+    private function getQBOwnerInList(QueryBuilder $queryBuilder,array $owners):QueryBuilder
+    {
+        return $queryBuilder
+            ->andWhere('t.owner in (:ownerlist)')
+            ->setParameter('ownerlist',$owners);
     }
 
 //    /**

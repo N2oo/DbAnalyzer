@@ -25,14 +25,12 @@ class TableFinder
 
     /**
      * @param Table[] $tables
-     * @return Table[]
      */
-    private function hydrateTableJoins(array $tables)
+    private function hydrateTableJoins(array $tables):void
     {
-
     }
 
-    public function hydrateSingleTable(Table $table)
+    public function hydrateSingleTable(Table $table):void
     {
         $this->hydrateTableJoins([$table]);
     }
@@ -45,5 +43,23 @@ class TableFinder
         $all_tables = $this->findAllTables();
         $this->hydrateTableJoins($all_tables);
         return $all_tables;
+    }
+
+    /**
+     * @param string[] $owner
+     */
+    public function findByOwners(array $owners)
+    {
+        return $this->tableRepository->findByOwners($owners);
+    }
+
+    public function findByLikelyTableName(string $input)
+    {
+        return $this->tableRepository->findByLikelyTableName($input);
+    }
+
+    public function findByLikelyTableNameAndInOwnerList(array $owners,string $likelyName)
+    {
+        return $this->tableRepository->findByLikelyTableNameAndInOwnerList($owners,$likelyName);
     }
 }

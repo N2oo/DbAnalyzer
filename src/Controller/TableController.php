@@ -4,6 +4,10 @@ namespace App\Controller;
 
 use App\Entity\Table;
 use App\Service\TableFinder;
+use App\Form\SearchTableType;
+use App\Entity\ValueObject\SearchTableQuery;
+use App\Service\Builder\Factory\SearchTableStrategyFactory;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -11,18 +15,24 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 #[Route("/table")]
 class TableController extends AbstractController
 {
-
-    public function __construct(private readonly TableFinder $tableFinder)
+    public function __construct(
+        private readonly TableFinder $tableFinder,
+        private readonly SearchTableStrategyFactory $searchTableStrategyFactory
+    )
     {
 
     }
 
     #[Route('/', name: 'app_table_index')]
-    public function index(): Response
+    public function index(Request $request): Response
     {
-        $all_tables = $this->tableFinder->findAllTablesAndHydrateJoins();
+        $searchTableQuery = new SearchTableQuery();
+        $form = $this->createForm(SearchTableType::class,$searchTableQuery);
+        $form->handleRequest($request);
+        $all_tables = $this->searchTableStrategyFactory->getStrategy($searchTableQuery)->find();
         return $this->render('table/index.html.twig', [
             'tables' => $all_tables,
+            'searchTableForm'=>$form
         ]);
     }
 
