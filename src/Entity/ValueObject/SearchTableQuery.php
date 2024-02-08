@@ -6,16 +6,16 @@ class SearchTableQuery
     private ?string $user_query = null;
 
     /**
-     * @var string[] $owners
+     * @var ?string[] $owners
      */
-    private array $owners;
+    private ?array $owners = null;
 
     /**
      * Get the value of owner
      *
-     * @return string[]
+     * @return ?string[]
      */
-    public function getOwners(): array
+    public function getOwners(): ?array
     {
         return $this->owners;
     }
@@ -23,11 +23,11 @@ class SearchTableQuery
     /**
      * Set the value of owner
      *
-     * @param string[] $owners
+     * @param ?string[] $owners
      *
      * @return self
      */
-    public function setOwners(array $owners): self
+    public function setOwners(?array $owners): self
     {
         $this->owners = $owners;
 
