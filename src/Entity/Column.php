@@ -35,7 +35,7 @@ use Symfony\Component\Serializer\Attribute\SerializedName;
         )
         ]),
     ApiResource(
-        shortName: "Colonne",
+        shortName: "Table",
         openapiContext:[
             "summary"=> "Résolution des colonnes d'une table",
             "secription"=> "Résolution des colonnes affairantes à une table"
