@@ -24,16 +24,14 @@
 	<table class="table">
 		<thead>
 			<tr>
-				<th scope="col">#</th>
-				<th scope="col">Nom</th>
-				<th scope="col">Référentiel</th>
-				<th scope="col">Fichier</th>
-				<th scope="col">Nb Lignes</th>
-				<th scope="col">Nb Colonnes</th>
-				<th scope="col">Nb Indexes</th>
-				<th scope="col">Nb Utilisation</th>
-				<th scope="col">Nb Dépendances</th>
-				<th scope="col">Vue ?</th>
+				<th scope="col-1">#</th>
+				<th scope="col-1">Nom</th>
+				<th scope="col-1">Référentiel</th>
+				<th scope="col-1">Fichier</th>
+				<th scope="col-1">Nb Lignes</th>
+				<th scope="col-1">Nb Utilisation</th>
+				<th scope="col-1">Nb Dépendances</th>
+				<th scope="col-1">Vue ?</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -46,8 +44,6 @@
 				<td>{{table.owner}}</td>
 				<td>{{table.dbFileName}}</td>
 				<td>{{table.numberRows}}</td>
-				<td>{{table.columns|length}}</td>
-				<td>{{table.indexes|length}}</td>
 				<td>{{table.dependencies|length}}</td>
 				<td>{{table.dependOns|length}}</td>
 				<td>{{table.tableType == "V" ? "Oui":""}}</td>

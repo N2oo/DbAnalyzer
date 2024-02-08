@@ -258,7 +258,6 @@ class Table
     public function getViewSql():string
     {
         $sql_query = "";
-        //TODO : s'assurer que les views sont triés par seqno
         foreach($this->getViews() as $viewElement)
         {
             $sql_query .= $viewElement->getViewText();

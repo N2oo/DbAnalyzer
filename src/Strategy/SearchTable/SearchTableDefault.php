@@ -13,6 +13,6 @@ class SearchTableDefault implements SearchTableStrategy
 
     }
     public function find():array{
-        return $this->tableFinder->findAllTables(true);
+        return $this->tableFinder->findAllTables();
     }
 }

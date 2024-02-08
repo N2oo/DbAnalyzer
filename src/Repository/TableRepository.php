@@ -52,11 +52,13 @@ class TableRepository extends ServiceEntityRepository
      */
     public function hydrateTables(array $tables){
         return $this->createQueryBuilder('t')
-            ->select('t,c,i,d,do')
+            ->select('t,c,i,d,do,ds,v')
             ->leftJoin('t.columns','c')
             ->leftJoin('t.indexes','i')
             ->leftJoin('t.dependencies','d')
             ->leftJoin('t.dependOns','do')
+            ->leftJoin('t.details','ds')
+            ->leftJoin('t.views','v')
             ->where('t IN (:tableList)')
             ->setParameter('tableList',$tables)
             ->getQuery()

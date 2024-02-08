@@ -1,7 +1,252 @@
 {% extends "base.html.twig" %}
-{% block title %}{{table.tableName}}{% endblock %}
+{% block title %}Table
+	{{table.owner}}.{{ table.tableName }}
+{% endblock %}
 {% block body %}
-    <pre>
+	{% set isView = table.tableType == "V" %}
+	{% set hasDependencies = table.dependencies|length > 0 %}
+	{% set hasGlobalDependencies = (hasDependencies or isView) %}
+    {% set hasIndexes = table.indexes| length > 0 %}
+    {# <pre>
         {{ dump(table) }}
-    </pre>
+    </pre> #}
+	<div class="mt-3 card shadow shadow-5">
+		<div class="card-header">
+			<h1 class="fs-2">Détail de la {{isView ? "vue":"table"}}
+				{{table.owner}}.{{ table.tableName }}
+				#{{table.id}}</h1>
+		</div>
+		<div class="card-body">
+			<ul class="mt-1 nav nav-tabs" id="ficheTable" role="tablist">
+				<li class="nav-item" role="presentation">
+					<button class="nav-link active" id="general_decription-tab" data-bs-toggle="tab" data-bs-target="#general_decription-tab-pane" type="button" role="tab" aria-controls="general_decription-tab-pane" aria-selected="true">Informations générales</button>
+				</li>
+				<li class="nav-item" role="presentation">
+					<button class="nav-link" id="columns-tab" data-bs-toggle="tab" data-bs-target="#columns-tab-pane" type="button" role="tab" aria-controls="columns-tab-pane" aria-selected="false">Colonne ({{table.columns|length}})</button>
+				</li>
+                {% if hasIndexes %}
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="indexes-tab" data-bs-toggle="tab" data-bs-target="#indexes-tab-pane" type="button" role="tab" aria-controls="indexes-tab-pane" aria-selected="false">Index ({{table.indexes|length}})</button>
+                    </li>            
+                {% endif %}
+                
+				{% if hasGlobalDependencies %}
+					<li class="nav-item" role="presentation">
+						<button class="nav-link" id="dependencies-tab" data-bs-toggle="tab" data-bs-target="#dependencies-tab-pane" type="button" role="tab" aria-controls="dependencies-tab-pane" aria-selected="false">Dépendences</button>
+					</li>
+				{% endif %}
+
+			</ul>
+			<div class="tab-content" id="ficheTableContent">
+				<div class="tab-pane fade show active" id="general_decription-tab-pane" role="tabpanel" aria-labelledby="general_decription-tab" tabindex="0">
+                    <div class="row">
+                        <div class="col-7">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col-3">Nom du champ</th>
+                                        <th scope="col">Valeur</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Nom table</td>
+                                        <td>{{table.tableName}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Propriétaire</td>
+                                        <td>{{table.owner}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Fichier</td>
+                                        <td>{{table.dbFilename}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Id Original</td>
+                                        <td>{{table.tabId}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Nombre de lignes</td>
+                                        <td>{{table.numberRows}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Date de création</td>
+                                        <td>{{table.createdAt|date("d-m-Y")}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Version</td>
+                                        <td>{{table.version}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Type de table</td>
+                                        <td>{{table.tableType == "V" ? "Vue" :"Table" }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Nombre de colonnes</td>
+                                        <td>{{table.columns|length}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Nombre d'indexes</td>
+                                        <td>{{table.indexes|length}}</td>
+                                    </tr>
+                                    {% if isView %}
+                                        <tr>
+                                            <td>Nombre de partition de vue</td>
+                                            <td>{{table.views|length}}</td>
+                                        </tr>
+                                    {% endif %}
+                                    <tr>
+                                        <td>Nombre de référence</td>
+                                        <td>{{table.dependencies|length}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Nombre de dépendances</td>
+                                        <td>{{table.dependOns|length}}</td>
+                                    </tr>
+                                    {% if isView %}
+                                        <tr>
+                                            <td>Déclaration de la vue</td>
+                                            <td>
+                                                  <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#sqlDeclarationCollapser" aria-expanded="false" aria-controls="sqlDeclarationCollapser">
+                                                        Montrer la requête
+                                                    </button>
+                                            </td>
+                                        </tr>
+                                    {% endif %}
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="col-4">
+                            <div class="collapse" id="sqlDeclarationCollapser">
+                                {{table.viewSql}}
+                            </div>
+                        </div>
+                    </div>
+				</div>
+				<div class="tab-pane fade" id="columns-tab-pane" role="tabpanel" aria-labelledby="columns-tab" tabindex="0">
+					<table class="table table-hover table-sm">
+						<thead>
+							<tr>
+								<th scope="col-1">#</th>
+								<th scope="col-2">Nom</th>
+								<th scope="col-1">N°</th>
+								<th scope="col-1">Type</th>
+								<th scope="col">Commentaire</th>
+							</tr>
+						</thead>
+						<tbody>
+							{% for column in table.columns %}
+								<tr>
+									<td>{{column.id}}</td>
+									<td>{{column.columnName}}</td>
+									<td>{{column.columnNumber}}</td>
+									<td>{{column.columnType}}</td>
+									<td></td>
+								</tr>
+							{% endfor %}
+						</tbody>
+					</table>
+				</div>
+                {% if hasIndexes %}
+                    <div class="tab-pane fade" id="indexes-tab-pane" role="tabpanel" aria-labelledby="indexes-tab" tabindex="0">
+                        <table class="table table-hover table-sm">
+                            <thead>
+                                <tr>
+                                    <th scope="col-1">#</th>
+                                    <th scope="col-2">Nom</th>
+                                    <th scope="col-1">Type</th>
+                                    <th scope="col-1">Clusterisé ?</th>
+                                    <th scope="col-1">Col N°1</th>
+                                    <th scope="col-1">Col N°2</th>
+                                    <th scope="col-1">Col N°3</th>
+                                    <th scope="col-1">Col N°4</th>
+                                    <th scope="col-1">Col N°5</th>
+                                    <th scope="col-1">Col N°6</th>
+                                    <th scope="col-1">Col N°7</th>
+                                    <th scope="col-1">Col N°8</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for index in table.indexes %}
+                                    <tr>
+                                        <td>{{index.id}}</td>
+                                        <td>{{index.indexName}}</td>
+                                        <td>{{index.indexType}}</td>
+                                        <td>{{index.clustered}}</td>
+                                        <td>{{index.part1}}</td>
+                                        <td>{{index.part2}}</td>
+                                        <td>{{index.part3}}</td>
+                                        <td>{{index.part4}}</td>
+                                        <td>{{index.part5}}</td>
+                                        <td>{{index.part6}}</td>
+                                        <td>{{index.part7}}</td>
+                                        <td>{{index.part8}}</td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>            
+                {% endif %}
+                
+				{% if hasGlobalDependencies %}
+					<div class="mt-3 tab-pane fade" id="dependencies-tab-pane" role="tabpanel" aria-labelledby="dependencies-tab" tabindex="0">
+						<div class="d-flex align-items-start">
+							<div class="nav flex-column nav-pills me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                                {% if isView %}
+                                    <button class="nav-link active" id="v-pills-depends_on-tab" data-bs-toggle="pill" data-bs-target="#v-pills-depends_on" type="button" role="tab" aria-controls="v-pills-depends_on" aria-selected="true">Dépends de...</button>
+                                {% endif %}
+                                {% if hasDependencies %}
+								    <button class="nav-link {{not isView ? 'active'}}" id="v-pills-is_used-tab" data-bs-toggle="pill" data-bs-target="#v-pills-is_used" type="button" role="tab" aria-controls="v-pills-is_used" aria-selected="false">Est utilisé par...</button>
+                                {% endif %}
+							</div>
+							<div class="tab-content" id="v-pills-tabContent">
+                                {% if isView %}
+                                    <div class="tab-pane fade show active" id="v-pills-depends_on" role="tabpanel" aria-labelledby="v-pills-depends_on-tab" tabindex="0">
+                                        <table class="table table-hover table-sm">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col-1">#</th>
+                                                    <th scope="col-2">Nom table</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {% for dependOn in table.dependOns %}
+                                                    <tr>
+                                                        <td>{{dependOn.id}}</td>
+                                                        <td><a href="{{path("app_table_show",{"id":dependOn.btable.id})}}" class="text-decoration-none link-body-emphasis">{{dependOn.btable.tableName}}</a></td>
+                                                    </tr>
+                                                {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>                        
+                                {% endif %}
+                                {% if hasDependencies %}
+                                    <div class="tab-pane fade {{not isView ? 'show active'}}" id="v-pills-is_used" role="tabpanel" aria-labelledby="v-pills-is_used-tab" tabindex="0">
+                                        <table class="table table-hover table-sm">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col-1">#</th>
+                                                    <th scope="col-2">Nom table</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {% for dependency in table.dependencies %}
+                                                    <tr>
+                                                        <td>{{dependency.dtable.id}}</td>
+                                                        <td><a href="{{path("app_table_show",{"id":dependency.dtable.id})}}" class="text-decoration-none link-body-emphasis">{{dependency.dtable.tableName}}</a></td>
+                                                    </tr>
+                                                {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                {% endif %}
+							</div>
+						</div>
+					</div>
+				{% endif %}
+
+
+			</div>
+		</div>
+	</div>
 {% endblock %}
