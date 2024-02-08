@@ -47,6 +47,22 @@ class TableRepository extends ServiceEntityRepository
         ->getResult();
     }
 
+    /**
+     * @param Table[] $tables
+     */
+    public function hydrateTables(array $tables){
+        return $this->createQueryBuilder('t')
+            ->select('t,c,i,d,do')
+            ->leftJoin('t.columns','c')
+            ->leftJoin('t.indexes','i')
+            ->leftJoin('t.dependencies','d')
+            ->leftJoin('t.dependOns','do')
+            ->where('t IN (:tableList)')
+            ->setParameter('tableList',$tables)
+            ->getQuery()
+            ->getResult();
+    }
+
     public function findByOwners(array $owners)
     {
         $queryBuilder = $this->createQueryBuilder('t')

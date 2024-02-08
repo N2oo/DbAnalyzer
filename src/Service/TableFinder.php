@@ -18,9 +18,14 @@ class TableFinder
     /**
      * @return Table[]
      */
-    public function findAllTables():array
+    public function findAllTables(bool $shouldHydrate = false):array
     {
-        return $this->tableRepository->findAll();
+        $all_tables =$this->tableRepository->findAll();
+        if($shouldHydrate)
+        {
+            $this->hydrateTableJoins($all_tables);
+        }
+        return $all_tables;
     }
 
     /**
@@ -28,21 +33,12 @@ class TableFinder
      */
     private function hydrateTableJoins(array $tables):void
     {
+        $this->tableRepository->hydrateTables($tables);
     }
 
     public function hydrateSingleTable(Table $table):void
     {
         $this->hydrateTableJoins([$table]);
-    }
-
-    /**
-     * @return Table[]
-     */
-    public function findAllTablesAndHydrateJoins():array
-    {
-        $all_tables = $this->findAllTables();
-        $this->hydrateTableJoins($all_tables);
-        return $all_tables;
     }
 
     /**
