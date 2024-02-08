@@ -1,42 +1,71 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
-        {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
-        {% block stylesheets %}
-            {{ encore_entry_link_tags('app') }}
-            <style>
-                table,
-                td {
-                    border: 1px solid #333;
-                }
+	<head>
+		<meta charset="UTF-8">
+		<title>
+			{% block title %}Welcome!
+			{% endblock %}
+		</title>
+		<link
+		rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
+		{# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
+		{% block stylesheets %}
+			{{ encore_entry_link_tags('app') }}
+			<style>
+				table,
+				td {
+					border: 1px solid #333;
+				}
 
-                thead,
-                tfoot {
-                    background-color: #333;
-                    color: #fff;
-                }
-            </style>
-        {% endblock %}
+				thead,
+				tfoot {
+					background-color: #333;
+					color: #fff;
+				}
+			</style>
+		{% endblock %}
 
-        {% block javascripts %}
-            {{ encore_entry_script_tags('app') }}
-        {% endblock %}
-    </head>
-    <body>
-    <ul>
-        <li><a href="{{ path('app_main') }}">Acceuil</a></li>
-        <li><a href="{{ path('app_import_index') }}">Import des fichiers CSV</a></li>
-    </ul>
-    {% for type in app.flashes %}
-        {% for message in type %}
-            <div>
-                {{ message }}
-            </div>
-        {% endfor %}
-    {% endfor %}
-        {% block body %}{% endblock %}
-    </body>
+		{% block javascripts %}
+			{{ encore_entry_script_tags('app') }}
+		{% endblock %}
+	</head>
+	<body>
+		<nav class="navbar navbar-expand-lg bg-body-tertiary">
+			<div class="container-fluid">
+				<a class="navbar-brand" href="{{path('app_main')}}">Analyse Credel</a>
+				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarNav">
+                {% set current_route = app.request.attributes.get("_route") %}
+					<ul class="navbar-nav">
+						<li class="nav-item">
+                            {% set route = "app_main" %}
+							<a class="nav-link {{ current_route == route ? "active":"" }}" {{ current_route == route ? "aria-current='page'":"" }} href="{{path(route)}}">Accueil</a>
+						</li>
+						<li class="nav-item">
+                            {% set route = "app_table" %}
+							<a class="nav-link {{ current_route == route ? "active":"" }}" {{ current_route == route ? "aria-current='page'":"" }} href="{{path(route)}}">Tables</a>
+						</li>
+                        <li class="nav-item">
+                            {% set route = "admin" %}
+							<a class="nav-link {{ current_route == route ? "active":"" }}" {{ current_route == route ? "aria-current='page'":"" }} href="{{path(route)}}">Admin panel</a>
+						</li>
+                        <li class="nav-item">
+                            {% set route = "api_doc" %}
+							<a class="nav-link {{ current_route == route ? "active":"" }}" {{ current_route == route ? "aria-current='page'":"" }} href="{{path(route)}}">Doc API</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+		{% for type in app.flashes %}
+			{% for message in type %}
+				<div>
+					{{ message }}
+				</div>
+			{% endfor %}
+		{% endfor %}
+		{% block body %}{% endblock %}
+	</body>
 </html>
