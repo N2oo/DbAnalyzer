@@ -8,6 +8,7 @@ use App\Entity\Column;
 use App\Entity\DependOn;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\Post;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\TableRepository;
 use ApiPlatform\Metadata\ApiResource;
@@ -118,6 +119,9 @@ class Table
 
     #[ORM\OneToMany(mappedBy: 'tableElement', targetEntity: Detail::class, cascade:["persist"])]
     private Collection $details;
+
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    private ?string $comment = null;
 
     public function __construct()
     {
@@ -441,6 +445,18 @@ class Table
                 $detail->setTableElement(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getComment(): ?string
+    {
+        return $this->comment;
+    }
+
+    public function setComment(?string $comment): static
+    {
+        $this->comment = $comment;
 
         return $this;
     }

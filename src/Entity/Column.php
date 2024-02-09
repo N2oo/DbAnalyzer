@@ -5,6 +5,7 @@ namespace App\Entity;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\Link;
 use ApiPlatform\Metadata\Post;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\ColumnRepository;
 use ApiPlatform\Metadata\ApiResource;
@@ -82,6 +83,9 @@ class Column
 
     #[ORM\ManyToOne(inversedBy: 'columns')]
     private ?Table $tableElement = null;
+
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    private ?string $comment = null;
 
     public function getId(): ?int
     {
@@ -195,6 +199,18 @@ class Column
     public function setTableElement(?Table $tableElement): static
     {
         $this->tableElement = $tableElement;
+
+        return $this;
+    }
+
+    public function getComment(): ?string
+    {
+        return $this->comment;
+    }
+
+    public function setComment(?string $comment): static
+    {
+        $this->comment = $comment;
 
         return $this;
     }
