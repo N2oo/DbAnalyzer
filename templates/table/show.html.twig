@@ -15,6 +15,20 @@
 				#{{table.id}}</h1>
 		</div>
 		<div class="card-body">
+				<div class="row">
+					{% set containComment = table.comment is not null or table.comment != "" %}
+					{% set col_number_comment = 11 %}
+						{% if containComment %}
+							<div class="col-{{col_number_comment}}">
+								<p>
+									<span class="badge rounded-pill text-bg-info">Commentaire :</span>{{table.comment}}
+								</p>
+							</div>
+						{% endif %}
+						<div class="col-1 {{not containComment ? "offset-"~col_number_comment:""}}">
+							<a href="{{path('app_table_edit',{'id':table.id})}}" class="btn btn-primary">Modifier</a>
+						</div>
+				</div>
 			<ul class="mt-1 nav nav-tabs" id="ficheTable" role="tablist">
 				<li class="nav-item" role="presentation">
 					<button class="nav-link active" id="general_decription-tab" data-bs-toggle="tab" data-bs-target="#general_decription-tab-pane" type="button" role="tab" aria-controls="general_decription-tab-pane" aria-selected="true">Informations générales</button>
@@ -213,7 +227,7 @@
 									<td>{{column.columnNumber}}</td>
 									<td>{{column.columnType}}</td>
 									<td>{{column.resolvedColumnType|lower}}</td>
-									<td></td>
+									<td>{{column.comment}}</td>
 								</tr>
 							{% endfor %}
 						</tbody>

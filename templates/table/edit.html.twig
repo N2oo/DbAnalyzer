@@ -1,0 +1,21 @@
+{% extends "base.html.twig" %}
+{% block title %}
+	Modifier
+{% endblock %}
+{% block body %}
+    {{form_start(form)}}
+        {{ form_row(form.comment) }}
+
+        <h3>Colonnes</h3>
+        <ul class="columns">
+            {% for column in form.columns %}
+                <li>
+                    {{form_label(column)}}
+                    <p>{{column.vars.value.columnName}}</p>
+                    {{form_widget(column)}}
+                </li>
+            {% endfor %}
+        </ul>
+
+	{{form_end(form)}}
+{% endblock %}
