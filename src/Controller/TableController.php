@@ -6,7 +6,10 @@ use App\Entity\Table;
 use App\Service\TableFinder;
 use App\Form\SearchTableType;
 use App\Entity\ValueObject\SearchTableQuery;
+use App\Repository\DetailRepository;
 use App\Service\Builder\Factory\SearchTableStrategyFactory;
+use App\Service\Finder\dbUserFinder;
+use App\Service\Finder\DetailFinder;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -17,6 +20,8 @@ class TableController extends AbstractController
 {
     public function __construct(
         private readonly TableFinder $tableFinder,
+        private readonly DetailFinder $detailFinder,
+        private readonly dbUserFinder $dbUserFinder,
         private readonly SearchTableStrategyFactory $searchTableStrategyFactory
     )
     {
@@ -39,9 +44,13 @@ class TableController extends AbstractController
     #[Route('/{id}',name: 'app_table_show')]
     public function show(Table $table)
     {
+        $details = $this->detailFinder->findByTabId($table,true);
+        $users = $this->dbUserFinder->findUserCanAccessTable($table);
         $this->tableFinder->hydrateSingleTable($table);
         return $this->render('table/show.html.twig',[
-            'table'=>$table
+            'table'=>$table,
+            'details'=>$details,
+            'users'=>$users
         ]);
     }
 }

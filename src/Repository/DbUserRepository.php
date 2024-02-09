@@ -3,7 +3,9 @@
 namespace App\Repository;
 
 use App\Entity\DbUser;
+use App\Entity\Table;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Query\ResultSetMappingBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -31,6 +33,21 @@ class DbUserRepository extends ServiceEntityRepository
         return $builder
             ->getQuery()
             ->getResult();
+    }
+
+    public function findByTableId(Table $table)
+    {
+        $rsm = new ResultSetMappingBuilder($this->getEntityManager());
+        $rsm->addRootEntityFromClassMetadata(DbUser::class,'u');
+
+        $sql = "SELECT DISTINCT u.* 
+                FROM db_user u 
+                LEFT JOIN detail_db_user ddu ON u.id = ddu.db_user_id 
+                LEFT JOIN detail d ON ddu.detail_id = d.id
+                WHERE d.table_element_id = :tabId";
+        $query = $this->getEntityManager()->createNativeQuery($sql,$rsm);
+        $query->setParameter("tabId",$table->getId());
+        return $query->getResult();
     }
 
 //    /**

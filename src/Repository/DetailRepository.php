@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Detail;
+use App\Entity\Table;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -19,6 +20,47 @@ class DetailRepository extends ServiceEntityRepository
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Detail::class);
+    }
+
+    /**
+     * @return Detail[]
+     */
+    public function findByTabId(Table $table)
+    {
+        return $this->createQueryBuilder('d')
+            ->select('d')
+            ->where('d.tableElement = :table')
+            ->setParameter('table',$table)
+            ->getQuery()
+            ->getResult();
+    }
+
+    /**
+     * @return Detail[]
+     */
+    public function findByOriginalTableId(Table $table)
+    {
+        return $this->createQueryBuilder('d')
+            ->select('d')
+            ->leftJoin('d.tableElement','t')
+            ->where('t.tabId = :tabId')
+            ->setParameter('tabId',$table->getTabId())
+            ->getQuery()
+            ->getResult();
+    }
+
+    /**
+     * @param Detail[] $details
+     */
+    public function hydrate(array $details)
+    {
+        return $this->createQueryBuilder('d')
+            ->select('d,u')
+            ->leftJoin('d.users','u')
+            ->where('d IN (:detailList)')
+            ->setParameter('detailList',$details)
+            ->getQuery()
+            ->getResult();
     }
 
 //    /**
