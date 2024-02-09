@@ -68,7 +68,8 @@ class TableController extends AbstractController
             return $this->redirectToRoute('app_table_show',['id'=>$table->getId()]);
         }
         return $this->render('table/edit.html.twig',[
-            'form'=>$form
+            'form'=>$form,
+            'table'=>$table
         ]);
     }
 }

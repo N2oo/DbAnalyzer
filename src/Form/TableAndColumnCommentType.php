@@ -23,8 +23,8 @@ class TableAndColumnCommentType extends AbstractType
                     'label'=>false
                 ],
             ])
-            ->add('send',SubmitType::class,[
-                'label'=>'Envoyer'
+            ->add('submit',SubmitType::class,[
+                'label'=>'Modifier'
             ])
         ;
     }

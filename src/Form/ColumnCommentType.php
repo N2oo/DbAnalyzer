@@ -11,7 +11,9 @@ class ColumnCommentType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        $builder->add('comment');
+        $builder->add('comment',null,[
+            'label'=>'Commentaire'
+        ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
