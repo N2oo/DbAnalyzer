@@ -1,0 +1,30 @@
+<div{{attributes}}>
+	<table class="table table-sm {{caption is not null ? "caption-top":""}}">
+        {% if caption is not null %}
+            <caption>{{caption}}</caption>
+        {% endif %}
+		<thead>
+			<tr>
+				<th scope="col">#</th>
+				<th scope="col">Identifiant</th>
+				<th scope="col">Dossier</th>
+				<th scope="col">Description</th>
+			</tr>
+		</thead>
+		<tbody>
+            {% if definedFilter %}
+                {% set users = users|filter(u => definedFilter in u.username) %}
+            {% endif %}
+        
+			{% for user in users %}
+				<tr>
+					<td>{{user.id}}</td>
+					<td>{{user.username}}</td>
+					<td>{{user.homeFolder}}</td>
+					<td>{{user.description}}</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+	<!-- component html -->
+</div>

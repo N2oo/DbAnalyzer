@@ -301,4 +301,15 @@ class Detail
 
         return $this;
     }
+
+    public function getStringifiedUserList($separator = ",")
+    {
+        $string_result = "";
+        foreach($this->getUsers() as $user){
+            $string_result .= $user->getUsername()."{$separator} ";
+        }
+        $string_result = substr($string_result,0,-2);
+        
+        return (isset($string_result) && $string_result != "") ? $string_result:"Aucun";
+    }
 }
