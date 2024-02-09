@@ -9,7 +9,9 @@ use App\Entity\DependOn;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\Post;
 use Doctrine\DBAL\Types\Types;
+use ApiPlatform\Metadata\Patch;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\OrderBy;
 use App\Repository\TableRepository;
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\GetCollection;
@@ -19,7 +21,6 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
 use App\Service\Processor\TableMultipleProcessor;
 use App\Entity\DTO\Table\TableMultipleResponseDTO;
-use Doctrine\ORM\Mapping\OrderBy;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Serializer\Annotation\SerializedName;
 
@@ -32,11 +33,11 @@ use Symfony\Component\Serializer\Annotation\SerializedName;
 
 #[ApiResource(
     shortName: "Table",
-    uriTemplate: "table",
     operations:[
-        new Get(uriTemplate:"table/{id}"),
+        new Get(),
         new GetCollection(),
         new Post(),
+        new Patch(),
         new Post(
             uriTemplate:'table/multiple',
             openapi: new Operation(

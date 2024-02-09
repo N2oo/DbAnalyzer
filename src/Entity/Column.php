@@ -6,6 +6,7 @@ use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\Link;
 use ApiPlatform\Metadata\Post;
 use Doctrine\DBAL\Types\Types;
+use ApiPlatform\Metadata\Patch;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\ColumnRepository;
 use ApiPlatform\Metadata\ApiResource;
@@ -19,11 +20,11 @@ use Symfony\Component\Serializer\Attribute\SerializedName;
 #[ORM\Entity(repositoryClass: ColumnRepository::class),
     ApiResource(
     shortName: "Colonne",
-    uriTemplate: "column",
     operations: [
-        new Get(uriTemplate: "column/{id}"),
+        new Get(),
         new GetCollection(),
         new Post(),
+        new Patch(),
         new Post(
             uriTemplate:'column/multiple',
             openapi: new Operation(
@@ -36,7 +37,7 @@ use Symfony\Component\Serializer\Attribute\SerializedName;
         )
         ]),
     ApiResource(
-        shortName: "Table",
+        shortName: "ColumnsFromTable",
         openapiContext:[
             "summary"=> "Résolution des colonnes d'une table",
             "secription"=> "Résolution des colonnes affairantes à une table"
