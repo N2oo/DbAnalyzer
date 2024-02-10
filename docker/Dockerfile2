@@ -1,0 +1,51 @@
+FROM composer:2.6.6 as buildercomposer
+
+
+COPY ./ /app
+WORKDIR /app
+RUN ls /app
+RUN composer install
+
+FROM node:21.6.1-alpine3.19 AS buildernpm
+
+# Copie du code source de l'application Symfony dans le conteneur
+COPY --from=buildercomposer /app /app
+
+# Changement du répertoire de travail
+WORKDIR /app
+
+# Installation des dépendances npm et builder des assets
+RUN npm install
+RUN npm run build
+
+
+
+
+# Image finale contenant PHP et Apache
+FROM php:8.3-apache
+
+# Installation des extensions PHP et des outils nécessaires
+ADD https://github.com/mlocati/docker-php-extension-installer/releases/latest/download/install-php-extensions /usr/local/bin/
+RUN chmod +x /usr/local/bin/install-php-extensions && \
+    install-php-extensions intl pdo_pgsql && \
+    apt-get update && apt-get install -y zip git && \
+    rm -rf /var/lib/apt/lists/*
+
+# Copie des fichiers de l'image de construction précédente (contenant les assets construits)
+COPY --from=buildernpm /app /var/www/html
+
+# Copie du fichier de configuration Apache
+COPY ./docker/apache.conf /etc/apache2/sites-available/000-default.conf
+
+# Définition de l'environnement Symfony en production
+ENV APP_ENV=prod
+
+# Nettoyage du cache Symfony et attribution des permissions appropriées
+RUN rm -rf /var/www/html/.git /var/www/html/.env.local && \
+    chown -R www-data:www-data /var/www/html
+
+# Exposition du port 80 pour Apache
+EXPOSE 80
+
+# Exécution du script d'initialisation Docker
+ENTRYPOINT ["bash", "./docker/docker.sh"]
