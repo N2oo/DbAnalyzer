@@ -44,18 +44,30 @@ class TableFinder
     /**
      * @param string[] $owner
      */
-    public function findByOwners(array $owners)
+    public function findByOwners(array $owners, bool $shouldHydrate=false)
     {
-        return $this->tableRepository->findByOwners($owners);
+        $all_tables = $this->tableRepository->findByOwners($owners);
+        if($shouldHydrate){
+            $this->hydrateTableJoins($all_tables);
+        }
+        return $all_tables;
     }
 
-    public function findByLikelyTableName(string $input)
+    public function findByLikelyTableName(string $input, bool $shouldHydrate=false)
     {
-        return $this->tableRepository->findByLikelyTableName($input);
+        $all_tables = $this->tableRepository->findByLikelyTableName($input);
+        if($shouldHydrate){
+            $this->hydrateTableJoins($all_tables);
+        }
+        return $all_tables;
     }
 
-    public function findByLikelyTableNameAndInOwnerList(array $owners,string $likelyName)
+    public function findByLikelyTableNameAndInOwnerList(array $owners,string $likelyName, bool $shouldHydrate=false)
     {
-        return $this->tableRepository->findByLikelyTableNameAndInOwnerList($owners,$likelyName);
+        $all_tables = $this->tableRepository->findByLikelyTableNameAndInOwnerList($owners,$likelyName);
+        if($shouldHydrate){
+            $this->hydrateTableJoins($all_tables);
+        }
+        return $all_tables;
     }
 }

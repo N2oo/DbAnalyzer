@@ -16,6 +16,6 @@ class SearchTableByOwners implements SearchTableStrategy
     }
     public function find():array{
         $owners = $this->searchTableQuery->getOwners();
-        return $this->tableFinder->findByOwners($owners);
+        return $this->tableFinder->findByOwners($owners,true);
     }
 }

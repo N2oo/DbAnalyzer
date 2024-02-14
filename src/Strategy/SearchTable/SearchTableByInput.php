@@ -15,6 +15,6 @@ class SearchTableByInput implements SearchTableStrategy
     
     public function find():array{
         $input = $this->searchTableQuery->getUserQuery();
-        return $this->tableFinder->findByLikelyTableName($input);
+        return $this->tableFinder->findByLikelyTableName($input,true);
     }
 }

@@ -43,7 +43,7 @@ class SearchTableQuery
     /**
      * Get the value of user_query
      *
-     * @return .string
+     * @return string
      */
     public function getUserQuery(): ?string
     {

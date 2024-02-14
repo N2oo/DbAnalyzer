@@ -17,6 +17,6 @@ class SearchTableByOwnerAndInput implements SearchTableStrategy
     public function find():array{
         $owners = $this->searchTableQuery->getOwners();
         $input = $this->searchTableQuery->getUserQuery();
-        return $this->tableFinder->findByLikelyTableNameAndInOwnerList($owners,$input);
+        return $this->tableFinder->findByLikelyTableNameAndInOwnerList($owners,$input,true);
     }
 }
