@@ -20,7 +20,10 @@ services:
     #         tags: [app.join_resolver_tagged]
     
     
-
+    Symfony\Component\HttpFoundation\Session\Storage\Handler\PdoSessionHandler:
+        arguments:
+            - '%env(DATABASE_URL)%'
+            - { db_table: 'users_session', db_id_col: 'guid' }
     App\:
         resource: '../src/'
         exclude:
