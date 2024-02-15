@@ -119,6 +119,7 @@ class Table
     private Collection $dependOns;
 
     #[ORM\OneToMany(mappedBy: 'tableElement', targetEntity: Detail::class, cascade:["persist"])]
+    #[OrderBy(["countLink"=>"DESC","iNode"=>"ASC"])]
     private Collection $details;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]

@@ -4,7 +4,7 @@ namespace App\Service\Finder;
 use App\Entity\Table;
 use App\Repository\DbUserRepository;
 
-class dbUserFinder
+class DbUserFinder
 {
     public function __construct(
         private DbUserRepository $dbUserRepository

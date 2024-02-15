@@ -7,9 +7,8 @@ use App\Service\TableFinder;
 use App\Form\SearchTableType;
 use App\Entity\ValueObject\SearchTableQuery;
 use App\Form\TableAndColumnCommentType;
-use App\Repository\DetailRepository;
 use App\Service\Builder\Factory\SearchTableStrategyFactory;
-use App\Service\Finder\dbUserFinder;
+use App\Service\Finder\DbUserFinder;
 use App\Service\Finder\DetailFinder;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -23,7 +22,7 @@ class TableController extends AbstractController
     public function __construct(
         private readonly TableFinder $tableFinder,
         private readonly DetailFinder $detailFinder,
-        private readonly dbUserFinder $dbUserFinder,
+        private readonly DbUserFinder $dbUserFinder,
         private readonly SearchTableStrategyFactory $searchTableStrategyFactory,
         private readonly EntityManagerInterface $entityManager
     )
