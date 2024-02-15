@@ -86,6 +86,30 @@ class Index
     #[ORM\ManyToOne(inversedBy: 'indexes')]
     private ?Table $tableElement = null;
 
+    #[ORM\ManyToOne]
+    private ?Column $column1 = null;
+
+    #[ORM\ManyToOne]
+    private ?Column $column2 = null;
+
+    #[ORM\ManyToOne]
+    private ?Column $column3 = null;
+
+    #[ORM\ManyToOne]
+    private ?Column $column4 = null;
+
+    #[ORM\ManyToOne]
+    private ?Column $column5 = null;
+
+    #[ORM\ManyToOne]
+    private ?Column $column6 = null;
+
+    #[ORM\ManyToOne]
+    private ?Column $column7 = null;
+
+    #[ORM\ManyToOne]
+    private ?Column $column8 = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -255,6 +279,102 @@ class Index
     public function setTableElement(?Table $tableElement): static
     {
         $this->tableElement = $tableElement;
+
+        return $this;
+    }
+
+    public function getColumn1(): ?Column
+    {
+        return $this->column1;
+    }
+
+    public function setColumn1(?Column $column1): static
+    {
+        $this->column1 = $column1;
+
+        return $this;
+    }
+
+    public function getColumn2(): ?Column
+    {
+        return $this->column2;
+    }
+
+    public function setColumn2(?Column $column2): static
+    {
+        $this->column2 = $column2;
+
+        return $this;
+    }
+
+    public function getColumn3(): ?Column
+    {
+        return $this->column3;
+    }
+
+    public function setColumn3(?Column $column3): static
+    {
+        $this->column3 = $column3;
+
+        return $this;
+    }
+
+    public function getColumn4(): ?Column
+    {
+        return $this->column4;
+    }
+
+    public function setColumn4(?Column $column4): static
+    {
+        $this->column4 = $column4;
+
+        return $this;
+    }
+
+    public function getColumn5(): ?Column
+    {
+        return $this->column5;
+    }
+
+    public function setColumn5(?Column $column5): static
+    {
+        $this->column5 = $column5;
+
+        return $this;
+    }
+
+    public function getColumn6(): ?Column
+    {
+        return $this->column6;
+    }
+
+    public function setColumn6(?Column $column6): static
+    {
+        $this->column6 = $column6;
+
+        return $this;
+    }
+
+    public function getColumn7(): ?Column
+    {
+        return $this->column7;
+    }
+
+    public function setColumn7(?Column $column7): static
+    {
+        $this->column7 = $column7;
+
+        return $this;
+    }
+
+    public function getColumn8(): ?Column
+    {
+        return $this->column8;
+    }
+
+    public function setColumn8(?Column $column8): static
+    {
+        $this->column8 = $column8;
 
         return $this;
     }
