@@ -300,14 +300,14 @@
 										<td>{{index.indexName}}</td>
 										<td>{{index.indexType}}</td>
 										<td>{{index.clustered}}</td>
-										<td>{{index.part1}}</td>
-										<td>{{index.part2}}</td>
-										<td>{{index.part3}}</td>
-										<td>{{index.part4}}</td>
-										<td>{{index.part5}}</td>
-										<td>{{index.part6}}</td>
-										<td>{{index.part7}}</td>
-										<td>{{index.part8}}</td>
+										<td>{{index.column1 is not null ? index.column1.columnName : ""}}</td>
+										<td>{{index.column2 is not null ? index.column2.columnName : ""}}</td>
+										<td>{{index.column3 is not null ? index.column3.columnName : ""}}</td>
+										<td>{{index.column4 is not null ? index.column4.columnName : ""}}</td>
+										<td>{{index.column5 is not null ? index.column5.columnName : ""}}</td>
+										<td>{{index.column6 is not null ? index.column6.columnName : ""}}</td>
+										<td>{{index.column7 is not null ? index.column7.columnName : ""}}</td>
+										<td>{{index.column8 is not null ? index.column8.columnName : ""}}</td>
 									</tr>
 								{% endfor %}
 							</tbody>
