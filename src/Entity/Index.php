@@ -163,6 +163,21 @@ class Index
         return $this;
     }
 
+    public function getResolvedIndexType(): ?string
+    {
+        $idxType = $this->getIndexType();
+        return match(true)
+        {
+            $idxType == "U" =>"Unique",
+            $idxType == "D" =>"Duplicates allowed",
+            $idxType == "G" =>"Nonbitmap generalized-key index",
+            $idxType == "g" =>"Bitmap generalized-key index",
+            $idxType == "u" =>"unique, bitmap",
+            $idxType == "d" =>"nonunique, bitmap ",
+            default => ""
+        };
+    }
+
     public function getClustered(): ?string
     {
         return $this->clustered;

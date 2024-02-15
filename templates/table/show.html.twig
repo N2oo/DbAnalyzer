@@ -34,9 +34,11 @@
 				<li class="nav-item" role="presentation">
 					<button class="nav-link active" id="general_decription-tab" data-bs-toggle="tab" data-bs-target="#general_decription-tab-pane" type="button" role="tab" aria-controls="general_decription-tab-pane" aria-selected="true">Informations générales</button>
 				</li>
-				<li class="nav-item" role="presentation">
-					<button class="nav-link" id="system-tab" data-bs-toggle="tab" data-bs-target="#system-tab-pane" type="button" role="tab" aria-controls="system-tab-pane" aria-selected="false">Système</button>
-				</li>
+				{% if not isView %}
+					<li class="nav-item" role="presentation">
+						<button class="nav-link" id="system-tab" data-bs-toggle="tab" data-bs-target="#system-tab-pane" type="button" role="tab" aria-controls="system-tab-pane" aria-selected="false">Système</button>
+					</li>
+				{% endif %}
 				<li class="nav-item" role="presentation">
 					<button class="nav-link" id="columns-tab" data-bs-toggle="tab" data-bs-target="#columns-tab-pane" type="button" role="tab" aria-controls="columns-tab-pane" aria-selected="false">Colonne ({{table.columns|length}})</button>
 				</li>
@@ -166,88 +168,92 @@
 						</div>
 					</div>
 				</div>
-				<div class="tab-pane fade" id="system-tab-pane" role="tabpanel" aria-labelledby="system-tab" tabindex="0">
+				{% if not isView %}
+					<div class="tab-pane fade" id="system-tab-pane" role="tabpanel" aria-labelledby="system-tab" tabindex="0">
 
-					<div class="row mt-2">
-						<div class="col-6">
-							<div class="card">
-								<div class="card-header">
-									<h3>Liste des fichiers ".dat"</h3>
-								</div>
-								<div class="card-body">
-									<table class="table table-sm">
-										<thead>
-											<tr>
-												<th scope="col">iNode</th>
-												<th scope="col">NbLiens</th>
-												<th scope="col">Chemin</th>
-											</tr>
-										</thead>
-										<tbody>
-											{% for detail in table.details|filter( d=> d.fileExtension == ".dat") %}
-												{% if detail.countLink == 1 %}
-													{% set color_class = "danger" %}
-												{% elseif detail.countLink < 15 %}
-													{% set color_class = "warning" %}
-												{% else %}
-													{% set color_class = "success" %}
-												{% endif %}
-												<tr class="table-{{color_class}}">
-														<td>{{detail.iNode}}</td>
-														<td>{{detail.countLink}}</td>
-														<td>
-															<twig:TooltipCustomComponent title="{{detail.stringifiedUserList()}}" placement="right">
-																{{detail.fileLocation}}
-															</twig:TooltipCustomComponent>
-														</td>
+						<div class="row mt-2">
+							<div class="col-6">
+								<div class="card">
+									<div class="card-header">
+										<h3>Liste des fichiers ".dat"</h3>
+									</div>
+									<div class="card-body">
+										<table class="table table-sm">
+											<thead>
+												<tr>
+													<th scope="col">iNode</th>
+													<th scope="col">NbLiens</th>
+													<th scope="col">Chemin</th>
 												</tr>
-											{% endfor %}
-										</tbody>
-									</table>
+											</thead>
+											<tbody>
+												{% for detail in table.details|filter( d=> d.fileExtension == ".dat") %}
+													{% if detail.countLink == 1 %}
+														{% set color_class = "danger" %}
+													{% elseif detail.countLink < 15 %}
+														{% set color_class = "warning" %}
+													{% else %}
+														{% set color_class = "success" %}
+													{% endif %}
+													<tr class="table-{{color_class}}">
+															<td>{{detail.iNode}}</td>
+															<td>{{detail.countLink}}</td>
+															<td>
+																<twig:TooltipCustomComponent title="{{detail.stringifiedUserList()}}" placement="right">
+																	{{detail.fileLocation}}
+																</twig:TooltipCustomComponent>
+															</td>
+													</tr>
+												{% endfor %}
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+							<div class="col-6">
+								<div class="card">
+									<div class="card-header">
+										<h3>Liste des fichiers ".idx"</h3>
+									</div>
+									<div class="card-body">
+										<table class="table table-sm">
+											<thead>
+												<tr>
+													<th scope="col">iNode</th>
+													<th scope="col">NbLiens</th>
+													<th scope="col">Chemin</th>
+												</tr>
+											</thead>
+											<tbody>
+												{% for detail in table.details|filter( d=> d.fileExtension == ".idx") %}
+													{% if detail.countLink == 1 %}
+														{% set color_class = "danger" %}
+													{% elseif detail.countLink < 15 %}
+														{% set color_class = "warning" %}
+													{% else %}
+														{% set color_class = "success" %}
+													{% endif %}
+													<tr class="table-{{color_class}}">
+															<td>{{detail.iNode}}</td>
+															<td>{{detail.countLink}}</td>
+															<td>
+																<twig:TooltipCustomComponent title="{{detail.stringifiedUserList()}}" placement="right">
+																	{{detail.fileLocation}}
+																</twig:TooltipCustomComponent>
+															</td>
+													</tr>
+												{% endfor %}
+											</tbody>
+										</table>
+									</div>
 								</div>
 							</div>
 						</div>
-						<div class="col-6">
-							<div class="card">
-								<div class="card-header">
-									<h3>Liste des fichiers ".idx"</h3>
-								</div>
-								<div class="card-body">
-									<table class="table table-sm">
-										<thead>
-											<tr>
-												<th scope="col">iNode</th>
-												<th scope="col">NbLiens</th>
-												<th scope="col">Chemin</th>
-											</tr>
-										</thead>
-										<tbody>
-											{% for detail in table.details|filter( d=> d.fileExtension == ".idx") %}
-												{% if detail.countLink == 1 %}
-													{% set color_class = "danger" %}
-												{% elseif detail.countLink < 15 %}
-													{% set color_class = "warning" %}
-												{% else %}
-													{% set color_class = "success" %}
-												{% endif %}
-												<tr class="table-{{color_class}}">
-														<td>{{detail.iNode}}</td>
-														<td>{{detail.countLink}}</td>
-														<td>
-															<twig:TooltipCustomComponent title="{{detail.stringifiedUserList()}}" placement="right">
-																{{detail.fileLocation}}
-															</twig:TooltipCustomComponent>
-														</td>
-												</tr>
-											{% endfor %}
-										</tbody>
-									</table>
-								</div>
-							</div>
-						</div>
+
 					</div>
+				{% endif %}
+				
 
-				</div>
 				<div class="tab-pane fade" id="columns-tab-pane" role="tabpanel" aria-labelledby="columns-tab" tabindex="0">
 					<table class="table table-hover table-sm">
 						<thead>
@@ -282,7 +288,7 @@
 									<th scope="col-1">#</th>
 									<th scope="col-2">Nom</th>
 									<th scope="col-1">Type</th>
-									<th scope="col-1">Clusterisé ?</th>
+									<th scope="col-1">Clusterisé</th>
 									<th scope="col-1">Col N°1</th>
 									<th scope="col-1">Col N°2</th>
 									<th scope="col-1">Col N°3</th>
@@ -298,8 +304,8 @@
 									<tr>
 										<td>{{index.id}}</td>
 										<td>{{index.indexName}}</td>
-										<td>{{index.indexType}}</td>
-										<td>{{index.clustered}}</td>
+										<td>{{index.resolvedIndexType is null or index.resolvedIndexType == "" ? "" : index.resolvedIndexType }}</td>
+										<td>{{index.clustered == "C" ? "Oui":""}}</td>
 										<td>{{index.column1 is not null ? index.column1.columnName : ""}}</td>
 										<td>{{index.column2 is not null ? index.column2.columnName : ""}}</td>
 										<td>{{index.column3 is not null ? index.column3.columnName : ""}}</td>
