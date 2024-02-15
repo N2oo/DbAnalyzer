@@ -15,20 +15,21 @@
 				#{{table.id}}</h1>
 		</div>
 		<div class="card-body">
-				<div class="row">
-					{% set containComment = table.comment is not null or table.comment != "" %}
-					{% set col_number_comment = 11 %}
-						{% if containComment %}
-							<div class="col-{{col_number_comment}}">
-								<p>
-									<span class="badge rounded-pill text-bg-info">Commentaire :</span>{{table.comment}}
-								</p>
-							</div>
-						{% endif %}
-						<div class="col-1 {{not containComment ? "offset-"~col_number_comment:""}}">
-							<a href="{{path('app_table_edit',{'id':table.id})}}" class="btn btn-primary">Modifier</a>
-						</div>
+			<div class="row">
+				{% set containComment = table.comment is not null or table.comment != "" %}
+				{% set col_number_comment = 11 %}
+				{% if containComment %}
+					<div class="col-{{col_number_comment}}">
+						<p>
+							<span class="badge rounded-pill text-bg-info">Commentaire :</span>
+							{{table.comment}}
+						</p>
+					</div>
+				{% endif %}
+				<div class="col-1 {{not containComment ? " offset-"~col_number_comment:" "}}">
+					<a href="{{path('app_table_edit',{'id':table.id})}}" class="btn btn-primary">Modifier</a>
 				</div>
+			</div>
 			<ul class="mt-1 nav nav-tabs" id="ficheTable" role="tablist">
 				<li class="nav-item" role="presentation">
 					<button class="nav-link active" id="general_decription-tab" data-bs-toggle="tab" data-bs-target="#general_decription-tab-pane" type="button" role="tab" aria-controls="general_decription-tab-pane" aria-selected="true">Informations générales</button>
@@ -153,10 +154,10 @@
 						<div class="col-4">
 							{% if not isView %}
 								<div class="collapse" id="user_can_access_odbc_Collapser">
-                                    {{component('TableUserComponent',{"definedFilter":"odbc","users":users,"caption":"Liste des identifiants ODBC utilisables pour cette table"})}}
+									{{component('TableUserComponent',{"definedFilter":"odbc","users":users,"caption":"Liste des identifiants ODBC utilisables pour cette table"})}}
 								</div>
 								<div class="collapse" id="user_can_access_Collapser">
-                                    {{component('TableUserComponent',{"users":users,"caption":"Liste des identifiants utilisables pour cette table"})}}
+									{{component('TableUserComponent',{"users":users,"caption":"Liste des identifiants utilisables pour cette table"})}}
 								</div>
 							{% endif %}
 							<div class="collapse" id="sqlDeclarationCollapser">
@@ -174,15 +175,35 @@
 									<h3>Liste des fichiers ".dat"</h3>
 								</div>
 								<div class="card-body">
-									<ul>
-										{% for detail in table.details|filter( d=> d.fileExtension == ".dat") %}
-											<li>
-												<twig:TooltipCustomComponent title="{{detail.stringifiedUserList()}}" placement="right">
-													{{detail.fileLocation}}
-												</twig:TooltipCustomComponent>
-											</li>
-										{% endfor %}
-									</ul>
+									<table class="table table-sm">
+										<thead>
+											<tr>
+												<th scope="col">iNode</th>
+												<th scope="col">NbLiens</th>
+												<th scope="col">Chemin</th>
+											</tr>
+										</thead>
+										<tbody>
+											{% for detail in table.details|filter( d=> d.fileExtension == ".dat") %}
+												{% if detail.countLink == 1 %}
+													{% set color_class = "danger" %}
+												{% elseif detail.countLink < 15 %}
+													{% set color_class = "warning" %}
+												{% else %}
+													{% set color_class = "success" %}
+												{% endif %}
+												<tr class="table-{{color_class}}">
+														<td>{{detail.iNode}}</td>
+														<td>{{detail.countLink}}</td>
+														<td>
+															<twig:TooltipCustomComponent title="{{detail.stringifiedUserList()}}" placement="right">
+																{{detail.fileLocation}}
+															</twig:TooltipCustomComponent>
+														</td>
+												</tr>
+											{% endfor %}
+										</tbody>
+									</table>
 								</div>
 							</div>
 						</div>
@@ -192,15 +213,35 @@
 									<h3>Liste des fichiers ".idx"</h3>
 								</div>
 								<div class="card-body">
-									<ul>
-										{% for detail in table.details|filter( d=> d.fileExtension == ".idx") %}
-											<li>
-												<twig:TooltipCustomComponent title="{{detail.stringifiedUserList()}}" placement="right">
-													{{detail.fileLocation}}
-												</twig:TooltipCustomComponent>
-											</li>
-										{% endfor %}
-									</ul>
+									<table class="table table-sm">
+										<thead>
+											<tr>
+												<th scope="col">iNode</th>
+												<th scope="col">NbLiens</th>
+												<th scope="col">Chemin</th>
+											</tr>
+										</thead>
+										<tbody>
+											{% for detail in table.details|filter( d=> d.fileExtension == ".idx") %}
+												{% if detail.countLink == 1 %}
+													{% set color_class = "danger" %}
+												{% elseif detail.countLink < 15 %}
+													{% set color_class = "warning" %}
+												{% else %}
+													{% set color_class = "success" %}
+												{% endif %}
+												<tr class="table-{{color_class}}">
+														<td>{{detail.iNode}}</td>
+														<td>{{detail.countLink}}</td>
+														<td>
+															<twig:TooltipCustomComponent title="{{detail.stringifiedUserList()}}" placement="right">
+																{{detail.fileLocation}}
+															</twig:TooltipCustomComponent>
+														</td>
+												</tr>
+											{% endfor %}
+										</tbody>
+									</table>
 								</div>
 							</div>
 						</div>
