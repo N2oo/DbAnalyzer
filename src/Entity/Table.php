@@ -103,6 +103,7 @@ class Table
     private ?string $audPath = null;
 
     #[ORM\OneToMany(mappedBy: 'tableElement', targetEntity: Column::class,cascade:["persist"])]
+    #[OrderBy(["columnName"=>"ASC"])]
     private Collection $columns;
 
     #[ORM\OneToMany(mappedBy: 'tableElement', targetEntity: Index::class,cascade:["persist"])]
