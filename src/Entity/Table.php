@@ -81,7 +81,7 @@ class Table
 
     #[ORM\Column]
     
-    #[SerializedName('ncols')]
+    #[SerializedName('nrows')]
     private ?int $numberRows = null;
 
     #[ORM\Column]
