@@ -5,28 +5,34 @@
 
 {% block body %}
 	{{form_start(searchTableForm)}}
-		<div class="row row-cols mt-3">
-			<div class="col-4">
-			    <div class="input-group h-100">
-					<div class="input-group-text">Référentiel</div>
-					{{form_widget(searchTableForm.owners)}}
-				</div>
-			</div>
-			<div class="col-4">
-				<div class="input-group mb-3 h-100">
-					{# {{form_label(searchTableForm.user_query) }} #}
-					<div class="input-group-text">Recherche</div>
-					{{form_widget(searchTableForm.user_query)}}
-					{{form_widget(searchTableForm.submit)}}
-				</div>
+	<div class="row row-cols mt-3">
+		<div class="col-4">
+			<div class="input-group h-100">
+				<div class="input-group-text">Référentiel</div>
+				{{form_widget(searchTableForm.owners)}}
 			</div>
 		</div>
+		<div class="col-4">
+			<div
+				class="input-group mb-3 h-100">
+				{# {{form_label(searchTableForm.user_query) }} #}
+				<div class="input-group-text">Recherche</div>
+				{{form_widget(searchTableForm.user_query)}}
+				{{form_widget(searchTableForm.submit)}}
+			</div>
+		</div>
+	</div>
 	{{form_end(searchTableForm)}}
 	{% set tablesLength = tables|length %}
 	{% set tablesEmpty = tables |filter(t=>t.numberRows <= 0) %}
 	{% set tablesFiled = tables |filter(t=>t.numberRows > 0) %}
 	<table class="table caption-top">
-		<caption class="mt-2">{{tablesLength}} élément{{tablesLength>1 ? "s":""}} affiché{{tablesLength>1 ? "s":""}}<br>{{tablesEmpty|length}} vides / {{tablesFiled|length}} remplies</caption>
+		<caption class="mt-2">{{tablesLength}}
+			élément{{tablesLength>1 ? "s":""}}
+			affiché{{tablesLength>1 ? "s":""}}<br>{{tablesEmpty|length}}
+			vides /
+			{{tablesFiled|length}}
+			remplies</caption>
 		<thead>
 			<tr>
 				<th scope="col-1">#</th>
@@ -36,39 +42,63 @@
 				<th scope="col-1">Nb Lignes</th>
 				<th scope="col-1">Nb Utilisation</th>
 				<th scope="col-1">Nb Dépendances</th>
-				<th scope="col-1">Vue ?</th>
+				<th scope="col-3">Commentaire</th>
 			</tr>
 		</thead>
 		<tbody>
-        {% for table in tablesFiled %}
-			<tr class="{{table.tableType == "V" ? "table-info":""}}">
-				<td>{{table.id}}</td>
-				<td>
-                    <a href="{{path("app_table_show",{"id":table.id})}}" class="link-body-emphasis text-decoration-none ">{{table.tableName}}</a>
-                </td>
-				<td>{{table.owner}}</td>
-				<td>{{table.dbFileName}}</td>
-				<td>{{table.numberRows}}</td>
-				<td>{{table.dependencies|length}}</td>
-				<td>{{table.dependOns|length}}</td>
-				<td>{{table.tableType == "V" ? "Oui":""}}</td>
-			</tr>
-        {% endfor %}
-		{% for table in tablesEmpty %}
-			<tr class="{{table.tableType == "V" ? "table-info":""}}">
-				<td>{{table.id}}</td>
-				<td>
-                    <a href="{{path("app_table_show",{"id":table.id})}}" class="link-body-emphasis text-decoration-none ">{{table.tableName}}</a>
-                </td>
-				<td>{{table.owner}}</td>
-				<td>{{table.dbFileName}}</td>
-				<td class="table-danger">{{table.numberRows}}</td>
-				<td>{{table.dependencies|length}}</td>
-				<td>{{table.dependOns|length}}</td>
-				<td>{{table.tableType == "V" ? "Oui":""}}</td>
-			</tr>
-        {% endfor %}
+			{% for table in tablesFiled %}
+				<tr class="{{table.tableType == "V" ? "table-info":""}}">
+					<td>{{table.id}}</td>
+					<td>
+						<a href="{{path("app_table_show",{"id":table.id})}}" class="link-body-emphasis text-decoration-none ">{{table.tableName}}</a>
+					</td>
+					<td>{{table.owner}}</td>
+					<td>{{table.dbFileName}}</td>
+					<td>{{table.numberRows}}</td>
+					<td>{{table.dependencies|length}}</td>
+					<td>{{table.dependOns|length}}</td>
+					<td>
+						{% if table.comment is not null and table.comment != "" %}
+							<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalcomment{{table.id}}">
+								Afficher
+							</button>
+
+							<div class="modal fade" id="modalcomment{{table.id}}" tabindex="-1" aria-labelledby="modalcommentLabel{{table.id}}" aria-hidden="true">
+								<div class="modal-dialog">
+									<div class="modal-content">
+										<div class="modal-header">
+											<h1 class="modal-title fs-5" id="modalcommentLabel{{table.id}}">Table <a href="{{path('app_table_show',{'id':table.id})}}">{{table.tableName}} #{{table.id}}</a></h1>
+											<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+										</div>
+										<div class="modal-body">
+											{{table.comment}}
+										</div>
+										<div class="modal-footer">
+											<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+										</div>
+									</div>
+								</div>
+							</div>
+
+						{% endif %}
+					</td>
+				</tr>
+			{% endfor %}
+			{% for table in tablesEmpty %}
+				<tr class="{{table.tableType == "V" ? "table-info":""}}">
+					<td>{{table.id}}</td>
+					<td>
+						<a href="{{path("app_table_show",{"id":table.id})}}" class="link-body-emphasis text-decoration-none ">{{table.tableName}}</a>
+					</td>
+					<td>{{table.owner}}</td>
+					<td>{{table.dbFileName}}</td>
+					<td class="table-danger">{{table.numberRows}}</td>
+					<td>{{table.dependencies|length}}</td>
+					<td>{{table.dependOns|length}}</td>
+					<td>{{table.tableType == "V" ? "Oui":""}}</td>
+				</tr>
+			{% endfor %}
 		</tbody>
 	</table>
-	
+
 {% endblock %}
