@@ -70,6 +70,7 @@ class TableRepository extends ServiceEntityRepository
         $queryBuilder = $this->createQueryBuilder('t')
             ->select('t');
         return $this->getQBOwnerInList($queryBuilder,$owners)
+            ->orderBy('t.tableName','ASC')
             ->getQuery()
             ->getResult();
     }
@@ -79,6 +80,7 @@ class TableRepository extends ServiceEntityRepository
             ->select('t');
         return $this
             ->getQBLikelyTableName($queryBuilder,$likelyName)
+            ->orderBy('t.tableName','ASC')
             ->getQuery()
             ->getResult();
     }
@@ -90,6 +92,7 @@ class TableRepository extends ServiceEntityRepository
         $queryBuilder = $this->getQBLikelyTableName($queryBuilder,$likelyName);
         return $this
             ->getQBOwnerInList($queryBuilder,$owners)
+            ->orderBy('t.tableName','ASC')
             ->getQuery()
             ->getResult();
     }

@@ -20,7 +20,7 @@ class TableFinder
      */
     public function findAllTables(bool $shouldHydrate = false):array
     {
-        $all_tables =$this->tableRepository->findAll();
+        $all_tables =$this->tableRepository->findBy([],['tableName'=>'ASC']);
         if($shouldHydrate)
         {
             $this->hydrateTableJoins($all_tables);
