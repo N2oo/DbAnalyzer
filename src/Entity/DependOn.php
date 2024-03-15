@@ -5,6 +5,7 @@ namespace App\Entity;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\Post;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\OrderBy;
 use ApiPlatform\Metadata\ApiResource;
 use App\Repository\DependOnRepository;
 use ApiPlatform\Metadata\GetCollection;
@@ -63,10 +64,12 @@ class DependOn
     #[SerializedName('dtabid')]
     private ?int $dTableIdOriginal = null;
 
-    #[ORM\ManyToOne(inversedBy: 'dependencies')]
+    #[ORM\ManyToOne(inversedBy: 'dependencies',fetch:'EAGER')]
+    #[OrderBy(["numberRows"=>"DESC"])]
     private ?Table $bTable = null;
 
-    #[ORM\ManyToOne(inversedBy: 'dependOns')]
+    #[ORM\ManyToOne(inversedBy: 'dependOns',fetch:'EAGER')]
+    #[OrderBy(["numberRows"=>"DESC"])]
     private ?Table $dTable = null;
 
     public function getId(): ?int

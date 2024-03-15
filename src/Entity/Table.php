@@ -21,6 +21,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
 use App\Service\Processor\TableMultipleProcessor;
 use App\Entity\DTO\Table\TableMultipleResponseDTO;
+use Doctrine\DBAL\FetchMode;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Serializer\Annotation\SerializedName;
 
