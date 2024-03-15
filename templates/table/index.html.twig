@@ -22,7 +22,9 @@
 			</div>
 		</div>
 	{{form_end(searchTableForm)}}
-	<table class="table">
+	{% set tablesLength = tables|length %}
+	<table class="table caption-top">
+		<caption class="mt-2">{{tablesLength}} élément{{tablesLength>1 ? "s":""}} affiché{{tablesLength>1 ? "s":""}}</caption>
 		<thead>
 			<tr>
 				<th scope="col-1">#</th>
@@ -36,7 +38,7 @@
 			</tr>
 		</thead>
 		<tbody>
-        {% for table in tables %}
+        {% for table in tables |filter(t=>t.numberRows > 0) %}
 			<tr class="{{table.tableType == "V" ? "table-info":""}}">
 				<td>{{table.id}}</td>
 				<td>
@@ -45,6 +47,20 @@
 				<td>{{table.owner}}</td>
 				<td>{{table.dbFileName}}</td>
 				<td>{{table.numberRows}}</td>
+				<td>{{table.dependencies|length}}</td>
+				<td>{{table.dependOns|length}}</td>
+				<td>{{table.tableType == "V" ? "Oui":""}}</td>
+			</tr>
+        {% endfor %}
+		{% for table in tables |filter(t=>t.numberRows <= 0) %}
+			<tr class="{{table.tableType == "V" ? "table-info":""}}">
+				<td>{{table.id}}</td>
+				<td>
+                    <a href="{{path("app_table_show",{"id":table.id})}}" class="link-body-emphasis text-decoration-none ">{{table.tableName}}</a>
+                </td>
+				<td>{{table.owner}}</td>
+				<td>{{table.dbFileName}}</td>
+				<td class="table-danger">{{table.numberRows}}</td>
 				<td>{{table.dependencies|length}}</td>
 				<td>{{table.dependOns|length}}</td>
 				<td>{{table.tableType == "V" ? "Oui":""}}</td>
