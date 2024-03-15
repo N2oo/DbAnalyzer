@@ -336,70 +336,18 @@
 							<div class="tab-content" id="v-pills-tabContent">
 								{% if hasDependOns %}
 									<div class="tab-pane fade show active" id="v-pills-depends_on" role="tabpanel" aria-labelledby="v-pills-depends_on-tab" tabindex="0">
-										<table class="table table-hover table-sm">
-											<thead>
-												<tr>
-													<th scope="col-1">#</th>
-													<th scope="col-2">Nom table</th>
-													<th scope="col-2">Nb lignes</th>
-													<th scope="col-2">Commentaire</th>
-												</tr>
-											</thead>
-											<tbody>
-												{% for dependOn in table.dependOns %}
-													<tr 
-														{% if dependOn.btable.tableType == "V" %}
-															class="table-info"
-														{% endif %}
-													>
-														<td>{{dependOn.id}}</td>
-														<td>
-															<a href="{{path("app_table_show",{"id":dependOn.btable.id})}}" class="text-decoration-none link-body-emphasis">{{dependOn.btable.tableName}}</a>
-														</td>
-														<td>
-															{{dependOn.btable.numberRows}}
-														</td>
-														<td>
-															{{dependOn.btable.comment}}
-														</td>
-													</tr>
-												{% endfor %}
-											</tbody>
-										</table>
+										{{ component('DependOnTable', {
+											table: table,
+											property: 'btable'
+										}) }}
 									</div>
 								{% endif %}
 								{% if hasDependencies %}
-									<div class="tab-pane fade {{not isView ? 'show active'}}" id="v-pills-is_used" role="tabpanel" aria-labelledby="v-pills-is_used-tab" tabindex="0">
-										<table class="table table-hover table-sm">
-											<thead>
-												<tr>
-													<th scope="col-1">#</th>
-													<th scope="col-2">Nom table</th>
-													<th scope="col-2">Nb lignes</th>
-													<th scope="col-2">Commentaire</th>
-												</tr>
-											</thead>
-											<tbody>
-												{% for dependency in table.dependencies %}
-													<tr
-														{% if dependency.dtable.tableType == "V" %}
-															class="table-info"
-														{% endif %}
-													>
-														<td>{{dependency.dtable.id}}</td>
-														<td>
-															<a href="{{path("app_table_show",{"id":dependency.dtable.id})}}" class="text-decoration-none link-body-emphasis">{{dependency.dtable.tableName}}</a>
-														</td>
-														<td>
-															{{dependency.dtable.numberRows}}
-														</td>
-														<td>
-															{{dependency.dtable.comment}}
-														</td>
-													</tr>
-												{% endfor %}
-											</tbody>
-										</table>
+									<div class="tab-pane fade {{not hasDependOns ? 'show active'}}" id="v-pills-is_used" role="tabpanel" aria-labelledby="v-pills-is_used-tab" tabindex="0">
+										{{ component('DependOnTable', {
+											table: table,
+											property: 'dtable'
+										}) }}
 									</div>
 								{% endif %}
 							</div>

@@ -1,0 +1,29 @@
+<div{{attributes}}>
+	<table class="table table-hover table-sm">
+		<thead>
+			<tr>
+				<th scope="col-1">#</th>
+				<th scope="col-2">Nom table</th>
+				<th scope="col-2">Nb lignes</th>
+				<th scope="col-2">Commentaire</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for dependOn in this.dependOns %}
+				<tr {% if this.table(dependOn).tableType == "V" %} class="table-info" {% endif %}>
+					<td>{{this.table(dependOn).id}}</td>
+					<td>
+						<a href="{{path("app_table_show",{"id":this.table(dependOn).id})}}" class="text-decoration-none link-body-emphasis">{{this.table(dependOn).tableName}}</a>
+					</td>
+					<td>
+						{{this.table(dependOn).numberRows}}
+					</td>
+					<td>
+						{{this.table(dependOn).comment}}
+					</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+	<!-- component html -->
+</div>
