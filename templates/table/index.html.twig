@@ -95,7 +95,31 @@
 					<td class="table-danger">{{table.numberRows}}</td>
 					<td>{{table.dependencies|length}}</td>
 					<td>{{table.dependOns|length}}</td>
-					<td>{{table.tableType == "V" ? "Oui":""}}</td>
+					<td>
+						{% if table.comment is not null and table.comment != "" %}
+							<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalcomment{{table.id}}">
+								Afficher
+							</button>
+
+							<div class="modal fade" id="modalcomment{{table.id}}" tabindex="-1" aria-labelledby="modalcommentLabel{{table.id}}" aria-hidden="true">
+								<div class="modal-dialog">
+									<div class="modal-content">
+										<div class="modal-header">
+											<h1 class="modal-title fs-5" id="modalcommentLabel{{table.id}}">Table <a href="{{path('app_table_show',{'id':table.id})}}">{{table.tableName}} #{{table.id}}</a></h1>
+											<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+										</div>
+										<div class="modal-body">
+											{{table.comment}}
+										</div>
+										<div class="modal-footer">
+											<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+										</div>
+									</div>
+								</div>
+							</div>
+
+						{% endif %}
+					</td>
 				</tr>
 			{% endfor %}
 		</tbody>
